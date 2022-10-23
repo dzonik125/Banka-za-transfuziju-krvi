@@ -27,4 +27,5 @@ public class BankComplaint extends Complaint {
     public void setDonor(Donor donor) {
         this.donor = donor;
     }
+    
 }
