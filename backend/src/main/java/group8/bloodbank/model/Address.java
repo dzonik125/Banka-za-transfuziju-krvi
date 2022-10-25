@@ -1,8 +1,13 @@
-package group8.bloodbank.model; /***********************************************************************
+package group8.bloodbank.model;
+
+import javax.persistence.*;
+
+/***********************************************************************
  * Module:  Address.java
  * Author:  david
  * Purpose: Defines the Class Address
  ***********************************************************************/
+
 
 public class Address {
     private String country;
@@ -10,6 +15,8 @@ public class Address {
     private String street;
     private String number;
 
+
+    private Long id;
 
     public String getCity() {
         return city;
