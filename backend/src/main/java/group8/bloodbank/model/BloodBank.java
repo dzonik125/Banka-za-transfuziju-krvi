@@ -57,6 +57,10 @@ public class BloodBank {
         this.workingHours = workingHours;
     }
 
+    public BloodBank() {
+        super();
+    }
+
     public Long getId() {
         return id;
     }
