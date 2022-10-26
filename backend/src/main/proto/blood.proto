@@ -1,0 +1,18 @@
+syntax = "proto3";
+package blood;
+
+service BloodProvider{
+
+  rpc GetBlood (BloodRequest) returns (BloodResponse);
+
+}
+
+message BloodRequest{
+  string Bank = 1;
+  string BloodType = 2;
+  string Quantity = 3;
+}
+
+message BloodResponse {
+  string Count = 1;
+}
