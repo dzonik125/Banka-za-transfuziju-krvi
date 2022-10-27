@@ -1,0 +1,135 @@
+<form action="" style="margin-top: 20px; margin-bottom: 10px;">
+  <section class="vh-100" style="background-color: white;">
+      <div class="container h-100">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+          <div class="col-lg-12 col-xl-11">
+            <div class="card text-black" style="border-radius: 25px; background-color: black; margin-bottom: 10px;">
+              <div class="card-body p-md-5">
+                <div class="row justify-content-center">
+                  <div class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
+    
+                    <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">Sign up</p>
+    
+                    <form class="mx-1 mx-md-4">
+    
+                      <div class="d-flex flex-row align-items-center mb-4">
+                        <i class="fas fa-user fa-lg me-3 fa-fw"></i>
+                        <div class="form-outline flex-fill mb-0">
+                          <input type="text" id="form3Example1c" class="form-control" name="Name" [(ngModel)]="User.Name" required/>
+                          <label class="form-label" for="form3Example1c">Name</label>
+                        </div>
+                      </div>
+
+                      <div class="d-flex flex-row align-items-center mb-4">
+                        <i class="fas fa-user fa-lg me-3 fa-fw"></i>
+                        <div class="form-outline flex-fill mb-0">
+                          <input type="text" id="form3Example1c" class="form-control" name="Surname" [(ngModel)]="User.Surname" required/>
+                          <label class="form-label" for="form3Example1c">Surname</label>
+                        </div>
+                      </div>
+    
+                      <div class="d-flex flex-row align-items-center mb-4">
+                        <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
+                        <div class="form-outline flex-fill mb-0">
+                          <input type="email" id="form3Example3c" class="form-control" name="Email" (keyup)="checkEmail()" [(ngModel)]="User.Email" required/>
+                          <p style="display: none" id="emailErr">Email must be written like: something@example.blah</p>
+                          <label class="form-label" for="form3Example3c">Your Email</label>
+                        </div>
+                      </div>
+    
+                      <div class="d-flex flex-row align-items-center mb-4">
+                        <i class="fas fa-lock fa-lg me-3 fa-fw"></i>
+                        <div class="form-outline flex-fill mb-0">
+                          <input type="password" id="form3Example4c" class="form-control" name="Password" [(ngModel)]="User.Password" required/>
+                          <label class="form-label" for="form3Example4c">Password</label>
+                        </div>
+                      </div>
+    
+                      <div class="d-flex flex-row align-items-center mb-4">
+                        <i class="fas fa-key fa-lg me-3 fa-fw"></i>
+                        <div class="form-outline flex-fill mb-0">
+                          <input type="password" id="form3Example4cd" class="form-control" name="rpass" (keyup)="checkForPassMatch()" [(ngModel)]="repeatPass" required/>
+                          <p style="color: red; display: none;" id="err">Passwords don't match!</p>
+                          <label class="form-label" for="form3Example4cd">Repeat your password</label>
+                        </div>
+                      </div>
+
+                      <div class="d-flex flex-row align-items-center mb-4">
+                        <i class="fas fa-key fa-lg me-3 fa-fw"></i>
+                        <div class="form-outline flex-fill mb-0">
+                          <input type="text" id="form3Example4cd" class="form-control" name="Country" [(ngModel)]="User.Adress.Country" required/>
+                          <label class="form-label" for="form3Example4cd">Country</label>
+                        </div>
+                      </div>
+
+                      <div class="d-flex flex-row align-items-center mb-4">
+                        <i class="fas fa-key fa-lg me-3 fa-fw"></i>
+                        <div class="form-outline flex-fill mb-0">
+                          <input type="text" id="form3Example4cd" class="form-control" name="City" [(ngModel)]="User.Adress.City" required/>
+                          <label class="form-label" for="form3Example4cd">City</label>
+                        </div>
+                      </div>
+
+                      <div class="d-flex flex-row align-items-center mb-4">
+                        <i class="fas fa-key fa-lg me-3 fa-fw"></i>
+                        <div class="form-outline flex-fill mb-0">
+                          <input type="text" id="form3Example4cd" class="form-control" name="Street" [(ngModel)]="User.Adress.Street" required/>
+                          <label class="form-label" for="form3Example4cd">Street</label>
+                        </div>
+                      </div>
+
+                      <div class="d-flex flex-row align-items-center mb-4">
+                        <i class="fas fa-key fa-lg me-3 fa-fw"></i>
+                        <div class="form-outline flex-fill mb-0">
+                          <input type="text" id="form3Example4cd" class="form-control" name="Number" [(ngModel)]="User.Adress.Number" required/>
+                          <label class="form-label" for="form3Example4cd">Number</label>
+                        </div>
+                      </div>
+
+                      <div class="d-flex flex-row align-items-center mb-4">
+                        <i class="fas fa-key fa-lg me-3 fa-fw"></i>
+                        <div class="form-outline flex-fill mb-0">
+                          <input type="text" id="form3Example4cd" class="form-control" name="Occupation" [(ngModel)]="User.Occupation" required/>
+                          <label class="form-label" for="form3Example4cd">Occupation</label>
+                        </div>
+                      </div>
+
+                      <div class="d-flex flex-row align-items-center mb-4">
+                        <i class="fas fa-key fa-lg me-3 fa-fw"></i>
+                        <div class="form-outline flex-fill mb-0">
+                          <select type="password" id="form3Example4cd" class="form-control" name="Gender" [(ngModel)]="User.Gender" required>
+                            <option value="M">Male</option>
+                            <option value="F">Female</option>
+                          </select>
+                          <label class="form-label" for="form3Example4cd">Gender</label>
+                        </div>
+                      </div>
+    
+                      <div class="form-check d-flex justify-content-center mb-5">
+                        <input class="form-check-input me-2" type="checkbox" value="" id="form2Example3c" required/>
+                        <label class="form-check-label" for="form2Example3">
+                          I agree with all statements in Terms of service
+                        </label>
+                      </div>
+    
+                      <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
+                        <input type="submit" class="btn btn-primary btn-lg" id="reg" value="Register">
+                      </div>
+    
+                    </form>
+    
+                  </div>
+                  <div class="col-md-10 col-lg-6 col-xl-7 d-flex align-items-center order-1 order-lg-2">
+    
+                    <img src="assets/SignUpBg.png"
+                      class="img-fluid" alt="Sample image">
+    
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+</form>
