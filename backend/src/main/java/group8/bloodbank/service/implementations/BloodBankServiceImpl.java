@@ -2,13 +2,38 @@ package group8.bloodbank.service.implementations;
 
 import group8.bloodbank.model.BloodBank;
 import group8.bloodbank.model.BloodType;
+import group8.bloodbank.repository.BloodBankRepository;
 import group8.bloodbank.service.interfaces.BloodBankService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 
 @Service
 public class BloodBankServiceImpl implements BloodBankService {
+
+
+    private BloodBankRepository bloodBankRepository;
+
+    @Autowired
+    public BloodBankServiceImpl(BloodBankRepository bloodBankRepository) {
+        this.bloodBankRepository = bloodBankRepository;
+        Map<BloodType, Double> map1 = new HashMap<>();
+        map1.put(BloodType.A_POSITIVE, 222.5);
+        map1.put(BloodType.A_NEGATIVE, 0.0);
+        Map<BloodType, Double> map2 = new HashMap<>();
+        map2.put(BloodType.B_NEGATIVE, 0.0);
+        map2.put(BloodType.B_POSITIVE, 0.0);
+        BloodBank b1 = new BloodBank(1l, "Banka 1", "", 3, map1, null, null
+                , null, null, null);
+        BloodBank b2 = new BloodBank(2l, "Banka 2", "", 3, map2, null, null
+                , null, null, null);
+        bloodBankRepository.save(b1);
+        bloodBankRepository.save(b2);
+    }
 
     public List<BloodBank> getAll() {
         return null;
@@ -19,7 +44,9 @@ public class BloodBankServiceImpl implements BloodBankService {
         return null;
     }
 
-    public double getAmountOfBloodForType(BloodType type) {
-        return 0;
+    @Override
+    public Optional<Double> getAmountOfBloodForType(BloodType type) {
+        return bloodBankRepository.getAmountOfBloodForType(type);
     }
+
 }
