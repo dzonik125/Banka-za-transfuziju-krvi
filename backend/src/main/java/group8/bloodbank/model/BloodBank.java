@@ -4,23 +4,46 @@ package group8.bloodbank.model; /***********************************************
  * Purpose: Defines the Class BloodBank
  ***********************************************************************/
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.springframework.boot.autoconfigure.domain.EntityScan;
+
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
+@Entity
 public class BloodBank {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     public ArrayList<MedicalWorker> medicalWorker;
     public ArrayList<Item> item;
     public ArrayList<Appointment> appointment;
-    public Address address;
-    public WorkingHours workingHours;
-    private int id;
-    private String name;
-    private String description;
-    private double avgGrade;
-    private HashMap<BloodType, Double> bloodType;
 
-    public BloodBank(int id, String name, String description, double avgGrade, HashMap<BloodType, Double> bloodType,
+    @Transient
+    public WorkingHours workingHours;
+    @Column
+    private String name;
+    @Column
+    private String description;
+    @Column
+    private double avgGrade;
+
+    @Transient
+    public Address address;
+
+
+    @ElementCollection
+    @CollectionTable(name="bloodType_bloodBank", joinColumns=@JoinColumn(name="bloodBank_id"))
+    @MapKeyColumn(name = "bloodType_key")
+    @Column(name="bloodType_amount")
+    @MapKeyEnumerated(EnumType.STRING)
+    private Map<BloodType, Double> bloodType;
+
+    public BloodBank(Long id, String name, String description, double avgGrade, Map<BloodType, Double> bloodType,
                      ArrayList<MedicalWorker> medicalWorker, ArrayList<Item> item, ArrayList<Appointment> appointment, Address address, WorkingHours workingHours) {
         this.id = id;
         this.name = name;
@@ -34,11 +57,15 @@ public class BloodBank {
         this.workingHours = workingHours;
     }
 
-    public int getId() {
+    public BloodBank() {
+        super();
+    }
+
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -66,11 +93,11 @@ public class BloodBank {
         this.avgGrade = avgGrade;
     }
 
-    public HashMap<BloodType, Double> getBloodType() {
+    public Map<BloodType, Double> getBloodType() {
         return bloodType;
     }
 
-    public void setBloodType(HashMap<BloodType, Double> bloodType) {
+    public void setBloodType(Map<BloodType, Double> bloodType) {
         this.bloodType = bloodType;
     }
 

@@ -4,9 +4,8 @@ package group8.bloodbank.model; /***********************************************
  * Purpose: Defines the Class Appointment
  ***********************************************************************/
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
-
+import java.time.LocalDateTime;
 public class Appointment {
     public ArrayList<MedicalWorker> medicalWorker;
     public Donor donor;
