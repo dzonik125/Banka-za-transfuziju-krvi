@@ -14,8 +14,8 @@ public class MedicalWorker extends User {
      */
     public BloodBank bloodBank;
 
-    public MedicalWorker(int id, String name, String surname, String username, String password, Address adress, String jmbg, String email, String occupation, int penalty, Gender gender) {
-        super(id, name, surname, username, password, adress, jmbg, email, occupation, penalty, gender);
+    public MedicalWorker(int id, String name, String surname, String password, Address adress, String jmbg, String email, String occupation, int penalty, Gender gender) {
+        super(id, name, surname, password, adress, jmbg, email, occupation, penalty, gender);
 
     }
 

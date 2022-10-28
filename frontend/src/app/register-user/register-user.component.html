@@ -7,15 +7,15 @@
               <div class="card-body p-md-5">
                 <div class="row justify-content-center">
                   <div class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
-    
+
                     <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">Sign up</p>
-    
+
                     <form class="mx-1 mx-md-4">
-    
+
                       <div class="d-flex flex-row align-items-center mb-4">
                         <i class="fas fa-user fa-lg me-3 fa-fw"></i>
                         <div class="form-outline flex-fill mb-0">
-                          <input type="text" id="form3Example1c" class="form-control" name="Name" [(ngModel)]="User.Name" required/>
+                          <input type="text" id="form3Example1c" class="form-control" name="Name" [(ngModel)]="User.name" required/>
                           <label class="form-label" for="form3Example1c">Name</label>
                         </div>
                       </div>
@@ -23,28 +23,28 @@
                       <div class="d-flex flex-row align-items-center mb-4">
                         <i class="fas fa-user fa-lg me-3 fa-fw"></i>
                         <div class="form-outline flex-fill mb-0">
-                          <input type="text" id="form3Example1c" class="form-control" name="Surname" [(ngModel)]="User.Surname" required/>
+                          <input type="text" id="form3Example1c" class="form-control" name="Surname" [(ngModel)]="User.surname" required/>
                           <label class="form-label" for="form3Example1c">Surname</label>
                         </div>
                       </div>
-    
+
                       <div class="d-flex flex-row align-items-center mb-4">
                         <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
                         <div class="form-outline flex-fill mb-0">
-                          <input type="email" id="form3Example3c" class="form-control" name="Email" (keyup)="checkEmail()" [(ngModel)]="User.Email" required/>
+                          <input type="email" id="form3Example3c" class="form-control" name="Email" (keyup)="checkEmail()" [(ngModel)]="User.email" required/>
                           <p style="display: none" id="emailErr">Email must be written like: something@example.blah</p>
                           <label class="form-label" for="form3Example3c">Your Email</label>
                         </div>
                       </div>
-    
+
                       <div class="d-flex flex-row align-items-center mb-4">
                         <i class="fas fa-lock fa-lg me-3 fa-fw"></i>
                         <div class="form-outline flex-fill mb-0">
-                          <input type="password" id="form3Example4c" class="form-control" name="Password" [(ngModel)]="User.Password" required/>
+                          <input type="password" id="form3Example4c" class="form-control" name="Password" [(ngModel)]="User.password" required/>
                           <label class="form-label" for="form3Example4c">Password</label>
                         </div>
                       </div>
-    
+
                       <div class="d-flex flex-row align-items-center mb-4">
                         <i class="fas fa-key fa-lg me-3 fa-fw"></i>
                         <div class="form-outline flex-fill mb-0">
@@ -57,7 +57,7 @@
                       <div class="d-flex flex-row align-items-center mb-4">
                         <i class="fas fa-key fa-lg me-3 fa-fw"></i>
                         <div class="form-outline flex-fill mb-0">
-                          <input type="text" id="form3Example4cd" class="form-control" name="Country" [(ngModel)]="User.Adress.Country" required/>
+                          <input type="text" id="form3Example4cd" class="form-control" name="Country" [(ngModel)]="User.adress.country" required/>
                           <label class="form-label" for="form3Example4cd">Country</label>
                         </div>
                       </div>
@@ -65,7 +65,7 @@
                       <div class="d-flex flex-row align-items-center mb-4">
                         <i class="fas fa-key fa-lg me-3 fa-fw"></i>
                         <div class="form-outline flex-fill mb-0">
-                          <input type="text" id="form3Example4cd" class="form-control" name="City" [(ngModel)]="User.Adress.City" required/>
+                          <input type="text" id="form3Example4cd" class="form-control" name="City" [(ngModel)]="User.adress.city" required/>
                           <label class="form-label" for="form3Example4cd">City</label>
                         </div>
                       </div>
@@ -73,7 +73,7 @@
                       <div class="d-flex flex-row align-items-center mb-4">
                         <i class="fas fa-key fa-lg me-3 fa-fw"></i>
                         <div class="form-outline flex-fill mb-0">
-                          <input type="text" id="form3Example4cd" class="form-control" name="Street" [(ngModel)]="User.Adress.Street" required/>
+                          <input type="text" id="form3Example4cd" class="form-control" name="Street" [(ngModel)]="User.adress.street" required/>
                           <label class="form-label" for="form3Example4cd">Street</label>
                         </div>
                       </div>
@@ -81,7 +81,7 @@
                       <div class="d-flex flex-row align-items-center mb-4">
                         <i class="fas fa-key fa-lg me-3 fa-fw"></i>
                         <div class="form-outline flex-fill mb-0">
-                          <input type="text" id="form3Example4cd" class="form-control" name="Number" [(ngModel)]="User.Adress.Number" required/>
+                          <input type="text" id="form3Example4cd" class="form-control" name="Number" [(ngModel)]="User.adress.number" required/>
                           <label class="form-label" for="form3Example4cd">Number</label>
                         </div>
                       </div>
@@ -89,7 +89,7 @@
                       <div class="d-flex flex-row align-items-center mb-4">
                         <i class="fas fa-key fa-lg me-3 fa-fw"></i>
                         <div class="form-outline flex-fill mb-0">
-                          <input type="text" id="form3Example4cd" class="form-control" name="Occupation" [(ngModel)]="User.Occupation" required/>
+                          <input type="text" id="form3Example4cd" class="form-control" name="Occupation" [(ngModel)]="User.occupation" required/>
                           <label class="form-label" for="form3Example4cd">Occupation</label>
                         </div>
                       </div>
@@ -97,33 +97,33 @@
                       <div class="d-flex flex-row align-items-center mb-4">
                         <i class="fas fa-key fa-lg me-3 fa-fw"></i>
                         <div class="form-outline flex-fill mb-0">
-                          <select type="password" id="form3Example4cd" class="form-control" name="Gender" [(ngModel)]="User.Gender" required>
+                          <select type="password" id="form3Example4cd" class="form-control" name="Gender" [(ngModel)]="User.gender" required>
                             <option value="M">Male</option>
                             <option value="F">Female</option>
                           </select>
                           <label class="form-label" for="form3Example4cd">Gender</label>
                         </div>
                       </div>
-    
+
                       <div class="form-check d-flex justify-content-center mb-5">
                         <input class="form-check-input me-2" type="checkbox" value="" id="form2Example3c" required/>
                         <label class="form-check-label" for="form2Example3">
                           I agree with all statements in Terms of service
                         </label>
                       </div>
-    
+
                       <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
-                        <input type="submit" class="btn btn-primary btn-lg" id="reg" value="Register">
+                        <input type="submit" (click)="createUser()" class="btn btn-primary btn-lg" id="reg" value="Register">
                       </div>
-    
+
                     </form>
-    
+
                   </div>
                   <div class="col-md-10 col-lg-6 col-xl-7 d-flex align-items-center order-1 order-lg-2">
-    
+
                     <img src="assets/SignUpBg.png"
                       class="img-fluid" alt="Sample image">
-    
+
                   </div>
                 </div>
               </div>

@@ -12,7 +12,6 @@ public class User {
     private int id;
     private String name;
     private String surname;
-    private String username;
     private String password;
     private Address address;
     private String jmbg;
@@ -21,11 +20,10 @@ public class User {
     private int penalty;
     private Gender gender;
 
-    public User(int id, String name, String surname, String username, String password, Address address, String jmbg, String email, String occupation, int penalty, Gender gender) {
+    public User(int id, String name, String surname, String password, Address address, String jmbg, String email, String occupation, int penalty, Gender gender) {
         this.id = id;
         this.name = name;
         this.surname = surname;
-        this.username = username;
         this.password = password;
         this.address = address;
         this.jmbg = jmbg;
@@ -57,14 +55,6 @@ public class User {
 
     public void setSurname(String surname) {
         this.surname = surname;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
     }
 
     public String getPassword() {
