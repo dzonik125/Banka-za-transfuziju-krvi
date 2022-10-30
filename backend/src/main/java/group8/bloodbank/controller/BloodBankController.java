@@ -1,14 +1,19 @@
 package group8.bloodbank.controller;
 
+import blood.Blood;
 import com.fasterxml.jackson.databind.util.JSONPObject;
 import group8.bloodbank.model.BloodBank;
 import group8.bloodbank.model.BloodType;
 import group8.bloodbank.service.interfaces.BloodBankService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpRequest;
+import org.springframework.http.HttpStatus;
 import org.springframework.boot.configurationprocessor.json.JSONException;
 import org.springframework.boot.configurationprocessor.json.JSONObject;
 import org.springframework.boot.jackson.JsonObjectSerializer;
+
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -36,18 +41,19 @@ public class BloodBankController {
         return bloodBankService.getAll();
     }
 
-    @GetMapping(value = "/check")
+    @GetMapping(value = "/checkForBloodType")
     @ResponseBody
-    public boolean getAmount(@RequestParam(value = "type") String type, @RequestParam(value = "bankID") int id) {
-        System.out.println(type);
-        Optional<Double> a = bloodBankService.getAmountOfBloodForType(BloodType.valueOfLabel(type), id);
-        double b = a.get();
-        if (b > 0)
-            return true;
-        else
-            return false;
-    }
 
+    public ResponseEntity<Boolean> getAmount(@RequestParam(value = "type") String type, @RequestHeader("apiKey") String apiKey) {
+
+        BloodBank b = bloodBankService.getByApiKey(apiKey);
+        if (b == null) {
+            return new ResponseEntity<Boolean>(HttpStatus.UNAUTHORIZED);
+        }
+        boolean hasBlood = bloodBankService.getAmountOfBloodForType(BloodType.valueOfLabel(type), b.getId());
+        return new ResponseEntity<Boolean>(hasBlood, HttpStatus.OK);
+
+    }
     @CrossOrigin(origins = "http://localhost:4200")
     @PostMapping(value = "/addApi")
     public void addApi(@RequestBody String json) throws JSONException {
