@@ -43,7 +43,6 @@ public class BloodBankController {
 
     @GetMapping(value = "/checkForBloodType")
     @ResponseBody
-
     public ResponseEntity<Boolean> getAmount(@RequestParam(value = "type") String type, @RequestHeader("apiKey") String apiKey) {
 
         BloodBank b = bloodBankService.getByApiKey(apiKey);

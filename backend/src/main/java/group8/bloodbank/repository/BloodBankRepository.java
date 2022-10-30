@@ -21,6 +21,6 @@ public interface BloodBankRepository extends JpaRepository<BloodBank, Long> {
 
     @Transactional
     @Modifying(clearAutomatically = true)
-    @Query("update BloodBank b set b.api=:apiKey where b.id=:id")
+    @Query("update BloodBank b set b.apiKey=:apiKey where b.id=:id")
     public void setApiKey(@Param("apiKey") String apiKey,@Param("id") Long id);
 }

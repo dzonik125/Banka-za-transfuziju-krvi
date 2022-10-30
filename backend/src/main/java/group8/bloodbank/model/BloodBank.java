@@ -27,8 +27,6 @@ public class BloodBank {
     private String description;
     @Column
     private double avgGrade;
-    @Column
-    private String api;
 
     @Transient
     public Address address;
