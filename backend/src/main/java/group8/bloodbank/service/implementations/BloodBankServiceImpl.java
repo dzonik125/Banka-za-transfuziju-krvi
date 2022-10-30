@@ -28,9 +28,9 @@ public class BloodBankServiceImpl implements BloodBankService {
         map2.put(BloodType.B_NEGATIVE, 0.0);
         map2.put(BloodType.B_POSITIVE, 0.0);
         BloodBank b1 = new BloodBank(1l, "Banka 1", "", 3, map1, null, null
-                , null, null, null);
+                , null, null, null, "1");
         BloodBank b2 = new BloodBank(2l, "Banka 2", "", 3, map2, null, null
-                , null, null, null);
+                , null, null, null, "");
         bloodBankRepository.save(b1);
         bloodBankRepository.save(b2);
     }
@@ -45,8 +45,17 @@ public class BloodBankServiceImpl implements BloodBankService {
     }
 
     @Override
-    public Optional<Double> getAmountOfBloodForType(BloodType type) {
-        return bloodBankRepository.getAmountOfBloodForType(type);
+    public boolean getAmountOfBloodForType(BloodType type, Long id) {
+        Optional<Double> b = bloodBankRepository.getAmountOfBloodForType(type, id);
+        if(b.isPresent()) {
+            return (b.get() > 0);
+        }
+        return false;
+    }
+
+    @Override
+    public BloodBank getByApiKey(String apiKey) {
+        return  bloodBankRepository.getByApiKey(apiKey);
     }
 
 }

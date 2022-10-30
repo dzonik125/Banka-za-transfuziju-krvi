@@ -4,12 +4,8 @@ package group8.bloodbank.model; /***********************************************
  * Purpose: Defines the Class BloodBank
  ***********************************************************************/
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.springframework.boot.autoconfigure.domain.EntityScan;
-
 import javax.persistence.*;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Map;
 
 @Entity
@@ -35,6 +31,10 @@ public class BloodBank {
     @Transient
     public Address address;
 
+    @Column
+    private String apiKey;
+
+
 
     @ElementCollection
     @CollectionTable(name="bloodType_bloodBank", joinColumns=@JoinColumn(name="bloodBank_id"))
@@ -44,7 +44,7 @@ public class BloodBank {
     private Map<BloodType, Double> bloodType;
 
     public BloodBank(Long id, String name, String description, double avgGrade, Map<BloodType, Double> bloodType,
-                     ArrayList<MedicalWorker> medicalWorker, ArrayList<Item> item, ArrayList<Appointment> appointment, Address address, WorkingHours workingHours) {
+                     ArrayList<MedicalWorker> medicalWorker, ArrayList<Item> item, ArrayList<Appointment> appointment, Address address, WorkingHours workingHours, String apiKey) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -55,6 +55,16 @@ public class BloodBank {
         this.appointment = appointment;
         this.address = address;
         this.workingHours = workingHours;
+        this.apiKey = apiKey;
+    }
+
+
+    public String getApiKey() {
+        return this.apiKey;
+    }
+
+    public void setApiKey(String apiKey) {
+        this.apiKey = apiKey;
     }
 
     public BloodBank() {
