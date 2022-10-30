@@ -55,7 +55,11 @@ public class BloodBankServiceImpl implements BloodBankService {
 
     @Override
     public BloodBank getByApiKey(String apiKey) {
-        return  bloodBankRepository.getByApiKey(apiKey);
-    }
+        return bloodBankRepository.getByApiKey(apiKey);
 
+    }
+    @Override
+    public void setApiKey(String apiKey, Long id){
+        bloodBankRepository.setApiKey(apiKey, id);
+    }
 }

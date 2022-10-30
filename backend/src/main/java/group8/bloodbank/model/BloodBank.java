@@ -27,6 +27,8 @@ public class BloodBank {
     private String description;
     @Column
     private double avgGrade;
+    @Column
+    private String api;
 
     @Transient
     public Address address;
@@ -55,7 +57,7 @@ public class BloodBank {
         this.appointment = appointment;
         this.address = address;
         this.workingHours = workingHours;
-        this.apiKey = apiKey;
+        this.apiKey = "";
     }
 
 
