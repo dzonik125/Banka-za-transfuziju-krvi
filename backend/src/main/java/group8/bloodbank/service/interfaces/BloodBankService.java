@@ -10,6 +10,7 @@ public interface BloodBankService {
 
     public List<BloodBank> getAll();
     public BloodBank getById(Long id);
-    public Optional<Double> getAmountOfBloodForType(BloodType type);
+    public Optional<Double> getAmountOfBloodForType(BloodType type, int id);
+    public void setApiKey(String apiKey, Long id);
 
 }

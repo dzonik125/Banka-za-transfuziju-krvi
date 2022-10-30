@@ -45,8 +45,13 @@ public class BloodBankServiceImpl implements BloodBankService {
     }
 
     @Override
-    public Optional<Double> getAmountOfBloodForType(BloodType type) {
-        return bloodBankRepository.getAmountOfBloodForType(type);
+    public Optional<Double> getAmountOfBloodForType(BloodType type, int id) {
+        return bloodBankRepository.getAmountOfBloodForType(type, id);
+    }
+
+    @Override
+    public void setApiKey(String apiKey, Long id){
+        bloodBankRepository.setApiKey(apiKey, id);
     }
 
 }
