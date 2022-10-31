@@ -20,7 +20,11 @@ public interface BloodBankRepository extends JpaRepository<BloodBank, Long> {
     public BloodBank getByApiKey(String apiKey);
 
     @Transactional
-    @Modifying(clearAutomatically = true)
+    @Modifying(clearAutomatically = true, flushAutomatically = true)
     @Query("update BloodBank b set b.apiKey=:apiKey where b.id=:id")
     public void setApiKey(@Param("apiKey") String apiKey,@Param("id") Long id);
+
+    @Query("SELECT value(m) FROM BloodBank b join b.bloodType m" +
+            " where key(m) = ?1 and b.id = ?2")
+    public Optional<Double> CheckBloodAmount(BloodType type, Long id);
 }

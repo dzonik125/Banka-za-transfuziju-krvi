@@ -1,6 +1,5 @@
 package group8.bloodbank.controller;
 
-import blood.Blood;
 import com.fasterxml.jackson.databind.util.JSONPObject;
 import group8.bloodbank.model.BloodBank;
 import group8.bloodbank.model.BloodType;
@@ -43,16 +42,28 @@ public class BloodBankController {
 
     @GetMapping(value = "/checkForBloodType")
     @ResponseBody
-    public ResponseEntity<Boolean> getAmount(@RequestParam(value = "type") String type, @RequestHeader("apiKey") String apiKey) {
+    public ResponseEntity<Boolean> GetAmount(@RequestParam(value = "type") String type, @RequestHeader("apiKey") String apiKey) {
 
         BloodBank b = bloodBankService.getByApiKey(apiKey);
         if (b == null) {
             return new ResponseEntity<Boolean>(HttpStatus.UNAUTHORIZED);
         }
-        boolean hasBlood = bloodBankService.getAmountOfBloodForType(BloodType.valueOfLabel(type), b.getId());
+        boolean hasBlood = bloodBankService.getAmountOfBloodForType(BloodType.valueOf(type), b.getId());
         return new ResponseEntity<Boolean>(hasBlood, HttpStatus.OK);
 
     }
+
+    @GetMapping(value = "/checkBloodAmount")
+    @ResponseBody
+    public ResponseEntity<Boolean> CheckBloodAmount(@RequestParam(value = "bloodType") BloodType bloodType, @RequestParam(value = "quantity") double quant, @RequestHeader("apiKey") String apiKey){
+        BloodBank b = bloodBankService.getByApiKey(apiKey);
+        if(b == null){
+            return new ResponseEntity<Boolean>(HttpStatus.UNAUTHORIZED);
+        }
+        boolean hasEnoughBlood = bloodBankService.CheckBloodAmount(bloodType, quant, b.getId());
+        return new ResponseEntity<Boolean>(hasEnoughBlood, HttpStatus.OK);
+    }
+
     @CrossOrigin(origins = "http://localhost:4200")
     @PostMapping(value = "/addApi")
     public void addApi(@RequestBody String json) throws JSONException {
