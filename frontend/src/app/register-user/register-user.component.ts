@@ -65,7 +65,6 @@ export class RegisterUserComponent{
   }
 
 
-
   constructor(private http: HttpClient, private userService: UserService, private router: Router) {
   }
 
@@ -74,7 +73,5 @@ export class RegisterUserComponent{
     this.userService.createUser(this.User).subscribe();
 
   }
-
-
 
 }

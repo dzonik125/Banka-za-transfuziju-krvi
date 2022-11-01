@@ -2,7 +2,6 @@
 //
 //import io.grpc.stub.StreamObserver;
 //import net.devh.boot.grpc.server.service.GrpcService;
-//
 //@GrpcService
 //class BloodService extends BloodProviderGrpc.BloodProviderImplBase {
 //    @Override
