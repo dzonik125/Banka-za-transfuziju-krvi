@@ -63,10 +63,6 @@ export class RegisterUserComponent implements OnInit {
     }
   }
 
-  createUser(){
-
-  }
-
   constructor(private http: HttpClient) { }
 
   ngOnInit(): void {

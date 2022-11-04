@@ -9,13 +9,15 @@ import { HomeComponentComponent } from './home-component/home-component.componen
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { SaveApiKeyComponent } from './save-api-key/save-api-key.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavigationComponent,
     RegisterUserComponent,
-    HomeComponentComponent
+    HomeComponentComponent,
+    SaveApiKeyComponent
   ],
   imports: [
     BrowserModule,
