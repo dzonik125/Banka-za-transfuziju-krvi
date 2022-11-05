@@ -22,15 +22,15 @@ public class BloodBankServiceImpl implements BloodBankService {
     public BloodBankServiceImpl(BloodBankRepository bloodBankRepository) {
         this.bloodBankRepository = bloodBankRepository;
         Map<BloodType, Double> map1 = new HashMap<>();
-        map1.put(BloodType.A_POSITIVE, 222.5);
-        map1.put(BloodType.A_NEGATIVE, 0.0);
+        map1.put(BloodType.Apos, 222.5);
+        map1.put(BloodType.Aneg, 0.0);
         Map<BloodType, Double> map2 = new HashMap<>();
-        map2.put(BloodType.B_NEGATIVE, 0.0);
-        map2.put(BloodType.B_POSITIVE, 0.0);
+        map2.put(BloodType.Bneg, 0.0);
+        map2.put(BloodType.Bpos, 0.0);
         BloodBank b1 = new BloodBank(1l, "Banka 1", "", 3, map1, null, null
-                , null, null, null);
+                , null, null, null, "1");
         BloodBank b2 = new BloodBank(2l, "Banka 2", "", 3, map2, null, null
-                , null, null, null);
+                , null, null, null, "");
         bloodBankRepository.save(b1);
         bloodBankRepository.save(b2);
     }
@@ -45,8 +45,31 @@ public class BloodBankServiceImpl implements BloodBankService {
     }
 
     @Override
-    public Optional<Double> getAmountOfBloodForType(BloodType type) {
-        return bloodBankRepository.getAmountOfBloodForType(type);
+    public boolean getAmountOfBloodForType(BloodType type, Long id) {
+        Optional<Double> b = bloodBankRepository.getAmountOfBloodForType(type, id);
+        if(b.isPresent()) {
+            System.out.println(b.get() > 0);
+            return (b.get() > 0);
+        }
+        return false;
     }
 
+    @Override
+    public BloodBank getByApiKey(String apiKey) {
+        return bloodBankRepository.getByApiKey(apiKey);
+
+    }
+    @Override
+    public void setApiKey(String apiKey, Long id){
+        bloodBankRepository.setApiKey(apiKey, id);
+    }
+
+    @Override
+    public boolean CheckBloodAmount(BloodType type, double quant, Long id){
+        Optional<Double> b = bloodBankRepository.CheckBloodAmount(type, id);
+        if(b.isPresent()) {
+            return (b.get() >= quant);
+        }
+        return false;
+    }
 }
