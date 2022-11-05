@@ -13,10 +13,12 @@ public class UserServiceImpl implements UserService {
     UserRepository userRepository;
 
     @Autowired
-    public UserServiceImpl(UserRepository userRepository) {}
+    public UserServiceImpl(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
 
     @Override
-    public User create(User user) {
+    public User saveUser(User user) {
         return userRepository.save(user);
     }
 }

@@ -2,20 +2,20 @@ package group8.bloodbank.model;
 
 import javax.persistence.*;
 
-/***********************************************************************
- * Module:  Address.java
- * Author:  david
- * Purpose: Defines the Class Address
- ***********************************************************************/
-
-
+@Entity
 public class Address {
+    @Column
     private String country;
+    @Column
     private String city;
+    @Column
     private String street;
+    @Column
     private String number;
 
-
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", nullable = false)
     private Long id;
 
     public String getCity() {

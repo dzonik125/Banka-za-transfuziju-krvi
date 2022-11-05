@@ -4,23 +4,44 @@ package group8.bloodbank.model; /***********************************************
  * Purpose: Defines the Class User
  ***********************************************************************/
 
+import javax.persistence.*;
+
 /**
  * @pdOid 5e205961-864a-4202-b8e7-f5fc834d2be0
  */
+@Entity
+@Table(name ="users")
 public class User {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", nullable = false)
+    private Long id;
 
-    private int id;
+    @Column
     private String name;
+    @Column
     private String surname;
+    @Column
     private String password;
+
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Address address;
+    @Column
     private String jmbg;
+    @Column
     private String email;
+    @Column
     private String occupation;
+    @Column
     private int penalty;
+    @Column
     private Gender gender;
 
-    public User(int id, String name, String surname, String password, Address address, String jmbg, String email, String occupation, int penalty, Gender gender) {
+    public User() {
+        super();
+    }
+
+    public User(Long id, String name, String surname, String password, Address address, String jmbg, String email, String occupation, int penalty, Gender gender) {
         this.id = id;
         this.name = name;
         this.surname = surname;
@@ -33,11 +54,11 @@ public class User {
         this.gender = gender;
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

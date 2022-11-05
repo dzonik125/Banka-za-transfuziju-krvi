@@ -9,7 +9,7 @@ package group8.bloodbank.model; /***********************************************
  */
 public class Admin extends User {
 
-    public Admin(int id, String name, String surname, String password, Address address, String jmbg, String email, String occupation, int penalty, Gender gender) {
+    public Admin(Long id, String name, String surname, String password, Address address, String jmbg, String email, String occupation, int penalty, Gender gender) {
         super(id, name, surname, password, address, jmbg, email, occupation, penalty, gender);
     }
 }
