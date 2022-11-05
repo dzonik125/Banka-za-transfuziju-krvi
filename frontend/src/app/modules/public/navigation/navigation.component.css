@@ -1,7 +1,7 @@
 nav{
     width: 100vl;
     padding: 1rem;
-    background-color: black;
+    background-color: #632626;
     color: white;
 }
 
@@ -25,7 +25,7 @@ a:hover{
 }
 
 img{
-    transform: scale(0.92); 
+    transform: scale(0.92);
     object-fit: cover;
     max-height: 100%;
 }
