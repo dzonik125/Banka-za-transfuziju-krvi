@@ -72,4 +72,9 @@ public class BloodBankServiceImpl implements BloodBankService {
         }
         return false;
     }
+
+    @Override
+    public BloodBank saveBloodBank(BloodBank bloodBank) {
+        return bloodBankRepository.save(bloodBank);
+    }
 }

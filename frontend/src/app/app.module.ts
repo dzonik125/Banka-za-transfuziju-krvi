@@ -10,6 +10,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { SaveApiKeyComponent } from './save-api-key/save-api-key.component';
+import { AdminDashboardComponent } from './modules/administrator/admin-dashboard/admin-dashboard.component';
+import { RegisterBloodBankComponent } from './modules/administrator/register-blood-bank/register-blood-bank.component';
 
 @NgModule({
   declarations: [
@@ -18,6 +20,8 @@ import { SaveApiKeyComponent } from './save-api-key/save-api-key.component';
     RegisterUserComponent,
     HomeComponentComponent,
     SaveApiKeyComponent,
+    AdminDashboardComponent,
+    RegisterBloodBankComponent
   ],
   imports: [
     BrowserModule,

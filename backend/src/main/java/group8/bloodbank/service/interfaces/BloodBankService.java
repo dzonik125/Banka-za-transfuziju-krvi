@@ -14,4 +14,5 @@ public interface BloodBankService {
     public void setApiKey(String apiKey, Long id);
     public BloodBank getByApiKey(String apiKey);
     public boolean CheckBloodAmount (BloodType type, double quant, Long id);
+    BloodBank saveBloodBank(BloodBank bloodBank);
 }
