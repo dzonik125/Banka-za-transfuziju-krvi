@@ -1,8 +1,11 @@
 package group8.bloodbank.controller;
 
 import com.fasterxml.jackson.databind.util.JSONPObject;
+import group8.bloodbank.BloodBankApplication;
 import group8.bloodbank.model.BloodBank;
 import group8.bloodbank.model.BloodType;
+import group8.bloodbank.model.DTO.BloodBankDTO;
+import group8.bloodbank.model.User;
 import group8.bloodbank.service.interfaces.BloodBankService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpRequest;
@@ -38,6 +41,21 @@ public class BloodBankController {
     public List<BloodBank> getAll() {
 
         return bloodBankService.getAll();
+    }
+
+    //   public BloodBank(Long id, String name, String description, double avgGrade, Map<BloodType, Double> bloodType,
+    //                     ArrayList<MedicalWorker> medicalWorker, ArrayList<Item> item, ArrayList<Appointment> appointment, Address address, WorkingHours workingHours, String apiKey) {
+    @CrossOrigin(origins = "http://localhost:4200")
+    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<BloodBank> saveBloodBank(@RequestBody BloodBankDTO bloodBankDTO)  {
+        BloodBank bloodBank = new BloodBank(bloodBankDTO.name, bloodBankDTO.description, bloodBankDTO.address);
+        try{
+            bloodBank = bloodBankService.saveBloodBank(bloodBank);
+            return new ResponseEntity<BloodBank>(bloodBank, HttpStatus.CREATED);
+        } catch (Exception e){
+            e.printStackTrace();
+            return new ResponseEntity<BloodBank>(bloodBank, HttpStatus.CONFLICT);
+        }
     }
 
     @GetMapping(value = "/checkForBloodType")
