@@ -1,8 +1,4 @@
-package group8.bloodbank.model; /***********************************************************************
- * Module:  BloodBank.java
- * Author:  david
- * Purpose: Defines the Class BloodBank
- ***********************************************************************/
+package group8.bloodbank.model;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -33,8 +29,6 @@ public class BloodBank {
 
     @Column
     private String apiKey;
-
-
 
     @ElementCollection
     @CollectionTable(name="bloodType_bloodBank", joinColumns=@JoinColumn(name="bloodBank_id"))

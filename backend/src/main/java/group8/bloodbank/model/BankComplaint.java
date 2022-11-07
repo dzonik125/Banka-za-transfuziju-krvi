@@ -1,8 +1,4 @@
-package group8.bloodbank.model; /***********************************************************************
- * Module:  BankComplaint.java
- * Author:  david
- * Purpose: Defines the Class BankComplaint
- ***********************************************************************/
+package group8.bloodbank.model;
 
 public class BankComplaint extends Complaint {
     private BloodBank bloodBank;

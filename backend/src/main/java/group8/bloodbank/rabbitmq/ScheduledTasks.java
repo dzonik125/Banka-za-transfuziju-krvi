@@ -5,8 +5,6 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
-
-import java.util.Date;
 import java.util.UUID;
 
 @Component
@@ -22,7 +20,7 @@ public class ScheduledTasks {
 
     @Scheduled(fixedRate = 5000)
     public void sendMessage() {
-        MessageDto message = new MessageDto("Random message from Java client: " + UUID.randomUUID().toString());
+        MessageDto message = new MessageDto("Random message from Java client: " + UUID.randomUUID().toString(), "Ovo je neki tekst veliki u kom stoje informacije");
         rabbitMQSender.send(message);
         System.out.println("Sent :" + message.toString());
     }
