@@ -1,5 +1,6 @@
 package group8.bloodbank.service.implementations;
 
+import group8.bloodbank.model.Address;
 import group8.bloodbank.model.BloodBank;
 import group8.bloodbank.model.BloodType;
 import group8.bloodbank.repository.BloodBankRepository;
@@ -27,16 +28,20 @@ public class BloodBankServiceImpl implements BloodBankService {
         Map<BloodType, Double> map2 = new HashMap<>();
         map2.put(BloodType.Bneg, 0.0);
         map2.put(BloodType.Bpos, 0.0);
-        BloodBank b1 = new BloodBank(1l, "Banka 1", "", 3, map1, null, null
-                , null, null, null, "1");
-        BloodBank b2 = new BloodBank(2l, "Banka 2", "", 3, map2, null, null
-                , null, null, null, "");
+        Address a1 = new Address("Srbija", "Beograd", "Karadjordjeva", "12");
+        Address a2 = new Address("Spanija", "Barselona", "Mesijeva", "123");
+        BloodBank b1 = new BloodBank(1l, "Banka 1", "", 3.4, map1, null, null
+                , null, a1, null, "1");
+        BloodBank b2 = new BloodBank(2l, "Banka 2", "", 1.2, map2, null, null
+                , null, a2, null, "");
+
         bloodBankRepository.save(b1);
         bloodBankRepository.save(b2);
     }
 
     public List<BloodBank> getAll() {
-        return null;
+        List<BloodBank> all = bloodBankRepository.findAll();
+        return all;
     }
 
 

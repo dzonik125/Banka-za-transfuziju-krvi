@@ -8,6 +8,7 @@ import { AdminDashboardComponent } from './modules/administrator/admin-dashboard
 import { SendNewsComponent } from './modules/administrator/send-news/send-news.component';
 
 import { UserProfileViewComponent } from './modules/public/user-profile-view/user-profile-view.component';
+import { DisplayAllCentersComponent } from './modules/public/display-all-centers/display-all-centers.component';
 
 const routes: Routes = [
   {path: '', component: HomeComponentComponent},
@@ -15,7 +16,8 @@ const routes: Routes = [
   {path:'saveApi/:id', component: SaveApiKeyComponent},
   {path:'sendNews', component: SendNewsComponent},
   {path: 'userProfile/:id', component: UserProfileViewComponent},
-  {path:'adminDashboard', component: AdminDashboardComponent}
+  {path:'adminDashboard', component: AdminDashboardComponent},
+  {path: 'homePage', component: DisplayAllCentersComponent}
 ];
 
 @NgModule({

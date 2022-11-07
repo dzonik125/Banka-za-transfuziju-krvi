@@ -14,6 +14,8 @@ import { UserProfileViewComponent } from './modules/public/user-profile-view/use
 import { AdminDashboardComponent } from './modules/administrator/admin-dashboard/admin-dashboard.component';
 import { RegisterBloodBankComponent } from './modules/administrator/register-blood-bank/register-blood-bank.component';
 import { SendNewsComponent } from './modules/administrator/send-news/send-news.component';
+import { DisplayAllCentersComponent } from './modules/public/display-all-centers/display-all-centers.component';
+import { MatTableModule } from '@angular/material/table';
 
 
 @NgModule({
@@ -26,7 +28,8 @@ import { SendNewsComponent } from './modules/administrator/send-news/send-news.c
     AdminDashboardComponent,
     RegisterBloodBankComponent,
     SendNewsComponent,
-    UserProfileViewComponent
+    UserProfileViewComponent,
+    DisplayAllCentersComponent
   ],
   imports: [
     BrowserModule,
@@ -34,7 +37,8 @@ import { SendNewsComponent } from './modules/administrator/send-news/send-news.c
     NgbModule,
     AppRoutingModule,
     FormsModule,
-    RouterModule
+    RouterModule,
+    MatTableModule
   ],
   providers: [],
   bootstrap: [AppComponent]
