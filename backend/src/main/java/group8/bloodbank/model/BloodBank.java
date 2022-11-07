@@ -58,6 +58,11 @@ public class BloodBank {
         this.apiKey = "";
     }
 
+    public BloodBank(String name, String description, Address address) {
+        this.name = name;
+        this.description = description;
+        this.address = address;
+    }
 
     public String getApiKey() {
         return this.apiKey;
