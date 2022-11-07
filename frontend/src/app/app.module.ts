@@ -12,6 +12,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { SaveApiKeyComponent } from './save-api-key/save-api-key.component';
 import { AdminDashboardComponent } from './modules/administrator/admin-dashboard/admin-dashboard.component';
 import { RegisterBloodBankComponent } from './modules/administrator/register-blood-bank/register-blood-bank.component';
+import { SendNewsComponent } from './modules/administrator/send-news/send-news.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { RegisterBloodBankComponent } from './modules/administrator/register-blo
     HomeComponentComponent,
     SaveApiKeyComponent,
     AdminDashboardComponent,
-    RegisterBloodBankComponent
+    RegisterBloodBankComponent,
+    SendNewsComponent
   ],
   imports: [
     BrowserModule,

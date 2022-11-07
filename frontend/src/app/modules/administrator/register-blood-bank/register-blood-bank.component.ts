@@ -26,7 +26,7 @@ export class RegisterBloodBankComponent {
   createBloodBank(){
     window.alert(this.bloodBank.name)
     window.alert(this.bloodBank.description)
-    
+
     this.bloodBank.address = this.address;
     this.bbservice.createBloodBank(this.bloodBank).subscribe();
   }
