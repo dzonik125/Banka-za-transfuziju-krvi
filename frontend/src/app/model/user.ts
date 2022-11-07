@@ -21,6 +21,11 @@ export class User {
           this.occupation = obj.occupation;
           this.gender = obj.gender;
           this.penalty = obj.penalty;
+          this.address = obj.address;
       }
+  }
+
+  public fullName(): String {
+    return this.name + ' ' + this.surname;
   }
 }
