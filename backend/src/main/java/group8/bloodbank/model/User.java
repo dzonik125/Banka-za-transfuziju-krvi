@@ -24,7 +24,7 @@ public class User {
     @Column
     private String password;
 
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Address address;
     @Column
     private String jmbg;

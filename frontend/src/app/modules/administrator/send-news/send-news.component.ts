@@ -7,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SendNewsComponent implements OnInit {
 
-  public subject="";
+  subject: any;
   message: any;
   text: any;
 
