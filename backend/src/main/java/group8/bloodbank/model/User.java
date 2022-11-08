@@ -1,15 +1,10 @@
-package group8.bloodbank.model; /***********************************************************************
- * Module:  User.java
- * Author:  david
- * Purpose: Defines the Class User
- ***********************************************************************/
+package group8.bloodbank.model;
+import net.bytebuddy.dynamic.loading.InjectionClassLoader;
 
 import javax.persistence.*;
 
-/**
- * @pdOid 5e205961-864a-4202-b8e7-f5fc834d2be0
- */
 @Entity
+@Inheritance(strategy = InheritanceType.JOINED)
 @Table(name ="users")
 public class User {
     @Id
@@ -33,15 +28,13 @@ public class User {
     @Column
     private String occupation;
     @Column
-    private int penalty;
-    @Column
     private Gender gender;
 
     public User() {
         super();
     }
 
-    public User(Long id, String name, String surname, String password, Address address, String jmbg, String email, String occupation, int penalty, Gender gender) {
+    public User(Long id, String name, String surname, String password, Address address, String jmbg, String email, String occupation, Gender gender) {
         this.id = id;
         this.name = name;
         this.surname = surname;
@@ -50,7 +43,6 @@ public class User {
         this.jmbg = jmbg;
         this.email = email;
         this.occupation = occupation;
-        this.penalty = penalty;
         this.gender = gender;
     }
 
@@ -116,14 +108,6 @@ public class User {
 
     public void setOccupation(String occupation) {
         this.occupation = occupation;
-    }
-
-    public int getPenalty() {
-        return penalty;
-    }
-
-    public void setPenalty(int penalty) {
-        this.penalty = penalty;
     }
 
     public Gender getGender() {

@@ -16,6 +16,16 @@ import { RegisterBloodBankComponent } from './modules/administrator/register-blo
 import { SendNewsComponent } from './modules/administrator/send-news/send-news.component';
 import { DisplayAllCentersComponent } from './modules/public/display-all-centers/display-all-centers.component';
 import { MatTableModule } from '@angular/material/table';
+import {MatSortModule} from '@angular/material/sort';
+import {MatButtonModule} from '@angular/material/button';
+import {MatButtonToggleModule} from '@angular/material/button-toggle';
+import {MatIconModule} from '@angular/material/icon';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { MatCardModule} from '@angular/material/card';
+import { MatToolbarModule } from '@angular/material/toolbar';
+
+
 
 
 @NgModule({
@@ -29,7 +39,8 @@ import { MatTableModule } from '@angular/material/table';
     RegisterBloodBankComponent,
     SendNewsComponent,
     UserProfileViewComponent,
-    DisplayAllCentersComponent
+    DisplayAllCentersComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -38,7 +49,17 @@ import { MatTableModule } from '@angular/material/table';
     AppRoutingModule,
     FormsModule,
     RouterModule,
-    MatTableModule
+    MatTableModule,
+    MatSortModule,
+    MatButtonModule,
+    MatButtonToggleModule,
+    MatIconModule,
+    BrowserAnimationsModule,
+    BrowserModule,
+    FlexLayoutModule,
+    MatCardModule,
+    MatToolbarModule
+
   ],
   providers: [],
   bootstrap: [AppComponent]

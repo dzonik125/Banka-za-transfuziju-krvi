@@ -29,10 +29,10 @@ public class BloodBankServiceImpl implements BloodBankService {
         map2.put(BloodType.Bneg, 0.0);
         map2.put(BloodType.Bpos, 0.0);
         Address a1 = new Address("Srbija", "Beograd", "Karadjordjeva", "12");
-        Address a2 = new Address("Spanija", "Barselona", "Mesijeva", "123");
-        BloodBank b1 = new BloodBank(1l, "Banka 1", "", 3.4, map1, null, null
+        Address a2 = new Address("Srbija", "Arandjelovac", "Ulica", "123");
+        BloodBank b1 = new BloodBank(1l, "A banka", "", 3.4, map1, null, null
                 , null, a1, null, "1");
-        BloodBank b2 = new BloodBank(2l, "Banka 2", "", 1.2, map2, null, null
+        BloodBank b2 = new BloodBank(2l, "B banka", "", 1.2, map2, null, null
                 , null, a2, null, "");
 
         bloodBankRepository.save(b1);

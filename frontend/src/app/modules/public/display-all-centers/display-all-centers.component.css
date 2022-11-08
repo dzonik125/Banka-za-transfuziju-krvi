@@ -1,0 +1,13 @@
+table {
+  width: 50%;
+  align-content: center;
+}
+
+th.mat-sort-header-sorted {
+  color: black;
+}
+
+.center {
+  display: flex;
+  justify-content: center;
+  }

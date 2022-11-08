@@ -1,25 +1,40 @@
-package group8.bloodbank.model; /***********************************************************************
- * Module:  Donor.java
- * Author:  david
- * Purpose: Defines the Class Donor
- ***********************************************************************/
+package group8.bloodbank.model;
 
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
+
+import javax.persistence.*;
 import java.util.ArrayList;
 
-/**
- * @pdOid c391d508-baeb-41be-a534-23d1021a74c9
- */
-public class Donor extends User {
 
+@Entity
+@AllArgsConstructor
+public class Donor extends User {
+    @Transient
     public ArrayList<Complaint> complaint;
+    @Transient
     public ArrayList<Survey> survey;
+    @Column
     private int points;
-    private int penals;
+    @Column
+    private int penalty;
+
+    @Column
     private Category category;
+    @Column
     private BloodType bloodType;
 
-    public Donor(Long id, String name, String surname, String password, Address address, String jmbg, String email, String occupation, int penalty, Gender gender) {
-        super(id, name, surname, password, address, jmbg, email, occupation, penalty, gender);
+
+    public Donor(Long id, String name, String surname, String password, Address address, String jmbg, String email, String occupation, Gender gender, int points, int penalty, Category category, BloodType bloodType) {
+        super(id, name, surname, password, address, jmbg, email, occupation, gender);
+        this.penalty = penalty;
+        this.points = points;
+        this.category = category;
+        this.bloodType = bloodType;
+    }
+
+    public Donor() {
+
     }
 
     public int getPoints() {
@@ -28,14 +43,6 @@ public class Donor extends User {
 
     public void setPoints(int points) {
         this.points = points;
-    }
-
-    public int getPenals() {
-        return penals;
-    }
-
-    public void setPenals(int penals) {
-        this.penals = penals;
     }
 
     public Category getCategory() {
@@ -68,6 +75,14 @@ public class Donor extends User {
 
     public void setSurvey(ArrayList<Survey> survey) {
         this.survey = survey;
+    }
+
+    public int getPenalty() {
+        return penalty;
+    }
+
+    public void setPenalty(int penalty) {
+        this.penalty = penalty;
     }
 
 }
