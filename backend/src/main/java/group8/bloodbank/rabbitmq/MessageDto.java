@@ -1,12 +1,21 @@
 package group8.bloodbank.rabbitmq;
 
-import java.util.Date;
+
+import org.springframework.web.multipart.MultipartFile;
 
 public class MessageDto {
+
     private String text;
     private String subject;
+    private MultipartFile image;
 
+    public MultipartFile getImage() {
+        return image;
+    }
 
+    public void setImage(MultipartFile image) {
+        this.image = image;
+    }
 
     public MessageDto() {
     }
@@ -15,6 +24,8 @@ public class MessageDto {
         this.text = text;
         this.subject = subject;
     }
+
+
     public String getSubject() {
         return subject;
     }
