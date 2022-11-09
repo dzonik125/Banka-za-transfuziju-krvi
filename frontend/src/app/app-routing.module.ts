@@ -9,6 +9,8 @@ import { SendNewsComponent } from './modules/administrator/send-news/send-news.c
 
 import { UserProfileViewComponent } from './modules/public/user-profile-view/user-profile-view.component';
 import { DisplayAllCentersComponent } from './modules/public/display-all-centers/display-all-centers.component';
+import { RegisterBloodBankComponent } from './modules/administrator/register-blood-bank/register-blood-bank.component';
+import { RegisterMedicalWorkerComponent } from './modules/administrator/register-medical-worker/register-medical-worker.component';
 
 const routes: Routes = [
   {path: '', component: HomeComponentComponent},
@@ -16,7 +18,8 @@ const routes: Routes = [
   {path:'saveApi/:id', component: SaveApiKeyComponent},
   {path:'sendNews', component: SendNewsComponent},
   {path: 'userProfile/:id', component: UserProfileViewComponent},
-  {path:'adminDashboard', component: AdminDashboardComponent},
+  {path:'adminDashboard/registerBloodBank', component: RegisterBloodBankComponent},
+  {path:'adminDashboard/registerMedicalWorker', component: RegisterMedicalWorkerComponent},
   {path: 'homePage', component: DisplayAllCentersComponent}
 ];
 

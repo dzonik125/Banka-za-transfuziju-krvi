@@ -46,6 +46,13 @@ public class User {
         this.gender = gender;
     }
 
+    public User(String name, String surname, String email, Gender gender) {
+        this.name = name;
+        this.surname = surname;
+        this.email = email;
+        this.gender = gender;
+    }
+
     public Long getId() {
         return id;
     }

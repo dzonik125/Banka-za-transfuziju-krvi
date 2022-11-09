@@ -1,21 +1,31 @@
-package group8.bloodbank.model; /***********************************************************************
- * Module:  MedicalWorker.java
- * Author:  david
- * Purpose: Defines the Class MedicalWorker
- ***********************************************************************/
+package group8.bloodbank.model;
 
-/**
- * @pdOid f711f8ab-b463-4dc5-8215-8f96fce1bf44
- */
+import lombok.AllArgsConstructor;
+
+import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
+
+@Entity
+@AllArgsConstructor
 public class MedicalWorker extends User {
-    /**  @pdOid 5cbd8b79-234f-4cad-b0a1-0a8130d141ec */
-    /**
-     * @pdRoleInfo migr=no name=BloodBank assc=association1 mult=1..1 side=A
-     */
+
+    @OneToOne
+    @JoinColumn(name = "blood_bank_id")
     public BloodBank bloodBank;
 
     public MedicalWorker(Long id, String name, String surname, String password, Address adress, String jmbg, String email, String occupation, Gender gender) {
         super(id, name, surname, password, adress, jmbg, email, occupation, gender);
+
+
+    }
+
+    public MedicalWorker(String name, String surname, String email, Gender gender) {
+        super(name, surname, email, gender);
+
+    }
+
+    public MedicalWorker() {
 
     }
 
@@ -26,5 +36,4 @@ public class MedicalWorker extends User {
     public void setBloodBank(BloodBank newBloodBank) {
         this.bloodBank = newBloodBank;
     }
-
 }
