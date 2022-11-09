@@ -10,8 +10,25 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { SaveApiKeyComponent } from './save-api-key/save-api-key.component';
+import { UserProfileViewComponent } from './modules/public/user-profile-view/user-profile-view.component';
 import { AdminDashboardComponent } from './modules/administrator/admin-dashboard/admin-dashboard.component';
 import { RegisterBloodBankComponent } from './modules/administrator/register-blood-bank/register-blood-bank.component';
+import { SendNewsComponent } from './modules/administrator/send-news/send-news.component';
+import { DisplayAllCentersComponent } from './modules/public/display-all-centers/display-all-centers.component';
+import { MatTableModule } from '@angular/material/table';
+import {MatSortModule} from '@angular/material/sort';
+import {MatButtonModule} from '@angular/material/button';
+import {MatButtonToggleModule} from '@angular/material/button-toggle';
+import {MatIconModule} from '@angular/material/icon';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { MatCardModule} from '@angular/material/card';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import {MatRadioModule} from '@angular/material/radio';
+import { RegisterMedicalWorkerComponent } from './modules/administrator/register-medical-worker/register-medical-worker.component';
+
+
+
 
 @NgModule({
   declarations: [
@@ -21,7 +38,12 @@ import { RegisterBloodBankComponent } from './modules/administrator/register-blo
     HomeComponentComponent,
     SaveApiKeyComponent,
     AdminDashboardComponent,
-    RegisterBloodBankComponent
+    RegisterBloodBankComponent,
+    SendNewsComponent,
+    UserProfileViewComponent,
+    DisplayAllCentersComponent,
+    RegisterMedicalWorkerComponent
+
   ],
   imports: [
     BrowserModule,
@@ -29,7 +51,19 @@ import { RegisterBloodBankComponent } from './modules/administrator/register-blo
     NgbModule,
     AppRoutingModule,
     FormsModule,
-    RouterModule
+    RouterModule,
+    MatTableModule,
+    MatSortModule,
+    MatButtonModule,
+    MatButtonToggleModule,
+    MatIconModule,
+    BrowserAnimationsModule,
+    BrowserModule,
+    FlexLayoutModule,
+    MatCardModule,
+    MatToolbarModule,
+    MatRadioModule
+
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { Address } from 'src/app/model/address';
 import { BloodBank } from 'src/app/model/bloodBank';
 import { Validator } from '../../util/validation';
-import { BloodBankServiceService } from '../services/blood-bank-service.service';
+import { BloodBankServiceService } from '../../services/blood-bank-service.service';
 
 @Component({
   selector: 'app-register-blood-bank',
@@ -26,7 +26,7 @@ export class RegisterBloodBankComponent {
   createBloodBank(){
     window.alert(this.bloodBank.name)
     window.alert(this.bloodBank.description)
-    
+
     this.bloodBank.address = this.address;
     this.bbservice.createBloodBank(this.bloodBank).subscribe();
   }

@@ -1,0 +1,107 @@
+<section style="background-color: white;">
+    <div class="container py-5">
+
+      <div class="row">
+        <div class="col-lg-4">
+          <div class="card mb-4 h-100" style="background-color: #632626; color: white;">
+            <div class="card-body text-center" style="margin-top: 2.4rem;">
+              <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp" alt="avatar"
+                class="rounded-circle img-fluid" style="width: 150px;">
+              <h5 class="my-3">{{user?.fullName()}}</h5>
+              <p class="text-muted mb-1">{{user?.occupation}}</p>
+              <p class="text-muted mb-4">{{user?.address?.city}}, {{user?.address?.country}}</p>
+              <div class="d-flex justify-content-center align-self-end mb-2">
+                <button type="button" class="btn btn-primary">Edit profile</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-8">
+          <div class="card mb-4 h-100" style="background-color: #632626; color: white;">
+            <div class="card-body">
+              <div class="row">
+                <div class="col-sm-3">
+                  <p class="mb-0">Full Name</p>
+                </div>
+                <div class="col-sm-9">
+                  <p class="text-muted mb-0">{{user?.fullName()}}</p>
+                </div>
+              </div>
+              <hr>
+              <div class="row">
+                <div class="col-sm-3">
+                  <p class="mb-0">Email</p>
+                </div>
+                <div class="col-sm-9">
+                  <p class="text-muted mb-0">{{user?.email}}</p>
+                </div>
+              </div>
+              <hr>
+              <div class="row">
+                <div class="col-sm-3">
+                  <p class="mb-0">Password</p>
+                </div>
+                <div class="col-sm-9">
+                  <p class="text-muted mb-0">{{user?.password}}</p>
+                </div>
+              </div>
+              <hr>
+              <div class="row">
+                <div class="col-sm-3">
+                  <p class="mb-0">Adress</p>
+                </div>
+                <div class="col-sm-9">
+                  <p class="text-muted mb-0">{{user?.address?.street + ' ' + user?.address?.number + ', ' + user?.address?.city + ', ' +user?.address?.country}}</p>
+                </div>
+              </div>
+              <hr>
+              <div class="row">
+                <div class="col-sm-3">
+                  <p class="mb-0">JMBG</p>
+                </div>
+                <div class="col-sm-9">
+                  <p class="text-muted mb-0">{{user?.jmbg}}</p>
+                </div>
+              </div>
+              <hr>
+              <div class="row">
+                <div class="col-sm-3">
+                  <p class="mb-0">Occupation</p>
+                </div>
+                <div class="col-sm-9">
+                  <p class="text-muted mb-0">{{user?.occupation}}</p>
+                </div>
+              </div>
+              <hr>
+              <div class="row">
+                <div class="col-sm-3">
+                  <p class="mb-0">Penalty</p>
+                </div>
+                <div class="col-sm-9">
+                  <p class="text-muted mb-0">{{user?.penalty}}</p>
+                </div>
+              </div>
+              <hr>
+              <div class="row">
+                <div class="col-sm-3">
+                  <p class="mb-0">Gender</p>
+                </div>
+                <div class="col-sm-9">
+                  <p class="text-muted mb-0">{{user?.gender | titlecase}}</p>
+                </div>
+              </div>
+              <hr>
+              <div class="row">
+                <div class="col-sm-3">
+                  <p class="mb-0">User category</p>
+                </div>
+                <div class="col-sm-9">
+                  <p class="text-muted mb-0">{{user?.category}}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>

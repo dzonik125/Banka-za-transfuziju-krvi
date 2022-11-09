@@ -33,4 +33,16 @@ public class UserController {
             return new ResponseEntity<User>(savedUser, HttpStatus.CONFLICT);
         }
     }
+
+    @CrossOrigin(origins = "http://localhost:4200")
+    @GetMapping
+    public ResponseEntity<User> findById(@RequestParam Long id){
+        try {
+            User toReturn = userService.findById(id);
+            return new ResponseEntity<User>(toReturn, HttpStatus.OK);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResponseEntity(HttpStatus.NOT_FOUND);
+        }
+    }
 }

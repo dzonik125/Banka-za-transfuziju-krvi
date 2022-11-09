@@ -1,3 +1,4 @@
+import { BloodBank } from './bloodBank';
 import { Address } from './address';
 export class User {
     name: string = '';
@@ -8,7 +9,9 @@ export class User {
     occupation: string ='';
     gender: string = '';
     penalty: number = 0;
+    points: number = 0;
     address!: Address;
+    category: string = 'REGULAR';
 
 
   public constructor(obj?: any) {
@@ -21,6 +24,13 @@ export class User {
           this.occupation = obj.occupation;
           this.gender = obj.gender;
           this.penalty = obj.penalty;
+          this.address = obj.address;
+          this.points = obj.points;
+          this.category = obj.category;
       }
+  }
+
+  public fullName(): String {
+    return this.name + ' ' + this.surname;
   }
 }
