@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import {LiveAnnouncer} from '@angular/cdk/a11y';
 import {MatSort, Sort} from '@angular/material/sort';
+import { MySort } from '../../util/sort';
 
 @Component({
   selector: 'app-display-all-centers',
@@ -19,6 +20,8 @@ export class DisplayAllCentersComponent implements AfterViewInit {
   public bloodBanks: BloodBank[] = [];
 
   gridColumns = 3;
+  public sorter: MySort = new MySort();
+  public anchor: any;
 
 
   constructor(private bloodBankService: BloodBankServiceService, private router: Router, private _liveAnnouncer: LiveAnnouncer) { }
@@ -35,7 +38,7 @@ export class DisplayAllCentersComponent implements AfterViewInit {
     this.dataSource.sort = this.sort;
   }
 
-  sortColumn($event: Sort): void {
+/*  sortColumn($event: Sort): void {
     this.dataSource.sortingDataAccessor = (item, property) => {
       switch (property) {
         case 'address.city': {
@@ -45,13 +48,15 @@ export class DisplayAllCentersComponent implements AfterViewInit {
           return (item as any)[property]; }
       }
     };
-}
+}*/
 
 
+  sortName(property: any){
+    this.sorter.sortName(this.bloodBanks,property);
+  }
 
-toggleGridColumns() {
-  this.gridColumns = this.gridColumns === 3 ? 4 : 3;
-}
-
+  sortData(){
+    this.sorter.sortData(this.bloodBanks);
+  }
 
 }

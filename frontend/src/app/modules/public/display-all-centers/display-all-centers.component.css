@@ -1,7 +1,3 @@
-table {
-  width: 50%;
-  align-content: center;
-}
 
 th.mat-sort-header-sorted {
   color: black;
@@ -11,3 +7,29 @@ th.mat-sort-header-sorted {
   display: flex;
   justify-content: center;
   }
+
+  mat-toolbar {
+    justify-content: space-between;
+}
+
+.content {
+    padding: 16px;
+}
+
+.content > mat-card {
+    margin-bottom: 16px;
+}
+
+.align{
+  width: 350px;
+  align-items: center;
+  padding-left: 50px;
+}
+
+.card-background{
+  background-color: #EDEDED;
+}
+
+
+
+

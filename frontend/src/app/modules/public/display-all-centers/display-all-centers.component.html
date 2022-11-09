@@ -1,36 +1,4 @@
-<div class="container pt-3 pb-3">
-  <div class="input-group mb-3">
-    <div class="input-group-prepend">
-
-    <label class="mr-3 mt-2">Opcije za pretragu:</label>
-      <select id="options"  class="btn btn-outline-secondary dropdown-toggle text-gray mr-3" aria-label=".form-select-lg example" >
-      <option selected>Naziv</option>
-      <option value="Grad">Grad</option>
-      <option value="Prosecna ocena">Prosecna ocena</option>
-
-    </select>
-
-    <select id="sortOptions"  class="btn btn-outline-secondary dropdown-toggle text-gray mr-3" aria-label=".form-select-lg example" >
-      <option selected>Rastuci</option>
-      <option value="Opadajuci">Opadajuci</option>
-      </select>
-
-
-  </div>
-
-    <input type="text" name="searchBox" id="searchh" class="form-control" placeholder="Pretraga">
-
-    <button class="btn btn-outline-primary ml-3 text-gray" id="sortBtn">Sortiraj</button>
-
-    <button type="submit" class="btn btn-outline-primary ml-3 text-gray" id="searchBtn">Pretrazi</button>
-
-
-</div>
-
-</div>
-
-
-<div class="center">
+<!-- <div class="center">
   <table mat-table [dataSource]="dataSource" matSort (matSortChange)="sortColumn($event)" class="mat-elevation-z8">
       <ng-container matColumnDef="name">
           <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by name"> Name </th>
@@ -49,38 +17,29 @@
       <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
   </table>
 
+</div> -->
+
+
+<div class="container my-3">
+<p class="text-start mb-1">Sort by:</p>
+<button class="btn btn-outline-primary ml-3 me-3 border" mat-button (click)="sortName('name')" >Name</button>
+<button class="btn btn-outline-primary ml-3 me-3 border" mat-button (click)="sortName('address.city')">City</button>
+<button class="btn btn-outline-primary ml-3  border" mat-button (click)="sortData()">Grade</button>
 </div>
-
-
-
-
-
-
-
-<mat-toolbar color="primary">
-  <span>Card view demo</span>
-  <button mat-button (click)="toggleGridColumns()" fxHide.lt-md>
-    <span *ngIf="gridColumns === 4">Three Columns</span>
-    <span *ngIf="gridColumns === 3">Four Columns</span>
-  </button>
-</mat-toolbar>
-<div class="content">
-  <div fxLayout="row wrap" fxLayoutGap="16px grid">
-    <div [fxFlex]="(100/gridColumns) + '%'" fxFlex.xs="100%" fxFlex.sm="33%" *ngFor="let num of [1,2,3,4,5,6,7]">
-      <mat-card class="mat-elevation-z4">
-        <mat-card-header>
-          <mat-card-title>Mountains {{num}}</mat-card-title>
-        </mat-card-header>
-        <img mat-card-image src="../../../../assets/SignUpBg.png">
+<div class="container">
+  <div fxLayout="row wrap space-evenly" fxLayoutGap="15px grid">
+    <div [fxFlex]="(100/3) + '%'" fxFlex.xs="100%" fxFlex.sm="33%" *ngFor="let bloodBank of bloodBanks">
+      <mat-card  class="mat-elevation-z19 border align card-background">
+        <img mat-card-image mat-card-s-image  src="../../../../assets/SignUpBg.png">
         <mat-card-content>
+          <mat-card-title class="text-center fs-5 fw-bold">{{bloodBank.name}}</mat-card-title>
           <p>
-            The Himalayas is a mountain range in Asia.
+            <mat-card-content>{{bloodBank.avgGrade}}</mat-card-content>
+          </p>
+          <p>
+            <mat-card-content>{{bloodBank.address.city}},{{bloodBank.address.street}} {{bloodBank.address.number}}</mat-card-content>
           </p>
         </mat-card-content>
-        <mat-card-actions>
-          <button mat-button>LIKE</button>
-          <button mat-button>SHARE</button>
-        </mat-card-actions>
       </mat-card>
     </div>
   </div>
