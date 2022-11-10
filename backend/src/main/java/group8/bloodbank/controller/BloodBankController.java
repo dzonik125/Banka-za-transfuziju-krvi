@@ -28,6 +28,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/bloodBanks")
+@CrossOrigin(origins = "http://localhost:4200")
 public class BloodBankController {
 
     private BloodBankService bloodBankService;
@@ -39,7 +40,6 @@ public class BloodBankController {
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public List<BloodBank> getAll() {
-
         return bloodBankService.getAll();
     }
 

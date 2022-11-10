@@ -14,6 +14,20 @@ import { UserProfileViewComponent } from './modules/public/user-profile-view/use
 import { AdminDashboardComponent } from './modules/administrator/admin-dashboard/admin-dashboard.component';
 import { RegisterBloodBankComponent } from './modules/administrator/register-blood-bank/register-blood-bank.component';
 import { SendNewsComponent } from './modules/administrator/send-news/send-news.component';
+import { DisplayAllCentersComponent } from './modules/public/display-all-centers/display-all-centers.component';
+import { MatTableModule } from '@angular/material/table';
+import {MatSortModule} from '@angular/material/sort';
+import {MatButtonModule} from '@angular/material/button';
+import {MatButtonToggleModule} from '@angular/material/button-toggle';
+import {MatIconModule} from '@angular/material/icon';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { MatCardModule} from '@angular/material/card';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import {MatRadioModule} from '@angular/material/radio';
+import { RegisterMedicalWorkerComponent } from './modules/administrator/register-medical-worker/register-medical-worker.component';
+
+
 
 
 @NgModule({
@@ -29,7 +43,10 @@ import { SendNewsComponent } from './modules/administrator/send-news/send-news.c
     AdminDashboardComponent,
     RegisterBloodBankComponent,
     SendNewsComponent,
-    UserProfileViewComponent
+    UserProfileViewComponent,
+    DisplayAllCentersComponent,
+    RegisterMedicalWorkerComponent
+
   ],
   imports: [
     BrowserModule,
@@ -37,7 +54,19 @@ import { SendNewsComponent } from './modules/administrator/send-news/send-news.c
     NgbModule,
     AppRoutingModule,
     FormsModule,
-    RouterModule
+    RouterModule,
+    MatTableModule,
+    MatSortModule,
+    MatButtonModule,
+    MatButtonToggleModule,
+    MatIconModule,
+    BrowserAnimationsModule,
+    BrowserModule,
+    FlexLayoutModule,
+    MatCardModule,
+    MatToolbarModule,
+    MatRadioModule
+
   ],
   providers: [],
   bootstrap: [AppComponent]
