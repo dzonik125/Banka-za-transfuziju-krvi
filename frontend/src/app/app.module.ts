@@ -25,7 +25,12 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatCardModule} from '@angular/material/card';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import {MatRadioModule} from '@angular/material/radio';
-
+import { FileUploadModule } from "ng2-file-upload";
+import { provideFirestore, getFirestore } from '@angular/fire/firestore';
+import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
+import { provideAuth, getAuth} from '@angular/fire/auth';
+import { environment } from 'src/environments/environment';
+import { provideStorage, getStorage } from '@angular/fire/storage';
 
 
 
@@ -41,7 +46,6 @@ import {MatRadioModule} from '@angular/material/radio';
     SendNewsComponent,
     UserProfileViewComponent,
     DisplayAllCentersComponent,
-
   ],
   imports: [
     BrowserModule,
@@ -60,8 +64,12 @@ import {MatRadioModule} from '@angular/material/radio';
     FlexLayoutModule,
     MatCardModule,
     MatToolbarModule,
-    MatRadioModule
-
+    MatRadioModule,
+    FileUploadModule,
+    provideFirebaseApp(()=> initializeApp(environment.firebase)),
+    provideAuth(() => getAuth()),
+    provideFirestore(() => getFirestore()),
+    provideStorage(() => getStorage())
   ],
   providers: [],
   bootstrap: [AppComponent]
