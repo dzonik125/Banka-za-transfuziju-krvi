@@ -1,3 +1,4 @@
+import { CreateSurveyComponent } from './modules/public/create-survey/create-survey.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { RegisterUserComponent } from './modules/public/register-user/register-user.component';
@@ -19,7 +20,7 @@ const routes: Routes = [
   {path: 'userProfile/:id', component: UserProfileViewComponent},
   {path:'adminDashboard/registerBloodBank', component: RegisterBloodBankComponent},
   {path:'adminDashboard/registerMedicalWorker', component: RegisterMedicalWorkerComponent},
-  {path: 'homePage', component: DisplayAllCentersComponent}
+  {path: 'homePage', component: DisplayAllCentersComponent},
 ];
 
 @NgModule({

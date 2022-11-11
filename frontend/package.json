@@ -31,6 +31,7 @@
     "firebase": "^9.13.0",
     "ng2-file-upload": "^1.4.0",
     "rxjs": "~7.5.0",
+    "survey-creator-knockout": "^1.9.57",
     "zone.js": "~0.11.4"
   },
   "devDependencies": {

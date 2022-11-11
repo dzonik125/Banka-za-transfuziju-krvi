@@ -1,35 +1,47 @@
-package group8.bloodbank.model; /***********************************************************************
- * Module:  Survey.java
- * Author:  david
- * Purpose: Defines the Class Survey
- ***********************************************************************/
+package group8.bloodbank.model;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+import javax.persistence.*;
 import java.util.ArrayList;
 
-
+@Entity
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class Survey {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id", nullable = false)
+    private Long id;
 
-    private Donor donor;
-    private ArrayList<String> answers;
+    //@ManyToOne
+   //@JoinColumn(name = "donor_id")
+    //@Transient
+    //private Donor donor;
+    @Column
+    private String answer1;
+    @Column
+    private String answer3;
+    @Column
+    private String answer2;
+    @Column
+    private String answer4;
+    @Column
+    private String answer5;
+    @Column
+    private String answer6;
+    @Column
+    private String answer7;
+    @Column
+    private String answer8;
+    @Column
+    private String answer9;
+    @Column
+    private String answer10;
 
-    public Survey(Donor donor, ArrayList<String> answers) {
-        this.donor = donor;
-        this.answers = answers;
-    }
-
-    public Donor getDonor() {
-        return donor;
-    }
-
-    public void setDonor(Donor donor) {
-        this.donor = donor;
-    }
-
-    public ArrayList<String> getAnswers() {
-        return answers;
-    }
-
-    public void setAnswers(ArrayList<String> answers) {
-        this.answers = answers;
-    }
 }

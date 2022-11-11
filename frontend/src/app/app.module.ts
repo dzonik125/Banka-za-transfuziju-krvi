@@ -17,7 +17,6 @@ import { SendNewsComponent } from './modules/administrator/send-news/send-news.c
 import { DisplayAllCentersComponent } from './modules/public/display-all-centers/display-all-centers.component';
 import { MatTableModule } from '@angular/material/table';
 import {MatSortModule} from '@angular/material/sort';
-import {MatButtonModule} from '@angular/material/button';
 import {MatButtonToggleModule} from '@angular/material/button-toggle';
 import {MatIconModule} from '@angular/material/icon';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -32,6 +31,9 @@ import { provideAuth, getAuth} from '@angular/fire/auth';
 import { environment } from 'src/environments/environment';
 import { provideStorage, getStorage } from '@angular/fire/storage';
 import { RegisterMedicalWorkerComponent } from './modules/administrator/register-medical-worker/register-medical-worker.component';
+import { CreateSurveyComponent } from './modules/public/create-survey/create-survey.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatButtonModule } from '@angular/material/button';
 
 
 
@@ -51,8 +53,9 @@ import { RegisterMedicalWorkerComponent } from './modules/administrator/register
     SendNewsComponent,
     UserProfileViewComponent,
     DisplayAllCentersComponent,
-    RegisterMedicalWorkerComponent
-    
+    RegisterMedicalWorkerComponent,
+    CreateSurveyComponent
+
   ],
   imports: [
     BrowserModule,
@@ -73,12 +76,14 @@ import { RegisterMedicalWorkerComponent } from './modules/administrator/register
     MatToolbarModule,
     MatRadioModule,
     FileUploadModule,
+    MatDialogModule,
     provideFirebaseApp(()=> initializeApp(environment.firebase)),
     provideAuth(() => getAuth()),
     provideFirestore(() => getFirestore()),
     provideStorage(() => getStorage())
   ],
   providers: [],
+  entryComponents: [CreateSurveyComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
