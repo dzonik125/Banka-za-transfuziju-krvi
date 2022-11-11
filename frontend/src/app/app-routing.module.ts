@@ -6,7 +6,6 @@ import { HomeComponentComponent } from './home-component/home-component.componen
 import { SaveApiKeyComponent } from './save-api-key/save-api-key.component';
 import { AdminDashboardComponent } from './modules/administrator/admin-dashboard/admin-dashboard.component';
 import { SendNewsComponent } from './modules/administrator/send-news/send-news.component';
-
 import { UserProfileViewComponent } from './modules/public/user-profile-view/user-profile-view.component';
 import { DisplayAllCentersComponent } from './modules/public/display-all-centers/display-all-centers.component';
 import { RegisterBloodBankComponent } from './modules/administrator/register-blood-bank/register-blood-bank.component';
