@@ -16,20 +16,29 @@ import { RegisterBloodBankComponent } from './modules/administrator/register-blo
 import { SendNewsComponent } from './modules/administrator/send-news/send-news.component';
 import { DisplayAllCentersComponent } from './modules/public/display-all-centers/display-all-centers.component';
 import { MatTableModule } from '@angular/material/table';
-import {MatSortModule} from '@angular/material/sort';
-import {MatButtonModule} from '@angular/material/button';
-import {MatButtonToggleModule} from '@angular/material/button-toggle';
-import {MatIconModule} from '@angular/material/icon';
+import { MatSortModule } from '@angular/material/sort';
+import { MatButtonModule } from '@angular/material/button';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
+import { MatIconModule } from '@angular/material/icon';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { MatCardModule} from '@angular/material/card';
+import { MatCardModule } from '@angular/material/card';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import {MatRadioModule} from '@angular/material/radio';
+import { MatRadioModule } from '@angular/material/radio';
 import { RegisterMedicalWorkerComponent } from './modules/administrator/register-medical-worker/register-medical-worker.component';
+import { DisplayAllUsersComponent } from './modules/administrator/display-all-users/display-all-users.component';
+import { 
+	IgxAvatarModule,
+	IgxFilterModule,
+	IgxIconModule,
+	IgxListModule,
+	IgxInputGroupModule,
+	IgxButtonGroupModule,
+	IgxRippleModule
+ } from "igniteui-angular";
 
 
-
-
+//I keep the new line
 @NgModule({
   declarations: [
     AppComponent,
@@ -42,7 +51,8 @@ import { RegisterMedicalWorkerComponent } from './modules/administrator/register
     SendNewsComponent,
     UserProfileViewComponent,
     DisplayAllCentersComponent,
-    RegisterMedicalWorkerComponent
+    RegisterMedicalWorkerComponent,
+    DisplayAllUsersComponent
 
   ],
   imports: [
@@ -57,6 +67,7 @@ import { RegisterMedicalWorkerComponent } from './modules/administrator/register
     MatButtonModule,
     MatButtonToggleModule,
     MatIconModule,
+    IgxListModule,
     BrowserAnimationsModule,
     BrowserModule,
     FlexLayoutModule,
@@ -68,4 +79,5 @@ import { RegisterMedicalWorkerComponent } from './modules/administrator/register
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}

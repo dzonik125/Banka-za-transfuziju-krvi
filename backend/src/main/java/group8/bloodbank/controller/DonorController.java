@@ -8,6 +8,8 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping("/donor")
@@ -31,6 +33,12 @@ public class DonorController {
             e.printStackTrace();
             return new ResponseEntity<Donor>(savedDonor, HttpStatus.CONFLICT);
         }
+    }
+
+    @CrossOrigin(origins = "http://localhost:4200")
+    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    public List<Donor> getAll() {
+        return donorService.getAll();
     }
 
 

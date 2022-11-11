@@ -1,7 +1,6 @@
 package group8.bloodbank.controller;
 
 import group8.bloodbank.model.User;
-import group8.bloodbank.service.interfaces.BloodBankService;
 import group8.bloodbank.service.interfaces.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -45,4 +44,6 @@ public class UserController {
             return new ResponseEntity(HttpStatus.NOT_FOUND);
         }
     }
+
+
 }
