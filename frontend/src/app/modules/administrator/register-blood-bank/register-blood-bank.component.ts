@@ -4,11 +4,9 @@ import { Address } from 'src/app/model/address';
 import { BloodBank } from 'src/app/model/bloodBank';
 import { Validator } from '../../util/validation';
 import { BloodBankServiceService } from '../../services/blood-bank-service.service';
-import { Buffer } from 'buffer';
 import { Router } from '@angular/router';
 import { Storage, ref, uploadBytesResumable, getDownloadURL } from '@angular/fire/storage'
-import { delay } from 'rxjs';
-import { waitForAsync } from '@angular/core/testing';
+
 
 @Component({
   selector: 'app-register-blood-bank',
@@ -52,19 +50,6 @@ export class RegisterBloodBankComponent implements OnInit {
 }
 
 
-convertDataURIToBinary(dataURI: string): Uint8Array {
-  var base64Index = dataURI.indexOf(';base64,') + ';base64,'.length;
-  var base64 = dataURI.substring(base64Index);
-  var raw = window.atob(base64);
-  var rawLength = raw.length;
-  var array = new Uint8Array(new ArrayBuffer(rawLength));
-
-  for(let i = 0; i < rawLength; i++) {
-    array[i] = raw.charCodeAt(i);
-  }
-  return array;
-}
-
 upload(event: any){
   this.file = event.target.files[0];
 }
@@ -85,17 +70,12 @@ public uploadUrl: any;
     const uploadTask = uploadBytesResumable(storageRef, this.file);
     uploadTask.on('state_changed',
   (snapshot) => {
-    // Observe state change events such as progress, pause, and resume
-    // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
     const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
     console.log('Upload is ' + progress + '% done');
   },
   (error) => {
-    // Handle unsuccessful uploads
   },
   () => {
-    // Handle successful uploads on complete
-    // For instance, get the download URL: https://firebasestorage.googleapis.com/...
       getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
       console.log('File available at', downloadURL);
       this.createBloodBank(downloadURL);
