@@ -7,22 +7,17 @@ public class MessageDto {
 
     private String text;
     private String subject;
-    private MultipartFile image;
-
-    public MultipartFile getImage() {
-        return image;
-    }
-
-    public void setImage(MultipartFile image) {
-        this.image = image;
-    }
+    private String image;
+    private byte[] byteArray;
 
     public MessageDto() {
     }
 
-    public MessageDto(String text, String subject) {
+    public MessageDto(String text, String subject, String image) {
         this.text = text;
         this.subject = subject;
+        this.image = image;
+        this.byteArray = java.util.Base64.getDecoder().decode(this.image);
     }
 
 
@@ -42,6 +37,13 @@ public class MessageDto {
         this.text = text;
     }
 
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
 
     @Override
     public String toString() {
