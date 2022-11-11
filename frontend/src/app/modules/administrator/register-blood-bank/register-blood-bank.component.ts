@@ -47,19 +47,16 @@ export class RegisterBloodBankComponent implements OnInit {
        this.url = event.target.result;
     }
   }
-}
-
-
-upload(event: any){
   this.file = event.target.files[0];
 }
+
+
 
 public uploadUrl: any;
 
    createBloodBank(downloadURL: any){
     this.bloodBank.address = this.address;
     this.bloodBank.image = downloadURL;
-    console.log(downloadURL);
     this.bbservice.createBloodBank(this.bloodBank).subscribe();
   }
 
