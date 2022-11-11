@@ -31,6 +31,8 @@ import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { provideAuth, getAuth} from '@angular/fire/auth';
 import { environment } from 'src/environments/environment';
 import { provideStorage, getStorage } from '@angular/fire/storage';
+import { RegisterMedicalWorkerComponent } from './modules/administrator/register-medical-worker/register-medical-worker.component';
+
 
 
 
@@ -46,6 +48,8 @@ import { provideStorage, getStorage } from '@angular/fire/storage';
     SendNewsComponent,
     UserProfileViewComponent,
     DisplayAllCentersComponent,
+    RegisterMedicalWorkerComponent
+    
   ],
   imports: [
     BrowserModule,
