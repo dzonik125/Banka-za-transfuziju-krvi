@@ -35,6 +35,9 @@ public class BloodBank {
     @Column
     private String apiKey;
 
+    @Column
+    private String image;
+
     @ElementCollection
     @CollectionTable(name="bloodType_bloodBank", joinColumns=@JoinColumn(name="bloodBank_id"))
     @MapKeyColumn(name = "bloodType_key")
@@ -57,10 +60,11 @@ public class BloodBank {
         this.apiKey = "";
     }
 
-    public BloodBank(String name, String description, Address address) {
+    public BloodBank(String name, String description, Address address, String image) {
         this.name = name;
         this.description = description;
         this.address = address;
+        this.image = image;
     }
 
 
