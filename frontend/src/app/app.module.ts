@@ -27,15 +27,10 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatRadioModule } from '@angular/material/radio';
 import { RegisterMedicalWorkerComponent } from './modules/administrator/register-medical-worker/register-medical-worker.component';
 import { DisplayAllUsersComponent } from './modules/administrator/display-all-users/display-all-users.component';
-import { 
-	IgxAvatarModule,
-	IgxFilterModule,
-	IgxIconModule,
-	IgxListModule,
-	IgxInputGroupModule,
-	IgxButtonGroupModule,
-	IgxRippleModule
- } from "igniteui-angular";
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
+import { ReactiveFormsModule } from '@angular/forms';
+import { FormlySelectModule } from '@ngx-formly/core/select';
+import { SearchFilterPipe } from './modules/util/pipes/search-filter.pipe';
 
 
 //I keep the new line
@@ -52,11 +47,14 @@ import {
     UserProfileViewComponent,
     DisplayAllCentersComponent,
     RegisterMedicalWorkerComponent,
-    DisplayAllUsersComponent
-
+    DisplayAllUsersComponent,
+    SearchFilterPipe
   ],
   imports: [
     BrowserModule,
+    ReactiveFormsModule,
+    FormlySelectModule,
+    Ng2SearchPipeModule,
     HttpClientModule,
     NgbModule,
     AppRoutingModule,
@@ -67,7 +65,6 @@ import {
     MatButtonModule,
     MatButtonToggleModule,
     MatIconModule,
-    IgxListModule,
     BrowserAnimationsModule,
     BrowserModule,
     FlexLayoutModule,
