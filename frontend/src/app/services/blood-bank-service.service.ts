@@ -1,5 +1,5 @@
 import { BloodBank } from 'src/app/model/bloodBank';
-import { HttpHeaders, HttpClient } from '@angular/common/http';
+import { HttpHeaders, HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
@@ -22,5 +22,9 @@ export class BloodBankServiceService {
     return this.http.get<BloodBank[]>(this.apiHost + 'bloodBanks', {headers: this.headers});
   }
 
-
+  getBloodBankById(id: any) : Observable<BloodBank> {
+    let params = new HttpParams();
+    params = params.append("id", id);
+    return this.http.get<BloodBank>(this.apiHost + 'bloodBanks/getById', {params: params});
+  }
 }

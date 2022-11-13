@@ -1,31 +1,19 @@
 package group8.bloodbank.controller;
-
-import com.fasterxml.jackson.databind.util.JSONPObject;
-import group8.bloodbank.BloodBankApplication;
 import group8.bloodbank.model.BloodBank;
 import group8.bloodbank.model.BloodType;
 import group8.bloodbank.model.DTO.BloodBankDTO;
-import group8.bloodbank.model.User;
 import group8.bloodbank.service.interfaces.BloodBankService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.boot.configurationprocessor.json.JSONException;
 import org.springframework.boot.configurationprocessor.json.JSONObject;
-import org.springframework.boot.jackson.JsonObjectSerializer;
-
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletRequest;
-import java.awt.*;
-
-import java.util.Base64;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
+
 
 @RestController
 @RequestMapping("/bloodBanks")
@@ -91,6 +79,14 @@ public class BloodBankController {
         bloodBankService.setApiKey(api, id);
     }
 
+<<<<<<< HEAD
+=======
+    @GetMapping(value = "/getById")
+    public Optional<BloodBank> getById(@RequestParam(value = "id") Long id) {
+        return bloodBankService.getById(id);
+    }
+
+>>>>>>> fc3231157d45b71e25e962c3b2e33fcaac3f0cc8
     @GetMapping(value = "/view/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public String getById(@PathVariable String id) {
         return id;

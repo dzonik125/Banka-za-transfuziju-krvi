@@ -38,8 +38,11 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { FormlySelectModule } from '@ngx-formly/core/select';
 import { SearchFilterPipe } from './modules/util/pipes/search-filter.pipe';
 import { MatDialogModule } from '@angular/material/dialog';
+import { BloodBankViewComponent } from './modules/medical_worker/blood-bank-view/blood-bank-view.component';
 
 //I keep the new line
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -57,7 +60,8 @@ import { MatDialogModule } from '@angular/material/dialog';
     DisplayAllCentersComponent,
     RegisterMedicalWorkerComponent,
     DisplayAllUsersComponent,
-    SearchFilterPipe
+    SearchFilterPipe,
+    BloodBankViewComponent
     
   ],
 
@@ -87,7 +91,8 @@ import { MatDialogModule } from '@angular/material/dialog';
     provideFirebaseApp(()=> initializeApp(environment.firebase)),
     provideAuth(() => getAuth()),
     provideFirestore(() => getFirestore()),
-    provideStorage(() => getStorage())
+    provideStorage(() => getStorage()),
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
