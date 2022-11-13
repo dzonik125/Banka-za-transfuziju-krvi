@@ -25,8 +25,6 @@ export class RegisterBloodBankComponent implements OnInit {
   public file: any = {}
 
 
-
-
   constructor(private http: HttpClient,
               private bbservice: BloodBankServiceService,
               private router: Router,

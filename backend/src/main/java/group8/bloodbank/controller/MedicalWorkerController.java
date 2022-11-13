@@ -27,7 +27,7 @@ public class MedicalWorkerController {
     @CrossOrigin(origins = "http://localhost:4200")
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<MedicalWorker> saveMedicalWorker(@RequestBody MedicalWorkerDTO medicalWorkerDTO)  {
-        MedicalWorker medicalWorker = new MedicalWorker(medicalWorkerDTO.name, medicalWorkerDTO.surname, medicalWorkerDTO.email, Gender.valueOf(medicalWorkerDTO.gender.toUpperCase()));
+        MedicalWorker medicalWorker = new MedicalWorker(medicalWorkerDTO.name, medicalWorkerDTO.surname, medicalWorkerDTO.email, medicalWorkerDTO.password, medicalWorkerDTO.jmbg , medicalWorkerDTO.address, medicalWorkerDTO.occupation, Gender.valueOf(medicalWorkerDTO.gender.toUpperCase()));
         try {
             medicalWorker = medicalWorkerService.saveMedicalWorker(medicalWorker);
             return new ResponseEntity<MedicalWorker>(medicalWorker, HttpStatus.CREATED);
