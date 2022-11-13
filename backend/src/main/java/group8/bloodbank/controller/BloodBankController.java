@@ -48,7 +48,7 @@ public class BloodBankController {
    @CrossOrigin(origins = "http://localhost:4200")
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<BloodBank> saveBloodBank(@RequestBody BloodBankDTO bloodBankDTO)  {
-        BloodBank bloodBank = new BloodBank(bloodBankDTO.name, bloodBankDTO.description, bloodBankDTO.address, bloodBankDTO.image);
+        BloodBank bloodBank = new BloodBank(bloodBankDTO.name, bloodBankDTO.description, bloodBankDTO.address, bloodBankDTO.image, bloodBankDTO.medicalWorker);
         try{
             bloodBank = bloodBankService.saveBloodBank(bloodBank);
             return new ResponseEntity<BloodBank>(bloodBank, HttpStatus.CREATED);

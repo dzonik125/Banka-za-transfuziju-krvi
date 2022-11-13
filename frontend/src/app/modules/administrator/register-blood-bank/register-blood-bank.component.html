@@ -30,14 +30,33 @@
                           </div>
                         </div>
 
+                        <!-- <div class="d-flex flex-row align-items-center mb-4">
+                          <i class="fas fa-key fa-lg me-3 fa-fw"></i>
+                          <div class="form-outline flex-fill mb-0">
+                            <div>
+                              <div id="div1">
+                                <select style="width: 267px; margin-right: 10px;"  type="password" id="form3Example4cd" class="form-control" name="Gender" required>
+                                  <option value="" disabled selected>Free medical workers...</option>
+                                  <option *ngFor="let medicalWorker of medicalWorkers" value="MALE"> {{medicalWorker.name}} {{medicalWorker.surname}}</option>
+                                </select>
+                              </div>
+                              <div id="div2">
+                                <button (click)="addNewMedicalWorker()" mat-flat-button color="primary">Add new</button>
+                              </div>
+                            </div>
+                            <label class="form-label" for="form3Example4cd">Admin(medical worker)</label>
+                            
+                          </div>
+                        </div> -->
+
                         <div class="d-flex flex-row align-items-center mb-4">
                           <i class="fas fa-key fa-lg me-3 fa-fw"></i>
                           <div class="form-outline flex-fill mb-0">
-                            <select type="password" id="form3Example4cd" class="form-control" name="Gender" required>
-                              <option value="MALE">Male</option>
-                              <option value="FEMALE">Female</option>
+                            <select type="password" id="form3Example4cd" class="form-control" name="Gender" [(ngModel)]="selectedMW" required>
+                              <option value="" disabled selected>Free medical workers...</option>
+                              <option  *ngFor="let medicalWorker of medicalWorkers" value="{{medicalWorker}}" > {{medicalWorker.name}} {{medicalWorker.surname}}</option>
                             </select>
-                            <label class="form-label" for="form3Example4cd">Gender</label>
+                            <label class="form-label" for="form3Example4cd">Admin(medical worker)</label>
                           </div>
                         </div>
 
@@ -87,7 +106,10 @@
 
                     </div>
                     <div class="col-md-10 col-lg-6 col-xl-7 d-flex align-items-center order-1 order-lg-2">
-                      <img [src]="url" height="300"> <br>
+
+                      <img src="assets/bb.png"
+                        class="img-fluid" alt="Sample image">
+  
                     </div>
                   </div>
                 </div>

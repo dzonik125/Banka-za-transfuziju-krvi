@@ -16,7 +16,8 @@ public class BloodBank {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    public ArrayList<MedicalWorker> medicalWorker;
+
+    public List<MedicalWorker> medicalWorker;
     public ArrayList<Item> item;
     public ArrayList<Appointment> appointment;
 
@@ -60,11 +61,12 @@ public class BloodBank {
         this.apiKey = "";
     }
 
-    public BloodBank(String name, String description, Address address, String image) {
+    public BloodBank(String name, String description, Address address, String image, MedicalWorker medicalWorker) {
         this.name = name;
         this.description = description;
         this.address = address;
         this.image = image;
+
     }
 
 

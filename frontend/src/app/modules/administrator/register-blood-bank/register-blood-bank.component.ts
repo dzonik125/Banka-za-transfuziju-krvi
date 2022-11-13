@@ -6,6 +6,9 @@ import { Validator } from '../../util/validation';
 import { Router } from '@angular/router';
 import { Storage, ref, uploadBytesResumable, getDownloadURL } from '@angular/fire/storage'
 import { BloodBankServiceService } from 'src/app/services/blood-bank-service.service';
+import { MedicalWorkerService } from 'src/app/services/medical-worker.service';
+import { MatDialog } from '@angular/material/dialog';
+import { RegisterMedicalWorkerComponent } from '../register-medical-worker/register-medical-worker.component';
 
 @Component({
   selector: 'app-register-blood-bank',
@@ -19,44 +22,56 @@ export class RegisterBloodBankComponent implements OnInit {
   public bloodBank: BloodBank = new BloodBank;
   public address: Address = new Address;
   public validation: Validator = new Validator;
+  public medicalWorkers: any[] = [];
 
   path!:String;
 
   public file: any = {}
-
+  public selectedMW: any;
 
   constructor(private http: HttpClient,
               private bbservice: BloodBankServiceService,
               private router: Router,
-              private storage: Storage
+              private storage: Storage,
+              private medicalWorkerService: MedicalWorkerService,
+              public dialog: MatDialog
               ) {
-  }
-  ngOnInit(): void {
-  }
+              }                
+
+    
+          
+    ngOnInit(): void {
+      this.medicalWorkerService.getFreeMedicalWorkers().subscribe(res => {
+        this.medicalWorkers = res;
+      
+    })  
+  }  
+
+  
 
   url: any = '';
 
   onFileChanged(event: any) {
     if(event.target.files){
-    var reader = new FileReader();
+    var reader = new FileReader();  
     reader.readAsDataURL(event.target.files[0]);
     reader.onload = (event: any) => {
-       this.url = event.target.result;
-    }
-  }
+        this.url = event.target.result;
+    }    
+  }  
   this.file = event.target.files[0];
-}
+  }
 
 
 
-public uploadUrl: any;
+  public uploadUrl: any;
 
-   createBloodBank(downloadURL: any){
+  createBloodBank(downloadURL: any){
     this.bloodBank.address = this.address;
     this.bloodBank.image = downloadURL;
+    this.bloodBank.medicalWorker = this.selectedMW;
     this.bbservice.createBloodBank(this.bloodBank).subscribe();
-  }
-
+  }  
 
 
   public  uploadImage(){

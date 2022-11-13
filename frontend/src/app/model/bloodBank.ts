@@ -5,6 +5,7 @@ export class BloodBank {
     address!: Address;
     avgGrade: number | undefined;
     image!: string;
+    medicalWorker: any;
 
 
   public constructor(obj?: any) {

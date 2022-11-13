@@ -37,7 +37,7 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FormlySelectModule } from '@ngx-formly/core/select';
 import { SearchFilterPipe } from './modules/util/pipes/search-filter.pipe';
-
+import { MatDialogModule } from '@angular/material/dialog';
 
 //I keep the new line
 @NgModule({
@@ -57,11 +57,12 @@ import { SearchFilterPipe } from './modules/util/pipes/search-filter.pipe';
     DisplayAllCentersComponent,
     RegisterMedicalWorkerComponent,
     DisplayAllUsersComponent,
-    SearchFilterPipe,
-    RegisterMedicalWorkerComponent
+    SearchFilterPipe
     
   ],
+
   imports: [
+    MatDialogModule,
     BrowserModule,
     ReactiveFormsModule,
     FormlySelectModule,

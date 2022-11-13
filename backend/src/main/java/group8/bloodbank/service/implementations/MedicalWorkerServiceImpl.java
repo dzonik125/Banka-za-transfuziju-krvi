@@ -27,4 +27,9 @@ public class MedicalWorkerServiceImpl implements MedicalWorkerService {
     public List<MedicalWorker> getAll() {
         return medicalWorkerRepository.findAll();
     }
+
+    @Override
+    public List<MedicalWorker> getAllByBloodBankIsNull() {
+        return medicalWorkerRepository.getAllByBloodBankIsNull();
+    }
 }
