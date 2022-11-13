@@ -4,6 +4,7 @@ export class BloodBank {
     description: string= '';
     address!: Address;
     avgGrade: number | undefined;
+    image!: string;
 
 
   public constructor(obj?: any) {
@@ -12,6 +13,7 @@ export class BloodBank {
           this.description = obj.description;
           this.address = obj.Address;
           this.avgGrade = obj.avgGrade;
+          this.image = obj.image;
       }
   }
 }

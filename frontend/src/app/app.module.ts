@@ -25,6 +25,13 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatCardModule } from '@angular/material/card';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatRadioModule } from '@angular/material/radio';
+import {MatRadioModule} from '@angular/material/radio';
+import { FileUploadModule } from "ng2-file-upload";
+import { provideFirestore, getFirestore } from '@angular/fire/firestore';
+import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
+import { provideAuth, getAuth} from '@angular/fire/auth';
+import { environment } from 'src/environments/environment';
+import { provideStorage, getStorage } from '@angular/fire/storage';
 import { RegisterMedicalWorkerComponent } from './modules/administrator/register-medical-worker/register-medical-worker.component';
 import { DisplayAllUsersComponent } from './modules/administrator/display-all-users/display-all-users.component';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
@@ -41,6 +48,9 @@ import { SearchFilterPipe } from './modules/util/pipes/search-filter.pipe';
     RegisterUserComponent,
     HomeComponentComponent,
     SaveApiKeyComponent,
+    RegisterBloodBankComponent,
+    AdminDashboardComponent,
+    UserProfileViewComponent,
     AdminDashboardComponent,
     RegisterBloodBankComponent,
     SendNewsComponent,
@@ -49,6 +59,8 @@ import { SearchFilterPipe } from './modules/util/pipes/search-filter.pipe';
     RegisterMedicalWorkerComponent,
     DisplayAllUsersComponent,
     SearchFilterPipe
+    RegisterMedicalWorkerComponent
+    
   ],
   imports: [
     BrowserModule,
@@ -70,8 +82,12 @@ import { SearchFilterPipe } from './modules/util/pipes/search-filter.pipe';
     FlexLayoutModule,
     MatCardModule,
     MatToolbarModule,
-    MatRadioModule
-
+    MatRadioModule,
+    FileUploadModule,
+    provideFirebaseApp(()=> initializeApp(environment.firebase)),
+    provideAuth(() => getAuth()),
+    provideFirestore(() => getFirestore()),
+    provideStorage(() => getStorage())
   ],
   providers: [],
   bootstrap: [AppComponent]
