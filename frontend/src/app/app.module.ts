@@ -16,14 +16,15 @@ import { RegisterBloodBankComponent } from './modules/administrator/register-blo
 import { SendNewsComponent } from './modules/administrator/send-news/send-news.component';
 import { DisplayAllCentersComponent } from './modules/public/display-all-centers/display-all-centers.component';
 import { MatTableModule } from '@angular/material/table';
-import {MatSortModule} from '@angular/material/sort';
-import {MatButtonModule} from '@angular/material/button';
-import {MatButtonToggleModule} from '@angular/material/button-toggle';
-import {MatIconModule} from '@angular/material/icon';
+import { MatSortModule } from '@angular/material/sort';
+import { MatButtonModule } from '@angular/material/button';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
+import { MatIconModule } from '@angular/material/icon';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { MatCardModule} from '@angular/material/card';
+import { MatCardModule } from '@angular/material/card';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatRadioModule } from '@angular/material/radio';
 import {MatRadioModule} from '@angular/material/radio';
 import { FileUploadModule } from "ng2-file-upload";
 import { provideFirestore, getFirestore } from '@angular/fire/firestore';
@@ -32,10 +33,14 @@ import { provideAuth, getAuth} from '@angular/fire/auth';
 import { environment } from 'src/environments/environment';
 import { provideStorage, getStorage } from '@angular/fire/storage';
 import { RegisterMedicalWorkerComponent } from './modules/administrator/register-medical-worker/register-medical-worker.component';
+import { DisplayAllUsersComponent } from './modules/administrator/display-all-users/display-all-users.component';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
+import { ReactiveFormsModule } from '@angular/forms';
+import { FormlySelectModule } from '@ngx-formly/core/select';
+import { SearchFilterPipe } from './modules/util/pipes/search-filter.pipe';
 
 
-
-
+//I keep the new line
 @NgModule({
   declarations: [
     AppComponent,
@@ -51,11 +56,17 @@ import { RegisterMedicalWorkerComponent } from './modules/administrator/register
     SendNewsComponent,
     UserProfileViewComponent,
     DisplayAllCentersComponent,
+    RegisterMedicalWorkerComponent,
+    DisplayAllUsersComponent,
+    SearchFilterPipe
     RegisterMedicalWorkerComponent
     
   ],
   imports: [
     BrowserModule,
+    ReactiveFormsModule,
+    FormlySelectModule,
+    Ng2SearchPipeModule,
     HttpClientModule,
     NgbModule,
     AppRoutingModule,
@@ -81,4 +92,5 @@ import { RegisterMedicalWorkerComponent } from './modules/administrator/register
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}

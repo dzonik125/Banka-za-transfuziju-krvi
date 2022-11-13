@@ -3,7 +3,7 @@ import { Component, Input, NgZone, OnInit } from '@angular/core';
 import { Address } from 'src/app/model/address';
 import { BloodBank } from 'src/app/model/bloodBank';
 import { Validator } from '../../util/validation';
-import { BloodBankServiceService } from '../../services/blood-bank-service.service';
+import { BloodBankServiceService } from '../../../services/blood-bank-service.service';
 import { Router } from '@angular/router';
 import { Storage, ref, uploadBytesResumable, getDownloadURL } from '@angular/fire/storage'
 

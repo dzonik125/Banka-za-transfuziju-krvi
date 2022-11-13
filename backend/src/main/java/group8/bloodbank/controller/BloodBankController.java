@@ -44,9 +44,8 @@ public class BloodBankController {
         return bloodBankService.getAll();
     }
 
-    //   public BloodBank(Long id, String name, String description, double avgGrade, Map<BloodType, Double> bloodType,
-    //                     ArrayList<MedicalWorker> medicalWorker, ArrayList<Item> item, ArrayList<Appointment> appointment, Address address, WorkingHours workingHours, String apiKey) {
-    @CrossOrigin(origins = "http://localhost:4200")
+
+   @CrossOrigin(origins = "http://localhost:4200")
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<BloodBank> saveBloodBank(@RequestBody BloodBankDTO bloodBankDTO)  {
         BloodBank bloodBank = new BloodBank(bloodBankDTO.name, bloodBankDTO.description, bloodBankDTO.address, bloodBankDTO.image);
@@ -91,12 +90,6 @@ public class BloodBankController {
         Long id = Long.parseLong(jsonObject.getString("id"));
         bloodBankService.setApiKey(api, id);
     }
-
-//    @GetMapping(value = "/checkAmount")
-//    @ResponseBody
-//    public boolean getSpecificAmount(@RequestParam(value = "type") String type) {
-//
-//    }
 
     @GetMapping(value = "/view/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public String getById(@PathVariable String id) {

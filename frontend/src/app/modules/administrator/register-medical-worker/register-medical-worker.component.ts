@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { MedicalWorker } from 'src/app/model/medicalWorker';
-import { MedicalWorkerService } from '../../services/medical-worker.service';
+import { MedicalWorkerService } from '../../../services/medical-worker.service';
 import { Validator } from '../../util/validation';
 
 @Component({
