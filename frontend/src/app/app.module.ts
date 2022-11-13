@@ -32,7 +32,7 @@ import { provideAuth, getAuth} from '@angular/fire/auth';
 import { environment } from 'src/environments/environment';
 import { provideStorage, getStorage } from '@angular/fire/storage';
 import { RegisterMedicalWorkerComponent } from './modules/administrator/register-medical-worker/register-medical-worker.component';
-
+import { BloodBankViewComponent } from './modules/medical_worker/blood-bank-view/blood-bank-view.component';
 
 
 
@@ -51,7 +51,8 @@ import { RegisterMedicalWorkerComponent } from './modules/administrator/register
     SendNewsComponent,
     UserProfileViewComponent,
     DisplayAllCentersComponent,
-    RegisterMedicalWorkerComponent
+    RegisterMedicalWorkerComponent,
+    BloodBankViewComponent
     
   ],
   imports: [
@@ -76,7 +77,8 @@ import { RegisterMedicalWorkerComponent } from './modules/administrator/register
     provideFirebaseApp(()=> initializeApp(environment.firebase)),
     provideAuth(() => getAuth()),
     provideFirestore(() => getFirestore()),
-    provideStorage(() => getStorage())
+    provideStorage(() => getStorage()),
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -5,4 +5,5 @@ import group8.bloodbank.model.MedicalWorker;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface MedicalWorkerRepository extends JpaRepository<MedicalWorker, Long> {
+
 }
