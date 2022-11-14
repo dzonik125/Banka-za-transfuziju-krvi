@@ -9,7 +9,7 @@ import java.util.Optional;
 public interface BloodBankService {
 
     public List<BloodBank> getAll();
-    public BloodBank getById(Long id);
+    public Optional<BloodBank> getById(Long id);
     public boolean getAmountOfBloodForType(BloodType type, Long id);
     public void setApiKey(String apiKey, Long id);
     public BloodBank getByApiKey(String apiKey);

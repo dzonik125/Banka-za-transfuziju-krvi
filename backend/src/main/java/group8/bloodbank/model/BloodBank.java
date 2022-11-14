@@ -1,25 +1,31 @@
 package group8.bloodbank.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 @Entity
 @Getter
 @Setter
+@Table(name="blood_bank")
 public class BloodBank {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    public ArrayList<MedicalWorker> medicalWorker;
-    public ArrayList<Item> item;
-    public ArrayList<Appointment> appointment;
+//    public ArrayList<Item> item;
 
+    @JsonIgnore
+    @OneToMany(mappedBy = "bloodBank", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    private List<Appointment> appointment;
     @Transient
     public WorkingHours workingHours;
     @Column
@@ -46,14 +52,12 @@ public class BloodBank {
     private Map<BloodType, Double> bloodType;
 
     public BloodBank(Long id, String name, String description, double avgGrade, Map<BloodType, Double> bloodType,
-                     ArrayList<MedicalWorker> medicalWorker, ArrayList<Item> item, ArrayList<Appointment> appointment, Address address, WorkingHours workingHours, String apiKey) {
+                     ArrayList<MedicalWorker> medicalWorkers, ArrayList<Item> item, ArrayList<Appointment> appointment, Address address, WorkingHours workingHours, String apiKey) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.avgGrade = avgGrade;
         this.bloodType = bloodType;
-        this.medicalWorker = medicalWorker;
-        this.item = item;
         this.appointment = appointment;
         this.address = address;
         this.workingHours = workingHours;

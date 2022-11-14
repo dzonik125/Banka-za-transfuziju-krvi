@@ -38,8 +38,13 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { FormlySelectModule } from '@ngx-formly/core/select';
 import { SearchFilterPipe } from './modules/util/pipes/search-filter.pipe';
 import { NgxRerenderModule } from 'ngx-rerender';
+import { MatDialogModule } from '@angular/material/dialog';
+import { BloodBankViewComponent } from './modules/medical_worker/blood-bank-view/blood-bank-view.component';
+import { NgMultiSelectDropDownModule} from 'ng-multiselect-dropdown'
 
 //I keep the new line
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -58,9 +63,13 @@ import { NgxRerenderModule } from 'ngx-rerender';
     RegisterMedicalWorkerComponent,
     DisplayAllUsersComponent,
     SearchFilterPipe,
-    RegisterMedicalWorkerComponent
+    RegisterMedicalWorkerComponent,
+    BloodBankViewComponent
   ],
+
   imports: [
+    NgMultiSelectDropDownModule,
+    MatDialogModule,
     BrowserModule,
     ReactiveFormsModule,
     FormlySelectModule,
@@ -86,7 +95,8 @@ import { NgxRerenderModule } from 'ngx-rerender';
     provideFirebaseApp(()=> initializeApp(environment.firebase)),
     provideAuth(() => getAuth()),
     provideFirestore(() => getFirestore()),
-    provideStorage(() => getStorage())
+    provideStorage(() => getStorage()),
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
