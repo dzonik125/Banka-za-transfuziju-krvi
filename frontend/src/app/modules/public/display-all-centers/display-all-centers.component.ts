@@ -58,6 +58,7 @@ export class DisplayAllCentersComponent implements AfterViewInit {
 
     this.dialogRef.open(CreateSurveyComponent,{
       width: '20%',
+     // position: center,
     })
    }
 
