@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { UserService } from './service/user.service';
 import { User } from 'src/app/model/user';
 import { Address } from 'src/app/model/address';
 import { Validator } from '../../util/validation';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-register-user',

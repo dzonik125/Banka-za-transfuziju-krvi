@@ -1,4 +1,6 @@
+import { BloodBank } from './bloodBank';
 import { Address } from './address';
+<<<<<<< HEAD
 export class User{
     private _name: string = '';
   public get name(): string {
@@ -63,6 +65,20 @@ export class User{
   public set address(value: Address) {
     this._address = value;
   }
+=======
+export class User {
+    name: string = '';
+    surname: string = '';
+    password: string = '';
+    jmbg: string = '';
+    email: string = '';
+    occupation: string ='';
+    gender: string = '';
+    penalty: number = 0;
+    points: number = 0;
+    address!: Address;
+    category: string = 'REGULAR';
+>>>>>>> 85f0bffdff605c33fbec22ef3883b6bb1f5ebdba
 
   private _id: number | undefined;
   public set id(value: number) {
@@ -79,8 +95,14 @@ export class User{
           this.occupation = obj.occupation;
           this.gender = obj.gender;
           this.penalty = obj.penalty;
+<<<<<<< HEAD
           const a = new Address(obj.address);
           this.address = a;
+=======
+          this.address = obj.address;
+          this.points = obj.points;
+          this.category = obj.category;
+>>>>>>> 85f0bffdff605c33fbec22ef3883b6bb1f5ebdba
       }
   }
 

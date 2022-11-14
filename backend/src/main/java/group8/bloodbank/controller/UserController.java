@@ -1,9 +1,11 @@
 package group8.bloodbank.controller;
 
+<<<<<<< HEAD
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import group8.bloodbank.model.DTO.UserDTO;
+=======
+>>>>>>> 85f0bffdff605c33fbec22ef3883b6bb1f5ebdba
 import group8.bloodbank.model.User;
-import group8.bloodbank.service.interfaces.BloodBankService;
 import group8.bloodbank.service.interfaces.UserService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,9 +14,12 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+<<<<<<< HEAD
 import javax.websocket.server.PathParam;
 import java.util.Optional;
 
+=======
+>>>>>>> 85f0bffdff605c33fbec22ef3883b6bb1f5ebdba
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping("/user")
@@ -43,6 +48,7 @@ public class UserController {
         }
     }
 
+<<<<<<< HEAD
     @CrossOrigin(origins = "http://localhost:4200")
     @PutMapping(value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
     public Boolean editUser(@PathVariable long id, @RequestBody UserDTO user) {
@@ -51,6 +57,8 @@ public class UserController {
     }
 
 
+=======
+>>>>>>> 85f0bffdff605c33fbec22ef3883b6bb1f5ebdba
     @CrossOrigin(origins = "http://localhost:4200")
     @GetMapping
     public ResponseEntity<User> findById(@RequestParam Long id){
@@ -62,4 +70,6 @@ public class UserController {
             return new ResponseEntity(HttpStatus.NOT_FOUND);
         }
     }
+
+
 }

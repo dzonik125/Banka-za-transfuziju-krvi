@@ -5,15 +5,14 @@ import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class BloodBankServiceService {
-
+export class AdminService {
+  
   apiHost: string = 'http://localhost:8081/';
   headers: HttpHeaders = new HttpHeaders({ 'Content-Type': 'application/json' });
 
   constructor(private http: HttpClient) { }
 
-  createBloodBank(bloodBank: any): Observable<any> {
-    return this.http.post<any>(this.apiHost + 'bloodBanks', bloodBank);
+  getAdmins(): Observable<any[]>{
+    return this.http.get<any[]>(this.apiHost + 'admin', {headers: this.headers});
   }
-  
 }

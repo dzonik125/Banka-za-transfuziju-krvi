@@ -1,10 +1,15 @@
 package group8.bloodbank.model;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Map;
 
 @Entity
+@Getter
+@Setter
 public class BloodBank {
 
     @Id
@@ -24,11 +29,14 @@ public class BloodBank {
     @Column
     private double avgGrade;
 
-    @Transient
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     public Address address;
 
     @Column
     private String apiKey;
+
+    @Column
+    private String image;
 
     @ElementCollection
     @CollectionTable(name="bloodType_bloodBank", joinColumns=@JoinColumn(name="bloodBank_id"))
@@ -52,101 +60,15 @@ public class BloodBank {
         this.apiKey = "";
     }
 
-    public BloodBank(String name, String description, Address address) {
+    public BloodBank(String name, String description, Address address, String image) {
         this.name = name;
         this.description = description;
         this.address = address;
+        this.image = image;
     }
 
-    public String getApiKey() {
-        return this.apiKey;
-    }
-
-    public void setApiKey(String apiKey) {
-        this.apiKey = apiKey;
-    }
 
     public BloodBank() {
-        super();
-    }
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public double getAvgGrade() {
-        return avgGrade;
-    }
-
-    public void setAvgGrade(double avgGrade) {
-        this.avgGrade = avgGrade;
-    }
-
-    public Map<BloodType, Double> getBloodType() {
-        return bloodType;
-    }
-
-    public void setBloodType(Map<BloodType, Double> bloodType) {
-        this.bloodType = bloodType;
-    }
-
-    public ArrayList<MedicalWorker> getMedicalWorker() {
-        return medicalWorker;
-    }
-
-    public void setMedicalWorker(ArrayList<MedicalWorker> medicalWorker) {
-        this.medicalWorker = medicalWorker;
-    }
-
-    public ArrayList<Item> getItem() {
-        return item;
-    }
-
-    public void setItem(ArrayList<Item> item) {
-        this.item = item;
-    }
-
-    public ArrayList<Appointment> getAppointment() {
-        return appointment;
-    }
-
-    public void setAppointment(ArrayList<Appointment> appointment) {
-        this.appointment = appointment;
-    }
-
-    public Address getAddress() {
-        return address;
-    }
-
-    public void setAddress(Address address) {
-        this.address = address;
-    }
-
-    public WorkingHours getWorkingHours() {
-        return workingHours;
-    }
-
-    public void setWorkingHours(WorkingHours workingHours) {
-        this.workingHours = workingHours;
     }
 }

@@ -22,12 +22,14 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 import java.awt.*;
 
+import java.util.Base64;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
 @RestController
 @RequestMapping("/bloodBanks")
+@CrossOrigin(origins = "http://localhost:4200")
 public class BloodBankController {
 
     private BloodBankService bloodBankService;
@@ -39,16 +41,14 @@ public class BloodBankController {
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public List<BloodBank> getAll() {
-
         return bloodBankService.getAll();
     }
 
-    //   public BloodBank(Long id, String name, String description, double avgGrade, Map<BloodType, Double> bloodType,
-    //                     ArrayList<MedicalWorker> medicalWorker, ArrayList<Item> item, ArrayList<Appointment> appointment, Address address, WorkingHours workingHours, String apiKey) {
-    @CrossOrigin(origins = "http://localhost:4200")
+
+   @CrossOrigin(origins = "http://localhost:4200")
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<BloodBank> saveBloodBank(@RequestBody BloodBankDTO bloodBankDTO)  {
-        BloodBank bloodBank = new BloodBank(bloodBankDTO.name, bloodBankDTO.description, bloodBankDTO.address);
+        BloodBank bloodBank = new BloodBank(bloodBankDTO.name, bloodBankDTO.description, bloodBankDTO.address, bloodBankDTO.image);
         try{
             bloodBank = bloodBankService.saveBloodBank(bloodBank);
             return new ResponseEntity<BloodBank>(bloodBank, HttpStatus.CREATED);
@@ -90,12 +90,6 @@ public class BloodBankController {
         Long id = Long.parseLong(jsonObject.getString("id"));
         bloodBankService.setApiKey(api, id);
     }
-
-//    @GetMapping(value = "/checkAmount")
-//    @ResponseBody
-//    public boolean getSpecificAmount(@RequestParam(value = "type") String type) {
-//
-//    }
 
     @GetMapping(value = "/view/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public String getById(@PathVariable String id) {

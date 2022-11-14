@@ -3,9 +3,13 @@ import { ActivatedRoute } from '@angular/router';
 import { User } from 'src/app/model/user';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
+<<<<<<< HEAD
 import { UserService } from '../register-user/service/user.service';
 import { JsonPipe } from '@angular/common';
 import { UserDTO } from 'src/app/model/userDTO';
+=======
+import { UserService } from 'src/app/services/user.service';
+>>>>>>> 85f0bffdff605c33fbec22ef3883b6bb1f5ebdba
 
 @Component({
   selector: 'app-user-profile-view',
