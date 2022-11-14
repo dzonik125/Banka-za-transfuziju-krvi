@@ -3,9 +3,10 @@ import { ActivatedRoute } from '@angular/router';
 import { User } from 'src/app/model/user';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { UserService } from '../register-user/service/user.service';
+
 import { JsonPipe } from '@angular/common';
 import { UserDTO } from 'src/app/model/userDTO';
+import { UserService } from 'src/app/services/user.service';
 
 
 @Component({
@@ -14,7 +15,7 @@ import { UserDTO } from 'src/app/model/userDTO';
   styleUrls: ['./user-profile-view.component.css']
 })
 export class UserProfileViewComponent implements OnInit {
-  
+
   trigger: number = 0;
   id: any;
   user: User | undefined;
@@ -29,7 +30,7 @@ export class UserProfileViewComponent implements OnInit {
     });
   }
 
-  
+
   showInputs(): void {
     this.oldUser = new User(this.user);
     var pass = <HTMLInputElement> document.querySelector('#pass');
@@ -118,7 +119,7 @@ export class UserProfileViewComponent implements OnInit {
     if(this.user?.address.country)  inpCountry.value = this.user.address.country;
     if(this.user?.address.city) inpCity.value = this.user.address.city;
     if(this.user?.address.street) inpStreet.value = this.user.address.street;
-    if(this.user?.address.number) inpNumber.value = this.user.address.number; 
+    if(this.user?.address.number) inpNumber.value = this.user.address.number;
     modal.close();
   }
 
@@ -132,7 +133,7 @@ export class UserProfileViewComponent implements OnInit {
     if(this.user?.address.city) this.user.address.city = inpCity.value;
     if(this.user?.address.street) this.user.address.street = inpStreet.value;
     if(this.user?.address.number) this.user.address.number  = inpNumber.value;
-    modal.close(); 
+    modal.close();
   }
 
   value: string = "";

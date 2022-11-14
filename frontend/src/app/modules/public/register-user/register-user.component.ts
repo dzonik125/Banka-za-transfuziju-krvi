@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { User } from 'src/app/model/user';
+import { Donor } from 'src/app/model/donor';
 import { Address } from 'src/app/model/address';
 import { Validator } from '../../util/validation';
 import { UserService } from 'src/app/services/user.service';
@@ -15,7 +15,7 @@ export class RegisterUserComponent{
 
   repeatPass = '';
 
-  public user: User = new User;
+  public user: Donor = new Donor;
   public address: Address = new Address;
   public validation: Validator = new Validator;
 

@@ -6,11 +6,14 @@ import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import {LiveAnnouncer} from '@angular/cdk/a11y';
 import {MatSort, Sort} from '@angular/material/sort';
 import { MySort } from '../../util/sort';
+import { MatDialog } from '@angular/material/dialog';
+import { CreateSurveyComponent } from '../create-survey/create-survey.component';
 
 @Component({
   selector: 'app-display-all-centers',
   templateUrl: './display-all-centers.component.html',
-  styleUrls: ['./display-all-centers.component.css']
+  styleUrls: ['./display-all-centers.component.css'],
+  entryComponents: [CreateSurveyComponent]
 })
 export class DisplayAllCentersComponent implements AfterViewInit {
 
@@ -24,7 +27,10 @@ export class DisplayAllCentersComponent implements AfterViewInit {
   public anchor: any;
 
 
-  constructor(private bloodBankService: BloodBankServiceService, private router: Router, private _liveAnnouncer: LiveAnnouncer) { }
+  constructor(private bloodBankService: BloodBankServiceService,
+              private router: Router,
+              private dialogRef: MatDialog,
+              private _liveAnnouncer: LiveAnnouncer) { }
 
 
 
@@ -58,5 +64,12 @@ export class DisplayAllCentersComponent implements AfterViewInit {
   sortData(){
     this.sorter.sortData(this.bloodBanks);
   }
+
+  openDialog(){
+
+    this.dialogRef.open(CreateSurveyComponent,{
+      width: '20%',
+    })
+   }
 
 }
