@@ -27,4 +27,8 @@ export class UserService {
     params = params.append("id", id);
     return this.http.get<User>(this.apiHost + 'user', {params: params});
   }
+
+  editUser(id:any, user: any): any {
+    return this.http.put(this.apiHost + 'user/' + encodeURIComponent(id), user);
+  }
 }

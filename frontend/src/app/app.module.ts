@@ -24,7 +24,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatCardModule } from '@angular/material/card';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import {MatRadioModule} from '@angular/material/radio';
+import { MatRadioModule } from '@angular/material/radio';
 import { FileUploadModule } from "ng2-file-upload";
 import { provideFirestore, getFirestore } from '@angular/fire/firestore';
 import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
@@ -37,6 +37,7 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FormlySelectModule } from '@ngx-formly/core/select';
 import { SearchFilterPipe } from './modules/util/pipes/search-filter.pipe';
+import { NgxRerenderModule } from 'ngx-rerender';
 import { MatDialogModule } from '@angular/material/dialog';
 import { BloodBankViewComponent } from './modules/medical_worker/blood-bank-view/blood-bank-view.component';
 import { NgMultiSelectDropDownModule} from 'ng-multiselect-dropdown'
@@ -62,8 +63,8 @@ import { NgMultiSelectDropDownModule} from 'ng-multiselect-dropdown'
     RegisterMedicalWorkerComponent,
     DisplayAllUsersComponent,
     SearchFilterPipe,
+    RegisterMedicalWorkerComponent,
     BloodBankViewComponent
-    
   ],
 
   imports: [
@@ -77,6 +78,7 @@ import { NgMultiSelectDropDownModule} from 'ng-multiselect-dropdown'
     NgbModule,
     AppRoutingModule,
     FormsModule,
+    NgxRerenderModule,
     RouterModule,
     MatTableModule,
     MatSortModule,
