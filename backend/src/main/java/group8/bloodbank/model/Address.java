@@ -1,8 +1,6 @@
 package group8.bloodbank.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 
@@ -10,6 +8,7 @@ import javax.persistence.*;
 @Getter
 @Setter
 @AllArgsConstructor
+@NoArgsConstructor
 public class Address {
     @Column
     private String country;
@@ -25,14 +24,7 @@ public class Address {
     @Column(name = "id", nullable = false)
     private Long id;
 
+
     public Address(String country, String city, String street, String number) {
-        this.country = country;
-        this.city = city;
-        this.street = street;
-        this.number = number;
-    }
-
-    public Address() {
-
     }
 }
