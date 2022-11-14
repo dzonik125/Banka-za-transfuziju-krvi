@@ -16,10 +16,10 @@ import { RegisterBloodBankComponent } from './modules/administrator/register-blo
 import { SendNewsComponent } from './modules/administrator/send-news/send-news.component';
 import { DisplayAllCentersComponent } from './modules/public/display-all-centers/display-all-centers.component';
 import { MatTableModule } from '@angular/material/table';
-import { MatSortModule } from '@angular/material/sort';
-import { MatButtonModule } from '@angular/material/button';
-import { MatButtonToggleModule } from '@angular/material/button-toggle';
-import { MatIconModule } from '@angular/material/icon';
+import {MatSortModule} from '@angular/material/sort';
+import {MatButtonModule} from '@angular/material/button';
+import {MatButtonToggleModule} from '@angular/material/button-toggle';
+import {MatIconModule} from '@angular/material/icon';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatCardModule } from '@angular/material/card';
@@ -80,7 +80,6 @@ import { RegisterMedicalWorkerComponent } from './modules/administrator/register
     MatToolbarModule,
     MatRadioModule,
     FileUploadModule,
-    MatDialogModule,
     provideFirebaseApp(()=> initializeApp(environment.firebase)),
     provideAuth(() => getAuth()),
     provideFirestore(() => getFirestore()),
@@ -88,7 +87,6 @@ import { RegisterMedicalWorkerComponent } from './modules/administrator/register
     FormsModule
   ],
   providers: [],
-  entryComponents: [CreateSurveyComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule {

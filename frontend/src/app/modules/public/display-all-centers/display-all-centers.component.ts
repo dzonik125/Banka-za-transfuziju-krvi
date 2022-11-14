@@ -6,32 +6,25 @@ import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import {LiveAnnouncer} from '@angular/cdk/a11y';
 import {MatSort, Sort} from '@angular/material/sort';
 import { MySort } from '../../util/sort';
-import { MatDialog } from '@angular/material/dialog';
-import { CreateSurveyComponent } from '../create-survey/create-survey.component';
-import { throwDialogContentAlreadyAttachedError } from '@angular/cdk/dialog';
 
 @Component({
   selector: 'app-display-all-centers',
   templateUrl: './display-all-centers.component.html',
-  styleUrls: ['./display-all-centers.component.css'],
-  entryComponents: [CreateSurveyComponent],
+  styleUrls: ['./display-all-centers.component.css']
 })
 export class DisplayAllCentersComponent implements AfterViewInit {
 
   public dataSource = new MatTableDataSource<BloodBank>();
   public displayedColumns = ['name', 'address.city', 'avgGrade'];
+  //public dataSource2: DataTableDataSource;
   public bloodBanks: BloodBank[] = [];
-
 
   gridColumns = 3;
   public sorter: MySort = new MySort();
   public anchor: any;
 
 
-  constructor(private bloodBankService: BloodBankServiceService,
-              private router: Router,
-              private _liveAnnouncer: LiveAnnouncer,
-              private dialogRef: MatDialog) { }
+  constructor(private bloodBankService: BloodBankServiceService, private router: Router, private _liveAnnouncer: LiveAnnouncer) { }
 
 
 
@@ -45,6 +38,19 @@ export class DisplayAllCentersComponent implements AfterViewInit {
     this.dataSource.sort = this.sort;
   }
 
+/*  sortColumn($event: Sort): void {
+    this.dataSource.sortingDataAccessor = (item, property) => {
+      switch (property) {
+        case 'address.city': {
+          return item.address.city;
+        }
+        default: {
+          return (item as any)[property]; }
+      }
+    };
+}*/
+
+
   sortName(property: any){
     this.sorter.sortName(this.bloodBanks,property);
   }
@@ -53,6 +59,7 @@ export class DisplayAllCentersComponent implements AfterViewInit {
     this.sorter.sortData(this.bloodBanks);
   }
 
+<<<<<<< HEAD
 
   openDialog(){
 
@@ -62,4 +69,6 @@ export class DisplayAllCentersComponent implements AfterViewInit {
     })
    }
 
+=======
+>>>>>>> parent of 6574d37 (feature works, poor apperance)
 }

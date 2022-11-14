@@ -1,4 +1,3 @@
-import { CreateSurveyComponent } from './modules/public/create-survey/create-survey.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { RegisterUserComponent } from './modules/public/register-user/register-user.component';
@@ -22,9 +21,13 @@ const routes: Routes = [
   {path: 'userProfile/:id', component: UserProfileViewComponent},
   {path:'adminDashboard/registerBloodBank', component: RegisterBloodBankComponent},
   {path:'adminDashboard/registerMedicalWorker', component: RegisterMedicalWorkerComponent},
+<<<<<<< HEAD
   {path: 'displayAllUsers', component: DisplayAllUsersComponent},
   {path: 'homePage', component: DisplayAllCentersComponent},
   {path: 'bloodBank/:id', component: BloodBankViewComponent}
+=======
+  {path: 'homePage', component: DisplayAllCentersComponent}
+>>>>>>> parent of 6574d37 (feature works, poor apperance)
 ];
 
 @NgModule({
