@@ -27,7 +27,7 @@ public class RabbitMQSender {
     @Value("${custom.rabbitmq.exchange}")
     String exchange;
 
-    @Value("${custom.rabbitmq.routingkey}")
+    @Value("${custom.rabbitmq.routingKey}")
     private String routingKey;
 
     @CrossOrigin(origins = "http://localhost:4200")
@@ -36,3 +36,6 @@ public class RabbitMQSender {
         rabbitTemplate.convertAndSend(exchange, routingKey, message);
     }
 }
+
+
+

@@ -1,6 +1,7 @@
 package group8.bloodbank.service.implementations;
 
 import group8.bloodbank.model.Address;
+import group8.bloodbank.model.Appointment;
 import group8.bloodbank.model.BloodBank;
 import group8.bloodbank.model.BloodType;
 import group8.bloodbank.repository.BloodBankRepository;
@@ -8,10 +9,7 @@ import group8.bloodbank.service.interfaces.BloodBankService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public class BloodBankServiceImpl implements BloodBankService {
@@ -44,7 +42,10 @@ public class BloodBankServiceImpl implements BloodBankService {
                 , null, a4, null, "");
         BloodBank b5 = new BloodBank(5l, "Crveni krst", "", 2.3, map2, null, null
                 , null, a5, null, "");
-
+        Appointment a = new Appointment(1l, null, null, b5, null, 30);
+        ArrayList<Appointment> al = new ArrayList<>();
+        al.add(a);
+        b5.setAppointment(al);
         bloodBankRepository.save(b1);
         bloodBankRepository.save(b2);
         bloodBankRepository.save(b3);
@@ -58,8 +59,8 @@ public class BloodBankServiceImpl implements BloodBankService {
     }
 
 
-    public BloodBank getById(Long id) {
-        return null;
+    public Optional<BloodBank> getById(Long id) {
+        return bloodBankRepository.findById(id);
     }
 
     @Override
