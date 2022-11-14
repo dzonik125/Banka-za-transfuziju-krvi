@@ -9,4 +9,6 @@ public interface UserService {
     User saveUser(User user);
 
     User findById(Long id) throws NoSuchElementException;
+
+    Boolean updateUser(Long id, User user);
 }

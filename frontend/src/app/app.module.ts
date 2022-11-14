@@ -14,7 +14,7 @@ import { UserProfileViewComponent } from './modules/public/user-profile-view/use
 import { AdminDashboardComponent } from './modules/administrator/admin-dashboard/admin-dashboard.component';
 import { RegisterBloodBankComponent } from './modules/administrator/register-blood-bank/register-blood-bank.component';
 import { SendNewsComponent } from './modules/administrator/send-news/send-news.component';
-
+import { NgxRerenderModule } from 'ngx-rerender';
 
 @NgModule({
   declarations: [
@@ -37,6 +37,7 @@ import { SendNewsComponent } from './modules/administrator/send-news/send-news.c
     NgbModule,
     AppRoutingModule,
     FormsModule,
+    NgxRerenderModule,
     RouterModule
   ],
   providers: [],
