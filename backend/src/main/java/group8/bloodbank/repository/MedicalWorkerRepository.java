@@ -1,8 +1,23 @@
 package group8.bloodbank.repository;
 
-import group8.bloodbank.model.Donor;
+import group8.bloodbank.model.BloodBank;
 import group8.bloodbank.model.MedicalWorker;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 public interface MedicalWorkerRepository extends JpaRepository<MedicalWorker, Long> {
+
+    @Query("SELECT b from MedicalWorker b where b.bloodBank is null")
+    public List<MedicalWorker> getAllByBloodBankIsNull();
+
+    @Transactional
+    @Modifying(clearAutomatically = true, flushAutomatically = true)
+    @Query("update MedicalWorker b set b.bloodBank=:bloodBank where b.id=:medicalWorkerID")
+    void updateMedicalWorker(@Param("medicalWorkerID") Long medicalWorkerID, @Param("bloodBank") BloodBank bloodBank);
+
 }

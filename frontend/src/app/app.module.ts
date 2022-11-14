@@ -16,14 +16,15 @@ import { RegisterBloodBankComponent } from './modules/administrator/register-blo
 import { SendNewsComponent } from './modules/administrator/send-news/send-news.component';
 import { DisplayAllCentersComponent } from './modules/public/display-all-centers/display-all-centers.component';
 import { MatTableModule } from '@angular/material/table';
-import {MatSortModule} from '@angular/material/sort';
-import {MatButtonToggleModule} from '@angular/material/button-toggle';
-import {MatIconModule} from '@angular/material/icon';
+import { MatSortModule } from '@angular/material/sort';
+import { MatButtonModule } from '@angular/material/button';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
+import { MatIconModule } from '@angular/material/icon';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { MatCardModule} from '@angular/material/card';
+import { MatCardModule } from '@angular/material/card';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import {MatRadioModule} from '@angular/material/radio';
+import { MatRadioModule } from '@angular/material/radio';
 import { FileUploadModule } from "ng2-file-upload";
 import { provideFirestore, getFirestore } from '@angular/fire/firestore';
 import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
@@ -31,11 +32,8 @@ import { provideAuth, getAuth} from '@angular/fire/auth';
 import { environment } from 'src/environments/environment';
 import { provideStorage, getStorage } from '@angular/fire/storage';
 import { RegisterMedicalWorkerComponent } from './modules/administrator/register-medical-worker/register-medical-worker.component';
-import { CreateSurveyComponent } from './modules/public/create-survey/create-survey.component';
-import { MatDialogModule } from '@angular/material/dialog';
-import { MatButtonModule } from '@angular/material/button';
 
-
+//I keep the new line
 
 
 @NgModule({
@@ -53,16 +51,22 @@ import { MatButtonModule } from '@angular/material/button';
     SendNewsComponent,
     UserProfileViewComponent,
     DisplayAllCentersComponent,
-    RegisterMedicalWorkerComponent,
-    CreateSurveyComponent
+    RegisterMedicalWorkerComponent
 
   ],
+
   imports: [
+    NgMultiSelectDropDownModule,
+    MatDialogModule,
     BrowserModule,
+    ReactiveFormsModule,
+    FormlySelectModule,
+    Ng2SearchPipeModule,
     HttpClientModule,
     NgbModule,
     AppRoutingModule,
     FormsModule,
+    NgxRerenderModule,
     RouterModule,
     MatTableModule,
     MatSortModule,
@@ -80,10 +84,12 @@ import { MatButtonModule } from '@angular/material/button';
     provideFirebaseApp(()=> initializeApp(environment.firebase)),
     provideAuth(() => getAuth()),
     provideFirestore(() => getFirestore()),
-    provideStorage(() => getStorage())
+    provideStorage(() => getStorage()),
+    FormsModule
   ],
   providers: [],
   entryComponents: [CreateSurveyComponent],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}

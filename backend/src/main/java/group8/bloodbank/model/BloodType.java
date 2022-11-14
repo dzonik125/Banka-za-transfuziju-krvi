@@ -8,5 +8,6 @@ public enum BloodType {
     Bpos,
     Bneg,
     ABpos,
-    ABneg
-}
+    ABneg,
+
+};

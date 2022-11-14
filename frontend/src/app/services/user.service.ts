@@ -18,9 +18,17 @@ export class UserService {
     return this.http.post<any>(this.apiHost + 'donor', user);
   }
 
+  getDonors(): Observable<any[]>{
+    return this.http.get<any[]>(this.apiHost + 'donor', {headers: this.headers});
+  }
+
   fetchUser(id: any): Observable<User> {
     let params = new HttpParams();
     params = params.append("id", id);
     return this.http.get<User>(this.apiHost + 'user', {params: params});
+  }
+
+  editUser(id:any, user: any): any {
+    return this.http.put(this.apiHost + 'user/' + encodeURIComponent(id), user);
   }
 }

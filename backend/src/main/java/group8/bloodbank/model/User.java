@@ -46,10 +46,14 @@ public class User {
         this.gender = gender;
     }
 
-    public User(String name, String surname, String email, Gender gender) {
+    public User(String name, String surname, String email, String password, String jmbg, Address address, String occupation, Gender gender) {
         this.name = name;
         this.surname = surname;
+        this.password = password;
+        this.address = address;
+        this.jmbg = jmbg;
         this.email = email;
+        this.occupation = occupation;
         this.gender = gender;
     }
 

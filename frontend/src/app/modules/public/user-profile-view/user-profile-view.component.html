@@ -3,28 +3,31 @@
 
       <div class="row">
         <div class="col-lg-4">
-          <div class="card mb-4 h-100" style="background-color: #632626; color: white;">
+          <div class="card mb-4 h-100" style="background-color: #632626; color: white;" *mcRerender="trigger">
             <div class="card-body text-center" style="margin-top: 2.4rem;">
               <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp" alt="avatar"
                 class="rounded-circle img-fluid" style="width: 150px;">
               <h5 class="my-3">{{user?.fullName()}}</h5>
               <p class="text-muted mb-1">{{user?.occupation}}</p>
               <p class="text-muted mb-4">{{user?.address?.city}}, {{user?.address?.country}}</p>
-              <div class="d-flex justify-content-center align-self-end mb-2">
-                <button type="button" class="btn btn-primary">Edit profile</button>
+              <div class="d-flex justify-content-center align-self-end mb-2 btn-toolbar">
+                <button type="button" (click)="showInputs()" class="btn btn-primary" name="b">Edit profile</button>
+                <button type="button" name="b" class="btn btn-primary" style="display: none;" (click)="confirmEdit()">Confirm</button>
+                <button type="button" name="b" (click)="hideInputs()" class="btn btn-primary" style="display: none;">Cancel</button>
               </div>
             </div>
           </div>
         </div>
         <div class="col-lg-8">
-          <div class="card mb-4 h-100" style="background-color: #632626; color: white;">
+          <div class="card mb-4 h-100" style="background-color: #632626; color: white;" *mcRerender="trigger">
             <div class="card-body">
               <div class="row">
                 <div class="col-sm-3">
                   <p class="mb-0">Full Name</p>
                 </div>
                 <div class="col-sm-9">
-                  <p class="text-muted mb-0">{{user?.fullName()}}</p>
+                  <input type="text" class="form-control animate pop" (focus)="openNameModal()" style="color: black !important; display: none;" id="nameInp" value='{{user?.fullName()}}'>
+                  <p class="text-muted mb-0" name="toGet">{{user?.fullName()}}</p>
                 </div>
               </div>
               <hr>
@@ -42,7 +45,8 @@
                   <p class="mb-0">Password</p>
                 </div>
                 <div class="col-sm-9">
-                  <p class="text-muted mb-0">{{user?.password}}</p>
+                  <input type="text" id="pass" class="form-control animate pop" style="color: black !important; display: none;" value='{{user?.password}}'>
+                  <p class="text-muted mb-0" name="toGet">{{user?.password}}</p>
                 </div>
               </div>
               <hr>
@@ -51,7 +55,8 @@
                   <p class="mb-0">Adress</p>
                 </div>
                 <div class="col-sm-9">
-                  <p class="text-muted mb-0">{{user?.address?.street + ' ' + user?.address?.number + ', ' + user?.address?.city + ', ' +user?.address?.country}}</p>
+                  <input type="text" class="form-control animate pop" (focus)="openAdressModal()" style="color: black !important; display: none;" id="adressInp" value="{{user?.address?.street + ' ' + user?.address?.number + ', ' + user?.address?.city + ', ' +user?.address?.country}}">
+                  <p class="text-muted mb-0" name="toGet">{{user?.address?.street + ' ' + user?.address?.number + ', ' + user?.address?.city + ', ' +user?.address?.country}}</p>
                 </div>
               </div>
               <hr>
@@ -60,7 +65,8 @@
                   <p class="mb-0">JMBG</p>
                 </div>
                 <div class="col-sm-9">
-                  <p class="text-muted mb-0">{{user?.jmbg}}</p>
+                  <input type="text" class="form-control animate pop" id="jmbg" style="color: black !important; display: none;" value='{{user?.jmbg}}'>
+                  <p class="text-muted mb-0" name="toGet">{{user?.jmbg}}</p>
                 </div>
               </div>
               <hr>
@@ -69,7 +75,8 @@
                   <p class="mb-0">Occupation</p>
                 </div>
                 <div class="col-sm-9">
-                  <p class="text-muted mb-0">{{user?.occupation}}</p>
+                  <input type="text" id="occupation" class="form-control animate pop" style="color: black !important; display: none;" value='{{user?.occupation}}'>
+                  <p class="text-muted mb-0" name="toGet">{{user?.occupation}}</p>
                 </div>
               </div>
               <hr>
@@ -87,7 +94,11 @@
                   <p class="mb-0">Gender</p>
                 </div>
                 <div class="col-sm-9">
-                  <p class="text-muted mb-0">{{user?.gender | titlecase}}</p>
+                  <select name="selGen" id="selGen" class="form-control animate pop" style="color: black !important; display: none;" value="{{user?.gender}}">
+                    <option style="color: black !important;" value="MALE">Male</option>
+                    <option value="FEMALE" style="color: black !important;">Female</option>
+                  </select>
+                  <p class="text-muted mb-0" name="toGet">{{user?.gender | titlecase}}</p>
                 </div>
               </div>
               <hr>
@@ -105,3 +116,73 @@
       </div>
     </div>
   </section>
+<dialog id="nameModal">
+  <h1 style="margin-bottom: 5px;">First and last name</h1>
+    <div class="row">
+      <div class="col-sm-3">
+        <p class="mb-0">First name</p>
+      </div>
+      <div class="col-sm-9">
+        <input type="text" class="form-control" id="inpNameModal" style="color: black !important;" value='{{user?.name}}'>
+      </div>
+    </div>
+    <hr>
+    <div class="row">
+      <div class="col-sm-3">
+        <p class="mb-0">Last name</p>
+      </div>
+      <div class="col-sm-9">
+        <input type="text" class="form-control" id="inpSurnameModal" style="color: black !important;" value='{{user?.surname}}'>
+      </div>
+    </div>
+    <div class="d-flex justify-content-center align-self-end mb-2 btn-toolbar" style="margin-top: 1rem;">
+      <button type="button" class="btn btn-primary align-self-end" style="margin-right: 5px;" (click)="confirmNameModal()">Confirm</button>
+      <button type="button" (click)="closeNameModal()" class="btn btn-primary align-self-end" id="closeBTN">Close</button>
+    </div>
+</dialog>
+<dialog id="adressModal">
+  <h1 style="margin-bottom: 5px;">Adress</h1>
+    <div class="row">
+      <div class="col-sm-3">
+        <p class="mb-0">Country</p>
+      </div>
+      <div class="col-sm-9">
+        <input type="text" class="form-control" id="coi" style="color: black !important;" value='{{user?.address?.country}}'>
+      </div>
+    </div>
+    <hr>
+    <div class="row">
+      <div class="col-sm-3">
+        <p class="mb-0">City</p>
+      </div>
+      <div class="col-sm-9">
+        <input type="text" class="form-control" id="cii" style="color: black !important;" value='{{user?.address?.city}}'>
+      </div>
+    </div>
+    <hr>
+    <div class="row">
+      <div class="col-sm-3">
+        <p class="mb-0">Street</p>
+      </div>
+      <div class="col-sm-9">
+        <input type="text" class="form-control" id="si" style="color: black !important;" value='{{user?.address?.street}}'>
+      </div>
+    </div>
+    <hr>
+    <div class="row">
+      <div class="col-sm-3">
+        <p class="mb-0">Number</p>
+      </div>
+      <div class="col-sm-9">
+        <input type="text" class="form-control" id="ni" style="color: black !important;" value='{{user?.address?.number}}'>
+      </div>
+    </div>
+    <div class="d-flex justify-content-center align-self-end mb-2 btn-toolbar" style="margin-top: 1rem;">
+      <button type="button" (click)="confirmAdressModal()" class="btn btn-primary align-self-end" style="margin-right: 5px;">Confirm</button>
+      <button type="button" (click)="closeAdressModal()" class="btn btn-primary align-self-end" id="closeBTN">Close</button>
+    </div>
+</dialog>
+<div class="alert hidden">
+  <span class="closebtn" onclick="this.parentElement.classList.replace('visible', 'hidden')">&times;</span>
+  Success! You have edit your personal information.
+</div>

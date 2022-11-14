@@ -24,7 +24,7 @@ public class RabbitMQConfig {
     @Value("${custom.rabbitmq.exchange}")
     private String exchange;
 
-    @Value("${custom.rabbitmq.routingkey}")
+    @Value("${custom.rabbitmq.routingKey}")
     private String routingKey;
 
     @Bean
@@ -55,7 +55,7 @@ public class RabbitMQConfig {
         return rabbitTemplate;
     }
 
- /*   @Bean
+    @Bean
     public MessageListenerContainer messageListenerContainer(ConnectionFactory connectionFactory ) {
         SimpleMessageListenerContainer simpleMessageListenerContainer = new SimpleMessageListenerContainer();
         simpleMessageListenerContainer.setConnectionFactory(connectionFactory);
@@ -63,9 +63,6 @@ public class RabbitMQConfig {
         simpleMessageListenerContainer.setMessageListener(new RabbitMQListener());
         return simpleMessageListenerContainer;
 
-    }*/
-
-
-
+    }
 
 }

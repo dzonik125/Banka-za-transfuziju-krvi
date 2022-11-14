@@ -1,4 +1,4 @@
-import { BloodBankServiceService } from '../../services/blood-bank-service.service';
+import { BloodBankServiceService } from '../../../services/blood-bank-service.service';
 import { BloodBank } from 'src/app/model/bloodBank';
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';

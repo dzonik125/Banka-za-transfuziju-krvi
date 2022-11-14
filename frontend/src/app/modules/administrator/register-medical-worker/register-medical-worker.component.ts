@@ -1,8 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Address } from 'src/app/model/address';
 import { MedicalWorker } from 'src/app/model/medicalWorker';
-import { MedicalWorkerService } from '../../services/medical-worker.service';
+import { MedicalWorkerService } from '../../../services/medical-worker.service';
 import { Validator } from '../../util/validation';
 
 @Component({
@@ -14,13 +15,14 @@ export class RegisterMedicalWorkerComponent{
 
   public user: MedicalWorker = new MedicalWorker;
   public validation: Validator = new Validator;
-
-
+  public address: Address = new Address;
+  
   constructor(private http: HttpClient, private medicalServ: MedicalWorkerService, private router: Router) {
   }
 
 
   createMedicalWorker(): void {
+    this.user.address = this.address;
     this.medicalServ.createMedicalWorker(this.user).subscribe();
   }
 

@@ -7,6 +7,7 @@ import group8.bloodbank.service.interfaces.DonorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.NoSuchElementException;
 
 
@@ -23,6 +24,11 @@ public class DonorServiceImpl implements DonorService {
     @Override
     public Donor saveDonor(Donor donor) {
         return donorRepository.save(donor);
+    }
+
+    @Override
+    public List<Donor> getAll() {
+        return donorRepository.findAll();
     }
 
 }
