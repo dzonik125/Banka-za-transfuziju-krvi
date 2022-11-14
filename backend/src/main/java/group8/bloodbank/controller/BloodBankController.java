@@ -3,6 +3,7 @@ import group8.bloodbank.model.BloodBank;
 import group8.bloodbank.model.BloodType;
 import group8.bloodbank.model.DTO.BloodBankDTO;
 import group8.bloodbank.service.interfaces.BloodBankService;
+import group8.bloodbank.service.interfaces.MedicalWorkerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.boot.configurationprocessor.json.JSONException;
@@ -21,10 +22,12 @@ import java.util.Optional;
 public class BloodBankController {
 
     private BloodBankService bloodBankService;
+    private MedicalWorkerService medicalWorkerService;
 
     @Autowired
-    public BloodBankController(BloodBankService bloodBankService) {
+    public BloodBankController(BloodBankService bloodBankService, MedicalWorkerService medicalWorkerService) {
         this.bloodBankService = bloodBankService;
+        this.medicalWorkerService =medicalWorkerService;
     }
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
@@ -36,10 +39,11 @@ public class BloodBankController {
    @CrossOrigin(origins = "http://localhost:4200")
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<BloodBank> saveBloodBank(@RequestBody BloodBankDTO bloodBankDTO)  {
-        BloodBank bloodBank = new BloodBank(bloodBankDTO.name, bloodBankDTO.description, bloodBankDTO.address, bloodBankDTO.image, bloodBankDTO.medicalWorker);
+        BloodBank bloodBank = new BloodBank(bloodBankDTO.name, bloodBankDTO.description, bloodBankDTO.address, bloodBankDTO.image);
         try{
-            bloodBank = bloodBankService.saveBloodBank(bloodBank);
-            return new ResponseEntity<BloodBank>(bloodBank, HttpStatus.CREATED);
+            BloodBank createdBloodBank = bloodBankService.saveBloodBank(bloodBank);
+            medicalWorkerService.SetBloodBankIDsForSelectedMedicalWorkers(bloodBankDTO.medicalWorkers, bloodBank);
+            return new ResponseEntity<BloodBank>(createdBloodBank, HttpStatus.CREATED);
         } catch (Exception e){
             e.printStackTrace();
             return new ResponseEntity<BloodBank>(bloodBank, HttpStatus.CONFLICT);
@@ -79,14 +83,11 @@ public class BloodBankController {
         bloodBankService.setApiKey(api, id);
     }
 
-<<<<<<< HEAD
-=======
     @GetMapping(value = "/getById")
     public Optional<BloodBank> getById(@RequestParam(value = "id") Long id) {
         return bloodBankService.getById(id);
     }
 
->>>>>>> fc3231157d45b71e25e962c3b2e33fcaac3f0cc8
     @GetMapping(value = "/view/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public String getById(@PathVariable String id) {
         return id;

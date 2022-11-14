@@ -1,17 +1,17 @@
-package group8.bloodbank.user;
-
-import blood.Blood;
-import blood.BloodProviderGrpc;
-import io.grpc.stub.StreamObserver;
-import net.devh.boot.grpc.server.service.GrpcService;
-@GrpcService
-class BloodService extends BloodProviderGrpc.BloodProviderImplBase {
-    @Override
-    public void getBlood(Blood.BloodRequest request, StreamObserver<Blood.BloodResponse> responseObserver) {
-           System.out.println(request.getBank());
-            Blood.BloodResponse res = Blood.BloodResponse.newBuilder().setCount("12").build();
-
-            responseObserver.onNext(res);
-            responseObserver.onCompleted();
-   }
-}
+//package group8.bloodbank.user;
+//
+////import blood.Blood;
+////import blood.BloodProviderGrpc;
+//import io.grpc.stub.StreamObserver;
+//import net.devh.boot.grpc.server.service.GrpcService;
+//@GrpcService
+//class BloodService extends BloodProviderGrpc.BloodProviderImplBase {
+//    @Override
+//    public void getBlood(Blood.BloodRequest request, StreamObserver<Blood.BloodResponse> responseObserver) {
+//           System.out.println(request.getBank());
+//            Blood.BloodResponse res = Blood.BloodResponse.newBuilder().setCount("12").build();
+//
+//            responseObserver.onNext(res);
+//            responseObserver.onCompleted();
+//   }
+//}

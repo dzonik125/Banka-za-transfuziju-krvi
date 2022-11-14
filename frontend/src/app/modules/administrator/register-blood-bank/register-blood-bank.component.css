@@ -1,6 +1,3 @@
-#wrapper {
-    border: 1px solid blue;
-}
 #div1 {
     display: inline-block;
    
@@ -9,7 +6,6 @@
     display: inline-block;
     
 }
-
 
 select:required:invalid {
     color: gray;
@@ -20,3 +16,11 @@ select:required:invalid {
   option {
     color: black;
   }
+
+  *{
+    color: white;
+}
+
+input, select, option{
+    color: black;
+}

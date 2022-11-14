@@ -21,10 +21,7 @@ public class BloodBank {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToMany(mappedBy = "bloodBank", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @Fetch(value = FetchMode.SUBSELECT)
-    public List<MedicalWorker> medicalWorker;
-    public ArrayList<Item> item;
+//    public ArrayList<Item> item;
 
     @JsonIgnore
     @OneToMany(mappedBy = "bloodBank", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
@@ -55,26 +52,23 @@ public class BloodBank {
     private Map<BloodType, Double> bloodType;
 
     public BloodBank(Long id, String name, String description, double avgGrade, Map<BloodType, Double> bloodType,
-                     ArrayList<MedicalWorker> medicalWorker, ArrayList<Item> item, ArrayList<Appointment> appointment, Address address, WorkingHours workingHours, String apiKey) {
+                     ArrayList<MedicalWorker> medicalWorkers, ArrayList<Item> item, ArrayList<Appointment> appointment, Address address, WorkingHours workingHours, String apiKey) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.avgGrade = avgGrade;
         this.bloodType = bloodType;
-        this.medicalWorker = medicalWorker;
-        this.item = item;
         this.appointment = appointment;
         this.address = address;
         this.workingHours = workingHours;
         this.apiKey = "";
     }
 
-    public BloodBank(String name, String description, Address address, String image, MedicalWorker medicalWorker) {
+    public BloodBank(String name, String description, Address address, String image) {
         this.name = name;
         this.description = description;
         this.address = address;
         this.image = image;
-
     }
 
 

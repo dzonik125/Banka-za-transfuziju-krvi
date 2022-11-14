@@ -10,11 +10,8 @@ import java.util.List;
 public class MedicalWorker extends User {
 
 
-
     public MedicalWorker(Long id, String name, String surname, String password, Address adress, String jmbg, String email, String occupation, Gender gender) {
         super(id, name, surname, password, adress, jmbg, email, occupation, gender);
-
-
     }
 
     public MedicalWorker(String name, String surname, String email, String password, String jmbg, Address address, String occupation,  Gender gender) {

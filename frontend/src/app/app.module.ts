@@ -39,6 +39,7 @@ import { FormlySelectModule } from '@ngx-formly/core/select';
 import { SearchFilterPipe } from './modules/util/pipes/search-filter.pipe';
 import { MatDialogModule } from '@angular/material/dialog';
 import { BloodBankViewComponent } from './modules/medical_worker/blood-bank-view/blood-bank-view.component';
+import { NgMultiSelectDropDownModule} from 'ng-multiselect-dropdown'
 
 //I keep the new line
 
@@ -66,6 +67,7 @@ import { BloodBankViewComponent } from './modules/medical_worker/blood-bank-view
   ],
 
   imports: [
+    NgMultiSelectDropDownModule,
     MatDialogModule,
     BrowserModule,
     ReactiveFormsModule,

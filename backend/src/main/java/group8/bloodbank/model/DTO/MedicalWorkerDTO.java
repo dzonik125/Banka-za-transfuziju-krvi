@@ -12,5 +12,6 @@ public class MedicalWorkerDTO {
     public Address address;
     public String gender;
     public String email;
+    public String fullname = name + ' ' + surname;
 
 }
