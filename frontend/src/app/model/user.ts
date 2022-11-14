@@ -1,3 +1,4 @@
+import { BloodBank } from './bloodBank';
 import { Address } from './address';
 export class User{
     private _name: string = '';

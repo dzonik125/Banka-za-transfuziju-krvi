@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Message } from 'src/app/model/message';
 import { Buffer } from 'buffer';
+import { Storage, ref, uploadBytesResumable, getDownloadURL } from '@angular/fire/storage'
 
 window.Buffer = Buffer;
 
@@ -11,7 +12,9 @@ window.Buffer = Buffer;
   styleUrls: ['./send-news.component.css']
 })
 export class SendNewsComponent implements OnInit {
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient,
+              private storage: Storage
+    ) { }
 
   ngOnInit(): void {
   }
@@ -19,6 +22,7 @@ export class SendNewsComponent implements OnInit {
   url="";
   subject = '';
   text = '';
+  public file: any = {}
 
   onFileChanged(event: any) {
     if(event.target.files){
@@ -29,28 +33,41 @@ export class SendNewsComponent implements OnInit {
        this.url = event.target.result;
     }
   }
+  this.file = event.target.files[0];
 }
 
-convertDataURIToBinary(dataURI: string): Uint8Array {
-  var base64Index = dataURI.indexOf(';base64,') + ';base64,'.length;
-  var base64 = dataURI.substring(base64Index);
-  var raw = window.atob(base64);
-  var rawLength = raw.length;
-  var array = new Uint8Array(new ArrayBuffer(rawLength));
 
-  for(let i = 0; i < rawLength; i++) {
-    array[i] = raw.charCodeAt(i);
-  }
-  return array;
-}
 
-sendNews(){
-  var base64string = Buffer.from(this.url).toString('base64');
-  var msg = new Message(this.text, this.subject, base64string);
+
+sendNews(downloadURL: any){
+  console.log(downloadURL);
+  var msg = new Message(this.text, this.subject, downloadURL);
   var headers = new HttpHeaders({ 'Content-Type': 'application/json' });
   this.http.post('http://localhost:8081/sendNews', msg, { headers }).subscribe(res => {
     console.log(res);
   });
+}
+
+
+public  uploadImage(){
+  const storageRef = ref(this.storage, this.file.name);
+  const uploadTask = uploadBytesResumable(storageRef, this.file);
+  uploadTask.on('state_changed',
+(snapshot) => {
+  const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+  console.log('Upload is ' + progress + '% done');
+},
+(error) => {
+},
+() => {
+    getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+    console.log('File available at', downloadURL);
+    this.sendNews(downloadURL);
+  });
+
+}
+);
+
 }
 
 }

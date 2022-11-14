@@ -7,6 +7,7 @@ import { UserService } from '../register-user/service/user.service';
 import { JsonPipe } from '@angular/common';
 import { UserDTO } from 'src/app/model/userDTO';
 
+
 @Component({
   selector: 'app-user-profile-view',
   templateUrl: './user-profile-view.component.html',

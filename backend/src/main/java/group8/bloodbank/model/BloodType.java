@@ -1,8 +1,4 @@
-package group8.bloodbank.model; /***********************************************************************
- * Module:  BloodType.java
- * Author:  david
- * Purpose: Defines the Class BloodType
- ***********************************************************************/
+package group8.bloodbank.model;
 
 public enum BloodType {
     Apos,
@@ -12,5 +8,6 @@ public enum BloodType {
     Bpos,
     Bneg,
     ABpos,
-    ABneg
+    ABneg,
+
 }

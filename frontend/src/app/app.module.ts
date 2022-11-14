@@ -14,8 +14,32 @@ import { UserProfileViewComponent } from './modules/public/user-profile-view/use
 import { AdminDashboardComponent } from './modules/administrator/admin-dashboard/admin-dashboard.component';
 import { RegisterBloodBankComponent } from './modules/administrator/register-blood-bank/register-blood-bank.component';
 import { SendNewsComponent } from './modules/administrator/send-news/send-news.component';
+import { DisplayAllCentersComponent } from './modules/public/display-all-centers/display-all-centers.component';
+import { MatTableModule } from '@angular/material/table';
+import { MatSortModule } from '@angular/material/sort';
+import { MatButtonModule } from '@angular/material/button';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
+import { MatIconModule } from '@angular/material/icon';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { MatCardModule } from '@angular/material/card';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatRadioModule } from '@angular/material/radio';
+import { FileUploadModule } from "ng2-file-upload";
+import { provideFirestore, getFirestore } from '@angular/fire/firestore';
+import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
+import { provideAuth, getAuth} from '@angular/fire/auth';
+import { environment } from 'src/environments/environment';
+import { provideStorage, getStorage } from '@angular/fire/storage';
+import { RegisterMedicalWorkerComponent } from './modules/administrator/register-medical-worker/register-medical-worker.component';
+import { DisplayAllUsersComponent } from './modules/administrator/display-all-users/display-all-users.component';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
+import { ReactiveFormsModule } from '@angular/forms';
+import { FormlySelectModule } from '@ngx-formly/core/select';
+import { SearchFilterPipe } from './modules/util/pipes/search-filter.pipe';
 import { NgxRerenderModule } from 'ngx-rerender';
 
+//I keep the new line
 @NgModule({
   declarations: [
     AppComponent,
@@ -29,18 +53,43 @@ import { NgxRerenderModule } from 'ngx-rerender';
     AdminDashboardComponent,
     RegisterBloodBankComponent,
     SendNewsComponent,
-    UserProfileViewComponent
+    UserProfileViewComponent,
+    DisplayAllCentersComponent,
+    RegisterMedicalWorkerComponent,
+    DisplayAllUsersComponent,
+    SearchFilterPipe,
+    RegisterMedicalWorkerComponent
   ],
   imports: [
     BrowserModule,
+    ReactiveFormsModule,
+    FormlySelectModule,
+    Ng2SearchPipeModule,
     HttpClientModule,
     NgbModule,
     AppRoutingModule,
     FormsModule,
     NgxRerenderModule,
-    RouterModule
+    RouterModule,
+    MatTableModule,
+    MatSortModule,
+    MatButtonModule,
+    MatButtonToggleModule,
+    MatIconModule,
+    BrowserAnimationsModule,
+    BrowserModule,
+    FlexLayoutModule,
+    MatCardModule,
+    MatToolbarModule,
+    MatRadioModule,
+    FileUploadModule,
+    provideFirebaseApp(()=> initializeApp(environment.firebase)),
+    provideAuth(() => getAuth()),
+    provideFirestore(() => getFirestore()),
+    provideStorage(() => getStorage())
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}

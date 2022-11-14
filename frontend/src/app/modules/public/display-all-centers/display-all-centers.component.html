@@ -1,0 +1,46 @@
+<!-- <div class="center">
+  <table mat-table [dataSource]="dataSource" matSort (matSortChange)="sortColumn($event)" class="mat-elevation-z8">
+      <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by name"> Name </th>
+          <td mat-cell *matCellDef="let bloodBank">{{bloodBank.name}}</td>
+      </ng-container>
+      <ng-container matColumnDef="address.city">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by city"> City </th>
+          <td mat-cell *matCellDef="let bloodBank">{{bloodBank.address.city}}</td>
+      </ng-container>
+      <ng-container matColumnDef="avgGrade">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by avgGrade"> Avg grade </th>
+        <td mat-cell *matCellDef="let bloodBank">{{bloodBank.avgGrade}}</td>
+    </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+
+</div> -->
+
+
+<div class="container my-3">
+<p class="text-start mb-1">Sort by:</p>
+<button class="btn btn-outline-primary ml-3 me-3 border" mat-button (click)="sortName('name')" >Name</button>
+<button class="btn btn-outline-primary ml-3 me-3 border" mat-button (click)="sortName('address.city')">City</button>
+<button class="btn btn-outline-primary ml-3  border" mat-button (click)="sortData()">Grade</button>
+</div>
+<div class="container">
+  <div fxLayout="row wrap space-evenly" fxLayoutGap="15px grid">
+    <div [fxFlex]="(100/3) + '%'" fxFlex.xs="100%" fxFlex.sm="33%" *ngFor="let bloodBank of bloodBanks">
+      <mat-card  class="mat-elevation-z19 border align card-background">
+        <img mat-card-image mat-card-s-image  src={{bloodBank.image}}>
+        <mat-card-content>
+          <mat-card-title class="text-center fs-5 fw-bold">{{bloodBank.name}}</mat-card-title>
+          <p>
+            <mat-card-content>{{bloodBank.avgGrade}}</mat-card-content>
+          </p>
+          <p>
+            <mat-card-content>{{bloodBank.address.city}},{{bloodBank.address.street}} {{bloodBank.address.number}}</mat-card-content>
+          </p>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+</div>
