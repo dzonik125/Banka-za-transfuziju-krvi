@@ -59,9 +59,8 @@ public class MedicalWorkerController {
 
     @CrossOrigin(origins = "http://localhost:4200")
     @GetMapping(value = "/freeMedicalWorkers", produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<MedicalWorker> getAllByBloodBankIsNull() {
-
-        return medicalWorkerService.getAllByBloodBankIsNull();
+    public List<MedicalWorkerDTO> getAllByBloodBankIsNull() {
+        return MedicalWorkerDTO.convertMedicalWorkerListToDTOList(medicalWorkerService.getAllByBloodBankIsNull());
     }
 
     @GetMapping(value = "/getAllByBloodBank")

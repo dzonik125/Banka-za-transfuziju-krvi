@@ -1,12 +1,12 @@
 <section style="background-color: white;">
     <div class="container py-5">
-
-      <div class="row">
+      <h2>{{bloodBank.name}}</h2>
+      <div class="row ">
         <div class="col-lg-4">
           <div class="card mb-4" style="background-color: #632626; color: white;">
             <div class="card-body text-center" style="margin-top: 2.4rem;">
               <img src={{bloodBank.image}} alt="avatar"
-                class="img-fluid" style="width: 150px;">
+                class="img-fluid" >
               <h5 class="my-3">Average grade: {{bloodBank.avgGrade}}</h5>
             </div>
           </div>
@@ -138,7 +138,7 @@
       </div>
       <div class="row m-4" (changed)="updateTable()">
         <div class="col-lg-8">
-          <div class="card mb-4 h-100" style="background-color: #632626;">
+          <div class="card mb-4 h-100" style="background-color: #632626; color:white">
             <div class="container">
               <div class="table-header row">
                 <div class="col-sm-11">

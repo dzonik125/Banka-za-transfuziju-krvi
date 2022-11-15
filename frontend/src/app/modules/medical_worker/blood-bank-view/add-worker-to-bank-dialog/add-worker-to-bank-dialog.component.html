@@ -3,7 +3,10 @@
    <form [formGroup]="medicalWorkersForm">
     <p>
         <mat-form-field appearance="fill" style="width:100%">
-            <mat-select formControlName="selectedMW">
+            <mat-select formControlName="selectedMW" placeholder="Medical Worker">
+              <mat-option *ngIf="freeMedicalWorkers.length < 1" selected="true">
+                No Available medical workers
+              </mat-option>
               <mat-option *ngFor="let mworker of freeMedicalWorkers" [value]="mworker">
                 {{mworker.name}} {{mworker.surname}}
               </mat-option>

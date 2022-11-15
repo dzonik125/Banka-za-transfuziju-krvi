@@ -10,7 +10,6 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { SaveApiKeyComponent } from './save-api-key/save-api-key.component';
-import { UserProfileViewComponent } from './modules/public/user-profile-view/user-profile-view.component';
 import { AdminDashboardComponent } from './modules/administrator/admin-dashboard/admin-dashboard.component';
 import { RegisterBloodBankComponent } from './modules/administrator/register-blood-bank/register-blood-bank.component';
 import { SendNewsComponent } from './modules/administrator/send-news/send-news.component';
@@ -44,6 +43,11 @@ import { NgMultiSelectDropDownModule} from 'ng-multiselect-dropdown';
 import { AddWorkerToBankDialogComponent } from './modules/medical_worker/blood-bank-view/add-worker-to-bank-dialog/add-worker-to-bank-dialog.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
+import { TitleCasePipe } from '@angular/common';
+import { UserProfileViewComponent } from './modules/public/user-profile-view/user-profile-view.component';
+import { CreateSurveyComponent } from './modules/public/create-survey/create-survey.component';
+import { ToastrModule } from 'ngx-toastr';
+
 //I keep the new line
 
 
@@ -58,8 +62,6 @@ import { MatSelectModule } from '@angular/material/select';
     SaveApiKeyComponent,
     RegisterBloodBankComponent,
     AdminDashboardComponent,
-    UserProfileViewComponent,
-    AdminDashboardComponent,
     RegisterBloodBankComponent,
     SendNewsComponent,
     DisplayAllCentersComponent,
@@ -68,7 +70,8 @@ import { MatSelectModule } from '@angular/material/select';
     SearchFilterPipe,
     RegisterMedicalWorkerComponent,
     BloodBankViewComponent,
-    AddWorkerToBankDialogComponent
+    AddWorkerToBankDialogComponent,
+    CreateSurveyComponent,
   ],
 
   imports: [
@@ -102,7 +105,11 @@ import { MatSelectModule } from '@angular/material/select';
     provideStorage(() => getStorage()),
     ReactiveFormsModule,
     MatFormFieldModule,
-    MatSelectModule
+    MatSelectModule,
+    FormsModule,
+    ToastrModule.forRoot(),
+    TitleCasePipe
+
   ],
   providers: [],
   bootstrap: [AppComponent]

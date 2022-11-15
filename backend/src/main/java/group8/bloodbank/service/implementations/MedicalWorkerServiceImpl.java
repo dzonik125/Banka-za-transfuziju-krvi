@@ -44,7 +44,6 @@ public class MedicalWorkerServiceImpl implements MedicalWorkerService {
 
     @Override
     public List<MedicalWorker> getAllByBloodBank(Long bloodBankId) {
-        System.out.println(bloodBankId);
         return medicalWorkerRepository.getAllByBloodBank(bloodBankId);
     }
 
