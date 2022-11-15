@@ -52,10 +52,10 @@ export class RegisterBloodBankComponent implements OnInit {
 
     this.dropdownSettings = {
       idField: 'id',
-      textField: 'name',
+      textField: 'fullname',
       allowSearchFilter: true,
       enableCheckAll: false,
-      noDataAvailablePlaceholderText: "There is no free managers availabale to show"
+      noDataAvailablePlaceholderText: "There is no free managers availabale to show",
     };
   }  
     

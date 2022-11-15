@@ -17,9 +17,6 @@ select:required:invalid {
     color: black;
   }
 
-  *{
-    color: white;
-}
 
 input, select, option{
     color: black;
