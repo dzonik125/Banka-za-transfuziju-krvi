@@ -41,7 +41,6 @@ public class MedicalWorkerController {
     public ResponseEntity<Boolean> updateMedicalWorkerBloodBank(@RequestBody MedicalWorkerDTO medicalWorkerDTO) {
         MedicalWorker medicalWorker = new MedicalWorker(medicalWorkerDTO.id, medicalWorkerDTO.name, medicalWorkerDTO.surname, medicalWorkerDTO.email, medicalWorkerDTO.password, medicalWorkerDTO.jmbg, medicalWorkerDTO.address, medicalWorkerDTO.occupation, Gender.valueOf(medicalWorkerDTO.gender.toUpperCase()));
         medicalWorker.setBloodBank(medicalWorkerDTO.bloodBank);
-        System.out.println(medicalWorker.getBloodBank().getId() + medicalWorker.getBloodBank().getName());
         try {
             medicalWorkerService.updateMedicalWorkerBloodBank(medicalWorker, medicalWorker.getBloodBank());
             return new ResponseEntity<Boolean>(true, HttpStatus.OK);
