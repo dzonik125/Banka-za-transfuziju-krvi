@@ -20,4 +20,9 @@ export class MedicalWorkerService {
     return this.http.get<any[]>(this.apiHost + 'medicalWorker', {headers: this.headers});
   }
 
+  
+  getFreeMedicalWorkers(): Observable<any[]>{
+    return this.http.get<any[]>(this.apiHost + 'medicalWorker/freeMedicalWorkers', {headers: this.headers});
+  }
+
 }
