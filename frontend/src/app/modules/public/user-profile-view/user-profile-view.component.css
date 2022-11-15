@@ -6,8 +6,12 @@
     display: block !important;
 }
 
+input{
+  margin-top: 1rem;
+}
+
 dialog{
-    background-color: #632626;
+    background-color: #E26868;
 }
 
 h1{
@@ -48,7 +52,7 @@ h1{
   .visible {
     visibility: visible;
     opacity: 1;
-    transition: opacity 2s linear;
+    transition: opacity 1.5s linear;
   }
 
   .hidden {
@@ -67,6 +71,15 @@ h1{
 
   .fade-out{
     transition: .5s ease-out;
+  }
+
+  .fade-in{
+    animation: fadeIn 1.5s;
+  }
+
+  @keyframes fadeIn {
+    0% { opacity: 0; }
+  100% { opacity: 1; }
   }
   
   @keyframes animate-pop {
