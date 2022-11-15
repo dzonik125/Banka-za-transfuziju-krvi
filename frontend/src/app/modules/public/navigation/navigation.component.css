@@ -33,3 +33,12 @@ img{
 img:hover{
     cursor: pointer;
 }
+
+
+*{
+    color: white;
+}
+
+input, select, option{
+    color: black;
+}
