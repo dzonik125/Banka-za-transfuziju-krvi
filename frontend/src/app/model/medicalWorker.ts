@@ -9,10 +9,12 @@ export class MedicalWorker {
     occupation: string ='';
     gender: string = '';
     address!: Address;
-
+    bloodBank!: BloodBank;
+    id: number = 0;
 
   public constructor(obj?: any) {
       if (obj) {
+          this.id = obj.id;
           this.name = obj.name;
           this.surname = obj.surname;
           this.password = obj.password;

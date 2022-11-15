@@ -64,7 +64,8 @@ public class BloodBank {
         this.apiKey = "";
     }
 
-    public BloodBank(String name, String description, Address address, String image) {
+    public BloodBank(Long id, String name, String description, Address address, String image) {
+        this.id = id;
         this.name = name;
         this.description = description;
         this.address = address;
@@ -74,5 +75,12 @@ public class BloodBank {
 
     public BloodBank() {
 
+    }
+
+    public BloodBank(String name, String description, Address address, String image) {
+        this.name = name;
+        this.description = description;
+        this.address = address;
+        this.image = image;
     }
 }

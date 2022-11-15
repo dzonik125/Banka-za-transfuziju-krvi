@@ -40,9 +40,13 @@ import { SearchFilterPipe } from './modules/util/pipes/search-filter.pipe';
 import { NgxRerenderModule } from 'ngx-rerender';
 import { MatDialogModule } from '@angular/material/dialog';
 import { BloodBankViewComponent } from './modules/medical_worker/blood-bank-view/blood-bank-view.component';
-import { NgMultiSelectDropDownModule} from 'ng-multiselect-dropdown'
-
+import { NgMultiSelectDropDownModule} from 'ng-multiselect-dropdown';
+import { AddWorkerToBankDialogComponent } from './modules/medical_worker/blood-bank-view/add-worker-to-bank-dialog/add-worker-to-bank-dialog.component';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatSelectModule } from '@angular/material/select';
 //I keep the new line
+
+
 
 
 @NgModule({
@@ -58,13 +62,13 @@ import { NgMultiSelectDropDownModule} from 'ng-multiselect-dropdown'
     AdminDashboardComponent,
     RegisterBloodBankComponent,
     SendNewsComponent,
-    UserProfileViewComponent,
     DisplayAllCentersComponent,
     RegisterMedicalWorkerComponent,
     DisplayAllUsersComponent,
     SearchFilterPipe,
     RegisterMedicalWorkerComponent,
-    BloodBankViewComponent
+    BloodBankViewComponent,
+    AddWorkerToBankDialogComponent
   ],
 
   imports: [
@@ -96,7 +100,9 @@ import { NgMultiSelectDropDownModule} from 'ng-multiselect-dropdown'
     provideAuth(() => getAuth()),
     provideFirestore(() => getFirestore()),
     provideStorage(() => getStorage()),
-    FormsModule
+    ReactiveFormsModule,
+    MatFormFieldModule,
+    MatSelectModule
   ],
   providers: [],
   bootstrap: [AppComponent]

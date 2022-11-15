@@ -37,6 +37,21 @@ public class MedicalWorkerController {
     }
 
     @CrossOrigin(origins = "http://localhost:4200")
+    @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Boolean> updateMedicalWorkerBloodBank(@RequestBody MedicalWorkerDTO medicalWorkerDTO) {
+        MedicalWorker medicalWorker = new MedicalWorker(medicalWorkerDTO.id, medicalWorkerDTO.name, medicalWorkerDTO.surname, medicalWorkerDTO.email, medicalWorkerDTO.password, medicalWorkerDTO.jmbg, medicalWorkerDTO.address, medicalWorkerDTO.occupation, Gender.valueOf(medicalWorkerDTO.gender.toUpperCase()));
+        medicalWorker.setBloodBank(medicalWorkerDTO.bloodBank);
+        System.out.println(medicalWorker.getBloodBank().getId() + medicalWorker.getBloodBank().getName());
+        try {
+            medicalWorkerService.updateMedicalWorkerBloodBank(medicalWorker, medicalWorker.getBloodBank());
+            return new ResponseEntity<Boolean>(true, HttpStatus.OK);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResponseEntity<Boolean>(false, HttpStatus.CONFLICT);
+        }
+    }
+
+    @CrossOrigin(origins = "http://localhost:4200")
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public List<MedicalWorker> getAll() {
         return medicalWorkerService.getAll();
@@ -47,6 +62,11 @@ public class MedicalWorkerController {
     public List<MedicalWorker> getAllByBloodBankIsNull() {
 
         return medicalWorkerService.getAllByBloodBankIsNull();
+    }
+
+    @GetMapping(value = "/getAllByBloodBank")
+    public List<MedicalWorker> getAllByBloodBank(@RequestParam(value = "bloodBankId") Long id) {
+        return medicalWorkerService.getAllByBloodBank(id);
     }
 
 }

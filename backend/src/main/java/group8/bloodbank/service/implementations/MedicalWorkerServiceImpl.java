@@ -2,6 +2,7 @@ package group8.bloodbank.service.implementations;
 
 import group8.bloodbank.model.BloodBank;
 import group8.bloodbank.model.MedicalWorker;
+import group8.bloodbank.repository.BloodBankRepository;
 import group8.bloodbank.repository.MedicalWorkerRepository;
 import group8.bloodbank.service.interfaces.MedicalWorkerService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,10 +19,12 @@ import java.util.Optional;
 public class MedicalWorkerServiceImpl implements MedicalWorkerService {
 
     MedicalWorkerRepository medicalWorkerRepository;
+    BloodBankRepository bloodBankRepository;
 
     @Autowired
-    public MedicalWorkerServiceImpl(MedicalWorkerRepository repo) {
+    public MedicalWorkerServiceImpl(MedicalWorkerRepository repo, BloodBankRepository bloodBankRepository) {
         this.medicalWorkerRepository = repo;
+        this.bloodBankRepository = bloodBankRepository;
     }
 
     @Override
@@ -40,12 +43,23 @@ public class MedicalWorkerServiceImpl implements MedicalWorkerService {
     }
 
     @Override
+    public List<MedicalWorker> getAllByBloodBank(Long bloodBankId) {
+        System.out.println(bloodBankId);
+        return medicalWorkerRepository.getAllByBloodBank(bloodBankId);
+    }
+
+    @Override
     public void SetBloodBankIDsForSelectedMedicalWorkers(List<MedicalWorker> medicalWorkers, BloodBank bloodBank) {
         for (MedicalWorker mw: medicalWorkers) {
         mw.setBloodBank(bloodBank);
         medicalWorkerRepository.updateMedicalWorker(mw.getId(), bloodBank);
         }
 
+    }
+
+    @Override
+    public void updateMedicalWorkerBloodBank(MedicalWorker medicalWorker, BloodBank bloodBank) {
+        medicalWorkerRepository.updateMedicalWorker(medicalWorker.getId(), bloodBank);
     }
 
 }
