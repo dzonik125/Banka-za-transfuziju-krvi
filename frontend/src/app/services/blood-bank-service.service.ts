@@ -27,4 +27,10 @@ export class BloodBankServiceService {
     params = params.append("id", id);
     return this.http.get<BloodBank>(this.apiHost + 'bloodBanks/getById', {params: params});
   }
+
+
+  editBloodBank(BloodBank: any) : Observable<BloodBank> {
+    return this.http.put<any>(this.apiHost + 'bloodBanks/updateBloodBank', BloodBank);
+  }
+
 }

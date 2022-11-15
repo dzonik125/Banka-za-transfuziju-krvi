@@ -4,11 +4,14 @@ import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import {LiveAnnouncer} from '@angular/cdk/a11y';
 import { MySort } from '../../util/sort';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { CreateSurveyComponent } from '../create-survey/create-survey.component';
 
 @Component({
   selector: 'app-display-all-centers',
   templateUrl: './display-all-centers.component.html',
-  styleUrls: ['./display-all-centers.component.css']
+  styleUrls: ['./display-all-centers.component.css'],
+  entryComponents: [CreateSurveyComponent]
 })
 export class DisplayAllCentersComponent implements AfterViewInit {
 
@@ -45,7 +48,11 @@ export class DisplayAllCentersComponent implements AfterViewInit {
     }
   }
 
-  constructor(private bloodBankService: BloodBankServiceService, private router: Router, private _liveAnnouncer: LiveAnnouncer) { }
+  constructor(private bloodBankService: BloodBankServiceService,
+              private router: Router,
+              private dialogRef: MatDialog,
+              private _liveAnnouncer: LiveAnnouncer
+              ) { }
 
   ngAfterViewInit() {
     this.bloodBankService.getBloodBanks().subscribe(res => {
@@ -92,4 +99,8 @@ export class DisplayAllCentersComponent implements AfterViewInit {
     }
   }
 
+  showBank(id: any) {
+    console.log('dwddd')
+    this.router.navigate(['bloodBank/' + id]);
+  }
 }

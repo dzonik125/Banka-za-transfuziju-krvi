@@ -38,7 +38,7 @@
   <div fxLayout="row wrap space-evenly" fxLayoutGap="15px grid">
     <div [fxFlex]="(100/3) + '%'" fxFlex.xs="100%" fxFlex.sm="33%" *ngFor="let bloodBank of filteredbloodBanks | filter : term">
       <mat-card  class="mat-elevation-z19 border align card-background">
-        <img mat-card-image mat-card-s-image  src={{bloodBank.image}}>
+        <img style="height: 200px; width: 300px" class="mt-1 mh-200 mw-200" mat-card-image mat-card-s-image src={{bloodBank.image}}>
         <mat-card-content>
           <mat-card-title class="text-center fs-5 fw-bold">{{bloodBank.name}}</mat-card-title>
           <p>
@@ -47,8 +47,12 @@
           <p>
             <mat-card-content>{{bloodBank.address.city}},{{bloodBank.address.street}} {{bloodBank.address.number}}</mat-card-content>
           </p>
+          <p>
+            <button class="btn btn-primary" (click)="showBank(bloodBank.id)">Show</button>
+          </p>
         </mat-card-content>
       </mat-card>
     </div>
   </div>
 </div>
+

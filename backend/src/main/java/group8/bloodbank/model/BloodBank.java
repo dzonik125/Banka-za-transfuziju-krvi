@@ -52,7 +52,7 @@ public class BloodBank {
     private Map<BloodType, Double> bloodType;
 
     public BloodBank(Long id, String name, String description, double avgGrade, Map<BloodType, Double> bloodType,
-                     ArrayList<MedicalWorker> medicalWorkers, ArrayList<Item> item, ArrayList<Appointment> appointment, Address address, WorkingHours workingHours, String apiKey) {
+                     ArrayList<MedicalWorker> medicalWorkers, ArrayList<Item> item, ArrayList<Appointment> appointment, Address address, WorkingHours workingHours, String apiKey, String image) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -62,9 +62,11 @@ public class BloodBank {
         this.address = address;
         this.workingHours = workingHours;
         this.apiKey = "";
+        this.image = image;
     }
 
-    public BloodBank(String name, String description, Address address, String image) {
+    public BloodBank(Long id, String name, String description, Address address, String image) {
+        this.id = id;
         this.name = name;
         this.description = description;
         this.address = address;
@@ -74,5 +76,12 @@ public class BloodBank {
 
     public BloodBank() {
 
+    }
+
+    public BloodBank(String name, String description, Address address, String image) {
+        this.name = name;
+        this.description = description;
+        this.address = address;
+        this.image = image;
     }
 }

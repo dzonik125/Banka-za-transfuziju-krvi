@@ -12,6 +12,10 @@ public class User {
     @Column(name = "id", nullable = false)
     private Long id;
 
+    @Enumerated(EnumType.STRING)
+    @Column
+    private UserType userType;
+
     @Column
     private String name;
     @Column
@@ -34,7 +38,7 @@ public class User {
         super();
     }
 
-    public User(Long id, String name, String surname, String password, Address address, String jmbg, String email, String occupation, Gender gender) {
+    public User(Long id, String name, String surname, String password, Address address, String jmbg, String email, String occupation, Gender gender, UserType userType) {
         this.id = id;
         this.name = name;
         this.surname = surname;
@@ -44,9 +48,10 @@ public class User {
         this.email = email;
         this.occupation = occupation;
         this.gender = gender;
+        this.userType = userType;
     }
 
-    public User(String name, String surname, String email, String password, String jmbg, Address address, String occupation, Gender gender) {
+    public User(String name, String surname, String email, String password, String jmbg, Address address, String occupation, Gender gender, UserType userType) {
         this.name = name;
         this.surname = surname;
         this.password = password;
@@ -55,6 +60,16 @@ public class User {
         this.email = email;
         this.occupation = occupation;
         this.gender = gender;
+        this.userType = userType;
+    }
+
+
+    public UserType getUserType() {
+        return userType;
+    }
+
+    public void setUserType(UserType userType) {
+        this.userType = userType;
     }
 
     public Long getId() {
