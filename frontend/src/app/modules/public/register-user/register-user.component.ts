@@ -5,6 +5,7 @@ import { Donor } from 'src/app/model/donor';
 import { Address } from 'src/app/model/address';
 import { Validator } from '../../util/validation';
 import { UserService } from 'src/app/services/user.service';
+import { NotificationService } from 'src/app/services/notification.service';
 
 @Component({
   selector: 'app-register-user',
@@ -20,12 +21,16 @@ export class RegisterUserComponent{
   public validation: Validator = new Validator;
 
 
-  constructor(private http: HttpClient, private userService: UserService, private router: Router) {
+  constructor(private http: HttpClient,
+              private userService: UserService,
+              private router: Router,
+              private notifyService : NotificationService) {
   }
 
   createUser(){
     this.user.address = this.address;
     this.userService.createUser(this.user).subscribe();
+    this.notifyService.showSuccess("You have successfully registered", "Success");
   }
 
 }

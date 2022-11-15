@@ -42,6 +42,7 @@ import { BloodBankViewComponent } from './modules/medical_worker/blood-bank-view
 import { NgMultiSelectDropDownModule} from 'ng-multiselect-dropdown';
 import { UserProfileViewComponent } from './modules/public/user-profile-view/user-profile-view.component';
 import { CreateSurveyComponent } from './modules/public/create-survey/create-survey.component';
+import { ToastrModule } from 'ngx-toastr';
 
 //I keep the new line
 
@@ -96,7 +97,8 @@ import { CreateSurveyComponent } from './modules/public/create-survey/create-sur
     provideAuth(() => getAuth()),
     provideFirestore(() => getFirestore()),
     provideStorage(() => getStorage()),
-    FormsModule
+    FormsModule,
+    ToastrModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]

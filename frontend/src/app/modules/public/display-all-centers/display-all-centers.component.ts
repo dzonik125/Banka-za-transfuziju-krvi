@@ -6,7 +6,7 @@ import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import {LiveAnnouncer} from '@angular/cdk/a11y';
 import {MatSort, Sort} from '@angular/material/sort';
 import { MySort } from '../../util/sort';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { CreateSurveyComponent } from '../create-survey/create-survey.component';
 
 @Component({
@@ -30,7 +30,8 @@ export class DisplayAllCentersComponent implements AfterViewInit {
   constructor(private bloodBankService: BloodBankServiceService,
               private router: Router,
               private dialogRef: MatDialog,
-              private _liveAnnouncer: LiveAnnouncer) { }
+              private _liveAnnouncer: LiveAnnouncer
+              ) { }
 
 
 
@@ -65,11 +66,5 @@ export class DisplayAllCentersComponent implements AfterViewInit {
     this.sorter.sortData(this.bloodBanks);
   }
 
-  openDialog(){
-
-    this.dialogRef.open(CreateSurveyComponent,{
-      width: '20%',
-    })
-   }
 
 }

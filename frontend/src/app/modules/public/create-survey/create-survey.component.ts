@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Survey } from 'src/app/model/survey';
+import { NotificationService } from 'src/app/services/notification.service';
 import { SurveyService } from 'src/app/services/survey.service';
 
 @Component({
@@ -16,16 +17,20 @@ export class CreateSurveyComponent implements OnInit {
   surveyForm!: FormGroup;
 
   constructor(private surveyService: SurveyService,
-              private dialogRef: MatDialog,
+              private notifyService : NotificationService
               ) {   }
 
   ngOnInit(): void {
   }
 
   createSurvey(){
+    if(this.survey.answer3 == 'yes' || this.survey.answer5 == 'yes' || this.survey.answer6 == 'yes'){
+      this.notifyService.showError("You cannot donate blood", "Warning");
+    }
+    else{
     this.surveyService.createSurvey(this.survey).subscribe();
-    this.dialogRef.closeAll();
-
+    this.notifyService.showSuccess("You have successfully completed the survey", "Success");
+    }
   }
 
 

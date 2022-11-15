@@ -1,16 +1,16 @@
 import { User } from "./user";
 
 export class Survey {
-    answer1!: boolean;
-    answer2!: boolean;
-    answer3!: boolean;
-    answer4!: boolean;
-    answer5!: boolean;
-    answer6!: boolean;
-    answer7!: boolean;
-    answer8!: boolean;
-    answer9!: boolean;
-    answer10!: boolean;
+    answer1!: string;
+    answer2!: string;
+    answer3!: string;
+    answer4!: string;
+    answer5!: string;
+    answer6!: string;
+    answer7!: string;
+    answer8!: string;
+    answer9!: string;
+    answer10!: string;
    /// donor!: User;
 
   public constructor(obj?: any) {
