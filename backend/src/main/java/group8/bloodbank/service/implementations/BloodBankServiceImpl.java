@@ -63,6 +63,10 @@ public class BloodBankServiceImpl implements BloodBankService {
         return bloodBankRepository.findById(id);
     }
 
+    public void updateBloodBank(BloodBank b) {
+        bloodBankRepository.save(b);
+    }
+
     @Override
     public boolean getAmountOfBloodForType(BloodType type, Long id) {
         Optional<Double> b = bloodBankRepository.getAmountOfBloodForType(type, id);

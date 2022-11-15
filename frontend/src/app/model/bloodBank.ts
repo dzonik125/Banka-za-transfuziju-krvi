@@ -1,5 +1,6 @@
 import { Address } from './address';
 export class BloodBank {
+    id: number = 0; 
     name: string = '';
     description: string= '';
     address!: Address;
@@ -10,6 +11,7 @@ export class BloodBank {
 
   public constructor(obj?: any) {
       if (obj) {
+          this.id = obj.id
           this.name = obj.name;
           this.description = obj.description;
           this.address = obj.Address;

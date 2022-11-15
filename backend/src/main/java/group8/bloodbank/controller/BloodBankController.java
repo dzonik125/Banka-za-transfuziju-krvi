@@ -50,6 +50,19 @@ public class BloodBankController {
         }
     }
 
+    @CrossOrigin(origins = "http://localhost:4200")
+    @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE, value = "/updateBloodBank")
+    public ResponseEntity<BloodBank> updateBloodBank(@RequestBody BloodBankDTO bloodBankDTO)  {
+        BloodBank bloodBank = new BloodBank(bloodBankDTO.id, bloodBankDTO.name, bloodBankDTO.description, bloodBankDTO.address, bloodBankDTO.image);
+        try{
+            bloodBank = bloodBankService.saveBloodBank(bloodBank);
+            return new ResponseEntity<BloodBank>(bloodBank, HttpStatus.OK);
+        } catch (Exception e){
+            e.printStackTrace();
+            return new ResponseEntity<BloodBank>(bloodBank, HttpStatus.CONFLICT);
+        }
+    }
+
     @GetMapping(value = "/checkForBloodType")
     @ResponseBody
     public ResponseEntity<Boolean> GetAmount(@RequestParam(value = "type") String type, @RequestHeader("apiKey") String apiKey) {
@@ -87,6 +100,7 @@ public class BloodBankController {
     public Optional<BloodBank> getById(@RequestParam(value = "id") Long id) {
         return bloodBankService.getById(id);
     }
+
 
     @GetMapping(value = "/view/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public String getById(@PathVariable String id) {

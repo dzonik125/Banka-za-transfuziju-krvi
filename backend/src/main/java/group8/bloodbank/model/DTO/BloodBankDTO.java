@@ -8,6 +8,8 @@ import java.util.Base64;
 import java.util.List;
 
 public class BloodBankDTO {
+
+    public long id;
     public String name;
     public String description;
     public Address address;

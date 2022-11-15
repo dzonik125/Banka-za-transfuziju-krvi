@@ -7,7 +7,6 @@ import { JsonPipe } from '@angular/common';
 import { UserDTO } from 'src/app/model/userDTO';
 import { UserService } from 'src/app/services/user.service';
 
-
 @Component({
   selector: 'app-user-profile-view',
   templateUrl: './user-profile-view.component.html',

@@ -66,5 +66,8 @@ export class DisplayAllCentersComponent implements AfterViewInit {
     this.sorter.sortData(this.bloodBanks);
   }
 
-
+  showBank(id: any) {
+    console.log('dwddd')
+    this.router.navigate(['bloodBank/' + id]);
+  }
 }

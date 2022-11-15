@@ -2,6 +2,9 @@ package group8.bloodbank.model.DTO;
 
 import clojure.spec.gen.alpha$gen_for_name;
 import group8.bloodbank.model.Address;
+
+import group8.bloodbank.model.BloodBank;
+
 import group8.bloodbank.model.MedicalWorker;
 
 import java.util.ArrayList;
@@ -18,7 +21,10 @@ public class MedicalWorkerDTO {
     public Address address;
     public String gender;
     public String email;
+
+    public BloodBank bloodBank;
     public String fullname;
+
 
     public MedicalWorkerDTO(MedicalWorker mw) {
         this.id = mw.getId();

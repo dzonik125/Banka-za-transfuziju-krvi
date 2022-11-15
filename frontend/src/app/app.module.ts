@@ -40,11 +40,17 @@ import { NgxRerenderModule } from 'ngx-rerender';
 import { MatDialogModule } from '@angular/material/dialog';
 import { BloodBankViewComponent } from './modules/medical_worker/blood-bank-view/blood-bank-view.component';
 import { NgMultiSelectDropDownModule} from 'ng-multiselect-dropdown';
+import { AddWorkerToBankDialogComponent } from './modules/medical_worker/blood-bank-view/add-worker-to-bank-dialog/add-worker-to-bank-dialog.component';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatSelectModule } from '@angular/material/select';
+import { TitleCasePipe } from '@angular/common';
 import { UserProfileViewComponent } from './modules/public/user-profile-view/user-profile-view.component';
 import { CreateSurveyComponent } from './modules/public/create-survey/create-survey.component';
 import { ToastrModule } from 'ngx-toastr';
 
 //I keep the new line
+
+
 
 
 @NgModule({
@@ -58,14 +64,14 @@ import { ToastrModule } from 'ngx-toastr';
     AdminDashboardComponent,
     RegisterBloodBankComponent,
     SendNewsComponent,
-    UserProfileViewComponent,
     DisplayAllCentersComponent,
     RegisterMedicalWorkerComponent,
     DisplayAllUsersComponent,
     SearchFilterPipe,
     RegisterMedicalWorkerComponent,
     BloodBankViewComponent,
-    CreateSurveyComponent
+    AddWorkerToBankDialogComponent,
+    CreateSurveyComponent,
   ],
 
   imports: [
@@ -97,8 +103,13 @@ import { ToastrModule } from 'ngx-toastr';
     provideAuth(() => getAuth()),
     provideFirestore(() => getFirestore()),
     provideStorage(() => getStorage()),
+    ReactiveFormsModule,
+    MatFormFieldModule,
+    MatSelectModule,
     FormsModule,
-    ToastrModule.forRoot()
+    ToastrModule.forRoot(),
+    TitleCasePipe
+
   ],
   providers: [],
   bootstrap: [AppComponent]
