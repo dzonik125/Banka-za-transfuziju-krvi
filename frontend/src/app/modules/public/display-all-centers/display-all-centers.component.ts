@@ -2,9 +2,7 @@ import { BloodBankServiceService } from '../../../services/blood-bank-service.se
 import { BloodBank } from 'src/app/model/bloodBank';
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
-import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import {LiveAnnouncer} from '@angular/cdk/a11y';
-import {MatSort, Sort} from '@angular/material/sort';
 import { MySort } from '../../util/sort';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { CreateSurveyComponent } from '../create-survey/create-survey.component';
@@ -17,15 +15,38 @@ import { CreateSurveyComponent } from '../create-survey/create-survey.component'
 })
 export class DisplayAllCentersComponent implements AfterViewInit {
 
-  public dataSource = new MatTableDataSource<BloodBank>();
-  public displayedColumns = ['name', 'address.city', 'avgGrade'];
-  //public dataSource2: DataTableDataSource;
   public bloodBanks: BloodBank[] = [];
-
-  gridColumns = 3;
+  public term: string = '';
   public sorter: MySort = new MySort();
-  public anchor: any;
+  public filteredbloodBanks: BloodBank[] = [];
+  _minTerm: string = '';
+  _maxTerm: string = '';
 
+  public get minTerm(): string {
+    return this._minTerm;
+  }
+
+  public set minTerm(value: string) {
+    this._minTerm = value;
+    if(this._maxTerm !== '') {
+      this.filteredbloodBanks = this.filterBanksByMinMaxGrade(this._maxTerm, value);
+    } else {
+      this.filteredbloodBanks = this.filterBanksByMinGrade(value);
+    }
+  }
+
+  public get maxTerm(): string {
+    return this._maxTerm;
+  }
+
+  public set maxTerm(value: string) {
+    this._maxTerm = value;
+    if (this._minTerm !== '') {
+      this.filteredbloodBanks = this.filterBanksByMinMaxGrade(value, this._minTerm);
+    } else {
+      this.filteredbloodBanks = this.filterBanksByMaxGrade(value);
+    }
+  }
 
   constructor(private bloodBankService: BloodBankServiceService,
               private router: Router,
@@ -33,37 +54,49 @@ export class DisplayAllCentersComponent implements AfterViewInit {
               private _liveAnnouncer: LiveAnnouncer
               ) { }
 
-
-
-  @ViewChild(MatSort) sort!: MatSort;
-
   ngAfterViewInit() {
     this.bloodBankService.getBloodBanks().subscribe(res => {
       this.bloodBanks = res;
-      this.dataSource.data = this.bloodBanks;
+      this.filteredbloodBanks = this.bloodBanks;
     })
-    this.dataSource.sort = this.sort;
   }
 
-/*  sortColumn($event: Sort): void {
-    this.dataSource.sortingDataAccessor = (item, property) => {
-      switch (property) {
-        case 'address.city': {
-          return item.address.city;
-        }
-        default: {
-          return (item as any)[property]; }
-      }
-    };
-}*/
-
-
   sortName(property: any){
-    this.sorter.sortName(this.bloodBanks,property);
+    this.sorter.sortName(this.filteredbloodBanks, property);
   }
 
   sortData(){
-    this.sorter.sortData(this.bloodBanks);
+    this.sorter.sortData(this.filteredbloodBanks);
+  }
+
+  filterBanksByMinGrade(filterTerm: string){
+    if(this.bloodBanks.length === 0 || filterTerm === '') {
+      return this.bloodBanks;
+    } else {
+      return this.bloodBanks.filter((bank) => {
+        return bank.avgGrade! >= parseFloat(filterTerm)
+      })
+    }
+  }
+
+  filterBanksByMaxGrade(filterTerm: string){
+    if(this.bloodBanks.length === 0 || filterTerm === '') {
+      return this.bloodBanks;
+    } else {
+      return this.bloodBanks.filter((bank) => {
+        return bank.avgGrade! <= parseFloat(filterTerm)
+      })
+    }
+  }
+
+  filterBanksByMinMaxGrade(max: string, min: string){
+    if(this.bloodBanks.length === 0 || (max === '' && min === '')) {
+      return this.bloodBanks;
+    } else {
+      return this.bloodBanks.filter((bank) => {
+        return parseFloat(min) <= bank.avgGrade! && bank.avgGrade! <= parseFloat(max);
+      })
+    }
   }
 
   showBank(id: any) {
