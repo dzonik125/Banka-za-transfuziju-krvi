@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
@@ -23,6 +23,17 @@ export class MedicalWorkerService {
   
   getFreeMedicalWorkers(): Observable<any[]>{
     return this.http.get<any[]>(this.apiHost + 'medicalWorker/freeMedicalWorkers', {headers: this.headers});
+  }
+
+  getAllByBloodBank(bloodBankId: any): Observable<any[]> {
+    let params = new HttpParams();
+    params = params.append("bloodBankId", bloodBankId);
+    return this.http.get<any[]>(this.apiHost + 'medicalWorker/getAllByBloodBank', {params: params});
+
+  }
+
+  updateMedicalWorker(medicalWorker: any) {
+    return this.http.put<any>(this.apiHost + 'medicalWorker', medicalWorker);
   }
 
 }

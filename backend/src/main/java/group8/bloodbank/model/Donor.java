@@ -26,7 +26,7 @@ public class Donor extends User {
 
 
     public Donor(Long id, String name, String surname, String password, Address address, String jmbg, String email, String occupation, Gender gender, int points, int penalty, Category category, BloodType bloodType) {
-        super(id, name, surname, password, address, jmbg, email, occupation, gender);
+        super(id, name, surname, password, address, jmbg, email, occupation, gender, UserType.DONOR);
         this.penalty = penalty;
         this.points = points;
         this.category = category;

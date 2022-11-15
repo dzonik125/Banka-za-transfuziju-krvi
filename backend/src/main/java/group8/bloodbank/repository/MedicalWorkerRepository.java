@@ -1,5 +1,6 @@
 package group8.bloodbank.repository;
 
+import blood.Blood;
 import group8.bloodbank.model.BloodBank;
 import group8.bloodbank.model.MedicalWorker;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -14,6 +15,9 @@ public interface MedicalWorkerRepository extends JpaRepository<MedicalWorker, Lo
 
     @Query("SELECT b from MedicalWorker b where b.bloodBank is null")
     public List<MedicalWorker> getAllByBloodBankIsNull();
+
+    @Query("SELECT b from MedicalWorker b where b.bloodBank.id =:bloodBankId")
+    public List<MedicalWorker> getAllByBloodBank(@Param("bloodBankId") Long bloodBankId);
 
     @Transactional
     @Modifying(clearAutomatically = true, flushAutomatically = true)
