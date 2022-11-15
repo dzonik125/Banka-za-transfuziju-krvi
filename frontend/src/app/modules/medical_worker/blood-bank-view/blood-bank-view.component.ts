@@ -31,9 +31,12 @@ export class BloodBankViewComponent implements OnInit {
   public dataSource = new MatTableDataSource<MedicalWorker>();
   public displayedColumns = ['name', 'surname', 'email', 'jmbg', 'remove'];
   public medicalWorkers: MedicalWorker[] = [];
+
+  
   
   constructor(private route: ActivatedRoute, private http: HttpClient, private bloodBankService: BloodBankServiceService, 
     private medicalWorkerService: MedicalWorkerService, private dialog: MatDialog) { }
+
 
   ngOnInit(): void {
     this.id = this.route.snapshot.paramMap.get('id');
@@ -64,11 +67,22 @@ export class BloodBankViewComponent implements OnInit {
     this.dialog.open(AddWorkerToBankDialogComponent, {
       width: '20%',
       data: this.bloodBank
-    })
+    }).afterClosed().subscribe(res=> {
+        this.getMedicalWorkers();
+      }
+    )
   }
 
   updateTable() {
     console.log("jeaaaaaaaaaaa");
+  }
+
+  removeWorker(medicalWorker: any) {
+    medicalWorker.bloodBank = null;
+    this.medicalWorkerService.updateMedicalWorker(medicalWorker).subscribe(res=> {
+      this.getMedicalWorkers();
+    });
+    
   }
 
 }

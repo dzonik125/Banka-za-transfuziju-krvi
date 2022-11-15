@@ -36,7 +36,10 @@ export class AddWorkerToBankDialogComponent implements OnInit {
     this.selectedWorker = this.medicalWorkersForm.value.selectedMW;
     console.log(this.data);
     this.selectedWorker.bloodBank = this.data;
-    this.api.updateMedicalWorker(this.selectedWorker).subscribe();
+    this.api.updateMedicalWorker(this.selectedWorker).subscribe(res=> {
+      this.DialogRef.close();
+    }
+    );
   }
 
 }
