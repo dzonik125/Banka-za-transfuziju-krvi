@@ -10,7 +10,6 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { SaveApiKeyComponent } from './save-api-key/save-api-key.component';
-import { UserProfileViewComponent } from './modules/public/user-profile-view/user-profile-view.component';
 import { AdminDashboardComponent } from './modules/administrator/admin-dashboard/admin-dashboard.component';
 import { RegisterBloodBankComponent } from './modules/administrator/register-blood-bank/register-blood-bank.component';
 import { SendNewsComponent } from './modules/administrator/send-news/send-news.component';
@@ -40,7 +39,10 @@ import { SearchFilterPipe } from './modules/util/pipes/search-filter.pipe';
 import { NgxRerenderModule } from 'ngx-rerender';
 import { MatDialogModule } from '@angular/material/dialog';
 import { BloodBankViewComponent } from './modules/medical_worker/blood-bank-view/blood-bank-view.component';
-import { NgMultiSelectDropDownModule} from 'ng-multiselect-dropdown'
+import { NgMultiSelectDropDownModule} from 'ng-multiselect-dropdown';
+import { UserProfileViewComponent } from './modules/public/user-profile-view/user-profile-view.component';
+import { CreateSurveyComponent } from './modules/public/create-survey/create-survey.component';
+import { ToastrModule } from 'ngx-toastr';
 
 //I keep the new line
 
@@ -54,8 +56,6 @@ import { NgMultiSelectDropDownModule} from 'ng-multiselect-dropdown'
     SaveApiKeyComponent,
     RegisterBloodBankComponent,
     AdminDashboardComponent,
-    UserProfileViewComponent,
-    AdminDashboardComponent,
     RegisterBloodBankComponent,
     SendNewsComponent,
     UserProfileViewComponent,
@@ -64,7 +64,8 @@ import { NgMultiSelectDropDownModule} from 'ng-multiselect-dropdown'
     DisplayAllUsersComponent,
     SearchFilterPipe,
     RegisterMedicalWorkerComponent,
-    BloodBankViewComponent
+    BloodBankViewComponent,
+    CreateSurveyComponent
   ],
 
   imports: [
@@ -96,7 +97,8 @@ import { NgMultiSelectDropDownModule} from 'ng-multiselect-dropdown'
     provideAuth(() => getAuth()),
     provideFirestore(() => getFirestore()),
     provideStorage(() => getStorage()),
-    FormsModule
+    FormsModule,
+    ToastrModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]
