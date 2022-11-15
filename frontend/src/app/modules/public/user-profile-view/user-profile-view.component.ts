@@ -3,7 +3,6 @@ import { ActivatedRoute } from '@angular/router';
 import { User } from 'src/app/model/user';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
-
 import { JsonPipe } from '@angular/common';
 import { UserDTO } from 'src/app/model/userDTO';
 import { UserService } from 'src/app/services/user.service';
