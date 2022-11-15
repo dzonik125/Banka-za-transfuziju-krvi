@@ -46,4 +46,7 @@ public class MedicalWorkerDTO {
         }
         return ret;
     }
+
+    public MedicalWorkerDTO() {
+    }
 }
