@@ -53,7 +53,7 @@ public class BloodBankController {
     @CrossOrigin(origins = "http://localhost:4200")
     @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE, value = "/updateBloodBank")
     public ResponseEntity<BloodBank> updateBloodBank(@RequestBody BloodBankDTO bloodBankDTO)  {
-        BloodBank bloodBank = new BloodBank(bloodBankDTO.id, bloodBankDTO.name, bloodBankDTO.description, bloodBankDTO.address, bloodBankDTO.image);
+        BloodBank bloodBank = new BloodBank(bloodBankDTO.id, bloodBankDTO.name, bloodBankDTO.description, bloodBankDTO.address, bloodBankDTO.image, bloodBankDTO.avgGrade);
         try{
             bloodBank = bloodBankService.saveBloodBank(bloodBank);
             return new ResponseEntity<BloodBank>(bloodBank, HttpStatus.OK);
