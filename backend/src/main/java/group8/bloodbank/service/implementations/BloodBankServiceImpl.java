@@ -100,4 +100,9 @@ public class BloodBankServiceImpl implements BloodBankService {
     public BloodBank saveBloodBank(BloodBank bloodBank) {
         return bloodBankRepository.save(bloodBank);
     }
+
+    @Override
+    public String getApiKeyById(Long id) {
+        return bloodBankRepository.getApiKeyById(id);
+    }
 }

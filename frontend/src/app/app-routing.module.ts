@@ -18,7 +18,7 @@ const routes: Routes = [
   {path: '', component: HomeComponentComponent},
   {path :'register', component: RegisterUserComponent},
   {path:'saveApi/:id', component: SaveApiKeyComponent},
-  {path:'sendNews', component: SendNewsComponent},
+  {path:'sendNews/:id', component: SendNewsComponent},
   {path: 'userProfile/:id', component: UserProfileViewComponent},
   {path:'adminDashboard/registerBloodBank', component: RegisterBloodBankComponent},
   {path:'adminDashboard/registerMedicalWorker', component: RegisterMedicalWorkerComponent},

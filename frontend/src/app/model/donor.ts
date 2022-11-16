@@ -1,5 +1,7 @@
 import { BloodBank } from './bloodBank';
 import { Address } from './address';
+
+
 export class Donor {
     name: string = '';
     surname: string = '';
@@ -12,6 +14,7 @@ export class Donor {
     points: number = 0;
     address!: Address;
     category: string = 'REGULAR';
+    
 
 
   public constructor(obj?: any) {
