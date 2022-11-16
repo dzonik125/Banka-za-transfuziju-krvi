@@ -1,6 +1,9 @@
 package group8.bloodbank.service.implementations;
 
+import group8.bloodbank.model.Address;
+import group8.bloodbank.model.Gender;
 import group8.bloodbank.model.User;
+import group8.bloodbank.model.UserType;
 import group8.bloodbank.repository.UserRepository;
 import group8.bloodbank.service.interfaces.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +18,15 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     public UserServiceImpl(UserRepository userRepository) {
+
         this.userRepository = userRepository;
+        Address a1 = new Address("Srbija", "Kraljevo", "Cirpanova", "12");
+        Address a2 = new Address("Srbija", "Lebane", "Titova", "123");
+
+        User u1 = new User("Nikola", "Kolarov", "dzonik125@gmail.com", "123456", "123456", a1, "menager", Gender.MALE, UserType.DONOR);
+        User u2 = new User("Petar", "Petrovic", "gasolina@gmail.com", "123", "042004021", a2, "f1 driver", Gender.MALE, UserType.MEDICAL_WORKER);
+        userRepository.save(u1);
+        userRepository.save(u2);
     }
 
     @Override

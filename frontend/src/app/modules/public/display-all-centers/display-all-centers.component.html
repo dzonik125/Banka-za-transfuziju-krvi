@@ -35,8 +35,8 @@
 <input type="search" placeholder="Search banks..." style="float: right; margin-right: 4.5rem;" [(ngModel)]="term">
 </div>
 <div class="container">
-  <div fxLayout="row wrap space-evenly" fxLayoutGap="15px grid">
-    <div [fxFlex]="(100/3) + '%'" fxFlex.xs="100%" fxFlex.sm="33%" *ngFor="let bloodBank of filteredbloodBanks | filter : term">
+  <div fxLayout="row wrap space-evenly" fxLayoutGap="25px grid">
+    <div [fxFlex]="(100/3) + '%'" fxFlex.xs="100%" fxFlex.sm="33%" class="zoom" *ngFor="let bloodBank of filteredbloodBanks | filter : term">
       <mat-card  class="mat-elevation-z19 border align card-background">
         <img style="height: 200px; width: 300px" class="mt-1 mh-200 mw-200" mat-card-image mat-card-s-image src={{bloodBank.image}}>
         <mat-card-content>

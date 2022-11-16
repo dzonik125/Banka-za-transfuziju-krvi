@@ -72,6 +72,7 @@ import { ToastrModule } from 'ngx-toastr';
     BloodBankViewComponent,
     AddWorkerToBankDialogComponent,
     CreateSurveyComponent,
+    UserProfileViewComponent
   ],
 
   imports: [

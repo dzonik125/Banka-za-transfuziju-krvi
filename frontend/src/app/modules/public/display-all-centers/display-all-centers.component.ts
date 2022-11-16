@@ -28,6 +28,10 @@ export class DisplayAllCentersComponent implements AfterViewInit {
 
   public set minTerm(value: string) {
     this._minTerm = value;
+    if(value === '' && this._maxTerm !== ''){
+      this.filteredbloodBanks = this.filterBanksByMaxGrade(this._maxTerm);
+      return;
+    }
     if(this._maxTerm !== '') {
       this.filteredbloodBanks = this.filterBanksByMinMaxGrade(this._maxTerm, value);
     } else {
@@ -41,6 +45,10 @@ export class DisplayAllCentersComponent implements AfterViewInit {
 
   public set maxTerm(value: string) {
     this._maxTerm = value;
+    if(value === '' && this._minTerm !== ''){
+      this.filteredbloodBanks = this.filterBanksByMinGrade(this._minTerm);
+      return;
+    }
     if (this._minTerm !== '') {
       this.filteredbloodBanks = this.filterBanksByMinMaxGrade(value, this._minTerm);
     } else {
