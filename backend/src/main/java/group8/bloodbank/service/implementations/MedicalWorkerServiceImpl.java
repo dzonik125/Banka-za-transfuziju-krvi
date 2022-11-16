@@ -1,19 +1,14 @@
 package group8.bloodbank.service.implementations;
 
-import group8.bloodbank.model.BloodBank;
-import group8.bloodbank.model.MedicalWorker;
+import group8.bloodbank.model.*;
 import group8.bloodbank.repository.BloodBankRepository;
 import group8.bloodbank.repository.MedicalWorkerRepository;
 import group8.bloodbank.service.interfaces.MedicalWorkerService;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.repository.Modifying;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class MedicalWorkerServiceImpl implements MedicalWorkerService {
@@ -25,6 +20,15 @@ public class MedicalWorkerServiceImpl implements MedicalWorkerService {
     public MedicalWorkerServiceImpl(MedicalWorkerRepository repo, BloodBankRepository bloodBankRepository) {
         this.medicalWorkerRepository = repo;
         this.bloodBankRepository = bloodBankRepository;
+
+        MedicalWorker medicalWorker1 = new MedicalWorker("Petar", "Kojic", "petar@mail.com", "petar123", "1231231231234", new Address("Srbija", "Novi Sad", "Strazilovska", "12B"), "", Gender.MALE, null);
+        MedicalWorker medicalWorker2 = new MedicalWorker("Ljuban", "Savic", "ljubi1@mail.com", "ljuba123", "1131231231234", new Address("Srbija", "Beograd", "Dusanova", "52"), "", Gender.MALE);
+        MedicalWorker medicalWorker3 = new MedicalWorker("Milan", "Anic", "milance@mail.com", "milo123", "1131271231234", new Address("Srbija", "Beograd", "Danilova","33"), "", Gender.MALE);
+
+        medicalWorkerRepository.save(medicalWorker1);
+        medicalWorkerRepository.save(medicalWorker2);
+        medicalWorkerRepository.save(medicalWorker3);
+
     }
 
     @Override
