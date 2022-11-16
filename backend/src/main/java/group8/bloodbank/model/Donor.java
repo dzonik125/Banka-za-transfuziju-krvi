@@ -33,6 +33,14 @@ public class Donor extends User {
         this.bloodType = bloodType;
     }
 
+    public Donor(String name, String surname, String password, Address address, String jmbg, String email, String occupation, Gender gender, int points, int penalty, Category category, BloodType bloodType) {
+        super(name, surname, email, password, jmbg, address, occupation, gender, UserType.DONOR);
+        this.penalty = penalty;
+        this.points = points;
+        this.category = category;
+        this.bloodType = bloodType;
+    }
+
     public Donor() {
 
     }
