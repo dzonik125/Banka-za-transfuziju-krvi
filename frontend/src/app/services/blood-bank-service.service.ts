@@ -33,4 +33,10 @@ export class BloodBankServiceService {
     return this.http.put<any>(this.apiHost + 'bloodBanks/updateBloodBank', BloodBank);
   }
 
+  getApiKey(id: any) : Observable<any> {
+    let params = new HttpParams();
+    params = params.append("id", id);
+    return this.http.get(this.apiHost + 'bloodBanks/getApiKeyById', {params: params, responseType: 'text'});
+  }
+
 }

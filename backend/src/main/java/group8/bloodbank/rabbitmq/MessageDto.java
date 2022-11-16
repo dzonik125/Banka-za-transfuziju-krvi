@@ -7,19 +7,28 @@ public class MessageDto {
 
     private String text;
     private String subject;
-    private String image;
-    private byte[] byteArray;
+    private String imgSrc;
+
+    private String bloodBankApiKey;
 
     public MessageDto() {
     }
 
-    public MessageDto(String text, String subject, String image) {
+    public MessageDto(String text, String subject, String image, String bloodBankApiKey) {
         this.text = text;
         this.subject = subject;
-        this.image = image;
-        this.byteArray = java.util.Base64.getDecoder().decode(this.image);
+        this.imgSrc = image;
+        this.bloodBankApiKey = bloodBankApiKey;
     }
 
+
+    public String getBloodBankApiKey() {
+        return bloodBankApiKey;
+    }
+
+    public void setBloodBankApiKey(String bloodBankApiKey) {
+        this.bloodBankApiKey = bloodBankApiKey;
+    }
 
     public String getSubject() {
         return subject;
@@ -37,12 +46,12 @@ public class MessageDto {
         this.text = text;
     }
 
-    public String getImage() {
-        return image;
+    public String getImgSrc() {
+        return imgSrc;
     }
 
-    public void setImage(String image) {
-        this.image = image;
+    public void setImgSrc(String imgSrc) {
+        this.imgSrc = imgSrc;
     }
 
     @Override

@@ -27,4 +27,7 @@ public interface BloodBankRepository extends JpaRepository<BloodBank, Long> {
     @Query("SELECT value(m) FROM BloodBank b join b.bloodType m" +
             " where key(m) = ?1 and b.id = ?2")
     public Optional<Double> CheckBloodAmount(BloodType type, Long id);
+
+    @Query("SELECT b.apiKey from BloodBank b where b.id=:id")
+    public String getApiKeyById(@Param("id") Long id);
 }

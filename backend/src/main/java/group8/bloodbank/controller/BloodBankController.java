@@ -101,9 +101,10 @@ public class BloodBankController {
         return bloodBankService.getById(id);
     }
 
+    @GetMapping(value = "getApiKeyById")
+    public String getApiKeyById(@RequestParam(value = "id") Long id) {
+        System.out.println(bloodBankService.getApiKeyById(id) +  "sasssssssssssssss");
+        return bloodBankService.getApiKeyById(id);}
 
-    @GetMapping(value = "/view/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public String getById(@PathVariable String id) {
-        return id;
-    }
+
 }
