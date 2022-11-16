@@ -21,14 +21,22 @@
 
 
 <div class="container my-3">
-<p class="text-start mb-1">Sort by:</p>
+<p class="text-start mb-1">Sort by: <span style="margin-left: 14rem;">Filter by:</span></p>
 <button class="btn btn-outline-primary ml-3 me-3 border" mat-button (click)="sortName('name')" >Name</button>
 <button class="btn btn-outline-primary ml-3 me-3 border" mat-button (click)="sortName('address.city')">City</button>
 <button class="btn btn-outline-primary ml-3  border" mat-button (click)="sortData()">Grade</button>
+<button class="btn btn-outline-primary ml-5  border" mat-button style="margin-left: 1.8rem;" onclick="this.setAttribute('style', 'display: none'); this.nextSibling.setAttribute('style', 'display: inline');">Grade</button>
+<div style="display: none;">
+  <span class="input-group-text" style="display: inline; margin-left: 1.8rem;" id="basic-addon1">MIN:</span>
+  <input [(ngModel)]="minTerm" type="text" style="width: 5rem;">
+  <span class="input-group-text" style="display: inline;" id="basic-addon1">MAX:</span>
+  <input [(ngModel)]="maxTerm" type="text" style="width: 5rem;">
+</div>
+<input type="search" placeholder="Search banks..." style="float: right; margin-right: 4.5rem;" [(ngModel)]="term">
 </div>
 <div class="container">
   <div fxLayout="row wrap space-evenly" fxLayoutGap="15px grid">
-    <div [fxFlex]="(100/3) + '%'" fxFlex.xs="100%" fxFlex.sm="33%" *ngFor="let bloodBank of bloodBanks">
+    <div [fxFlex]="(100/3) + '%'" fxFlex.xs="100%" fxFlex.sm="33%" *ngFor="let bloodBank of filteredbloodBanks | filter : term">
       <mat-card  class="mat-elevation-z19 border align card-background">
         <img style="height: 200px; width: 300px" class="mt-1 mh-200 mw-200" mat-card-image mat-card-s-image src={{bloodBank.image}}>
         <mat-card-content>
