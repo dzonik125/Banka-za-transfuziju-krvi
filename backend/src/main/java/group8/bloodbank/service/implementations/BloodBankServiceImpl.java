@@ -9,6 +9,7 @@ import group8.bloodbank.service.interfaces.BloodBankService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.awt.print.Pageable;
 import java.util.*;
 
 @Service
@@ -42,6 +43,23 @@ public class BloodBankServiceImpl implements BloodBankService {
                 , null, a4, null, "", "https://firebasestorage.googleapis.com/v0/b/isapsw-6ef61.appspot.com/o/h4.jpeg?alt=media&token=5b420fc6-e490-453c-afce-5d57241eda35");
         BloodBank b5 = new BloodBank(5l, "Crveni krst", "", 2.3, map2, null, null
                 , null, a5, null, "", "https://firebasestorage.googleapis.com/v0/b/isapsw-6ef61.appspot.com/o/h5.jpg?alt=media&token=c1d1d5ca-2270-41b3-bb04-c3ffe4d0cc0a");
+        BloodBank b6 = new BloodBank(6l, "Crveni krst", "", 1.2, map2, null, null
+                , null, a3, null, "", "https://firebasestorage.googleapis.com/v0/b/isapsw-6ef61.appspot.com/o/h5.jpg?alt=media&token=c1d1d5ca-2270-41b3-bb04-c3ffe4d0cc0a");
+        BloodBank b7 = new BloodBank(7l, "Crveni krst", "", 2.7, map2, null, null
+                , null, a1, null, "", "https://firebasestorage.googleapis.com/v0/b/isapsw-6ef61.appspot.com/o/h5.jpg?alt=media&token=c1d1d5ca-2270-41b3-bb04-c3ffe4d0cc0a");
+        BloodBank b8 = new BloodBank(8l, "Zuti krst", "", 5.0, map2, null, null
+                , null, a2, null, "", "https://firebasestorage.googleapis.com/v0/b/isapsw-6ef61.appspot.com/o/h3.jpg?alt=media&token=482263cb-3590-405f-9c1e-e1fcd46b5229");
+        BloodBank b9 = new BloodBank(9l, "Crveni krst", "", 1.3, map2, null, null
+                , null, a5, null, "", "https://firebasestorage.googleapis.com/v0/b/isapsw-6ef61.appspot.com/o/h5.jpg?alt=media&token=c1d1d5ca-2270-41b3-bb04-c3ffe4d0cc0a");
+        BloodBank b10 = new BloodBank(10l, "Zeleni krst", "", 4.3, map2, null, null
+                , null, a5, null, "", "https://firebasestorage.googleapis.com/v0/b/isapsw-6ef61.appspot.com/o/h3.jpg?alt=media&token=482263cb-3590-405f-9c1e-e1fcd46b5229");
+        BloodBank b11 = new BloodBank(11l, "Crveni krst", "", 2.3, map2, null, null
+                , null, a3, null, "", "https://firebasestorage.googleapis.com/v0/b/isapsw-6ef61.appspot.com/o/h2.jpg?alt=media&token=3d2fca8e-7272-4dcc-bafc-231afce6eeac");
+        BloodBank b12 = new BloodBank(12l, "Plavi krst", "", 2.3, map2, null, null
+                , null, a4, null, "", "https://firebasestorage.googleapis.com/v0/b/isapsw-6ef61.appspot.com/o/h3.jpg?alt=media&token=482263cb-3590-405f-9c1e-e1fcd46b5229");
+        BloodBank b13 = new BloodBank(13l, "Crni krst", "", 2.3, map2, null, null
+                , null, a5, null, "", "https://firebasestorage.googleapis.com/v0/b/isapsw-6ef61.appspot.com/o/h5.jpg?alt=media&token=c1d1d5ca-2270-41b3-bb04-c3ffe4d0cc0a");
+
         Appointment a = new Appointment(1l, null, null, b5, null, 30);
         ArrayList<Appointment> al = new ArrayList<>();
         al.add(a);
@@ -51,6 +69,14 @@ public class BloodBankServiceImpl implements BloodBankService {
         bloodBankRepository.save(b3);
         bloodBankRepository.save(b4);
         bloodBankRepository.save(b5);
+        bloodBankRepository.save(b6);
+        bloodBankRepository.save(b7);
+        bloodBankRepository.save(b8);
+        bloodBankRepository.save(b9);
+        bloodBankRepository.save(b10);
+        bloodBankRepository.save(b11);
+        bloodBankRepository.save(b12);
+        bloodBankRepository.save(b13);
     }
 
     public List<BloodBank> getAll() {
@@ -105,4 +131,10 @@ public class BloodBankServiceImpl implements BloodBankService {
     public String getApiKeyById(Long id) {
         return bloodBankRepository.getApiKeyById(id);
     }
+
+    @Override
+    public List<BloodBank> findAllByName(Pageable pageable){
+        return bloodBankRepository.findAllByName(pageable);
+    }
+
 }
