@@ -13,6 +13,7 @@ import { RegisterBloodBankComponent } from './modules/administrator/register-blo
 import { RegisterMedicalWorkerComponent } from './modules/administrator/register-medical-worker/register-medical-worker.component';
 import { DisplayAllUsersComponent } from './modules/administrator/display-all-users/display-all-users.component';
 import { BloodBankViewComponent } from './modules/medical_worker/blood-bank-view/blood-bank-view.component';
+import { ViewReportsComponent } from './view-reports/view-reports.component';
 
 const routes: Routes = [
   {path: '', component: HomeComponentComponent},
@@ -26,6 +27,7 @@ const routes: Routes = [
   {path: 'homePage', component: DisplayAllCentersComponent},
   {path: 'bloodBank/:id', component: BloodBankViewComponent},
   {path :'survey', component: CreateSurveyComponent},
+  {path: 'reports', component: ViewReportsComponent}
 ];
 
 @NgModule({

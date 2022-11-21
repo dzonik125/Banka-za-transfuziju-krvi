@@ -1,0 +1,17 @@
+<h2 style="margin-left: 40%;">Reports</h2>
+<table class="table" style="margin-left: 10%">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Url</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let report of reports; let i = index">
+        <th scope="row">{{i + 1}}</th>
+        <td>
+          <a [href]="report.url">Report {{i + 1}}</a>
+        </td>
+      </tr>
+    </tbody>
+  </table>

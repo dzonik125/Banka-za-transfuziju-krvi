@@ -47,6 +47,7 @@ import { TitleCasePipe } from '@angular/common';
 import { UserProfileViewComponent } from './modules/public/user-profile-view/user-profile-view.component';
 import { CreateSurveyComponent } from './modules/public/create-survey/create-survey.component';
 import { ToastrModule } from 'ngx-toastr';
+import { ViewReportsComponent } from './view-reports/view-reports.component';
 
 //I keep the new line
 
@@ -72,7 +73,8 @@ import { ToastrModule } from 'ngx-toastr';
     BloodBankViewComponent,
     AddWorkerToBankDialogComponent,
     CreateSurveyComponent,
-    UserProfileViewComponent
+    UserProfileViewComponent,
+    ViewReportsComponent
   ],
 
   imports: [
