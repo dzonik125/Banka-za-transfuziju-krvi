@@ -8,6 +8,7 @@
               <img src={{bloodBank.image}} alt="avatar"
                 class="img-fluid" >
               <h5 class="my-3">Average grade: {{bloodBank.avgGrade}}</h5>
+              <button class="btn btn-primary btn-sm" (click)="publishNews()">Publish News</button>
             </div>
           </div>
         </div>
@@ -131,6 +132,15 @@
                    <input type="text" class="m-3" [(ngModel)]="bloodBank.description" name="Number" required>
                    <button class="btn btn-primary btn-sm" (click)="editBank(); editDescription = !editDescription">Edit</button>
                </form> 
+            </div>
+            <hr>
+            <div class="row">
+              <div class="col-sm-3">
+                <p class="mb-0">API Key</p>
+              </div>
+              <div class="col-sm-8">
+                <p class="text-muted mb-0">{{bloodBank.apiKey}}</p>
+              </div>
             </div>
             </div>
           </div>

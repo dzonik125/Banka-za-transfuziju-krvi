@@ -7,6 +7,7 @@ export class BloodBank {
     avgGrade: number | undefined;
     image!: string;
     medicalWorkers: any[] | undefined;
+    apiKey!: string;
   
 
   public constructor(obj?: any) {
@@ -17,6 +18,7 @@ export class BloodBank {
           this.address = obj.Address;
           this.avgGrade = obj.avgGrade;
           this.image = obj.image;
+          this.apiKey = obj.apiKey;
       }
   }
 }
