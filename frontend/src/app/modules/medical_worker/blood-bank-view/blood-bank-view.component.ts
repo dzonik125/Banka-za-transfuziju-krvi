@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { BloodBank } from 'src/app/model/bloodBank';
 import { BloodBankServiceService } from 'src/app/services/blood-bank-service.service';
 import {Input, NgZone} from '@angular/core';
@@ -34,7 +34,7 @@ export class BloodBankViewComponent implements OnInit {
 
   
   
-  constructor(private route: ActivatedRoute, private http: HttpClient, private bloodBankService: BloodBankServiceService, 
+  constructor(private route: ActivatedRoute, private router: Router, private http: HttpClient, private bloodBankService: BloodBankServiceService, 
     private medicalWorkerService: MedicalWorkerService, private dialog: MatDialog) { }
 
 
@@ -83,6 +83,10 @@ export class BloodBankViewComponent implements OnInit {
       this.getMedicalWorkers();
     });
     
+  }
+
+  publishNews() {
+    this.router.navigate(['sendNews/' + this.id]);
   }
 
 }

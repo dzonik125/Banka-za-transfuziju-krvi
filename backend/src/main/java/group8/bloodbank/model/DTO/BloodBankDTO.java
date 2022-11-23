@@ -17,4 +17,6 @@ public class BloodBankDTO {
     public String image;
     public List<MedicalWorker> medicalWorkers;
     public double avgGrade;
+
+    public String apiKey;
 }
