@@ -7,6 +7,7 @@ import { MySort } from '../../util/sort';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { CreateSurveyComponent } from '../create-survey/create-survey.component';
 
+
 @Component({
   selector: 'app-display-all-centers',
   templateUrl: './display-all-centers.component.html',
@@ -21,6 +22,24 @@ export class DisplayAllCentersComponent implements AfterViewInit {
   public filteredbloodBanks: BloodBank[] = [];
   _minTerm: string = '';
   _maxTerm: string = '';
+
+  title='pagination';
+  POSTS: any;
+  page: number = 1;
+  count: number = 0;
+
+  constructor(private bloodBankService: BloodBankServiceService,
+    private router: Router,
+    private dialogRef: MatDialog,
+    private _liveAnnouncer: LiveAnnouncer
+    ) { }
+
+    ngAfterViewInit() {
+      this.bloodBankService.getBloodBanks().subscribe(res => {
+        this.bloodBanks = res;
+        this.filteredbloodBanks = this.bloodBanks;
+      })
+    }
 
   public get minTerm(): string {
     return this._minTerm;
@@ -56,18 +75,7 @@ export class DisplayAllCentersComponent implements AfterViewInit {
     }
   }
 
-  constructor(private bloodBankService: BloodBankServiceService,
-              private router: Router,
-              private dialogRef: MatDialog,
-              private _liveAnnouncer: LiveAnnouncer
-              ) { }
 
-  ngAfterViewInit() {
-    this.bloodBankService.getBloodBanks().subscribe(res => {
-      this.bloodBanks = res;
-      this.filteredbloodBanks = this.bloodBanks;
-    })
-  }
 
   sortName(property: any){
     this.sorter.sortName(this.filteredbloodBanks, property);
@@ -108,7 +116,16 @@ export class DisplayAllCentersComponent implements AfterViewInit {
   }
 
   showBank(id: any) {
-    console.log('dwddd')
     this.router.navigate(['bloodBank/' + id]);
+  }
+
+
+
+  onTableDataChange(event: any){
+    this.page = event;
+    this.bloodBankService.getBloodBanks().subscribe(res => {
+      this.bloodBanks = res;
+      this.filteredbloodBanks = this.bloodBanks;
+    })
   }
 }

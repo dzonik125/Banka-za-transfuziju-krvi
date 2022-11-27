@@ -4,7 +4,7 @@ import { Router, RouterModule, Routes } from '@angular/router';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavigationComponent } from './modules/public/navigation/navigation.component';
-import { RegisterUserComponent } from './modules/public/register-user/register-user.component';
+import { RegisterUserComponent } from './modules/administrator/register-user/register-user.component';
 import { HomeComponentComponent } from './home-component/home-component.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule } from '@angular/forms';
@@ -47,6 +47,7 @@ import { TitleCasePipe } from '@angular/common';
 import { UserProfileViewComponent } from './modules/public/user-profile-view/user-profile-view.component';
 import { CreateSurveyComponent } from './modules/public/create-survey/create-survey.component';
 import { ToastrModule } from 'ngx-toastr';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 //I keep the new line
 
@@ -98,8 +99,8 @@ import { ToastrModule } from 'ngx-toastr';
     FlexLayoutModule,
     MatCardModule,
     MatToolbarModule,
-    MatRadioModule,
     FileUploadModule,
+    MatRadioModule,
     provideFirebaseApp(()=> initializeApp(environment.firebase)),
     provideAuth(() => getAuth()),
     provideFirestore(() => getFirestore()),
@@ -109,7 +110,8 @@ import { ToastrModule } from 'ngx-toastr';
     MatSelectModule,
     FormsModule,
     ToastrModule.forRoot(),
-    TitleCasePipe
+    TitleCasePipe,
+    NgxPaginationModule
 
   ],
   providers: [],

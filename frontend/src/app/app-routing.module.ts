@@ -1,7 +1,7 @@
 import { CreateSurveyComponent } from './modules/public/create-survey/create-survey.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { RegisterUserComponent } from './modules/public/register-user/register-user.component';
+import { RegisterUserComponent } from './modules/administrator/register-user/register-user.component';
 import { AppComponent } from './app.component';
 import { HomeComponentComponent } from './home-component/home-component.component';
 import { SaveApiKeyComponent } from './save-api-key/save-api-key.component';
@@ -15,7 +15,7 @@ import { DisplayAllUsersComponent } from './modules/administrator/display-all-us
 import { BloodBankViewComponent } from './modules/medical_worker/blood-bank-view/blood-bank-view.component';
 
 const routes: Routes = [
-  {path: '', component: HomeComponentComponent},
+  {path: 'home', component: HomeComponentComponent},
   {path :'register', component: RegisterUserComponent},
   {path:'saveApi/:id', component: SaveApiKeyComponent},
   {path:'sendNews/:id', component: SendNewsComponent},
@@ -23,7 +23,7 @@ const routes: Routes = [
   {path:'adminDashboard/registerBloodBank', component: RegisterBloodBankComponent},
   {path:'adminDashboard/registerMedicalWorker', component: RegisterMedicalWorkerComponent},
   {path: 'displayAllUsers', component: DisplayAllUsersComponent},
-  {path: 'homePage', component: DisplayAllCentersComponent},
+  {path: '', component: DisplayAllCentersComponent},
   {path: 'bloodBank/:id', component: BloodBankViewComponent},
   {path :'survey', component: CreateSurveyComponent},
 ];

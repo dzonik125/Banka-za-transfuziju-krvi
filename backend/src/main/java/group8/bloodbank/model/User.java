@@ -1,9 +1,16 @@
 package group8.bloodbank.model;
-import net.bytebuddy.dynamic.loading.InjectionClassLoader;
+
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 @Entity
+@Getter
+@Setter
 @Inheritance(strategy = InheritanceType.JOINED)
 @Table(name ="users")
 public class User {
@@ -17,21 +24,31 @@ public class User {
     private UserType userType;
 
     @Column
+    @NotNull(message = "Name cannot be null")
     private String name;
     @Column
+    @NotNull(message = "Surname cannot be null")
     private String surname;
     @Column
+    @NotNull(message = "Password cannot be null")
     private String password;
 
     @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @NotNull(message = "Password cannot be null")
     private Address address;
     @Column
+    @Size(max = 13, message = "Jmbg should contains 13 numbers")
     private String jmbg;
     @Column
+    @NotNull(message = "Password cannot be null")
+    @Email(regexp = ".+[@].+[\\\\.].+", message = "Email should be valid")
+    //@CustomConstraint(message = "Email should be unique")
     private String email;
     @Column
+    @NotNull(message = "Password cannot be null")
     private String occupation;
     @Column
+    @NotNull(message = "Password cannot be null")
     private Gender gender;
 
     public User() {
@@ -63,84 +80,4 @@ public class User {
         this.userType = userType;
     }
 
-
-    public UserType getUserType() {
-        return userType;
-    }
-
-    public void setUserType(UserType userType) {
-        this.userType = userType;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getSurname() {
-        return surname;
-    }
-
-    public void setSurname(String surname) {
-        this.surname = surname;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public Address getAddress() {
-        return address;
-    }
-
-    public void setAddress(Address address) {
-        this.address = address;
-    }
-
-    public String getJmbg() {
-        return jmbg;
-    }
-
-    public void setJmbg(String jmbg) {
-        this.jmbg = jmbg;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getOccupation() {
-        return occupation;
-    }
-
-    public void setOccupation(String occupation) {
-        this.occupation = occupation;
-    }
-
-    public Gender getGender() {
-        return gender;
-    }
-
-    public void setGender(Gender gender) {
-        this.gender = gender;
-    }
 }

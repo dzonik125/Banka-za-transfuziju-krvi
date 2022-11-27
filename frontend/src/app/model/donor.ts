@@ -1,20 +1,22 @@
+import { User } from './user';
 import { BloodBank } from './bloodBank';
 import { Address } from './address';
 
 
 export class Donor {
-    name: string = '';
-    surname: string = '';
-    password: string = '';
-    jmbg: string = '';
-    email: string = '';
-    occupation: string ='';
-    gender: string = '';
+    name!: string
+    surname!: string
+    password!: string
+    jmbg!: string
+    email!: string
+    occupation!: string
+    gender!: string
     penalty: number = 0;
     points: number = 0;
     address!: Address;
     category: string = 'REGULAR';
-    
+    userType: string = 'DONOR';
+
 
 
   public constructor(obj?: any) {
@@ -30,6 +32,7 @@ export class Donor {
           this.address = obj.address;
           this.points = obj.points;
           this.category = obj.category;
+          this.userType = obj.userType;
       }
   }
 
