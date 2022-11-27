@@ -7,6 +7,7 @@ import { Validator } from '../../util/validation';
 import { UserService } from 'src/app/services/user.service';
 import { NotificationService } from 'src/app/services/notification.service';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { EmptyError } from 'rxjs';
 
 @Component({
   selector: 'app-register-user',
@@ -64,7 +65,7 @@ export class RegisterUserComponent{
       this.user.gender = '';
       this.validation.repeatPass = '';
     }, error => {
-      this.notifyService.showError(error.error, "Error");
+      this.notifyService.showError("Fill in all the information","Error");
     })
 
   }

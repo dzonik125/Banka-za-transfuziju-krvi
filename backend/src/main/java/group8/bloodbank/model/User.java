@@ -34,17 +34,21 @@ public class User {
     private String password;
 
     @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @NotNull(message = "Password cannot be null")
     private Address address;
     @Column
     @Size(max = 13, message = "Jmbg should contains 13 numbers")
     private String jmbg;
     @Column
+    @NotNull(message = "Password cannot be null")
     @Email(regexp = ".+[@].+[\\\\.].+", message = "Email should be valid")
     //@CustomConstraint(message = "Email should be unique")
     private String email;
     @Column
+    @NotNull(message = "Password cannot be null")
     private String occupation;
     @Column
+    @NotNull(message = "Password cannot be null")
     private Gender gender;
 
     public User() {
