@@ -2,26 +2,28 @@ package group8.bloodbank.model;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.sql.Timestamp;
+import java.util.Collection;
+import java.util.Date;
+import java.util.List;
 
 @Entity
 @Getter
 @Setter
 @Inheritance(strategy = InheritanceType.JOINED)
 @Table(name ="users")
-public class User {
+public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Long id;
-
-    @Enumerated(EnumType.STRING)
-    @Column
-    private UserType userType;
 
     @Column
     @NotNull(message = "Name cannot be null")
@@ -51,6 +53,18 @@ public class User {
     @NotNull(message = "Password cannot be null")
     private Gender gender;
 
+    @Column
+    private boolean enabled;
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "user_role",
+            joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))
+    private List<Role> roles;
+
+    @Column
+    private Timestamp lastPasswordResetDate;
+
     public User() {
         super();
     }
@@ -65,7 +79,6 @@ public class User {
         this.email = email;
         this.occupation = occupation;
         this.gender = gender;
-        this.userType = userType;
     }
 
     public User(String name, String surname, String email, String password, String jmbg, Address address, String occupation, Gender gender, UserType userType) {
@@ -77,7 +90,39 @@ public class User {
         this.email = email;
         this.occupation = occupation;
         this.gender = gender;
-        this.userType = userType;
     }
 
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return null;
+    }
+
+    @Override
+    public String getUsername() {
+        return email;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return enabled;
+    }
+
+    public Date getLastPasswordResetDate() {
+        return lastPasswordResetDate;
+    }
 }

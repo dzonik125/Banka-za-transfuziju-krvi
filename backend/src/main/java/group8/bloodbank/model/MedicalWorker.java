@@ -3,7 +3,7 @@ package group8.bloodbank.model;
 import lombok.AllArgsConstructor;
 
 import javax.persistence.*;
-import java.util.List;
+import java.util.Set;
 
 @Entity
 @AllArgsConstructor
@@ -37,7 +37,7 @@ public class MedicalWorker extends User {
             name = "medical_worker_appointments",
             joinColumns = @JoinColumn(name = "medical_worker_id"),
             inverseJoinColumns = @JoinColumn(name = "appointment_id"))
-    private List<Appointment> appointments;
+    private Set<Appointment> appointments;
 
     public MedicalWorker(Long id, String name, String surname, String email, String password, String jmbg, Address address, String occupation, Gender gender) {
         super(name, surname, email, password, jmbg, address, occupation, gender, UserType.MEDICAL_WORKER);

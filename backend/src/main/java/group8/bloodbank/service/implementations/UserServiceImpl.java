@@ -1,35 +1,38 @@
 package group8.bloodbank.service.implementations;
 
+import group8.bloodbank.model.DTO.UserDTO;
 import group8.bloodbank.model.User;
 import group8.bloodbank.repository.UserRepository;
 import group8.bloodbank.service.interfaces.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.NoSuchElementException;
 
 @Service
 public class UserServiceImpl implements UserService {
-
-    UserRepository userRepository;
-
     @Autowired
-    public UserServiceImpl(UserRepository userRepository) {
-
-        this.userRepository = userRepository;
-//        Address a1 = new Address("Srbija", "Kraljevo", "Cirpanova", "12");
-//        Address a2 = new Address("Srbija", "Lebane", "Titova", "123");
-//
-//        User u1 = new User("Nikola", "Kolarov", "dzonik125@gmail.com", "123456", "1234578965496", a1, "menager", Gender.MALE, UserType.DONOR);
-//        User u2 = new User("Petar", "Petrovic", "gasolina@gmail.com", "123", "1234578965496", a2, "f1 driver", Gender.MALE, UserType.MEDICAL_WORKER);
-//        userRepository.save(u1);
-//        userRepository.save(u2);
-    }
+    UserRepository userRepository;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @Override
-    public User saveUser(User user) {
-        return userRepository.save(user);
+    public User saveUser(User user, UserDTO userDTO) {
+        user.setPassword(passwordEncoder.encode(userDTO.getPassword()));
+        user.setName(userDTO.getName());
+        user.setSurname(userDTO.getSurname());
+        user.setEmail(userDTO.getEmail());
+        user.setGender(userDTO.getGender());
+        user.setAddress(userDTO.getAddress());
+        user.setJmbg(userDTO.getJmbg());
+        user.setOccupation(userDTO.getOccupation());
+        user.setLastPasswordResetDate(Timestamp.valueOf(LocalDateTime.now()));
+        
+        return user;
     }
 
     @Override
@@ -59,4 +62,10 @@ public class UserServiceImpl implements UserService {
             return false;
         }
     }
+
+    @Override
+    public User findByUsername(String email) {
+        return userRepository.findByEmail(email);
+    }
+
 }

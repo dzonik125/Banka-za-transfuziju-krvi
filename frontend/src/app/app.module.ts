@@ -1,3 +1,7 @@
+import { ConfigService } from './services/login-services/config.service';
+import { UserService } from 'src/app/services/user.service';
+import { ApiService } from './services/login-services/api.service';
+import { AuthService } from 'src/app/services/login-services/auth.service';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { Router, RouterModule, Routes } from '@angular/router';
@@ -8,7 +12,7 @@ import { RegisterUserComponent } from './modules/administrator/register-user/reg
 import { HomeComponentComponent } from './home-component/home-component.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { SaveApiKeyComponent } from './save-api-key/save-api-key.component';
 import { AdminDashboardComponent } from './modules/administrator/admin-dashboard/admin-dashboard.component';
 import { RegisterBloodBankComponent } from './modules/administrator/register-blood-bank/register-blood-bank.component';
@@ -48,6 +52,10 @@ import { UserProfileViewComponent } from './modules/public/user-profile-view/use
 import { CreateSurveyComponent } from './modules/public/create-survey/create-survey.component';
 import { ToastrModule } from 'ngx-toastr';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { LoginComponent } from './modules/public/login/login.component';
+import { TokenInterceptor } from './interceptor/TokenInterceptor';
+import { NO_ERRORS_SCHEMA } from '@angular/compiler';
+import {MatInputModule} from '@angular/material/input';
 
 //I keep the new line
 
@@ -73,7 +81,8 @@ import { NgxPaginationModule } from 'ngx-pagination';
     BloodBankViewComponent,
     AddWorkerToBankDialogComponent,
     CreateSurveyComponent,
-    UserProfileViewComponent
+    UserProfileViewComponent,
+    LoginComponent
   ],
 
   imports: [
@@ -111,11 +120,23 @@ import { NgxPaginationModule } from 'ngx-pagination';
     FormsModule,
     ToastrModule.forRoot(),
     TitleCasePipe,
-    NgxPaginationModule
+    NgxPaginationModule,
+    MatCardModule,
+    MatButtonModule,
+    MatInputModule
 
   ],
-  providers: [],
-  bootstrap: [AppComponent]
+  providers: [
+    {
+    provide: HTTP_INTERCEPTORS,
+    useClass: TokenInterceptor,
+    multi: true
+    },
+    AuthService,
+    ApiService,
+    UserService,
+    ConfigService
+  ],
+  bootstrap: [AppComponent],
 })
-export class AppModule {
-}
+export class AppModule {}

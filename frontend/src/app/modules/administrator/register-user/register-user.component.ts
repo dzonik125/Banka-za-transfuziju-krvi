@@ -1,3 +1,4 @@
+import { UserDTO } from './../../../model/userDTO';
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
@@ -19,7 +20,7 @@ export class RegisterUserComponent{
   repeatPass = '';
   form!: FormGroup;
 
-  public user: Donor = new Donor;
+  public user: UserDTO = new UserDTO;
   public address: Address = new Address;
   public validation: Validator = new Validator;
 
@@ -65,7 +66,7 @@ export class RegisterUserComponent{
       this.user.gender = '';
       this.validation.repeatPass = '';
     }, error => {
-      this.notifyService.showError("Fill in all the information","Error");
+      this.notifyService.showError("Fill in all the information ","Error");
     })
 
   }

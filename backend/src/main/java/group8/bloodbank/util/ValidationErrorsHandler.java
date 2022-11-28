@@ -1,4 +1,4 @@
-package group8.bloodbank.util.validation;
+package group8.bloodbank.util;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

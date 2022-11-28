@@ -33,7 +33,7 @@ public class BloodBankController {
         this.medicalWorkerService =medicalWorkerService;
     }
 
-    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE, value="/findAllBloodBanks")
     public List<BloodBank> getAll() {
         return bloodBankService.getAll();
     }

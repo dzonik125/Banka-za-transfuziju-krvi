@@ -1,20 +1,10 @@
-package group8.bloodbank.model; /***********************************************************************
- * Module:  StaffComplaint.java
- * Author:  david
- * Purpose: Defines the Class StaffComplaint
- ***********************************************************************/
-
-/**
- * @pdOid bc1e374c-40f5-43ba-9fbb-ad94acc255a1
- */
+package group8.bloodbank.model;
 public class StaffComplaint extends Complaint {
-    /**
-     * @pdRoleInfo migr=no name=MedicalWorker assc=association23 mult=0..1
-     */
+
     public MedicalWorker medicalWorker;
 
-    public StaffComplaint(String description, int id) {
-        super(description, id);
+    public StaffComplaint(String description, Long id) {
+        super(id,description);
     }
 
     public MedicalWorker getMedicalWorker() {

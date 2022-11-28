@@ -44,86 +44,52 @@ INSERT INTO blood_type_blood_bank(
     blood_bank_id, blood_type_amount, blood_type_key)
 VALUES (1, 20, 'Bneg');
 
-
-
 INSERT INTO blood_type_blood_bank(
     blood_bank_id, blood_type_amount, blood_type_key)
 VALUES (2, 13, 'Bpos');
 
 
-INSERT INTO users(
-    email, gender, jmbg, name, occupation, password, surname, user_type, address_id)
-VALUES ('nikola@mail.com', 1, '1232312321321', 'Nikola', 'student', 'nikola123', 'Kolarov', 'MEDICAL_WORKER', 1);
-
-INSERT INTO users(
-    email, gender, jmbg, name, occupation, password, surname, user_type, address_id)
-VALUES ('david@mail.com', 1, '5732312321321', 'David', 'imac kada', 'david123', 'Mijailovic', 'MEDICAL_WORKER', 1);
-
-INSERT INTO users(
-    email, gender, jmbg, name, occupation, password, surname, user_type, address_id)
-VALUES ('tosa12@mail.com', 1, '0832312321321', 'Todor', 'roker', 'todortodor123', 'Belic', 'MEDICAL_WORKER', 2);
-
-INSERT INTO users(
-    email, gender, jmbg, name, occupation, password, surname, user_type, address_id)
-VALUES ('marko11@mail.com', 1, '1132312321321', 'Marko', ' ', 'marko11123', 'Nikolic', 'DONOR', 2);
-
-INSERT INTO users(
-    email, gender, jmbg, name, occupation, password, surname, user_type, address_id)
-VALUES ('marika@mail.com', 0, '7132312321321', 'Marija', ' ', 'marecare123', 'Bozic', 'DONOR', 3);
-
-INSERT INTO users(
-    email, gender, jmbg, name, occupation, password, surname, user_type, address_id)
-VALUES ('nedeljko@mail.com', 1, '9932312321321', 'Nedeljko', ' ', 'nedjo123', 'Milic', 'DONOR', 1);
 
 
+--sifre su Donor         -> donor
+--         MedicalWorker -> medicalworker
+--         Admin         -> admin
 INSERT INTO users(
-    email, gender, jmbg, name, occupation, password, surname, user_type, address_id)
-VALUES ('slavica@mail.com', 0, '8132312321321', 'Slavica', ' ', 'slava123', 'Krstic', 'SYSTEM_ADMINISTRATOR', 1);
+    email, gender, jmbg, name, occupation, password, surname, address_id, enabled, last_password_reset_date)
+VALUES ('donor@mail.com', 0, '7132312321321', 'Marko', 'Poljoprivrednik', '$2y$10$9INQk3/KYVWY1FbUqA0W5upioL.6RVl63zJU9iEwQG.XvHEk9Aug6', 'Bozic', 3, true, '2022-11-28 18:17:53.840417');
 
 INSERT INTO users(
-    email, gender, jmbg, name, occupation, password, surname, user_type, address_id)
-VALUES ('dragica@mail.com', 0, '8132312321321', 'Dragica', ' ', 'dragalav123', 'Ristovic', 'SYSTEM_ADMINISTRATOR', 3);
+    email, gender, jmbg, name, occupation, password, surname, address_id, enabled, last_password_reset_date)
+VALUES ('medicalworker@mail.com', 1, '1232312321321', 'Nikola', 'Student', '$2y$10$1KJBnDRXEz87Zcrq.b3vR.hkmaVVIvXarI.4IwbtebcbAcMSjOJkK', 'Kolarov', 1, true, '2022-11-28 18:17:53.840417');
+
+INSERT INTO users(
+    email, gender, jmbg, name, occupation, password, surname, address_id, enabled, last_password_reset_date)
+VALUES ('admin@mail.com', 0, '8132312321321', 'Slavica', 'IT strucnjak', '$2y$10$YQtYG49nm8UhWrtT3Zq1gOoGYCkhVMC9IKczv5M.mThbC.QH0xnYu', 'Krstic', 2, true, '2022-11-28 18:17:53.840417');
 
 
 INSERT INTO donor(
     blood_type, category, penalty, points, id)
-VALUES (0, 0, 0, 11, 4);
-
-INSERT INTO donor(
-    blood_type, category, penalty, points, id)
-VALUES (1, 1, 1, 46, 5);
-
-INSERT INTO donor(
-    blood_type, category, penalty, points, id)
-VALUES (2, 2, 0, 99, 8);
-
-
-INSERT INTO admin(
-    id)
-VALUES (6);
-
-INSERT INTO admin(
-    id)
-VALUES (7);
-
-
-INSERT INTO medical_worker(
-    id, blood_bank_id)
-VALUES (1, null);
+VALUES (0, 0, 0, 11, 1);
 
 INSERT INTO medical_worker(
     id, blood_bank_id)
 VALUES (2, null);
 
-INSERT INTO medical_worker(
-    id, blood_bank_id)
-VALUES (3, 1);
+INSERT INTO admin(
+    id)
+VALUES (3);
 
 
-INSERT INTO medical_worker_appointments(
-    medical_worker_id, appointment_id)
-VALUES (1, 1);
 
 INSERT INTO medical_worker_appointments(
     medical_worker_id, appointment_id)
-VALUES (2, 2);
+VALUES (2, 1);
+
+
+INSERT INTO role (name) VALUES ('ROLE_DONOR');
+INSERT INTO role (name) VALUES ('ROLE_MEDICALWORKER');
+INSERT INTO role (name) VALUES ('ROLE_ADMIN');
+
+INSERT INTO USER_ROLE (user_id, role_id) VALUES (1, 1); -- user-u dodeljujemo rolu DONOR
+INSERT INTO USER_ROLE (user_id, role_id) VALUES (2, 2); -- user-u dodeljujemo rolu MW
+INSERT INTO USER_ROLE (user_id, role_id) VALUES (3, 3); -- user-u dodeljujemo rolu ADMIN

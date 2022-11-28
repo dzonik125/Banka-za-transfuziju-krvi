@@ -1,35 +1,26 @@
-package group8.bloodbank.model; /***********************************************************************
- * Module:  Complaint.java
- * Author:  david
- * Purpose: Defines the Class Complaint
- ***********************************************************************/
+package group8.bloodbank.model;
 
-/**
- * @pdOid 77577f6a-eda9-40e7-98cf-fb077b59948f
- */
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+import javax.persistence.*;
+
+@Entity
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class Complaint {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", nullable = false)
+    private Long id;
+
+    @Column
     private String description;
-    private int id;
 
-    public Complaint(String description, int id) {
-        this.description = description;
-        this.id = id;
-    }
 
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
 }

@@ -1,4 +1,4 @@
-package group8.bloodbank.util.validation;
+package group8.bloodbank.util;
 
 import group8.bloodbank.model.User;
 import group8.bloodbank.service.interfaces.UserService;

@@ -19,7 +19,7 @@ export class BloodBankServiceService {
   }
 
   getBloodBanks(): Observable<BloodBank[]>{
-    return this.http.get<BloodBank[]>(this.apiHost + 'bloodBanks', {headers: this.headers});
+    return this.http.get<BloodBank[]>(this.apiHost + 'bloodBanks/findAllBloodBanks', {headers: this.headers});
   }
 
   getBloodBanksByName(currentPage: any): Observable<BloodBank[]>{

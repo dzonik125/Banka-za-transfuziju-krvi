@@ -1,4 +1,4 @@
-package group8.bloodbank.util.validation;
+package group8.bloodbank.util;
 
 import javax.validation.Constraint;
 import javax.validation.Payload;
