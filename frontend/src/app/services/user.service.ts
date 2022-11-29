@@ -38,13 +38,13 @@ export class UserService {
     return this.http.put(this.apiHost + 'user/' + encodeURIComponent(id), user);
   }
 
-  getMyInfo() {
-    return this.apiService.get(this.config.whoami_url)
-      .pipe(map((user: any) => {
-        this.currentUser = user;
-        return user;
-      }));
-  }
+  // getMyInfo() {
+  //   return this.apiService.get(this.config.whoami_url)
+  //     .pipe(map((user: any) => {
+  //       this.currentUser = user;
+  //       return user;
+  //     }));
+  // }
 
   getAll() {
     return this.apiService.get(this.config.users_url);

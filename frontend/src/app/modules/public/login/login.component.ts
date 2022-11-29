@@ -78,10 +78,10 @@ export class LoginComponent implements OnInit {
     this.authService.login(this.form.value)
       .subscribe((data: any) => {
         console.log(data);
-          this.userService.getMyInfo().subscribe();
+          //this.userService.getMyInfo().subscribe();
           this.router.navigate([this.returnUrl]);
         },
-        ( error: any) => {
+        (error) => {
           console.log(error);
           this.submitted = false;
           this.notifyService.showError('Incorrect email or password.', 'Error');

@@ -97,6 +97,7 @@ public class BloodBankController {
         return new ResponseEntity<Boolean>(hasEnoughBlood, HttpStatus.OK);
     }
 
+
     @CrossOrigin(origins = "http://localhost:4200")
     @PostMapping(value = "/addApi")
     public void addApi(@RequestBody String json) throws JSONException {
