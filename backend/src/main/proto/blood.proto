@@ -2,17 +2,37 @@ syntax = "proto3";
 package blood;
 
 service BloodProvider{
-
-  rpc GetBlood (BloodRequest) returns (BloodResponse);
-
+  rpc SendUrgentBloodUnits (BloodUnitRequest) returns (BloodResponse);
 }
 
-message BloodRequest{
-  string Bank = 1;
-  string BloodType = 2;
-  string Quantity = 3;
+message BloodUnitRequest{
+  string BankBankApiKey = 1;
+  repeated BloodUnit BloodUnits = 2;
+}
+
+message BloodUnit{
+  BloodTypeEnum BloodType = 1;
+  int32 Quantity = 2;
+}
+
+enum BloodTypeEnum {
+    A_POS = 0;
+    A_NEG = 1;
+    O_POS = 2;
+    O_NEG = 3;
+    B_POS = 4;
+    B_NEG = 5;
+    AB_POS = 6;
+    AB_NEG = 7;
+}
+
+enum RequestResponseStatus {
+  BLOOD_AVAILABLE = 0;
+  BLOOD_NOT_AVAILABLE = 1;
+  BLOOD_BANK_NOT_FOUND = 2;
 }
 
 message BloodResponse {
-  string Count = 1;
+  RequestResponseStatus status = 1;
 }
+

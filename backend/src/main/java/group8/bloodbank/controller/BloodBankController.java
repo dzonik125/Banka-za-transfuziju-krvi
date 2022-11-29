@@ -103,8 +103,5 @@ public class BloodBankController {
 
     @GetMapping(value = "getApiKeyById")
     public String getApiKeyById(@RequestParam(value = "id") Long id) {
-        System.out.println(bloodBankService.getApiKeyById(id) +  "sasssssssssssssss");
         return bloodBankService.getApiKeyById(id);}
-
-
 }
