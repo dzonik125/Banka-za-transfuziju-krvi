@@ -8,6 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.HashMap;
 import java.util.Optional;
 
 public interface BloodBankRepository extends JpaRepository<BloodBank, Long> {
@@ -15,6 +16,9 @@ public interface BloodBankRepository extends JpaRepository<BloodBank, Long> {
     @Query("SELECT value(m) FROM BloodBank b join b.bloodType m" +
             " where key(m) = ?1 and b.id = ?2")
     public Optional<Double> getAmountOfBloodForType(BloodType type, Long id);
+
+    @Query("SELECT m FROM BloodBank b join b.bloodType m where b.id=:apiKey")
+    public HashMap<BloodType, Double> getAllBloodUnits(@Param("apiKey") String apiKey);
 
     @Query("SELECT b from BloodBank b where b.apiKey = ?1")
     public BloodBank getByApiKey(String apiKey);

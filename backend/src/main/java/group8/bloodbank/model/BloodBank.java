@@ -44,7 +44,7 @@ public class BloodBank {
     @Column
     private String image;
 
-    @ElementCollection
+    @ElementCollection(fetch = FetchType.EAGER)
     @CollectionTable(name="bloodType_bloodBank", joinColumns=@JoinColumn(name="bloodBank_id"))
     @MapKeyColumn(name = "bloodType_key")
     @Column(name="bloodType_amount")
@@ -61,7 +61,7 @@ public class BloodBank {
         this.appointment = appointment;
         this.address = address;
         this.workingHours = workingHours;
-        this.apiKey = "";
+        this.apiKey = apiKey;
         this.image = image;
     }
 

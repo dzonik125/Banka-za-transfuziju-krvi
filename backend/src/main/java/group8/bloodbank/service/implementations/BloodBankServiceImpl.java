@@ -6,6 +6,7 @@ import group8.bloodbank.model.BloodBank;
 import group8.bloodbank.model.BloodType;
 import group8.bloodbank.repository.BloodBankRepository;
 import group8.bloodbank.service.interfaces.BloodBankService;
+import io.grpc.netty.shaded.io.netty.handler.codec.http.HttpObjectAggregator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,14 +16,20 @@ import java.util.*;
 public class BloodBankServiceImpl implements BloodBankService {
 
 
-    private BloodBankRepository bloodBankRepository;
+    private final BloodBankRepository bloodBankRepository;
 
     @Autowired
     public BloodBankServiceImpl(BloodBankRepository bloodBankRepository) {
         this.bloodBankRepository = bloodBankRepository;
         Map<BloodType, Double> map1 = new HashMap<>();
-        map1.put(BloodType.Apos, 222.5);
-        map1.put(BloodType.Aneg, 0.0);
+        map1.put(BloodType.Apos, 1000.0);
+        map1.put(BloodType.Aneg, 1000.0);
+        map1.put(BloodType.Bpos, 1000.0);
+        map1.put(BloodType.Bneg, 1000.0);
+        map1.put(BloodType.Opos, 1000.0);
+        map1.put(BloodType.Oneg, 1000.0);
+        map1.put(BloodType.ABpos, 1000.0);
+        map1.put(BloodType.ABneg, 1000.0);
         Map<BloodType, Double> map2 = new HashMap<>();
         map2.put(BloodType.Bneg, 0.0);
         map2.put(BloodType.Bpos, 0.0);
@@ -33,7 +40,7 @@ public class BloodBankServiceImpl implements BloodBankService {
         Address a5 = new Address("Srbija", "Subotica", "Bulevar Oslobodjenja", "15a");
 
         BloodBank b1 = new BloodBank(1l, "A banka", "", 3.4, map1, null, null
-                , null, a1, null, "1", "https://firebasestorage.googleapis.com/v0/b/isapsw-6ef61.appspot.com/o/h1.jpg?alt=media&token=5268f3af-3bda-4014-b18e-3e69b57fb3ea");
+                , null, a1, null, "123", "https://firebasestorage.googleapis.com/v0/b/isapsw-6ef61.appspot.com/o/h1.jpg?alt=media&token=5268f3af-3bda-4014-b18e-3e69b57fb3ea");
         BloodBank b2 = new BloodBank(2l, "B banka", "", 1.2, map2, null, null
                 , null, a2, null, "", "https://firebasestorage.googleapis.com/v0/b/isapsw-6ef61.appspot.com/o/h2.jpg?alt=media&token=3d2fca8e-7272-4dcc-bafc-231afce6eeac");
         BloodBank b3 = new BloodBank(3l, "C banka", "", 4.7, map2, null, null
@@ -99,6 +106,17 @@ public class BloodBankServiceImpl implements BloodBankService {
     @Override
     public BloodBank saveBloodBank(BloodBank bloodBank) {
         return bloodBankRepository.save(bloodBank);
+    }
+
+    @Override
+    public boolean checkIfBloodUnitsAvailable(HashMap<BloodType, Double> bloodUnits, String apiKey) {
+        HashMap<BloodType, Double> bloodUnitsInBank = bloodBankRepository.getAllBloodUnits(apiKey);
+        for(BloodType key : bloodUnitsInBank.keySet()) {
+            if (bloodUnits.get(key) > bloodUnitsInBank.get(key)) {
+                return false;
+            }
+        }
+        return true;
     }
 
     @Override
