@@ -2,7 +2,7 @@ syntax = "proto3";
 package blood;
 
 service BloodProvider{
-  rpc SendUrgentBloodUnits (BloodUnitRequest) returns (BloodResponse);
+  rpc communicate (BloodUnitRequest) returns (BloodResponse);
 }
 
 message BloodUnitRequest{
@@ -16,10 +16,10 @@ message BloodUnit{
 }
 
 enum BloodTypeEnum {
-    A_POS = 0;
-    A_NEG = 1;
-    O_POS = 2;
-    O_NEG = 3;
+    O_POS = 0;
+    O_NEG = 1;
+    A_POS = 2;
+    A_NEG = 3;
     B_POS = 4;
     B_NEG = 5;
     AB_POS = 6;

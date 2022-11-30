@@ -10,12 +10,12 @@ import java.util.List;
 @GrpcService
 class BloodRequestService extends BloodProviderGrpc.BloodProviderImplBase {
     @Override
-    public void sendUrgentBloodUnits(Blood.BloodUnitRequest request, StreamObserver<Blood.BloodResponse> responseObserver) {
+    public void communicate(Blood.BloodUnitRequest request, StreamObserver<Blood.BloodResponse> responseObserver) {
             String apiKey = request.getBankBankApiKey();
             List<Blood.BloodUnit> units = request.getBloodUnitsList();
             //TODO: Parsirati request i proveriti da li ima krvi u bankama
             Blood.BloodResponse res = Blood.BloodResponse.newBuilder().setStatus(Blood.RequestResponseStatus.BLOOD_AVAILABLE).build();
-
+            System.out.println("pogodio");
             responseObserver.onNext(res);
             responseObserver.onCompleted();
    }
