@@ -1,6 +1,5 @@
 package group8.bloodbank.repository;
 
-import blood.Blood;
 import group8.bloodbank.model.BloodBank;
 import group8.bloodbank.model.MedicalWorker;
 import org.springframework.data.jpa.repository.JpaRepository;

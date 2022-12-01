@@ -1,1 +1,0 @@
-insert into new_table(id, name, email) values (DEFAULT, 'pera', 'pera@gmail.com');

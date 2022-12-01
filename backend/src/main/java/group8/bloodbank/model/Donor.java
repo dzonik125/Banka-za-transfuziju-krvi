@@ -1,13 +1,17 @@
 package group8.bloodbank.model;
 
 import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Transient;
 import java.util.ArrayList;
 
-
 @Entity
+@Getter
+@Setter
 @AllArgsConstructor
 public class Donor extends User {
     @Transient
@@ -33,56 +37,16 @@ public class Donor extends User {
         this.bloodType = bloodType;
     }
 
-    public Donor() {
-
-    }
-
-    public int getPoints() {
-        return points;
-    }
-
-    public void setPoints(int points) {
+    public Donor(String name, String surname, String password, Address address, String jmbg, String email, String occupation, Gender gender, int points, int penalty, Category category, BloodType bloodType) {
+        super(name, surname, email, password, jmbg, address, occupation, gender, UserType.DONOR);
+        this.penalty = penalty;
         this.points = points;
-    }
-
-    public Category getCategory() {
-        return category;
-    }
-
-    public void setCategory(Category category) {
         this.category = category;
-    }
-
-    public BloodType getBloodType() {
-        return bloodType;
-    }
-
-    public void setBloodType(BloodType bloodType) {
         this.bloodType = bloodType;
     }
 
-    public ArrayList<Complaint> getComplaint() {
-        return complaint;
-    }
+    public Donor() {
 
-    public void setComplaint(ArrayList<Complaint> complaint) {
-        this.complaint = complaint;
-    }
-
-    public ArrayList<Survey> getSurvey() {
-        return survey;
-    }
-
-    public void setSurvey(ArrayList<Survey> survey) {
-        this.survey = survey;
-    }
-
-    public int getPenalty() {
-        return penalty;
-    }
-
-    public void setPenalty(int penalty) {
-        this.penalty = penalty;
     }
 
 }

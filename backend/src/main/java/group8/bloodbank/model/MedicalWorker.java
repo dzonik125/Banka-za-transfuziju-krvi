@@ -14,6 +14,11 @@ public class MedicalWorker extends User {
         super(id, name, surname, password, adress, jmbg, email, occupation, gender, UserType.MEDICAL_WORKER);
     }
 
+    public MedicalWorker(String name, String surname, String email, String password, String jmbg, Address address, String occupation,  Gender gender, BloodBank bb) {
+        super(name, surname, email, password, jmbg, address, occupation, gender, UserType.MEDICAL_WORKER);
+        this.bloodBank = bb;
+    }
+
     public MedicalWorker(String name, String surname, String email, String password, String jmbg, Address address, String occupation,  Gender gender) {
         super(name, surname, email, password, jmbg, address, occupation, gender, UserType.MEDICAL_WORKER);
 

@@ -1,17 +1,20 @@
 package group8.bloodbank.controller;
+
 import group8.bloodbank.model.BloodBank;
 import group8.bloodbank.model.BloodType;
 import group8.bloodbank.model.DTO.BloodBankDTO;
 import group8.bloodbank.service.interfaces.BloodBankService;
 import group8.bloodbank.service.interfaces.MedicalWorkerService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.boot.configurationprocessor.json.JSONException;
 import org.springframework.boot.configurationprocessor.json.JSONObject;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.awt.print.Pageable;
 import java.util.List;
 import java.util.Optional;
 
@@ -33,6 +36,13 @@ public class BloodBankController {
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public List<BloodBank> getAll() {
         return bloodBankService.getAll();
+    }
+
+    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE, value="/findAll")
+    @CrossOrigin(origins = "http://localhost:4200")
+    public List<BloodBank> findAllByName(Pageable pageable){
+        Pageable pageable2 = (Pageable) PageRequest.of(pageable.getNumberOfPages(), 6);
+        return bloodBankService.findAllByName(pageable2);
     }
 
 

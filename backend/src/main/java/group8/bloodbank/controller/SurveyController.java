@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/survey")
 public class SurveyController {
 
-    private SurveyService surveyService;
+    private final SurveyService surveyService;
 
     @Autowired
     public SurveyController (SurveyService surveyService) {

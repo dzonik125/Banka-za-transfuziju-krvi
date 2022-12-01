@@ -7,6 +7,7 @@ import { MySort } from '../../util/sort';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { CreateSurveyComponent } from '../create-survey/create-survey.component';
 
+
 @Component({
   selector: 'app-display-all-centers',
   templateUrl: './display-all-centers.component.html',
@@ -22,12 +23,34 @@ export class DisplayAllCentersComponent implements AfterViewInit {
   _minTerm: string = '';
   _maxTerm: string = '';
 
+  title='pagination';
+  POSTS: any;
+  page: number = 1;
+  count: number = 0;
+
+  constructor(private bloodBankService: BloodBankServiceService,
+    private router: Router,
+    private dialogRef: MatDialog,
+    private _liveAnnouncer: LiveAnnouncer
+    ) { }
+
+    ngAfterViewInit() {
+      this.bloodBankService.getBloodBanks().subscribe(res => {
+        this.bloodBanks = res;
+        this.filteredbloodBanks = this.bloodBanks;
+      })
+    }
+
   public get minTerm(): string {
     return this._minTerm;
   }
 
   public set minTerm(value: string) {
     this._minTerm = value;
+    if(value === '' && this._maxTerm !== ''){
+      this.filteredbloodBanks = this.filterBanksByMaxGrade(this._maxTerm);
+      return;
+    }
     if(this._maxTerm !== '') {
       this.filteredbloodBanks = this.filterBanksByMinMaxGrade(this._maxTerm, value);
     } else {
@@ -41,6 +64,10 @@ export class DisplayAllCentersComponent implements AfterViewInit {
 
   public set maxTerm(value: string) {
     this._maxTerm = value;
+    if(value === '' && this._minTerm !== ''){
+      this.filteredbloodBanks = this.filterBanksByMinGrade(this._minTerm);
+      return;
+    }
     if (this._minTerm !== '') {
       this.filteredbloodBanks = this.filterBanksByMinMaxGrade(value, this._minTerm);
     } else {
@@ -48,18 +75,7 @@ export class DisplayAllCentersComponent implements AfterViewInit {
     }
   }
 
-  constructor(private bloodBankService: BloodBankServiceService,
-              private router: Router,
-              private dialogRef: MatDialog,
-              private _liveAnnouncer: LiveAnnouncer
-              ) { }
 
-  ngAfterViewInit() {
-    this.bloodBankService.getBloodBanks().subscribe(res => {
-      this.bloodBanks = res;
-      this.filteredbloodBanks = this.bloodBanks;
-    })
-  }
 
   sortName(property: any){
     this.sorter.sortName(this.filteredbloodBanks, property);
@@ -100,7 +116,16 @@ export class DisplayAllCentersComponent implements AfterViewInit {
   }
 
   showBank(id: any) {
-    console.log('dwddd')
     this.router.navigate(['bloodBank/' + id]);
+  }
+
+
+
+  onTableDataChange(event: any){
+    this.page = event;
+    this.bloodBankService.getBloodBanks().subscribe(res => {
+      this.bloodBanks = res;
+      this.filteredbloodBanks = this.bloodBanks;
+    })
   }
 }

@@ -14,7 +14,7 @@ window.Buffer = Buffer;
   styleUrls: ['./send-news.component.css']
 })
 export class SendNewsComponent implements OnInit {
-  
+
   id:any
   apiKey:string = ''
   constructor(private http: HttpClient,
@@ -54,7 +54,6 @@ export class SendNewsComponent implements OnInit {
 
 
 sendNews(downloadURL: any){
-  console.log(this.apiKey + 'ddddddddddddddddddddddddddddddddddddddd')
   console.log(downloadURL);
   var msg = new Message(this.text, this.subject, downloadURL, this.apiKey);
   var headers = new HttpHeaders({ 'Content-Type': 'application/json' });

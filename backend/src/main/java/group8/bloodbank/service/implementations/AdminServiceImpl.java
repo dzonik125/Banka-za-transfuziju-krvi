@@ -16,6 +16,18 @@ public class AdminServiceImpl implements AdminService {
     @Autowired
     public AdminServiceImpl(AdminRepository adminRepository) {
         this.adminRepository = adminRepository;
+
+
+       // public Admin(String name, String surname, String email, String password, String jmbg, Address address, String occupation, Gender gender) {
+         //super(name, surname, email, password, jmbg, address, occupation, gender, UserType.MEDICAL_WORKER);
+
+
+
+//        Admin admin1 = new Admin("Slavica", "Savovic","slav12@mail.com", "slava123", "123123123333", new Address("BiH", "Visegrad", "Andriceva", "11C"), " ", Gender.FEMALE);
+//        Admin admin2 = new Admin("Slavica", "Savovic","slavica123@mail.com", "slava123", "123123123333", new Address("BiH", "Visegrad", "Andriceva", "11C"), " ", Gender.FEMALE);
+//        adminRepository.save(admin1);
+//        adminRepository.save(admin2);
+
     }
 
 
