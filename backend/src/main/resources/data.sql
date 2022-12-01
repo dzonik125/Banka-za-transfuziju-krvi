@@ -14,7 +14,7 @@ VALUES ('Kovilj', 'Srbija', '50', 'Živojina Mišića');
 
 INSERT INTO blood_bank(
     api_key, avg_grade, description, image, name, address_id)
-VALUES (null, 3.4, ' ','https://firebasestorage.googleapis.com/v0/b/isapsw-6ef61.appspot.com/o/h1.jpg?alt=media&token=5268f3af-3bda-4014-b18e-3e69b57fb3ea','A banka' , 1);
+VALUES ('unknown', 3.4, ' ','https://firebasestorage.googleapis.com/v0/b/isapsw-6ef61.appspot.com/o/h1.jpg?alt=media&token=5268f3af-3bda-4014-b18e-3e69b57fb3ea','A banka' , 1);
 
 INSERT INTO blood_bank(
     api_key, avg_grade, description, image, name, address_id)
@@ -38,12 +38,35 @@ VALUES (20, null, 2);
 
 INSERT INTO blood_type_blood_bank(
     blood_bank_id, blood_type_amount, blood_type_key)
-VALUES (1, 10, 'Aneg');
+VALUES (1, 1000, 'Aneg');
 
 INSERT INTO blood_type_blood_bank(
     blood_bank_id, blood_type_amount, blood_type_key)
-VALUES (1, 20, 'Bneg');
+VALUES (1, 1000, 'Apos');
 
+INSERT INTO blood_type_blood_bank(
+    blood_bank_id, blood_type_amount, blood_type_key)
+VALUES (1, 1000, 'ABpos');
+
+INSERT INTO blood_type_blood_bank(
+    blood_bank_id, blood_type_amount, blood_type_key)
+VALUES (1, 1000, 'ABneg');
+
+INSERT INTO blood_type_blood_bank(
+    blood_bank_id, blood_type_amount, blood_type_key)
+VALUES (1, 1000, 'Bpos');
+
+INSERT INTO blood_type_blood_bank(
+    blood_bank_id, blood_type_amount, blood_type_key)
+VALUES (1, 1000, 'Bneg');
+
+INSERT INTO blood_type_blood_bank(
+    blood_bank_id, blood_type_amount, blood_type_key)
+VALUES (1, 1000, 'Opos');
+
+INSERT INTO blood_type_blood_bank(
+    blood_bank_id, blood_type_amount, blood_type_key)
+VALUES (1, 1000, 'Oneg');
 
 
 INSERT INTO blood_type_blood_bank(
