@@ -2,6 +2,7 @@ package group8.bloodbank.controller;
 
 import group8.bloodbank.model.BloodBank;
 import group8.bloodbank.model.BloodType;
+import group8.bloodbank.model.BloodUnitUrgentRequest;
 import group8.bloodbank.model.DTO.BloodBankDTO;
 import group8.bloodbank.service.interfaces.BloodBankService;
 import group8.bloodbank.service.interfaces.MedicalWorkerService;
@@ -95,6 +96,15 @@ public class BloodBankController {
         }
         boolean hasEnoughBlood = bloodBankService.CheckBloodAmount(bloodType, quant, b.getId());
         return new ResponseEntity<Boolean>(hasEnoughBlood, HttpStatus.OK);
+    }
+
+    @PostMapping(value = "/urgentRequest")
+    @ResponseBody
+    public ResponseEntity<String> SendUrgentRequest(@RequestBody BloodUnitUrgentRequest request, @RequestHeader String apiKey){
+        System.out.println("pogodio");
+
+        String hasEnoughBlood = "Ima dovoljno krvi";
+        return new ResponseEntity<String>(hasEnoughBlood, HttpStatus.OK);
     }
 
     @CrossOrigin(origins = "http://localhost:4200")
