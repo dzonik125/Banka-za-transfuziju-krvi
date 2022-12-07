@@ -100,11 +100,13 @@ public class BloodBankController {
 
     @PostMapping(value = "/urgentRequest")
     @ResponseBody
-    public ResponseEntity<String> SendUrgentRequest(@RequestBody BloodUnitUrgentRequest request, @RequestHeader String apiKey){
-        System.out.println("pogodio");
-
-        String hasEnoughBlood = "Ima dovoljno krvi";
-        return new ResponseEntity<String>(hasEnoughBlood, HttpStatus.OK);
+    public ResponseEntity<Boolean> SendUrgentRequest(@RequestBody BloodUnitUrgentRequest request, @RequestHeader String apiKey){
+        BloodBank b = bloodBankService.getByApiKey(apiKey);
+        if(b == null){
+            return new ResponseEntity<Boolean>(HttpStatus.UNAUTHORIZED);
+        }
+        boolean hasEnoughBlood = bloodBankService.sendBloodUnitsIfAvailable(request, apiKey);
+        return new ResponseEntity<Boolean>(hasEnoughBlood, HttpStatus.OK);
     }
 
     @CrossOrigin(origins = "http://localhost:4200")

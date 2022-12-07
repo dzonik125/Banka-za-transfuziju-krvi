@@ -1,12 +1,9 @@
 package group8.bloodbank.service.implementations;
 
-import group8.bloodbank.model.Address;
-import group8.bloodbank.model.Appointment;
-import group8.bloodbank.model.BloodBank;
-import group8.bloodbank.model.BloodType;
+import group8.bloodbank.mapper.BloodUnitUrgentRequestMapper;
+import group8.bloodbank.model.*;
 import group8.bloodbank.repository.BloodBankRepository;
 import group8.bloodbank.service.interfaces.BloodBankService;
-import io.grpc.netty.shaded.io.netty.handler.codec.http.HttpObjectAggregator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -129,6 +126,15 @@ public class BloodBankServiceImpl implements BloodBankService {
     public BloodBank saveBloodBank(BloodBank bloodBank) {
         return bloodBankRepository.save(bloodBank);
     }
+
+
+    @Override
+    public boolean sendBloodUnitsIfAvailable(BloodUnitUrgentRequest bloodUnitUrgentRequest, String apiKey) {
+        HashMap<BloodType, Double> bloodUnits =  BloodUnitUrgentRequestMapper.bloodUnitSetToHashMap(bloodUnitUrgentRequest.getBloodUnits());
+        return checkIfBloodUnitsAvailable(bloodUnits, apiKey);
+    }
+
+
 
     @Override
     public boolean checkIfBloodUnitsAvailable(HashMap<BloodType, Double> bloodUnits, String apiKey) {

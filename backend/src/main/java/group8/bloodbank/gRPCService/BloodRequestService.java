@@ -3,6 +3,7 @@ import blood.Blood.*;
 import blood.BloodProviderGrpc;
 import group8.bloodbank.model.BloodType;
 import group8.bloodbank.service.interfaces.BloodBankService;
+import io.grpc.Metadata;
 import io.grpc.stub.StreamObserver;
 import net.devh.boot.grpc.server.service.GrpcService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +28,7 @@ class BloodRequestService extends BloodProviderGrpc.BloodProviderImplBase {
         } else {
             status = RequestResponseStatus.BLOOD_BANK_NOT_FOUND;
             }
+        
         BloodResponse res = BloodResponse.newBuilder().setStatus(status).build();
         responseObserver.onNext(res);
         responseObserver.onCompleted();
@@ -40,6 +42,5 @@ class BloodRequestService extends BloodProviderGrpc.BloodProviderImplBase {
             }
             return bloodUnitsMap;
         }
-
     }
 

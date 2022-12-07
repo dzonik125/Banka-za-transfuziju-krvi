@@ -1,6 +1,8 @@
 package group8.bloodbank;
 
 
+import io.grpc.Server;
+import io.grpc.ServerBuilder;
 import org.modelmapper.ModelMapper;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -18,7 +20,11 @@ public class BloodBankApplication {
     }
 
     public static void main(String[] args) {
+
         SpringApplication.run(BloodBankApplication.class, args);
+        Server server =
+                ServerBuilder.forPort(8787)
+                        .build();
     }
 
 
