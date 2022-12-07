@@ -14,11 +14,11 @@ VALUES ('Kovilj', 'Srbija', '50', 'Živojina Mišića');
 
 INSERT INTO blood_bank(
     api_key, avg_grade, description, image, name, address_id)
-VALUES ('unknown', 3.4, ' ','https://firebasestorage.googleapis.com/v0/b/isapsw-6ef61.appspot.com/o/h1.jpg?alt=media&token=5268f3af-3bda-4014-b18e-3e69b57fb3ea','A banka' , 1);
+VALUES ('i3gaxFo!!Efaf*Dx', 3.4, ' ','https://firebasestorage.googleapis.com/v0/b/isapsw-6ef61.appspot.com/o/h1.jpg?alt=media&token=5268f3af-3bda-4014-b18e-3e69b57fb3ea','A banka' , 1);
 
 INSERT INTO blood_bank(
     api_key, avg_grade, description, image, name, address_id)
-VALUES (null, 4.4, ' ','https://firebasestorage.googleapis.com/v0/b/isapsw-6ef61.appspot.com/o/h2.jpg?alt=media&token=3d2fca8e-7272-4dcc-bafc-231afce6eeac','B banka' , 2);
+VALUES ('unknown', 4.4, ' ','https://firebasestorage.googleapis.com/v0/b/isapsw-6ef61.appspot.com/o/h2.jpg?alt=media&token=3d2fca8e-7272-4dcc-bafc-231afce6eeac','B banka' , 2);
 
 INSERT INTO blood_bank(
     api_key, avg_grade, description, image, name, address_id)
