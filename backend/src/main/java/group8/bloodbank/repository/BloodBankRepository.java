@@ -9,8 +9,12 @@ import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.transaction.annotation.Transactional;
 
+
+import java.util.HashMap;
+
 import java.awt.print.Pageable;
 import java.util.List;
+
 import java.util.Optional;
 
 public interface BloodBankRepository extends JpaRepository<BloodBank, Long>, PagingAndSortingRepository<BloodBank, Long> {
@@ -18,6 +22,9 @@ public interface BloodBankRepository extends JpaRepository<BloodBank, Long>, Pag
     @Query("SELECT value(m) FROM BloodBank b join b.bloodType m" +
             " where key(m) = ?1 and b.id = ?2")
     public Optional<Double> getAmountOfBloodForType(BloodType type, Long id);
+
+    @Query("SELECT key(m), value(m) FROM BloodBank b join b.bloodType m where b.apiKey=:apiKey")
+    public List<Object[]> getAllBloodUnits(@Param("apiKey") String apiKey);
 
     @Query("SELECT b from BloodBank b where b.apiKey = ?1")
     public BloodBank getByApiKey(String apiKey);

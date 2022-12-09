@@ -1,10 +1,10 @@
 package group8.bloodbank.model;
 
 public enum BloodType {
-    Apos,
-    Aneg,
     Opos,
     Oneg,
+    Apos,
+    Aneg,
     Bpos,
     Bneg,
     ABpos,

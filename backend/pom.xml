@@ -20,7 +20,7 @@
         <spring-native.version>0.12.1</spring-native.version>
         <protobuf.version>3.19.1</protobuf.version>
         <protobuf-plugin.version>0.6.1</protobuf-plugin.version>
-
+        <grpc.version>1.42.1</grpc.version>
     </properties>
 
     <dependencies>
@@ -57,7 +57,7 @@
             <version>2.7.5</version>
             <scope>test</scope>
         </dependency>
-            <!-- ... other dependency elements ... -->
+        <!-- ... other dependency elements ... -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-security</artifactId>
@@ -99,7 +99,11 @@
             <version>2.7.5</version>
         </dependency>
 
-
+        <dependency>
+            <groupId>net.devh</groupId>
+            <artifactId>grpc-server-spring-boot-starter</artifactId>
+            <version>2.13.1.RELEASE</version>
+        </dependency>
 
         <!-- https://mvnrepository.com/artifact/org.postgresql/postgresql -->
         <dependency>
@@ -179,7 +183,6 @@
 
 
 
-
     </dependencies>
 
     <build>
@@ -197,6 +200,8 @@
                 <version>${protobuf-plugin.version}</version>
                 <configuration>
                     <protocArtifact>com.google.protobuf:protoc:${protobuf.version}:exe:${os.detected.classifier}</protocArtifact>
+                    <pluginId>grpc-java</pluginId>
+                    <pluginArtifact>io.grpc:protoc-gen-grpc-java:${grpc.version}:exe:${os.detected.classifier}</pluginArtifact>
                 </configuration>
                 <executions>
                     <execution>

@@ -1,0 +1,38 @@
+syntax = "proto3";
+package blood;
+
+service BloodProvider{
+  rpc communicate (BloodUnitRequest) returns (BloodResponse);
+}
+
+message BloodUnitRequest{
+  string BankBankApiKey = 1;
+  repeated BloodUnit BloodUnits = 2;
+}
+
+message BloodUnit{
+  BloodTypeEnum BloodType = 1;
+  int32 Quantity = 2;
+}
+
+enum BloodTypeEnum {
+    O_POS = 0;
+    O_NEG = 1;
+    A_POS = 2;
+    A_NEG = 3;
+    B_POS = 4;
+    B_NEG = 5;
+    AB_POS = 6;
+    AB_NEG = 7;
+}
+
+enum RequestResponseStatus {
+  BLOOD_AVAILABLE = 0;
+  BLOOD_NOT_AVAILABLE = 1;
+  BLOOD_BANK_NOT_FOUND = 2;
+}
+
+message BloodResponse {
+  RequestResponseStatus status = 1;
+}
+

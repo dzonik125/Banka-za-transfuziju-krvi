@@ -2,6 +2,7 @@ package group8.bloodbank.controller;
 
 import group8.bloodbank.model.BloodBank;
 import group8.bloodbank.model.BloodType;
+import group8.bloodbank.model.BloodUnitUrgentRequest;
 import group8.bloodbank.model.DTO.BloodBankDTO;
 import group8.bloodbank.service.interfaces.BloodBankService;
 import group8.bloodbank.service.interfaces.MedicalWorkerService;
@@ -98,6 +99,18 @@ public class BloodBankController {
     }
 
 
+    @PostMapping(value = "/urgentRequest")
+    @ResponseBody
+    public ResponseEntity<Boolean> SendUrgentRequest(@RequestBody BloodUnitUrgentRequest request, @RequestHeader String apiKey){
+        BloodBank b = bloodBankService.getByApiKey(apiKey);
+        if(b == null){
+            return new ResponseEntity<Boolean>(HttpStatus.UNAUTHORIZED);
+        }
+        boolean hasEnoughBlood = bloodBankService.sendBloodUnitsIfAvailable(request, apiKey);
+        return new ResponseEntity<Boolean>(hasEnoughBlood, HttpStatus.OK);
+    }
+
+
     @CrossOrigin(origins = "http://localhost:4200")
     @PostMapping(value = "/addApi")
     public void addApi(@RequestBody String json) throws JSONException {
@@ -114,8 +127,5 @@ public class BloodBankController {
 
     @GetMapping(value = "getApiKeyById")
     public String getApiKeyById(@RequestParam(value = "id") Long id) {
-        System.out.println(bloodBankService.getApiKeyById(id) +  "sasssssssssssssss");
         return bloodBankService.getApiKeyById(id);}
-
-
 }

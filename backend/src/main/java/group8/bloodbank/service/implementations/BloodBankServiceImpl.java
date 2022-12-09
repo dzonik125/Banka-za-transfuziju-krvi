@@ -1,25 +1,26 @@
 package group8.bloodbank.service.implementations;
 
-import group8.bloodbank.model.BloodBank;
-import group8.bloodbank.model.BloodType;
+import group8.bloodbank.mapper.BloodUnitUrgentRequestMapper;
+import group8.bloodbank.model.*;
 import group8.bloodbank.repository.BloodBankRepository;
 import group8.bloodbank.service.interfaces.BloodBankService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.awt.print.Pageable;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public class BloodBankServiceImpl implements BloodBankService {
 
 
-    private BloodBankRepository bloodBankRepository;
+    private final BloodBankRepository bloodBankRepository;
 
     @Autowired
     public BloodBankServiceImpl(BloodBankRepository bloodBankRepository) {
         this.bloodBankRepository = bloodBankRepository;
+
+
 //        Map<BloodType, Double> map1 = new HashMap<>();
 //        map1.put(BloodType.Apos, 222.5);
 //        map1.put(BloodType.Aneg, 0.0);
@@ -76,11 +77,11 @@ public class BloodBankServiceImpl implements BloodBankService {
 //        bloodBankRepository.save(b11);
 //        bloodBankRepository.save(b12);
 //        bloodBankRepository.save(b13);
+
     }
 
     public List<BloodBank> getAll() {
-        List<BloodBank> all = bloodBankRepository.findAll();
-        return all;
+        return bloodBankRepository.findAll();
     }
 
 
@@ -124,6 +125,35 @@ public class BloodBankServiceImpl implements BloodBankService {
     @Override
     public BloodBank saveBloodBank(BloodBank bloodBank) {
         return bloodBankRepository.save(bloodBank);
+    }
+
+
+    @Override
+    public boolean sendBloodUnitsIfAvailable(BloodUnitUrgentRequest bloodUnitUrgentRequest, String apiKey) {
+        HashMap<BloodType, Double> bloodUnits =  BloodUnitUrgentRequestMapper.bloodUnitSetToHashMap(bloodUnitUrgentRequest.getBloodUnits());
+        return checkIfBloodUnitsAvailable(bloodUnits, apiKey);
+    }
+
+
+
+    @Override
+    public boolean checkIfBloodUnitsAvailable(HashMap<BloodType, Double> bloodUnits, String apiKey) {
+        List<Object[]> bloodUnitsInBank = bloodBankRepository.getAllBloodUnits(apiKey);
+        HashMap<BloodType, Double> bloodUnitsInBankMap = new HashMap<>();
+        for(Object[] map : bloodUnitsInBank) {
+            bloodUnitsInBankMap.put((BloodType)map[0], (double)map[1]);
+        }
+        for(BloodType key : bloodUnits.keySet()) {
+            if (bloodUnits.get(key) > bloodUnitsInBankMap.get(key)) {
+                return false;
+            }else {
+                bloodUnitsInBankMap.replace(key, bloodUnitsInBankMap.get(key) - bloodUnits.get(key));
+            }
+        }
+        BloodBank bloodBank = getByApiKey(apiKey);
+        bloodBank.setBloodType(bloodUnitsInBankMap);
+        updateBloodBank(bloodBank);
+        return true;
     }
 
     @Override

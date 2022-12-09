@@ -4,6 +4,8 @@ import group8.bloodbank.security.auth.RestAuthenticationEntryPoint;
 import group8.bloodbank.security.auth.TokenAuthenticationFilter;
 import group8.bloodbank.service.implementations.CustomUserDetailsService;
 import group8.bloodbank.util.TokenUtils;
+import net.devh.boot.grpc.server.security.authentication.BasicGrpcAuthenticationReader;
+import net.devh.boot.grpc.server.security.authentication.GrpcAuthenticationReader;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -67,6 +69,11 @@ public class WebSecurityConfig {
  	public AuthenticationManager authenticationManager(AuthenticationConfiguration authConfig) throws Exception {
  	    return authConfig.getAuthenticationManager();
  	}
+
+	@Bean
+	public GrpcAuthenticationReader grpcAuthenticationReader() {
+		return new BasicGrpcAuthenticationReader();
+	}
  	
 	// Injektujemo implementaciju iz TokenUtils klase kako bismo mogli da koristimo njene metode za rad sa JWT u TokenAuthenticationFilteru
 	@Autowired
