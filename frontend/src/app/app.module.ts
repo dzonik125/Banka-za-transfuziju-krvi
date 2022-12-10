@@ -8,7 +8,7 @@ import { Router, RouterModule, Routes } from '@angular/router';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavigationComponent } from './modules/public/navigation/navigation.component';
-import { RegisterUserComponent } from './modules/administrator/register-user/register-user.component';
+import { RegisterUserComponent } from './modules/authentication/register-user/register-user.component';
 import { HomeComponentComponent } from './home-component/home-component.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule } from '@angular/forms';
@@ -53,9 +53,12 @@ import { CreateSurveyComponent } from './modules/public/create-survey/create-sur
 import { ToastrModule } from 'ngx-toastr';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { LoginComponent } from './modules/public/login/login.component';
-import { TokenInterceptor } from './interceptor/TokenInterceptor';
 import { NO_ERRORS_SCHEMA } from '@angular/compiler';
 import {MatInputModule} from '@angular/material/input';
+
+import { JwtInterceptor } from "./modules/authentication/helpers/jwt.interceptor";
+import { JwtModule } from "@auth0/angular-jwt";
+import { AuthenticationModule } from './modules/authentication/authentication.module';
 
 //I keep the new line
 
@@ -123,15 +126,18 @@ import {MatInputModule} from '@angular/material/input';
     NgxPaginationModule,
     MatCardModule,
     MatButtonModule,
-    MatInputModule
+    MatInputModule,
+    AuthenticationModule,
+    JwtModule.forRoot({
+      config: {
+        tokenGetter: () => localStorage.getItem('token')
+      }
+    })
 
   ],
   providers: [
     {
-    provide: HTTP_INTERCEPTORS,
-    useClass: TokenInterceptor,
-    multi: true
-    },
+    provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true},
     AuthService,
     ApiService,
     UserService,

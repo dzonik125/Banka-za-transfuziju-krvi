@@ -1,4 +1,4 @@
-import { UserDTO } from './../../../model/userDTO';
+import { UserDTO } from '../../../model/userDTO';
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
@@ -9,6 +9,7 @@ import { UserService } from 'src/app/services/user.service';
 import { NotificationService } from 'src/app/services/notification.service';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { EmptyError } from 'rxjs';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-register-user',
@@ -24,11 +25,8 @@ export class RegisterUserComponent{
   public address: Address = new Address;
   public validation: Validator = new Validator;
 
-  constructor(private http: HttpClient,
-              private userService: UserService,
-              private router: Router,
-              private notifyService : NotificationService,
-              private formBuilder: FormBuilder) {
+  constructor(private notifyService : NotificationService,
+              private authService: AuthService) {
   }
 
   ngOnInit(){
@@ -51,7 +49,7 @@ export class RegisterUserComponent{
 
   createUser(){
     this.user.address = this.address;
-    this.userService.createUser(this.user).subscribe(res =>{
+    this.authService.register(this.user).subscribe(res =>{
       this.notifyService.showSuccess("You have successfully registered", "Success");
       this.user.name = '';
       this.user.surname = '';

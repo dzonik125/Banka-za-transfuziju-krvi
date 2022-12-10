@@ -1,7 +1,7 @@
 import { CreateSurveyComponent } from './modules/public/create-survey/create-survey.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { RegisterUserComponent } from './modules/administrator/register-user/register-user.component';
+import { RegisterUserComponent } from './modules/authentication/register-user/register-user.component';
 import { AppComponent } from './app.component';
 import { HomeComponentComponent } from './home-component/home-component.component';
 import { SaveApiKeyComponent } from './save-api-key/save-api-key.component';
