@@ -5,6 +5,7 @@
     <!--<a routerLink="/login" href="" style="margin-left: 1rem;">Login</a> -->
     <a *ngIf="!isLogged" routerLink="/register" routerLinkActive="active" style="margin-left: 1rem;">Register</a>
     <a *ngIf="isLogged && userRole=='ROLE_DONOR'" routerLink="/survey" routerLinkActive="active" style="margin-left: 1rem;">Survey</a>
+    <a *ngIf="isLogged && userRole=='ROLE_DONOR'" routerLink="/getAll" routerLinkActive="active" style="margin-left: 1rem;">GetAll</a>
     <a *ngIf="isLogged " (click)="logout()" style="margin-left: 1rem;"> Log out </a>
   </div>
 </nav>

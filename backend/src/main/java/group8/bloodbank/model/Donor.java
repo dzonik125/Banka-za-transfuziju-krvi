@@ -22,6 +22,7 @@ public class Donor extends User {
     @Column
     @OneToMany(fetch = FetchType.LAZY)
     public Set<Survey> survey;
+
     @Column
     private int points;
     @Column

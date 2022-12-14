@@ -6,7 +6,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.ArrayList;
 
 @Entity
 @Getter
@@ -19,10 +18,10 @@ public class Survey {
     @Column(name = "id", nullable = false)
     private Long id;
 
-    //@ManyToOne
-    //@JoinColumn(name = "donor_id")
-    //@Transient
-    //private Donor donor;
+//    @OneToMany
+//    @JoinColumn(name = "donor_id")
+//    @Transient
+//    private Donor donor;
     @Column
     private String answer1;
     @Column

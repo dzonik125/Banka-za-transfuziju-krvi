@@ -1,14 +1,14 @@
 package group8.bloodbank.controller;
 
 import group8.bloodbank.model.AppointmentSlot;
-import group8.bloodbank.model.BloodBank;
 import group8.bloodbank.service.interfaces.AppointmentSlotService;
-import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/appSlots")
@@ -29,5 +29,10 @@ public class AppointmentSlotController {
         } catch (Exception e) {
             return new ResponseEntity<>(slot, HttpStatus.CONFLICT);
         }
+    }
+
+    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE, value="/findAllAppointments")
+    public List<AppointmentSlot> getAll() {
+        return service.getAll();
     }
 }

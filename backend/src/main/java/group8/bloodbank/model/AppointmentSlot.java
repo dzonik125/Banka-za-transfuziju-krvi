@@ -8,11 +8,12 @@ import lombok.Setter;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
+@Entity
+@Table(name = "appointment_slot")
 @Getter
 @Setter
+@AllArgsConstructor
 @NoArgsConstructor
-@Entity
-@Table(name = "appointmentSlot")
 public class AppointmentSlot {
 
     @Id
@@ -24,15 +25,9 @@ public class AppointmentSlot {
     public BloodBank bloodBank;
 
     @Column
-    private LocalDateTime start;
+    private LocalDateTime startTime;
 
     @Column
-    private LocalDateTime end;
+    private LocalDateTime endTime;
 
-    public AppointmentSlot(Long id, BloodBank bloodBank, LocalDateTime start, LocalDateTime end) {
-        this.id = id;
-        this.bloodBank = bloodBank;
-        this.start = start;
-        this.end = this.start.plusMinutes(30);
-    }
 }
