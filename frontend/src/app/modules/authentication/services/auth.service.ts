@@ -21,7 +21,7 @@ export class AuthService {
   };
 
   constructor(private http: HttpClient, private jwtHelper: JwtHelperService) {
-    this.logout();
+    //this.logout();
     this.userClaims = this.jwtHelper.decodeToken();
     if(this.userClaims)
       this.loginSource.next(true);
