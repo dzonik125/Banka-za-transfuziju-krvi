@@ -3,8 +3,7 @@ import { Injectable } from '@angular/core';
 import { map, Observable } from 'rxjs';
 import { User } from 'src/app/model/user';
 import { HttpParams } from '@angular/common/http';
-import { ConfigService } from './login-services/config.service';
-import { ApiService } from './login-services/api.service';
+
 
 @Injectable({
   providedIn: 'root'
@@ -16,9 +15,7 @@ export class UserService {
   apiHost: string = 'http://localhost:8081/';
   headers: HttpHeaders = new HttpHeaders({ 'Content-Type': 'application/json' });
 
-  constructor(private http: HttpClient,
-              private config: ConfigService,
-              private apiService: ApiService,) { }
+  constructor(private http: HttpClient) { }
 
   createUser(user: any): Observable<any> {
     return this.http.post<any>(this.apiHost + 'auth/signup', user);
@@ -38,15 +35,4 @@ export class UserService {
     return this.http.put(this.apiHost + 'user/' + encodeURIComponent(id), user);
   }
 
-  // getMyInfo() {
-  //   return this.apiService.get(this.config.whoami_url)
-  //     .pipe(map((user: any) => {
-  //       this.currentUser = user;
-  //       return user;
-  //     }));
-  // }
-
-  getAll() {
-    return this.apiService.get(this.config.users_url);
-  }
 }
