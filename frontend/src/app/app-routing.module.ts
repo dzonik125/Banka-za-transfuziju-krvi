@@ -14,13 +14,13 @@ import { RegisterBloodBankComponent } from './modules/administrator/register-blo
 import { RegisterMedicalWorkerComponent } from './modules/administrator/register-medical-worker/register-medical-worker.component';
 import { DisplayAllUsersComponent } from './modules/administrator/display-all-users/display-all-users.component';
 import { BloodBankViewComponent } from './modules/medical_worker/blood-bank-view/blood-bank-view.component';
-import { LoginComponent } from './modules/public/login/login.component';
+import { LoginComponent } from './modules/authentication/login/login/login.component';
 import { AddAppointmentSlotComponent } from './modules/medical_worker/blood-bank-view/add-appointment-slot/add-appointment-slot.component';
 
 const routes: Routes = [
   {path: 'home', component: HomeComponentComponent},
   {path :'register', component: RegisterUserComponent},
-  {path :'login', component: LoginComponent},
+  {path: 'login', component: LoginComponent},
   {path:'saveApi/:id', component: SaveApiKeyComponent},
   {path:'sendNews/:id', component: SendNewsComponent},
   {path: 'userProfile/:id', component: UserProfileViewComponent},

@@ -1,7 +1,4 @@
-import { ConfigService } from './services/login-services/config.service';
 import { UserService } from 'src/app/services/user.service';
-import { ApiService } from './services/login-services/api.service';
-import { AuthService } from 'src/app/services/login-services/auth.service';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { Router, RouterModule, Routes } from '@angular/router';
@@ -52,10 +49,7 @@ import { UserProfileViewComponent } from './modules/public/user-profile-view/use
 import { CreateSurveyComponent } from './modules/public/create-survey/create-survey.component';
 import { ToastrModule } from 'ngx-toastr';
 import { NgxPaginationModule } from 'ngx-pagination';
-import { LoginComponent } from './modules/public/login/login.component';
-import { NO_ERRORS_SCHEMA } from '@angular/compiler';
 import {MatInputModule} from '@angular/material/input';
-
 import { JwtInterceptor } from "./modules/authentication/helpers/jwt.interceptor";
 import { JwtModule } from "@auth0/angular-jwt";
 import { AuthenticationModule } from './modules/authentication/authentication.module';
@@ -87,7 +81,6 @@ import { ScheduleExsistingAppointmentComponent } from './modules/public/schedule
     AddWorkerToBankDialogComponent,
     CreateSurveyComponent,
     UserProfileViewComponent,
-    LoginComponent,
     AddAppointmentSlotComponent,
     ScheduleExsistingAppointmentComponent,
   ],
@@ -142,10 +135,7 @@ import { ScheduleExsistingAppointmentComponent } from './modules/public/schedule
   providers: [
     {
     provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true},
-    AuthService,
-    ApiService,
     UserService,
-    ConfigService
   ],
   bootstrap: [AppComponent],
 })
