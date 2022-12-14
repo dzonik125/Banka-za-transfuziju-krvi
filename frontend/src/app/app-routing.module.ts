@@ -14,6 +14,7 @@ import { RegisterMedicalWorkerComponent } from './modules/administrator/register
 import { DisplayAllUsersComponent } from './modules/administrator/display-all-users/display-all-users.component';
 import { BloodBankViewComponent } from './modules/medical_worker/blood-bank-view/blood-bank-view.component';
 import { LoginComponent } from './modules/public/login/login.component';
+import { AddAppointmentSlotComponent } from './modules/medical_worker/blood-bank-view/add-appointment-slot/add-appointment-slot.component';
 
 const routes: Routes = [
   {path: 'home', component: HomeComponentComponent},
@@ -24,6 +25,7 @@ const routes: Routes = [
   {path: 'userProfile/:id', component: UserProfileViewComponent},
   {path:'adminDashboard/registerBloodBank', component: RegisterBloodBankComponent},
   {path:'adminDashboard/registerMedicalWorker', component: RegisterMedicalWorkerComponent},
+  {path:'addAppointmentSlot', component: AddAppointmentSlotComponent},
   {path: 'displayAllUsers', component: DisplayAllUsersComponent},
   {path: '', component: DisplayAllCentersComponent},
   {path: 'bloodBank/:id', component: BloodBankViewComponent},

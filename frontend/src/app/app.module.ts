@@ -59,6 +59,7 @@ import {MatInputModule} from '@angular/material/input';
 import { JwtInterceptor } from "./modules/authentication/helpers/jwt.interceptor";
 import { JwtModule } from "@auth0/angular-jwt";
 import { AuthenticationModule } from './modules/authentication/authentication.module';
+import { AddAppointmentSlotComponent } from './modules/medical_worker/blood-bank-view/add-appointment-slot/add-appointment-slot.component';
 
 //I keep the new line
 
@@ -85,7 +86,8 @@ import { AuthenticationModule } from './modules/authentication/authentication.mo
     AddWorkerToBankDialogComponent,
     CreateSurveyComponent,
     UserProfileViewComponent,
-    LoginComponent
+    LoginComponent,
+    AddAppointmentSlotComponent
   ],
 
   imports: [
