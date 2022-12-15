@@ -73,9 +73,6 @@ export class BloodBankViewComponent implements OnInit {
     )
   }
 
-  updateTable() {
-    console.log("jeaaaaaaaaaaa");
-  }
 
   removeWorker(medicalWorker: any) {
     medicalWorker.bloodBank = null;

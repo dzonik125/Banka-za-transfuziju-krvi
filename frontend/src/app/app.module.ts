@@ -48,6 +48,7 @@ import { UserProfileViewComponent } from './modules/public/user-profile-view/use
 import { CreateSurveyComponent } from './modules/public/create-survey/create-survey.component';
 import { ToastrModule } from 'ngx-toastr';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { MonthlySubscriptionsComponent } from './modules/medical_worker/monthly-subscriptions/monthly-subscriptions.component';
 
 //I keep the new line
 
@@ -73,7 +74,8 @@ import { NgxPaginationModule } from 'ngx-pagination';
     BloodBankViewComponent,
     AddWorkerToBankDialogComponent,
     CreateSurveyComponent,
-    UserProfileViewComponent
+    UserProfileViewComponent,
+    MonthlySubscriptionsComponent
   ],
 
   imports: [

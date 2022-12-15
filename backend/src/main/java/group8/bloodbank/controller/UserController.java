@@ -13,7 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import javax.websocket.server.PathParam;
 import java.util.Optional;
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "http://localhost:4201")
 @RestController
 @RequestMapping("/user")
 public class UserController {
@@ -28,7 +28,7 @@ public class UserController {
         this.userService = userService;
     }
 
-    @CrossOrigin(origins = "http://localhost:4200")
+    @CrossOrigin(origins = "http://localhost:4201")
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<User> saveUser(@RequestBody User user)  {
         User savedUser = null;
@@ -41,14 +41,14 @@ public class UserController {
         }
     }
 
-    @CrossOrigin(origins = "http://localhost:4200")
+    @CrossOrigin(origins = "http://localhost:4201")
     @PutMapping(value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
     public Boolean editUser(@PathVariable long id, @RequestBody UserDTO user) {
         User userRequest = modelMapper.map(user, User.class);
         return userService.updateUser(id, userRequest);
     }
 
-    @CrossOrigin(origins = "http://localhost:4200")
+    @CrossOrigin(origins = "http://localhost:4201")
     @GetMapping
     public ResponseEntity<User> findById(@RequestParam Long id){
         try {
