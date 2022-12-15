@@ -1,6 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { JwtHelperService } from '@auth0/angular-jwt';
 import { Survey } from 'src/app/model/survey';
 import { NotificationService } from 'src/app/services/notification.service';
 import { SurveyService } from 'src/app/services/survey.service';
@@ -16,8 +17,11 @@ export class CreateSurveyComponent implements OnInit {
 
   surveyForm!: FormGroup;
 
+  userClaims: any;
+
   constructor(private surveyService: SurveyService,
-              private notifyService : NotificationService
+              private notifyService : NotificationService,
+              private jwtHelper: JwtHelperService
               ) {   }
 
   ngOnInit(): void {
@@ -28,6 +32,8 @@ export class CreateSurveyComponent implements OnInit {
       this.notifyService.showError("You cannot donate blood", "Warning");
     }
     else{
+    this.userClaims = this.jwtHelper.decodeToken();
+    this.survey.donor = this.userClaims.id;
     this.surveyService.createSurvey(this.survey).subscribe();
     this.notifyService.showSuccess("You have successfully completed the survey", "Success");
     }

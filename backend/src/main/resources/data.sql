@@ -69,6 +69,16 @@ INSERT INTO blood_type_blood_bank(
 VALUES (1, 1000, 'Oneg');
 
 
+INSERT INTO appointment_slot(
+    start_time, end_time, blood_bank_id, status)
+VALUES ('2022-12-15 08:29:28.111756','2022-12-15 09:29:28.112755', 1, 0);
+
+INSERT INTO appointment_slot(
+    start_time, end_time, blood_bank_id, status)
+VALUES ('2022-12-15 10:29:28.111756','2022-12-15 11:29:28.112755', 1, 0);
+
+
+
 
 
 
@@ -89,8 +99,8 @@ VALUES ('admin@mail.com', 0, '8132312321321', 'Slavica', 'IT strucnjak', '$2y$10
 
 
 INSERT INTO donor(
-    blood_type, category, penalty, points, id)
-VALUES (0, 0, 0, 11, 1);
+    blood_type, category, penalty, points, id, have_survey)
+VALUES (0, 0, 0, 11, 1, false);
 
 INSERT INTO medical_worker(
     id, blood_bank_id)

@@ -5,8 +5,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.*;
-import java.util.Set;
+import javax.persistence.Column;
+import javax.persistence.Entity;
 
 @Entity
 @Getter
@@ -15,18 +15,21 @@ import java.util.Set;
 @NoArgsConstructor
 public class Donor extends User {
 
-    @Column
-    @OneToMany(fetch = FetchType.LAZY)
-    public Set<Complaint> complaint;
-
-    @Column
-    @OneToMany(fetch = FetchType.LAZY)
-    public Set<Survey> survey;
+//    @Column
+//    @OneToMany(fetch = FetchType.LAZY)
+//    public Set<Complaint> complaint;
+//
+//    @Column
+//    @OneToMany(fetch = FetchType.LAZY)
+//    public Set<Survey> survey;
 
     @Column
     private int points;
     @Column
     private int penalty;
+
+    @Column
+    private Boolean haveSurvey;
 
     @Column
     private Category category;

@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
@@ -33,6 +34,7 @@ public class UserController {
 
     @CrossOrigin(origins = "http://localhost:4200")
     @GetMapping
+    @PreAuthorize("hasRole('ROLE_DONOR')")
     public ResponseEntity<User> findById(@RequestParam Long id){
         try {
             User toReturn = userService.findById(id);

@@ -3,8 +3,9 @@ export class ExistingAppointment {
 
   public id: any;
   public bloodBank!: BloodBank;
-  public startTime: any;
-  public endTime: any;
+  public startTime!: Date;
+  public endTime!: Date;
+  public status!: string;
 
   public constructor(obj?: any) {
       if (obj) {
@@ -12,6 +13,7 @@ export class ExistingAppointment {
         this.bloodBank = obj.bloodBank;
         this.startTime = obj.startTime;
         this.endTime = obj.endTime;
+        this.status = obj.status;
       }
   }
 

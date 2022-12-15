@@ -18,10 +18,9 @@ public class Survey {
     @Column(name = "id", nullable = false)
     private Long id;
 
-//    @OneToMany
-//    @JoinColumn(name = "donor_id")
-//    @Transient
-//    private Donor donor;
+    @ManyToOne
+    @JoinColumn(name = "donor_id")
+    private Donor donor;
     @Column
     private String answer1;
     @Column

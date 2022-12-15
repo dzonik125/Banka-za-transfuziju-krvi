@@ -38,6 +38,7 @@
     "igniteui-angular": "^14.2.5",
     "material-steppers": "^2.0.0",
     "minireset.css": "~0.0.4",
+    "moment": "^2.29.4",
     "ng-multiselect-dropdown": "^0.3.9",
     "ng2-file-upload": "^1.4.0",
     "ng2-search-filter": "^0.5.1",

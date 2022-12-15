@@ -12,7 +12,6 @@ import group8.bloodbank.service.interfaces.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Collections;
 import java.util.List;
 
 
@@ -44,9 +43,10 @@ public class DonorServiceImpl implements DonorService {
         d.setCategory(Category.REGULAR);
         d.setPenalty(0);
         d.setBloodType(BloodType.ABneg);
-        d.setComplaint(Collections.emptySet());
-        d.setSurvey(Collections.emptySet());
+        //d.setComplaint(Collections.emptySet());
+        //d.setSurvey(Collections.emptySet());
         d.setEnabled(true);
+        d.setHaveSurvey(false);
 
         return this.donorRepository.save(d);
     }
