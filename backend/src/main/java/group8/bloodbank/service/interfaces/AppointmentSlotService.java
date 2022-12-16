@@ -8,6 +8,8 @@ public interface AppointmentSlotService {
 
     AppointmentSlot saveSlot(AppointmentSlot slot);
 
+    AppointmentSlot cancelSlot(AppointmentSlot slot);
+
     AppointmentSlot findById(Long id);
 
     List<AppointmentSlot> getAll();

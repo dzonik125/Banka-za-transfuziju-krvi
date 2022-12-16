@@ -1,3 +1,4 @@
+import { ScheduledAppointmentsComponent } from './modules/public/scheduled-appointments/scheduled-appointments.component';
 import { ScheduleExsistingAppointmentComponent } from './modules/public/schedule-exsisting-appointment/schedule-exsisting-appointment.component';
 import { CreateSurveyComponent } from './modules/public/create-survey/create-survey.component';
 import { NgModule } from '@angular/core';
@@ -34,6 +35,7 @@ const routes: Routes = [
   {path: 'bloodBank/:id', component: BloodBankViewComponent},
   {path :'survey', component: CreateSurveyComponent, canActivate: [AuthGuard, RoleGuard], data: { roles: ['ROLE_DONOR'] }},
   {path :'schedule', component: ScheduleExsistingAppointmentComponent, canActivate: [AuthGuard, RoleGuard], data: { roles: ['ROLE_DONOR'] }},
+  {path :'scheduledAppointments', component: ScheduledAppointmentsComponent, canActivate: [AuthGuard, RoleGuard], data: { roles: ['ROLE_DONOR'] }},
 ];
 
 @NgModule({

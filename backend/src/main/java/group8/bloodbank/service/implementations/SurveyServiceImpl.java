@@ -56,5 +56,24 @@ public class SurveyServiceImpl implements SurveyService {
        return surveyRepository.findAll();
     }
 
+    @Override
+    public void updateSurvey(SurveyDTO surveyDTO) {
+        Survey forUpdate = surveyRepository.getSurveyByDonorId(Long.valueOf(surveyDTO.getDonor()));
+        Optional<Donor> d = donorRepository.findById(Long.valueOf(surveyDTO.getDonor()));
+        forUpdate.setDonor(d.get());
+        forUpdate.setAnswer1(surveyDTO.getAnswer1());
+        forUpdate.setAnswer2(surveyDTO.getAnswer2());
+        forUpdate.setAnswer3(surveyDTO.getAnswer3());
+        forUpdate.setAnswer4(surveyDTO.getAnswer4());
+        forUpdate.setAnswer5(surveyDTO.getAnswer5());
+        forUpdate.setAnswer6(surveyDTO.getAnswer6());
+        forUpdate.setAnswer7(surveyDTO.getAnswer7());
+        forUpdate.setAnswer8(surveyDTO.getAnswer8());
+        forUpdate.setAnswer9(surveyDTO.getAnswer9());
+        forUpdate.setAnswer10(surveyDTO.getAnswer10());
+        surveyRepository.save(forUpdate);
+
+    }
+
 
 }

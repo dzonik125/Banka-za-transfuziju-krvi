@@ -25,7 +25,7 @@ public class AppointmentSlot {
     @JoinColumn(name = "blood_bank_id")
     public BloodBank bloodBank;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "donor_id")
     public Donor donor;
 

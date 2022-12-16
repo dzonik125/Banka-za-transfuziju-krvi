@@ -20,6 +20,7 @@ export class Donor {
 
 
 
+
   public constructor(obj?: any) {
       if (obj) {
           this.name = obj.name;

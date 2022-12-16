@@ -1,6 +1,7 @@
 package group8.bloodbank.service.implementations;
 
 import group8.bloodbank.model.AppointmentSlot;
+import group8.bloodbank.model.AppointmentStatus;
 import group8.bloodbank.repository.AppointmentSlotRepository;
 import group8.bloodbank.repository.BloodBankRepository;
 import group8.bloodbank.repository.DonorRepository;
@@ -8,6 +9,7 @@ import group8.bloodbank.service.interfaces.AppointmentSlotService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -29,6 +31,22 @@ public class AppointmentSlotServiceImpl implements AppointmentSlotService {
     public AppointmentSlot saveSlot(AppointmentSlot slot) {
         try {
             repository.save(slot);
+            return slot;
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+    @Override
+    public AppointmentSlot cancelSlot(AppointmentSlot slot) {
+        try {
+            if(LocalDateTime.now().plusDays(1).isBefore(slot.getStartTime())){
+                slot.setStatus(AppointmentStatus.WAITING);
+                slot.setDonor(null);
+                repository.save(slot);
+            } else{
+                repository.save(slot);
+            }
             return slot;
         } catch (Exception e) {
             return null;

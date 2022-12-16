@@ -19,7 +19,7 @@ public class Survey {
     @Column(name = "id", nullable = false)
     private Long id;
 
-    @ManyToOne
+    @OneToOne
     @JoinColumn(name = "donor_id")
     private Donor donor;
 

@@ -55,6 +55,7 @@ import { JwtModule } from "@auth0/angular-jwt";
 import { AuthenticationModule } from './modules/authentication/authentication.module';
 import { AddAppointmentSlotComponent } from './modules/medical_worker/blood-bank-view/add-appointment-slot/add-appointment-slot.component';
 import { ScheduleExsistingAppointmentComponent } from './modules/public/schedule-exsisting-appointment/schedule-exsisting-appointment.component';
+import { ScheduledAppointmentsComponent } from './modules/public/scheduled-appointments/scheduled-appointments.component';
 
 //I keep the new line
 
@@ -83,6 +84,7 @@ import { ScheduleExsistingAppointmentComponent } from './modules/public/schedule
     UserProfileViewComponent,
     AddAppointmentSlotComponent,
     ScheduleExsistingAppointmentComponent,
+    ScheduledAppointmentsComponent,
   ],
 
   imports: [

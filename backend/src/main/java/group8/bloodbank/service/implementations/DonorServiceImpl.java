@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 
 @Service
@@ -56,6 +57,11 @@ public class DonorServiceImpl implements DonorService {
     @Override
     public List<Donor> getAll() {
         return donorRepository.findAll();
+    }
+
+    @Override
+    public Optional<Donor> findById(Long id) {
+        return donorRepository.findById(id);
     }
 
 

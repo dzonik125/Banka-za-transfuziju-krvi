@@ -68,4 +68,18 @@ public class AppointmentSlotController {
             return new ResponseEntity<AppointmentSlot>(slot, HttpStatus.CONFLICT);
         }
     }
+
+    @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE, value = "/cancelAppointment")
+    @PreAuthorize("hasRole('ROLE_DONOR')")
+    public ResponseEntity<AppointmentSlot> cancelAppointment(@RequestBody AppointmentSlotDTO appointmentSlot)  {
+        Optional<Donor> donor = donorRepository.findById(appointmentSlot.donor);
+        AppointmentSlot slot = new AppointmentSlot(appointmentSlot.id, appointmentSlot.bloodBank, donor.get(), appointmentSlot.startTime, appointmentSlot.endTime, appointmentSlot.status);
+        try{
+            service.cancelSlot(slot);
+            return new ResponseEntity<AppointmentSlot>(slot, HttpStatus.OK);
+        } catch (Exception e){
+            e.printStackTrace();
+            return new ResponseEntity<AppointmentSlot>(slot, HttpStatus.CONFLICT);
+        }
+    }
 }

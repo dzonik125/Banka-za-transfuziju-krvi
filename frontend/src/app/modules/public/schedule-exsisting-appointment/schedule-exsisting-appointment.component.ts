@@ -26,12 +26,11 @@ export class ScheduleExsistingAppointmentComponent implements AfterViewInit {
 
    appointments: ExistingAppointment[] = [];
 
-  displayedColumns: string[] = ['id', 'bloodBank', 'startDate', 'startTime', 'schedule', 'cancel'];
+  displayedColumns: string[] = ['id', 'bloodBank', 'startDate', 'startTime', 'schedule'];
   dataSource: any;
   userClaims: any;
   user!: any;
   retApp: ExistingAppointmentDTO[] = [];
-
   surveys: any;
 
   constructor(private existingAppointmentService: ExistingAppointmentService,
@@ -41,7 +40,9 @@ export class ScheduleExsistingAppointmentComponent implements AfterViewInit {
               private notifyService : NotificationService,
               private surveyService: SurveyService) { }
 
-  @ViewChild(MatSort) sort!: MatSort;
+  @ViewChild(MatSort) set matSort(sort: MatSort){
+    this.dataSource.sort = sort;
+  }
 
   ngAfterViewInit() {
     this.surveyService.getSurveys().subscribe(res =>{
@@ -63,12 +64,10 @@ export class ScheduleExsistingAppointmentComponent implements AfterViewInit {
         return r.status === 'WAITING';
       })
       this.dataSource = result;
+      this.dataSource.sort = this.matSort;
     })
-
-
-    this.dataSource.sort = this.sort;
-
   }
+
 
 
   scheduleAppointment(event: Event, id: any){
@@ -85,52 +84,25 @@ export class ScheduleExsistingAppointmentComponent implements AfterViewInit {
     request[0].donor = this.jwtHelper.decodeToken().id;
     request[0].status = 1;
     if(s[0].answer6 === 'yes'){
-      this.notifyService.showWarning("You cannot schedule an appointment because you have donated blood in the previous 6 months !", "Warrning");
+      this.notifyService.showWarning("You cannot schedule an appointment because you have donated blood in the previous 6 months !", "Warning");
     } else{
     this.existingAppointmentService.scheduleAppointment(request[0]).subscribe(res=> {
       this.ngAfterViewInit();
       });
     }
-
-
-      // if(element.innerText === 'Approve'){
-      //    request = this.requests.filter(req => {
-      //     return req.id === id;
-      //   })
-      //   request[0].status = 1;
-      //   this.service.changeRequestStatus(request[0]).subscribe(res=> {
-      //     this.ngOnInit();
-      //  });
-      // }
-      // else if(element.innerHTML === 'Reject') {
-      //   request = this.requests.filter(req => {
-      //     return req.id === id;
-      //   })
-      //   request[0].status = 0;
-      //   this.service.changeRequestStatus(request[0]).subscribe(res=> {
-      //     this.ngOnInit();
-      //  });
-
-      // }
-      // else {
-      //   request = this.requests.filter(req => {
-      //     return req.id === id;
-      //   })
-
-      // }
   }
 
-  announceSortChange(sortState: Sort) {
-    // This example uses English messages. If your application supports
-    // multiple language, you would internationalize these strings.
-    // Furthermore, you can customize the message to add additional
-    // details about the values being sorted.
-    if (sortState.direction) {
-      this._liveAnnouncer.announce(`Sorted ${sortState.direction}ending`);
-    } else {
-      this._liveAnnouncer.announce('Sorting cleared');
-    }
-  }
+  // announceSortChange(sortState: Sort) {
+  //   // This example uses English messages. If your application supports
+  //   // multiple language, you would internationalize these strings.
+  //   // Furthermore, you can customize the message to add additional
+  //   // details about the values being sorted.
+  //   if (sortState.direction) {
+  //     this._liveAnnouncer.announce(`Sorted ${sortState.direction}ending`);
+  //   } else {
+  //     this._liveAnnouncer.announce('Sorting cleared');
+  //   }
+  // }
 
 
 

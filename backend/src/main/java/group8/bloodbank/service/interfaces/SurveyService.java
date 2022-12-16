@@ -9,4 +9,6 @@ public interface SurveyService {
     Survey saveSurvey(SurveyDTO survey);
 
     List<Survey> findAll();
+
+    void updateSurvey(SurveyDTO surveyDTO);
 }
