@@ -46,7 +46,7 @@ public class DonorServiceImpl implements DonorService {
         //d.setComplaint(Collections.emptySet());
         //d.setSurvey(Collections.emptySet());
         d.setEnabled(true);
-        d.setHaveSurvey(false);
+        d.setHasSurvey(false);
 
         return this.donorRepository.save(d);
     }

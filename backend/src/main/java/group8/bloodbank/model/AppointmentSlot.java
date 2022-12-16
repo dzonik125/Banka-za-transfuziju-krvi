@@ -25,6 +25,10 @@ public class AppointmentSlot {
     @JoinColumn(name = "blood_bank_id")
     public BloodBank bloodBank;
 
+    @OneToOne
+    @JoinColumn(name = "donor_id")
+    public Donor donor;
+
     @Column
     @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private LocalDateTime startTime;

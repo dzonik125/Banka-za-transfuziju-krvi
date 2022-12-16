@@ -29,7 +29,7 @@ public class Donor extends User {
     private int penalty;
 
     @Column
-    private Boolean haveSurvey;
+    private Boolean hasSurvey;
 
     @Column
     private Category category;

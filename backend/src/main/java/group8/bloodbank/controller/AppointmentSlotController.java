@@ -2,7 +2,11 @@ package group8.bloodbank.controller;
 
 import group8.bloodbank.model.AppointmentSlot;
 import group8.bloodbank.model.DTO.AppointmentSlotDTO;
+import group8.bloodbank.model.Donor;
+import group8.bloodbank.repository.DonorRepository;
 import group8.bloodbank.service.interfaces.AppointmentSlotService;
+import group8.bloodbank.service.interfaces.BloodBankService;
+import group8.bloodbank.service.interfaces.DonorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -10,8 +14,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/appSlots")
@@ -19,10 +23,19 @@ import java.util.List;
 public class AppointmentSlotController {
     private AppointmentSlotService service;
 
-    @Autowired
-    public AppointmentSlotController(AppointmentSlotService service) {
-        this.service = service;
+    private DonorService donorService;
 
+    private BloodBankService bloodBankService;
+    private final DonorRepository donorRepository;
+
+    @Autowired
+    public AppointmentSlotController(AppointmentSlotService service, DonorService donorService, BloodBankService bloodBankService,
+                                     DonorRepository donorRepository) {
+        this.service = service;
+        this.donorService = donorService;
+        this.bloodBankService = bloodBankService;
+
+        this.donorRepository = donorRepository;
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
@@ -37,26 +50,22 @@ public class AppointmentSlotController {
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE, value="/findAllAppointments")
     @PreAuthorize("hasRole('ROLE_DONOR')")
-    public List<AppointmentSlotDTO> getAllAppointments() {
-        List<AppointmentSlotDTO> appointmentSlots = new ArrayList<AppointmentSlotDTO>();
-        for (AppointmentSlot as: service.getAll()) {
-            AppointmentSlotDTO aps = new AppointmentSlotDTO(as.getId(), as.getBloodBank(), as.getStartTime(), as.getEndTime(), as.getStatus());
-            appointmentSlots.add(aps);
-        }
-        return appointmentSlots;
+    public List<AppointmentSlot> getAllAppointments() {
+        return service.getAll();
     }
 
 
     @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE, value = "/updateAppointment")
     @PreAuthorize("hasRole('ROLE_DONOR')")
     public ResponseEntity<AppointmentSlot> update(@RequestBody AppointmentSlotDTO appointmentSlot)  {
-        AppointmentSlot as = new AppointmentSlot(appointmentSlot.getId(), appointmentSlot.getBloodBank(), appointmentSlot.getStartTime(), appointmentSlot.getEndTime(), appointmentSlot.getStatus());
+        Optional<Donor> donor = donorRepository.findById(appointmentSlot.donor);
+        AppointmentSlot slot = new AppointmentSlot(appointmentSlot.id, appointmentSlot.bloodBank, donor.get(), appointmentSlot.startTime, appointmentSlot.endTime, appointmentSlot.status);
         try{
-            as = service.saveSlot(as);
-            return new ResponseEntity<AppointmentSlot>(as, HttpStatus.OK);
+            service.saveSlot(slot);
+            return new ResponseEntity<AppointmentSlot>(slot, HttpStatus.OK);
         } catch (Exception e){
             e.printStackTrace();
-            return new ResponseEntity<AppointmentSlot>(as, HttpStatus.CONFLICT);
+            return new ResponseEntity<AppointmentSlot>(slot, HttpStatus.CONFLICT);
         }
     }
 }

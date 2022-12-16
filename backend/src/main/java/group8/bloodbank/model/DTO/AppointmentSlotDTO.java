@@ -27,5 +27,7 @@ public class AppointmentSlotDTO {
 
     public AppointmentStatus status;
 
+    public Long donor;
+
 
 }

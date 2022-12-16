@@ -10,6 +10,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping("/survey")
@@ -34,5 +36,12 @@ public class SurveyController {
             e.printStackTrace();
             return new ResponseEntity<Survey>(savedSurvey, HttpStatus.CONFLICT);
         }
+    }
+
+    @CrossOrigin(origins = "http://localhost:4200")
+    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE, value="/findAll")
+    @PreAuthorize("hasRole('ROLE_DONOR')")
+    public List<Survey> getAll() {
+        return surveyService.findAll();
     }
 }

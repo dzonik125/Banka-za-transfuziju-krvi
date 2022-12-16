@@ -10,6 +10,7 @@ import group8.bloodbank.service.interfaces.SurveyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -33,7 +34,7 @@ public class SurveyServiceImpl implements SurveyService {
 
         Survey s = new Survey();
         Optional<Donor> d = donorRepository.findById(Long.valueOf(survey.getDonor()));
-        d.get().setHaveSurvey(true);
+        d.get().setHasSurvey(true);
         userRepository.save(d.get());
 
         s.setAnswer1(survey.getAnswer1());
@@ -48,6 +49,11 @@ public class SurveyServiceImpl implements SurveyService {
         s.setAnswer10(survey.getAnswer10());
         s.setDonor(d.get());
         return surveyRepository.save(s);
+    }
+
+    @Override
+    public List<Survey> findAll() {
+       return surveyRepository.findAll();
     }
 
 

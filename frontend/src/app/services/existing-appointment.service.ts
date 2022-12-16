@@ -17,16 +17,8 @@ export class ExistingAppointmentService {
     return this.http.get<ExistingAppointment[]>(this.apiHost + 'appSlots/findAllAppointments', {headers: this.headers});
   }
 
-  changeRequestStatus(request: any){
-    console.log(request);
-    // let time = new Date(request.creationDate).getTime();
-    // let day = new Date(request.creationDate).getDate();
-    // let month = new Date(request.creationDate).getMonth() + 1;
-    // let year = new Date(request.creationDate).getFullYear();
-    // let newFormat = `${day}/${month}/${year}`;
-    // request.creationDate = newFormat;
-    // console.log(request.creationDate);
-return this.http.put<any>(this.apiHost + 'appSlots/updateAppointment', request, {headers: this.headers})
+  scheduleAppointment(request: any){
+  return this.http.put<any>(this.apiHost + 'appSlots/updateAppointment', request, {headers: this.headers})
 }
 
 

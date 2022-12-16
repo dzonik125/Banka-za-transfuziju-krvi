@@ -16,6 +16,8 @@ import { DisplayAllUsersComponent } from './modules/administrator/display-all-us
 import { BloodBankViewComponent } from './modules/medical_worker/blood-bank-view/blood-bank-view.component';
 import { LoginComponent } from './modules/authentication/login/login/login.component';
 import { AddAppointmentSlotComponent } from './modules/medical_worker/blood-bank-view/add-appointment-slot/add-appointment-slot.component';
+import { AuthGuard } from './modules/authentication/helpers/auth.guard';
+import { RoleGuard } from './modules/authentication/helpers/role.guard';
 
 const routes: Routes = [
   {path: 'home', component: HomeComponentComponent},
@@ -30,8 +32,8 @@ const routes: Routes = [
   {path: 'displayAllUsers', component: DisplayAllUsersComponent},
   {path: '', component: DisplayAllCentersComponent},
   {path: 'bloodBank/:id', component: BloodBankViewComponent},
-  {path :'survey', component: CreateSurveyComponent},
-  {path :'getAll', component: ScheduleExsistingAppointmentComponent},
+  {path :'survey', component: CreateSurveyComponent, canActivate: [AuthGuard, RoleGuard], data: { roles: ['ROLE_DONOR'] }},
+  {path :'schedule', component: ScheduleExsistingAppointmentComponent, canActivate: [AuthGuard, RoleGuard], data: { roles: ['ROLE_DONOR'] }},
 ];
 
 @NgModule({

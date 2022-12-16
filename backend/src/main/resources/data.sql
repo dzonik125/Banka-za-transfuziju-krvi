@@ -69,17 +69,6 @@ INSERT INTO blood_type_blood_bank(
 VALUES (1, 1000, 'Oneg');
 
 
-INSERT INTO appointment_slot(
-    start_time, end_time, blood_bank_id, status)
-VALUES ('2022-12-15 08:29:28.111756','2022-12-15 09:29:28.112755', 1, 0);
-
-INSERT INTO appointment_slot(
-    start_time, end_time, blood_bank_id, status)
-VALUES ('2022-12-15 10:29:28.111756','2022-12-15 11:29:28.112755', 1, 0);
-
-
-
-
 
 
 --sifre su Donor         -> donor
@@ -99,7 +88,7 @@ VALUES ('admin@mail.com', 0, '8132312321321', 'Slavica', 'IT strucnjak', '$2y$10
 
 
 INSERT INTO donor(
-    blood_type, category, penalty, points, id, have_survey)
+    blood_type, category, penalty, points, id, has_survey)
 VALUES (0, 0, 0, 11, 1, false);
 
 INSERT INTO medical_worker(
@@ -115,6 +104,19 @@ VALUES (3);
 INSERT INTO medical_worker_appointments(
     medical_worker_id, appointment_id)
 VALUES (2, 1);
+
+INSERT INTO appointment_slot(
+    start_time, end_time, donor_id, blood_bank_id, status)
+VALUES ('2022-12-15 08:29:28.111756','2022-12-15 09:29:28.112755',null, 1, 0);
+
+INSERT INTO appointment_slot(
+    start_time, end_time, donor_id, blood_bank_id, status)
+VALUES ('2022-12-15 10:29:28.111756','2022-12-15 11:29:28.112755',null, 1, 0);
+
+-- INSERT INTO survey(
+--     answer1, answer2, answer3, answer4, answer5, answer6, answer7, answer8, answer9, answer10, donor_id)
+-- VALUES ('yes','yes','yes','yes','yes','no','yes','yes','yes','yes', 1);
+
 
 
 INSERT INTO role (name) VALUES ('ROLE_DONOR');
