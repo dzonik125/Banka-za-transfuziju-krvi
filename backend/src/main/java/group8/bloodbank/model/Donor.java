@@ -36,5 +36,8 @@ public class Donor extends User {
     @Column
     private BloodType bloodType;
 
+    @Column
+    private String verificationCode;
+
 
 }

@@ -102,10 +102,6 @@ INSERT INTO medical_worker_appointments(
     medical_worker_id, appointment_id)
 VALUES (2, 1);
 
--- INSERT INTO survey(
---     answer1, answer2, answer3, answer4, answer5, answer6, answer7, answer8, answer9, answer10, donor_id)
--- VALUES ('yes','yes','yes','yes','yes','no','yes','yes','yes','yes', 1);
-
 INSERT INTO role (name) VALUES ('ROLE_DONOR');
 INSERT INTO role (name) VALUES ('ROLE_MEDICALWORKER');
 INSERT INTO role (name) VALUES ('ROLE_ADMIN');
