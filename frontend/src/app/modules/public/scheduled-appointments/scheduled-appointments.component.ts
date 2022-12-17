@@ -52,6 +52,11 @@ export class ScheduledAppointmentsComponent implements AfterViewInit {
     } else{
       this.existingAppointmentService.cancelAppointment(request[0]).subscribe(res=> {
       this.ngAfterViewInit();
+      },
+      (err) => {
+        if(err.status == 409){
+          this.notifyService.showWarning("You cannot cancel an appointment 24 hours before the start!", "Warning");
+        } else this.notifyService.showWarning("Unexpected error occured", err.status);
       });
     }
   }

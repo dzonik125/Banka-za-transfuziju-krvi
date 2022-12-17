@@ -107,11 +107,23 @@ VALUES (2, 1);
 
 INSERT INTO appointment_slot(
     start_time, end_time, donor_id, blood_bank_id, status)
-VALUES ('2022-12-17 16:00:28.111756','2022-12-17 18:00:28.112755',null, 1, 0);
+VALUES ('2022-12-15 16:00:28.111756','2022-12-15 18:00:28.112755',null, 1, 0);
 
 INSERT INTO appointment_slot(
     start_time, end_time, donor_id, blood_bank_id, status)
-VALUES ('2022-12-17 20:29:28.111756','2022-12-17 21:29:28.112755',null, 1, 0);
+VALUES ('2022-12-19 16:00:28.111756','2022-12-19 18:00:28.112755',null, 1, 0);
+
+INSERT INTO appointment_slot(
+    start_time, end_time, donor_id, blood_bank_id, status)
+VALUES ('2022-12-19 16:00:28.111756','2022-12-19 18:00:28.112755',null, 1, 0);
+
+INSERT INTO appointment_slot(
+    start_time, end_time, donor_id, blood_bank_id, status)
+VALUES ('2022-12-20 16:00:28.111756','2022-12-20 18:00:28.112755',null, 1, 0);
+
+
+
+
 
 -- INSERT INTO survey(
 --     answer1, answer2, answer3, answer4, answer5, answer6, answer7, answer8, answer9, answer10, donor_id)

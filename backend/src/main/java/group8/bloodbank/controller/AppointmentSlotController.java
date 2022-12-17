@@ -57,15 +57,15 @@ public class AppointmentSlotController {
 
     @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE, value = "/updateAppointment")
     @PreAuthorize("hasRole('ROLE_DONOR')")
-    public ResponseEntity<AppointmentSlot> update(@RequestBody AppointmentSlotDTO appointmentSlot)  {
+    public ResponseEntity<Exception> update(@RequestBody AppointmentSlotDTO appointmentSlot)  {
         Optional<Donor> donor = donorRepository.findById(appointmentSlot.donor);
         AppointmentSlot slot = new AppointmentSlot(appointmentSlot.id, appointmentSlot.bloodBank, donor.get(), appointmentSlot.startTime, appointmentSlot.endTime, appointmentSlot.status);
         try{
-            service.saveSlot(slot);
-            return new ResponseEntity<AppointmentSlot>(slot, HttpStatus.OK);
+            service.scheduleSlot(slot);
+            return new ResponseEntity<Exception>(HttpStatus.OK);
         } catch (Exception e){
-            e.printStackTrace();
-            return new ResponseEntity<AppointmentSlot>(slot, HttpStatus.CONFLICT);
+            //e.printStackTrace();
+            return new ResponseEntity<Exception>(e, HttpStatus.CONFLICT);
         }
     }
 
@@ -78,7 +78,7 @@ public class AppointmentSlotController {
             service.cancelSlot(slot);
             return new ResponseEntity<AppointmentSlot>(slot, HttpStatus.OK);
         } catch (Exception e){
-            e.printStackTrace();
+            //e.printStackTrace();
             return new ResponseEntity<AppointmentSlot>(slot, HttpStatus.CONFLICT);
         }
     }

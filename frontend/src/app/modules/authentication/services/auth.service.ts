@@ -3,7 +3,6 @@ import { Injectable } from '@angular/core';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { BehaviorSubject, catchError, map, Observable, of } from 'rxjs';
 import { Credentials } from '../model/credentials.model';
-//import { RegisterRequest } from '../model/register-request.model';
 
 @Injectable({
   providedIn: 'root'

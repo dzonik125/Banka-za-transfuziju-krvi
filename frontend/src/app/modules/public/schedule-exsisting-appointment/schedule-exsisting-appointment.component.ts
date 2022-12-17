@@ -6,7 +6,7 @@ import { UserService } from 'src/app/services/user.service';
 import { AppComponent } from './../../../app.component';
 import { ExistingAppointmentService } from './../../../services/existing-appointment.service';
 import { ExistingAppointment } from './../../../model/existingAppointment';
-import { AfterViewInit, Component, OnInit, ViewChild, enableProdMode } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild, enableProdMode, PipeTransform } from '@angular/core';
 import { DatePipe, formatDate } from '@angular/common';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { Donor } from 'src/app/model/donor';
@@ -32,13 +32,18 @@ export class ScheduleExsistingAppointmentComponent implements AfterViewInit {
   user!: any;
   retApp: ExistingAppointmentDTO[] = [];
   surveys: any;
+  //currentDate: Date = new Date();
 
   constructor(private existingAppointmentService: ExistingAppointmentService,
               private userService: UserService,
               private jwtHelper: JwtHelperService,
               private _liveAnnouncer: LiveAnnouncer,
               private notifyService : NotificationService,
-              private surveyService: SurveyService) { }
+              private surveyService: SurveyService,
+              ) {
+
+              //let currentDateTime =this.datepipe.((new Date), 'MM/dd/yyyy h:mm:ss');
+               }
 
   @ViewChild(MatSort) set matSort(sort: MatSort){
     this.dataSource.sort = sort;
@@ -70,7 +75,7 @@ export class ScheduleExsistingAppointmentComponent implements AfterViewInit {
 
 
 
-  scheduleAppointment(event: Event, id: any){
+  async scheduleAppointment(event: Event, id: any){
     var request = null;
     const element = event.target as HTMLElement;
     const s = this.surveys.filter((res: any) => {
@@ -88,8 +93,14 @@ export class ScheduleExsistingAppointmentComponent implements AfterViewInit {
     } else{
     this.existingAppointmentService.scheduleAppointment(request[0]).subscribe(res=> {
       this.ngAfterViewInit();
+    },
+      (err) => {
+        //if(err.status != 409){
+        this.notifyService.showWarning(err.error.message, "Warning");
+        //} else this.notifyService.showWarning(err.error.message, "Warrning");
       });
     }
+    this.ngAfterViewInit();
   }
 
   // announceSortChange(sortState: Sort) {
