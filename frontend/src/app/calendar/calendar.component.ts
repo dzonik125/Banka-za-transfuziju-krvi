@@ -1,9 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { OnInit,  Component } from '@angular/core';
 import { CalendarOptions } from '@fullcalendar/core'; // useful for typechecking
 import dayGridPlugin from '@fullcalendar/daygrid'; 
 import interactionPlugin from '@fullcalendar/interaction'; 
 import listPlugin from '@fullcalendar/list';
+import { toJSDate } from '@ng-bootstrap/ng-bootstrap/datepicker/ngb-calendar';
+import { Appointment } from '../model/appointment';
 import { ExistingAppointment } from '../model/existingAppointment';
+import { AppointmentService } from '../services/appointment.service';
+import { setTimeout } from "timers/promises";
+import { concat } from 'rxjs';
+import { ActivatedRoute } from '@angular/router';
 
 
 
@@ -16,11 +22,32 @@ import { ExistingAppointment } from '../model/existingAppointment';
 
 export class CalendarComponent implements OnInit {
 
-  Events: any[] = [
-    { title: 'Marko markovic', date: '2023-01-01', start: '2023-01-01T10:30:00',  },
+  public appointmets: any[] = [
   ];
-
   
+  public id: any;
+
+  constructor(private appointmentService: AppointmentService, private route: ActivatedRoute) { }
+
+
+
+
+  ngOnInit() {
+    this.id = this.route.snapshot.paramMap.get('id');
+    window.alert(this.id)
+
+    this.appointmentService.getAppointmentsByBloodBankID(this.id).subscribe(res => {
+      // window.alert(JSON.stringify(res[0]))
+      // this.appointmets.push(res[0])
+      // this.appointmets.push(res[1])
+     res.forEach(element => this.appointmets.push(element));
+
+    })
+    
+    
+  }
+
+  calendarPlugins = [dayGridPlugin];   
   calendarOptions: CalendarOptions = {
     initialView: 'dayGridMonth',
     plugins: [dayGridPlugin, interactionPlugin, listPlugin],
@@ -30,16 +57,8 @@ export class CalendarComponent implements OnInit {
       right: 'dayGridMonth, dayGridWeek, dayGridDay, listWeek'
     },
     dayMaxEvents: true, // allow "more" link when too many events
-    events: [{ title: 'Marko markovic', date: '2023-01-01', start: '2023-01-01T10:30:00',  end:'2023-01-01T11:30:00' }]
+    events: this.appointmets,
 
   };
 
-
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-
-
-  calendarPlugins = [dayGridPlugin]; 
 }

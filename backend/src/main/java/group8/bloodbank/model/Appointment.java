@@ -4,13 +4,11 @@ package group8.bloodbank.model; /***********************************************
  * Purpose: Defines the Class Appointment
  ***********************************************************************/
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -28,8 +26,8 @@ public class Appointment {
     @ManyToMany(mappedBy = "appointments", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     public List<MedicalWorker> medicalWorker;
 
-    @Transient
-    public Donor donor;
+    @Column
+    public Long donor_id;
 
     @ManyToOne
     @JoinColumn(name = "blood_bank_id")
@@ -41,4 +39,22 @@ public class Appointment {
     @Column
     private double duration;
 
+    @Transient
+    public Donor donor;
+
+    public Donor getDonor() {
+        return donor;
+    }
+
+    public void setDonor(Donor donor) {
+        this.donor = donor;
+    }
+
+    public BloodBank getBloodBank() {
+        return bloodBank;
+    }
+
+    public void setBloodBank(BloodBank newBloodBank) {
+        this.bloodBank = newBloodBank;
+    }
 }

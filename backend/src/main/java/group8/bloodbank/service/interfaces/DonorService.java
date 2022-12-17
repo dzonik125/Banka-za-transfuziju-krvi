@@ -9,4 +9,6 @@ import java.util.List;
 public interface DonorService {
     Donor saveDonor(UserDTO donor);
     List<Donor> getAll();
+
+    Donor getById(Long donor_id);
 }
