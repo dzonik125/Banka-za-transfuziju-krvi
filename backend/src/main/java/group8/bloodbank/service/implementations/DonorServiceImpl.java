@@ -58,5 +58,10 @@ public class DonorServiceImpl implements DonorService {
         return donorRepository.findAll();
     }
 
+    @Override
+    public Donor getById(Long donor_id) {
+        return donorRepository.findById(donor_id).get();
+    }
+
 
 }

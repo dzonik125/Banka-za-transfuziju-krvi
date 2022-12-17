@@ -27,12 +27,13 @@ const routes: Routes = [
   {path:'sendNews/:id', component: SendNewsComponent},
   {path: 'userProfile/:id', component: UserProfileViewComponent},
   {path:'adminDashboard/registerBloodBank', component: RegisterBloodBankComponent},
-  {path:'adminDashboard/calendar', component: CalendarComponent}, 
+  {path:'adminDashboard/calendar/:id', component: CalendarComponent}, 
   {path:'adminDashboard/registerMedicalWorker', component: RegisterMedicalWorkerComponent},
   {path:'addAppointmentSlot', component: AddAppointmentSlotComponent},
   {path: 'displayAllUsers', component: DisplayAllUsersComponent},
   {path: '', component: DisplayAllCentersComponent},
   {path: 'bloodBank/:id', component: BloodBankViewComponent},
+  
   {path :'survey', component: CreateSurveyComponent},
   {path :'getAll', component: ScheduleExsistingAppointmentComponent},
 ];
