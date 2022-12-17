@@ -3,7 +3,9 @@ package group8.bloodbank.controller;
 import group8.bloodbank.model.DTO.MedicalWorkerDTO;
 import group8.bloodbank.model.Gender;
 import group8.bloodbank.model.MedicalWorker;
+import group8.bloodbank.model.WorkingHours;
 import group8.bloodbank.service.interfaces.MedicalWorkerService;
+import group8.bloodbank.service.interfaces.WorkingHoursService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -16,11 +18,14 @@ import java.util.List;
 @RestController
 @RequestMapping("/medicalWorker")
 public class MedicalWorkerController {
+
     private MedicalWorkerService medicalWorkerService;
+    private WorkingHoursService workingHoursService;
 
     @Autowired
-    public MedicalWorkerController(MedicalWorkerService medicalWorkerService) {
+    public MedicalWorkerController(MedicalWorkerService medicalWorkerService, WorkingHoursService workingHoursService){
         this.medicalWorkerService = medicalWorkerService;
+        this.workingHoursService = workingHoursService;
     }
 
     @CrossOrigin(origins = "http://localhost:4200")
@@ -65,6 +70,11 @@ public class MedicalWorkerController {
     @GetMapping(value = "/getAllByBloodBank")
     public List<MedicalWorker> getAllByBloodBank(@RequestParam(value = "bloodBankId") Long id) {
         return medicalWorkerService.getAllByBloodBank(id);
+    }
+
+    @GetMapping(value = "/getBloodBankWorkingHours")
+    public WorkingHours getBloodBankWorkingHours(@RequestParam(value = "id") Long id){
+        return workingHoursService.getByBloodBankId(medicalWorkerService.getBloodBank(id));
     }
 
 }

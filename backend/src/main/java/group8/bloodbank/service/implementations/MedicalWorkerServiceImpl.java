@@ -65,4 +65,9 @@ public class MedicalWorkerServiceImpl implements MedicalWorkerService {
         medicalWorkerRepository.updateMedicalWorker(medicalWorker.getId(), bloodBank);
     }
 
+    @Override
+    public Long getBloodBank(Long id) {
+       return medicalWorkerRepository.getBloodBank(id);
+    }
+
 }

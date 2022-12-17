@@ -40,6 +40,16 @@ public class AppointmentSlotController {
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<AppointmentSlot> createSlot(@RequestBody AppointmentSlot slot){
+        List<AppointmentSlot> slots = service.getAll();
+        for(AppointmentSlot s : slots) {
+            if(slot.getStartTime().isBefore(s.getEndTime()) && slot.getStartTime().isAfter(s.getStartTime().minusMinutes(1))){
+                return new ResponseEntity<>(HttpStatus.CONFLICT);
+            } else if (slot.getEndTime().isAfter(s.getStartTime()) && slot.getEndTime().isBefore(s.getEndTime().plusMinutes(1))){
+                return new ResponseEntity<>(HttpStatus.CONFLICT);
+            } else if (slot.getStartTime().isEqual(s.getStartTime()) && slot.getEndTime().isEqual(s.getEndTime())){
+                return new ResponseEntity<>(HttpStatus.CONFLICT);
+            }
+        }
         try{
             service.saveSlot(slot);
             return new ResponseEntity<>(slot, HttpStatus.CREATED);

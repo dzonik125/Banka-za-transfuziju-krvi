@@ -68,9 +68,6 @@ INSERT INTO blood_type_blood_bank(
     blood_bank_id, blood_type_amount, blood_type_key)
 VALUES (1, 1000, 'Oneg');
 
-
-
-
 --sifre su Donor         -> donor
 --         MedicalWorker -> medicalworker
 --         Admin         -> admin
@@ -93,7 +90,7 @@ VALUES (0, 0, 0, 11, 1, false);
 
 INSERT INTO medical_worker(
     id, blood_bank_id)
-VALUES (2, null);
+VALUES (2, 1);
 
 INSERT INTO admin(
     id)
@@ -105,19 +102,9 @@ INSERT INTO medical_worker_appointments(
     medical_worker_id, appointment_id)
 VALUES (2, 1);
 
-INSERT INTO appointment_slot(
-    start_time, end_time, donor_id, blood_bank_id, status)
-VALUES ('2022-12-17 16:00:28.111756','2022-12-17 18:00:28.112755',null, 1, 0);
-
-INSERT INTO appointment_slot(
-    start_time, end_time, donor_id, blood_bank_id, status)
-VALUES ('2022-12-17 20:29:28.111756','2022-12-17 21:29:28.112755',null, 1, 0);
-
 -- INSERT INTO survey(
 --     answer1, answer2, answer3, answer4, answer5, answer6, answer7, answer8, answer9, answer10, donor_id)
 -- VALUES ('yes','yes','yes','yes','yes','no','yes','yes','yes','yes', 1);
-
-
 
 INSERT INTO role (name) VALUES ('ROLE_DONOR');
 INSERT INTO role (name) VALUES ('ROLE_MEDICALWORKER');
@@ -126,3 +113,7 @@ INSERT INTO role (name) VALUES ('ROLE_ADMIN');
 INSERT INTO USER_ROLE (user_id, role_id) VALUES (1, 1); -- user-u dodeljujemo rolu DONOR
 INSERT INTO USER_ROLE (user_id, role_id) VALUES (2, 2); -- user-u dodeljujemo rolu MW
 INSERT INTO USER_ROLE (user_id, role_id) VALUES (3, 3); -- user-u dodeljujemo rolu ADMIN
+
+INSERT INTO working_hours(
+    id, end_time, start_time, blood_bank_id)
+VALUES (1, '12:00:00', '08:00:00', 1);
