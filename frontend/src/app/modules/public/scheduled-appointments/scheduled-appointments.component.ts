@@ -1,11 +1,14 @@
+import { MatTableDataSource } from '@angular/material/table';
 import { NotificationService } from './../../../services/notification.service';
 
 import { ExistingAppointment } from './../../../model/existingAppointment';
-import { Component, OnInit, AfterViewInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ViewChild } from '@angular/core';
 import { ExistingAppointmentService } from 'src/app/services/existing-appointment.service';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { now } from 'moment';
 import { DatePipe, formatDate } from '@angular/common';
+import { MatSort, Sort } from '@angular/material/sort';
+import { LiveAnnouncer } from '@angular/cdk/a11y';
 
 @Component({
   selector: 'app-scheduled-appointments',
@@ -14,13 +17,16 @@ import { DatePipe, formatDate } from '@angular/common';
 })
 export class ScheduledAppointmentsComponent implements AfterViewInit {
 
+  @ViewChild(MatSort) sort!: MatSort;
+
   displayedColumns: string[] = ['id', 'bloodBank', 'startDate', 'startTime', 'cancel'];
-  dataSource: any;
+  dataSource = new MatTableDataSource<ExistingAppointment>();
   date!: Date;
   pipe = new DatePipe('en-US'); // Use your own locale
   constructor(private existingAppointmentService: ExistingAppointmentService,
               private jwtHelper: JwtHelperService,
-              private notifyService: NotificationService) { }
+              private notifyService: NotificationService,
+              private _liveAnnouncer: LiveAnnouncer) { }
 
 
 
@@ -30,8 +36,8 @@ export class ScheduledAppointmentsComponent implements AfterViewInit {
       const result = res.filter((r: any) => {
         return r.status === 'APPROVED';
       })
-      this.dataSource = result;
-      //this.dataSource.sort = this.matSort;
+      this.dataSource = new MatTableDataSource<ExistingAppointment>(result);
+      this.dataSource.sort = this.sort;
     })
   }
 
@@ -40,7 +46,7 @@ export class ScheduledAppointmentsComponent implements AfterViewInit {
     this.pipe.transform(this.date.setDate( this.date.getDate() + 1), 'short');
      var request = null;
 
-    request = this.dataSource.filter((res: any) => {
+    request = this.dataSource.data.filter((res: any) => {
          return res.id === id;
     })
 
@@ -58,6 +64,15 @@ export class ScheduledAppointmentsComponent implements AfterViewInit {
           this.notifyService.showWarning("You cannot cancel an appointment 24 hours before the start!", "Warning");
         } else this.notifyService.showWarning("Unexpected error occured", err.status);
       });
+    }
+  }
+
+  announceSortChange(sortState: Sort) {
+    this.dataSource.sort = this.sort;
+    if (sortState.direction) {
+      this._liveAnnouncer.announce(`Sorted ${sortState.direction}ending`);
+    } else {
+      this._liveAnnouncer.announce('Sorting cleared');
     }
   }
 }
