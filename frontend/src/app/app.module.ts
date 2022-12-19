@@ -56,7 +56,8 @@ import { AuthenticationModule } from './modules/authentication/authentication.mo
 import { AddAppointmentSlotComponent } from './modules/medical_worker/blood-bank-view/add-appointment-slot/add-appointment-slot.component';
 import { ScheduleExsistingAppointmentComponent } from './modules/public/schedule-exsisting-appointment/schedule-exsisting-appointment.component';
 import { CalendarComponent } from './calendar/calendar.component'
-import { FullCalendarModule } from '@fullcalendar/angular'; 
+import { FullCalendarModule } from '@fullcalendar/angular';
+import { RegisterAdministratorComponent } from './modules/administrator/register-administrator/register-administrator.component';
 
 //I keep the new line
 
@@ -86,6 +87,7 @@ import { FullCalendarModule } from '@fullcalendar/angular';
     AddAppointmentSlotComponent,
     ScheduleExsistingAppointmentComponent,
     CalendarComponent,
+    RegisterAdministratorComponent,
   ],
 
   imports: [

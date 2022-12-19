@@ -6,4 +6,6 @@ import java.util.List;
 
 public interface AdminService {
     public List<Admin> getAll();
+
+    Admin create(Admin admin);
 }

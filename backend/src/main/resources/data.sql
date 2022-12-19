@@ -92,8 +92,8 @@ INSERT INTO users(
 VALUES ('medicalworker@mail.com', 1, '1232312321321', 'Nikola', 'Student', '$2y$10$1KJBnDRXEz87Zcrq.b3vR.hkmaVVIvXarI.4IwbtebcbAcMSjOJkK', 'Kolarov', 1, true, '2022-11-28 18:17:53.840417');
 
 INSERT INTO users(
-    email, gender, jmbg, name, occupation, password, surname, address_id, enabled, last_password_reset_date)
-VALUES ('admin@mail.com', 0, '8132312321321', 'Slavica', 'IT strucnjak', '$2y$10$YQtYG49nm8UhWrtT3Zq1gOoGYCkhVMC9IKczv5M.mThbC.QH0xnYu', 'Krstic', 2, true, '2022-11-28 18:17:53.840417');
+     email, gender, jmbg, name, occupation, password, surname, address_id, enabled, last_password_reset_date)
+VALUES ( 'admin@mail.com', 0, '8132312321321', 'Slavica', 'IT strucnjak', '$2y$10$YQtYG49nm8UhWrtT3Zq1gOoGYCkhVMC9IKczv5M.mThbC.QH0xnYu', 'Krstic', 2, true, '2022-11-28 18:17:53.840417');
 
 INSERT INTO users(
     id, email, gender, jmbg, name, occupation, password, surname, address_id, enabled, last_password_reset_date)
@@ -122,8 +122,8 @@ INSERT INTO medical_worker(
 VALUES (2, null);
 
 INSERT INTO admin(
-    id)
-VALUES (3);
+    first_login, id)
+VALUES (false, 3);
 
 
 

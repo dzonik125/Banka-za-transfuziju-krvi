@@ -15,4 +15,8 @@ export class AdminService {
   getAdmins(): Observable<any[]>{
     return this.http.get<any[]>(this.apiHost + 'admin', {headers: this.headers});
   }
+
+  createAdministrator(administrator: any): Observable<any> {
+    return this.http.post<any>(this.apiHost + 'admin/createAdmin', administrator);
+  }
 }
