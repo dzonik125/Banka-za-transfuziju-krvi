@@ -7,13 +7,17 @@ import group8.bloodbank.model.Donor;
 import group8.bloodbank.model.Role;
 import group8.bloodbank.repository.DonorRepository;
 import group8.bloodbank.service.interfaces.DonorService;
+import group8.bloodbank.service.interfaces.EmailService;
 import group8.bloodbank.service.interfaces.RoleService;
 import group8.bloodbank.service.interfaces.UserService;
+import net.bytebuddy.utility.RandomString;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Collections;
+import javax.mail.MessagingException;
+import java.io.UnsupportedEncodingException;
 import java.util.List;
+import java.util.Optional;
 
 
 @Service
@@ -26,13 +30,16 @@ public class DonorServiceImpl implements DonorService {
     @Autowired
     UserService userService;
 
+    @Autowired
+    EmailService emailService;
+
 
     @Autowired
     public DonorServiceImpl() {
     }
 
     @Override
-    public Donor saveDonor(UserDTO userDTO) {
+    public Donor registerDonor(UserDTO userDTO) throws MessagingException, UnsupportedEncodingException {
 
         Donor d = new Donor();
 
@@ -44,11 +51,18 @@ public class DonorServiceImpl implements DonorService {
         d.setCategory(Category.REGULAR);
         d.setPenalty(0);
         d.setBloodType(BloodType.ABneg);
-        d.setComplaint(Collections.emptySet());
-        d.setSurvey(Collections.emptySet());
-        d.setEnabled(true);
+        //d.setComplaint(Collections.emptySet());
+        //d.setSurvey(Collections.emptySet());
 
-        return this.donorRepository.save(d);
+        d.setEnabled(false);
+
+        d.setVerificationCode(RandomString.make(64));
+        d.setHasSurvey(false);
+
+        donorRepository.save(d);
+        emailService.sendVerificationEmail(d);
+
+        return d;
     }
 
 
@@ -59,6 +73,23 @@ public class DonorServiceImpl implements DonorService {
     }
 
     @Override
+    public Optional<Donor> findById(Long id) {
+        return donorRepository.findById(id);
+    }
+
+    @Override
+    public boolean verify(String code) {
+        Donor donor = donorRepository.findDonorByVerificationCode(code);
+
+        if(donor == null || donor.isEnabled()){
+            return false;
+        } else {
+            donor.setVerificationCode(null);
+            donor.setEnabled(true);
+            donorRepository.save(donor);
+            return true;
+        }
+        
     public Donor getById(Long donor_id) {
         return donorRepository.findById(donor_id).get();
     }

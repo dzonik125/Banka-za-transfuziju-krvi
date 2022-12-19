@@ -17,4 +17,15 @@ export class ExistingAppointmentService {
     return this.http.get<ExistingAppointment[]>(this.apiHost + 'appSlots/findAllAppointments', {headers: this.headers});
   }
 
+  scheduleAppointment(request: any){
+  return this.http.put<any>(this.apiHost + 'appSlots/updateAppointment', request, {headers: this.headers})
+}
+
+cancelAppointment(request: any){
+  return this.http.put<any>(this.apiHost + 'appSlots/cancelAppointment', request, {headers: this.headers})
+}
+
+
+
+
 }

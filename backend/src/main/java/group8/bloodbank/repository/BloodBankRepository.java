@@ -9,12 +9,8 @@ import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.transaction.annotation.Transactional;
 
-
-import java.util.HashMap;
-
 import java.awt.print.Pageable;
 import java.util.List;
-
 import java.util.Optional;
 
 public interface BloodBankRepository extends JpaRepository<BloodBank, Long>, PagingAndSortingRepository<BloodBank, Long> {
@@ -42,4 +38,6 @@ public interface BloodBankRepository extends JpaRepository<BloodBank, Long>, Pag
     public String getApiKeyById(@Param("id") Long id);
 
     public List<BloodBank> findAllByName(Pageable pageable);
+
+    public BloodBank findByName(String Name);
 }

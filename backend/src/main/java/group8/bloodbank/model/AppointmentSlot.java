@@ -1,5 +1,6 @@
 package group8.bloodbank.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -24,10 +25,19 @@ public class AppointmentSlot {
     @JoinColumn(name = "blood_bank_id")
     public BloodBank bloodBank;
 
+    @ManyToOne
+    @JoinColumn(name = "donor_id")
+    public Donor donor;
+
     @Column
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private LocalDateTime startTime;
 
     @Column
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private LocalDateTime endTime;
+
+    @Column
+    private AppointmentStatus status;
 
 }

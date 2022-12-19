@@ -1,14 +1,12 @@
 import { BloodBank } from 'src/app/model/bloodBank';
-import { Donor } from './donor';
-import { User } from './user';
-export class ExistingAppointment {
+export class ExistingAppointmentDTO {
 
-  public id: any;
-  public bloodBank!: BloodBank;
+  public id: any = '';
+  public bloodBank: string = '';
   public startTime!: Date;
   public endTime!: Date;
-  public status!: string;
-  public donor!: string;
+  public status: string = '';
+  public donor: string = '';
 
   public constructor(obj?: any) {
       if (obj) {
