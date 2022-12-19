@@ -89,6 +89,9 @@ public class DonorServiceImpl implements DonorService {
             donorRepository.save(donor);
             return true;
         }
+        
+    public Donor getById(Long donor_id) {
+        return donorRepository.findById(donor_id).get();
     }
 
 

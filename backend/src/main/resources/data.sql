@@ -26,14 +26,21 @@ VALUES (null, 1.8, ' ','https://firebasestorage.googleapis.com/v0/b/isapsw-6ef61
 
 
 
-INSERT INTO appointment(
-    duration, start, blood_bank_id)
-VALUES (30, null, 1);
+INSERT INTO public.appointment(
+    id, donor_id, duration, start, blood_bank_id)
+VALUES (1, 1, 20, '2022-12-24 18:17:53.840417', 1);
 
-INSERT INTO appointment(
-    duration, start, blood_bank_id)
-VALUES (20, null, 2);
+INSERT INTO public.appointment(
+    id, donor_id, duration, start, blood_bank_id)
+VALUES (2, 8, 20, '2022-12-25 18:17:53.840417', 1);
 
+INSERT INTO public.appointment(
+    id, donor_id, duration, start, blood_bank_id)
+VALUES (3, 7, 20, '2022-12-24 13:17:53.840417', 1);
+
+INSERT INTO public.appointment(
+    id, donor_id, duration, start, blood_bank_id)
+VALUES (4, 7, 20, '2022-12-27 13:17:53.840417', 2);
 
 
 INSERT INTO blood_type_blood_bank(
@@ -78,6 +85,7 @@ INSERT INTO users(
     email, gender, jmbg, name, occupation, password, surname, address_id, enabled, last_password_reset_date)
 VALUES ('donor@mail.com', 0, '7132312321321', 'Marko', 'Poljoprivrednik', '$2y$10$9INQk3/KYVWY1FbUqA0W5upioL.6RVl63zJU9iEwQG.XvHEk9Aug6', 'Bozic', 3, true, '2022-11-28 18:17:53.840417');
 
+
 INSERT INTO users(
     email, gender, jmbg, name, occupation, password, surname, address_id, enabled, last_password_reset_date)
 VALUES ('medicalworker@mail.com', 1, '1232312321321', 'Nikola', 'Student', '$2y$10$1KJBnDRXEz87Zcrq.b3vR.hkmaVVIvXarI.4IwbtebcbAcMSjOJkK', 'Kolarov', 1, true, '2022-11-28 18:17:53.840417');
@@ -86,10 +94,27 @@ INSERT INTO users(
     email, gender, jmbg, name, occupation, password, surname, address_id, enabled, last_password_reset_date)
 VALUES ('admin@mail.com', 0, '8132312321321', 'Slavica', 'IT strucnjak', '$2y$10$YQtYG49nm8UhWrtT3Zq1gOoGYCkhVMC9IKczv5M.mThbC.QH0xnYu', 'Krstic', 2, true, '2022-11-28 18:17:53.840417');
 
+INSERT INTO users(
+    id, email, gender, jmbg, name, occupation, password, surname, address_id, enabled, last_password_reset_date)
+VALUES (8, 'donor2@mail.com', 0, '7132312321325', 'Trifko', 'Agrikola', '$2y$10$9INQk3/KYVWY1FbUqA0W5upioL.6RVl63zJU9iEwQG.XvHEk9Aug6', 'Milic', 3, true, '2022-11-28 18:17:53.840417');
+
+INSERT INTO users(
+    id, email, gender, jmbg, name, occupation, password, surname, address_id, enabled, last_password_reset_date)
+VALUES (7, 'donor3@mail.com', 0, '7132312321321', 'Zarko', 'Vodoinstalater', '$2y$10$9INQk3/KYVWY1FbUqA0W5upioL.6RVl63zJU9iEwQG.XvHEk9Aug6', 'Dinic', 3, true, '2022-11-28 18:17:53.840417');
+
 
 INSERT INTO donor(
     blood_type, category, penalty, points, id, has_survey)
 VALUES (0, 0, 0, 11, 1, false);
+
+INSERT INTO donor(
+    blood_type, category, penalty, points, id)
+VALUES (1, 1, 0, 11, 7);
+
+INSERT INTO donor(
+    blood_type, category, penalty, points, id)
+VALUES (2, 2, 0, 14, 8);
+
 
 INSERT INTO medical_worker(
     id, blood_bank_id)
@@ -138,3 +163,6 @@ INSERT INTO role (name) VALUES ('ROLE_ADMIN');
 INSERT INTO USER_ROLE (user_id, role_id) VALUES (1, 1); -- user-u dodeljujemo rolu DONOR
 INSERT INTO USER_ROLE (user_id, role_id) VALUES (2, 2); -- user-u dodeljujemo rolu MW
 INSERT INTO USER_ROLE (user_id, role_id) VALUES (3, 3); -- user-u dodeljujemo rolu ADMIN
+
+INSERT INTO USER_ROLE (user_id, role_id) VALUES (7, 1); -- user-u dodeljujemo rolu DONOR
+INSERT INTO USER_ROLE (user_id, role_id) VALUES (8, 1); -- user-u dodeljujemo rolu DONOR
