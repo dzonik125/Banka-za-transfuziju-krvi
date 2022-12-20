@@ -1,6 +1,7 @@
 package group8.bloodbank.controller;
 
 import group8.bloodbank.model.Admin;
+import group8.bloodbank.model.BloodBank;
 import group8.bloodbank.model.DTO.AdministratorDTO;
 import group8.bloodbank.model.DTO.MedicalWorkerDTO;
 import group8.bloodbank.model.Gender;
@@ -14,6 +15,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
@@ -41,7 +43,6 @@ public class AdminController {
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE, value = "/createAdmin")
     public ResponseEntity<Admin> createAdmin(@RequestBody AdministratorDTO administratorDTO) {
 
-
         Admin admin = new Admin(administratorDTO.firstLogin, administratorDTO.getName(), administratorDTO.getSurname(), administratorDTO.getEmail(), administratorDTO.getPassword(), administratorDTO.getJmbg(), administratorDTO.getAddress(), administratorDTO.getOccupation(), administratorDTO.getGender());
         try {
             admin = adminService.create(admin);
@@ -51,4 +52,23 @@ public class AdminController {
             return new ResponseEntity<Admin>(admin, HttpStatus.CONFLICT);
         }
     }
+
+    @GetMapping(value = "/getById")
+    public Optional<Admin> getById(@RequestParam(value = "id") Long id) {
+        return adminService.getById(id);
+    }
+
+    @CrossOrigin(origins = "http://localhost:4200")
+    @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE, value = "updatePassword")
+    public ResponseEntity<Boolean> updateMedicalWorkerBloodBank(@RequestBody Admin admin) {
+        int i = 0;
+        try {
+            adminService.updateAdminPassword(admin.getPassword(), admin.getId());
+            return new ResponseEntity<Boolean>(true, HttpStatus.OK);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResponseEntity<Boolean>(false, HttpStatus.CONFLICT);
+        }
+    }
+
 }

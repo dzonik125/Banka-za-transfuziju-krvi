@@ -6,6 +6,8 @@ import {LiveAnnouncer} from '@angular/cdk/a11y';
 import { MySort } from '../../util/sort';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { CreateSurveyComponent } from '../create-survey/create-survey.component';
+import { AuthService } from '../../authentication/services/auth.service';
+import { JwtHelperService } from '@auth0/angular-jwt';
 
 
 @Component({
@@ -31,14 +33,20 @@ export class DisplayAllCentersComponent implements AfterViewInit {
   constructor(private bloodBankService: BloodBankServiceService,
     private router: Router,
     private dialogRef: MatDialog,
-    private _liveAnnouncer: LiveAnnouncer
+    private _liveAnnouncer: LiveAnnouncer,
+    private authService: AuthService,
+    private jwtHelper: JwtHelperService
     ) { }
+
 
     ngAfterViewInit() {
       this.bloodBankService.getBloodBanks().subscribe(res => {
         this.bloodBanks = res;
         this.filteredbloodBanks = this.bloodBanks;
       })
+
+
+      
     }
 
   public get minTerm(): string {

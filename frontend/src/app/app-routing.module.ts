@@ -18,6 +18,7 @@ import { LoginComponent } from './modules/authentication/login/login/login.compo
 import { AddAppointmentSlotComponent } from './modules/medical_worker/blood-bank-view/add-appointment-slot/add-appointment-slot.component';
 import { CalendarComponent } from './calendar/calendar.component';
 import { RegisterAdministratorComponent } from './modules/administrator/register-administrator/register-administrator.component';
+import { ChangePasswordComponent } from './modules/administrator/admin-dashboard/change-password/change-password.component';
 
 
 const routes: Routes = [
@@ -36,6 +37,7 @@ const routes: Routes = [
   {path: 'displayAllUsers', component: DisplayAllUsersComponent},
   {path: '', component: DisplayAllCentersComponent},
   {path: 'bloodBank/:id', component: BloodBankViewComponent},
+  {path: 'changepassword', component: ChangePasswordComponent},
   
   {path :'survey', component: CreateSurveyComponent},
   {path :'getAll', component: ScheduleExsistingAppointmentComponent},
