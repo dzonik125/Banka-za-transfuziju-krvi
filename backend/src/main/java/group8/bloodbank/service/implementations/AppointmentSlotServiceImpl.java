@@ -62,7 +62,7 @@ public class AppointmentSlotServiceImpl implements AppointmentSlotService {
                     throw new UnsupportedOperationException("You already have an appointment at this facility at this time !");
             }
             repository.save(slot);
-            String url = qrCodeService.generateImageAsQRCode(link, 200, 200, imagePath);
+            String url = qrCodeService.generateImageAsQRCode(link, 200, 200, imagePath, slot.getId().toString());
             emailService.sendAppointmentInformationMail(d.get(), url);
         }
         return slot;
