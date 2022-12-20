@@ -57,7 +57,7 @@ import { AddAppointmentSlotComponent } from './modules/medical_worker/blood-bank
 import { ScheduleExsistingAppointmentComponent } from './modules/public/schedule-exsisting-appointment/schedule-exsisting-appointment.component';
 import { ScheduledAppointmentsComponent } from './modules/public/scheduled-appointments/scheduled-appointments.component';
 import { CalendarComponent } from './calendar/calendar.component'
-import { FullCalendarModule } from '@fullcalendar/angular'; 
+import { FullCalendarModule } from '@fullcalendar/angular';
 
 
 //I keep the new line
