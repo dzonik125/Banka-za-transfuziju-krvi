@@ -59,6 +59,7 @@ import { ScheduledAppointmentsComponent } from './modules/public/scheduled-appoi
 import { CalendarComponent } from './calendar/calendar.component'
 import { FullCalendarModule } from '@fullcalendar/angular';
 
+import { ScheduleNewAppointmentComponent } from './modules/public/schedule-new-appointment/schedule-new-appointment.component';
 
 //I keep the new line
 
@@ -90,6 +91,7 @@ import { FullCalendarModule } from '@fullcalendar/angular';
     ScheduledAppointmentsComponent,
     CalendarComponent,
 
+    ScheduleNewAppointmentComponent
   ],
 
   imports: [

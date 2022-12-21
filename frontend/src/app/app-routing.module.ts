@@ -21,6 +21,7 @@ import { AuthGuard } from './modules/authentication/helpers/auth.guard';
 import { RoleGuard } from './modules/authentication/helpers/role.guard';
 import { CalendarComponent } from './calendar/calendar.component';
 
+import { ScheduleNewAppointmentComponent } from './modules/public/schedule-new-appointment/schedule-new-appointment.component';
 
 const routes: Routes = [
   {path: 'home', component: HomeComponentComponent},
@@ -32,14 +33,14 @@ const routes: Routes = [
   {path:'adminDashboard/registerBloodBank', component: RegisterBloodBankComponent},
   {path:'adminDashboard/calendar/:id', component: CalendarComponent}, 
   {path:'adminDashboard/registerMedicalWorker', component: RegisterMedicalWorkerComponent},
-  {path:'addAppointmentSlot/:id', component: AddAppointmentSlotComponent},
+  {path:'addAppointmentSlot/:id', component: AddAppointmentSlotComponent, canActivate: [AuthGuard, RoleGuard], data: { roles: ['ROLE_MEDICALWORKER'] }},
   {path: 'displayAllUsers', component: DisplayAllUsersComponent},
   {path: '', component: DisplayAllCentersComponent},
   {path: 'bloodBank/:id', component: BloodBankViewComponent},
   {path :'survey', component: CreateSurveyComponent, canActivate: [AuthGuard, RoleGuard], data: { roles: ['ROLE_DONOR'] }},
   {path :'schedule', component: ScheduleExsistingAppointmentComponent, canActivate: [AuthGuard, RoleGuard], data: { roles: ['ROLE_DONOR'] }},
   {path :'scheduledAppointments', component: ScheduledAppointmentsComponent, canActivate: [AuthGuard, RoleGuard], data: { roles: ['ROLE_DONOR'] }},
-
+  {path: 'scheduleNewAppointment', component: ScheduleNewAppointmentComponent}
 ];
 
 @NgModule({

@@ -1,6 +1,7 @@
 package group8.bloodbank.controller;
 
 import group8.bloodbank.model.AppointmentSlot;
+import group8.bloodbank.model.BloodBank;
 import group8.bloodbank.model.DTO.AppointmentSlotDTO;
 import group8.bloodbank.model.Donor;
 import group8.bloodbank.repository.DonorRepository;
@@ -14,6 +15,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -91,5 +95,26 @@ public class AppointmentSlotController {
             //e.printStackTrace();
             return new ResponseEntity<AppointmentSlot>(slot, HttpStatus.CONFLICT);
         }
+    }
+
+    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE, value = "/getAvailableBanks")
+    public ResponseEntity<List<BloodBank>> getFreeBanks(@RequestBody LocalDateTime start){
+        boolean addToRet = true;
+        List<BloodBank> toRet = new ArrayList<>();
+        for (BloodBank b: bloodBankService.getAll()
+             ) {
+            addToRet = true;
+            for (AppointmentSlot as: service.getAllByBankId(b.getId())
+                 ) {
+                if(as.getStartTime().minusMinutes(1).isBefore(start) && as.getEndTime().plusMinutes(1).isAfter(start)){
+                    addToRet = false;
+                    break;
+                } //DODAJ PROVERU I ZA OBICNE APPOINTMENTE
+            }
+            if(addToRet){
+                toRet.add(b);
+            }
+        }
+        return new ResponseEntity<List<BloodBank>>(toRet, HttpStatus.OK);
     }
 }

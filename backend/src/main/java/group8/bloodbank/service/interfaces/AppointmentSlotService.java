@@ -17,4 +17,6 @@ public interface AppointmentSlotService {
     AppointmentSlot findById(Long id);
 
     List<AppointmentSlot> getAll();
+
+    List<AppointmentSlot> getAllByBankId(Long id);
 }
