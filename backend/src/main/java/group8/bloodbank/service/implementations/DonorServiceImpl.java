@@ -81,7 +81,7 @@ public class DonorServiceImpl implements DonorService {
     public boolean verify(String code) {
         Donor donor = donorRepository.findDonorByVerificationCode(code);
 
-        if(donor == null || donor.isEnabled()){
+        if (donor == null || donor.isEnabled()) {
             return false;
         } else {
             donor.setVerificationCode(null);
@@ -89,6 +89,11 @@ public class DonorServiceImpl implements DonorService {
             donorRepository.save(donor);
             return true;
         }
+
+    }
+
+    public Donor getById(Long donor_id) {
+        return donorRepository.findById(donor_id).get();
     }
 
 

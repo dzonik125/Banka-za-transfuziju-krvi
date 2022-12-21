@@ -27,17 +27,17 @@ public class QRCodeServiceImpl implements QRCodeService {
     FirebaseService firebaseService;
     @Async
     @Override
-    public String generateImageAsQRCode(String text, int widht, int heght, String path) {
+    public String generateImageAsQRCode(String link, int widht, int heght, String path, String appointmentId) {
         QRCodeWriter qrCodeWriter = new QRCodeWriter();
         String url = "";
         try {
-            BitMatrix bitMatrix = qrCodeWriter.encode(text, BarcodeFormat.QR_CODE, widht, heght);
+            BitMatrix bitMatrix = qrCodeWriter.encode(link, BarcodeFormat.QR_CODE, widht, heght);
             MatrixToImageWriter.writeToPath(bitMatrix, "PNG", FileSystems.getDefault().getPath(path));
             File is = getFileFromResource("qrcodes/QRCode.png");
             FileInputStream input = new FileInputStream(is);
             MultipartFile multipartFile = new MockMultipartFile("QRCode.png",
                     is.getName(), "image/png", input.readAllBytes());
-            url = firebaseService.upload(multipartFile);
+            url = firebaseService.upload(multipartFile, appointmentId);
 
         } catch (WriterException | IOException | URISyntaxException e) {
             e.printStackTrace();

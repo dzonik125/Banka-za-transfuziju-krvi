@@ -118,7 +118,10 @@ export class DisplayAllCentersComponent implements AfterViewInit {
   showBank(id: any) {
     this.router.navigate(['bloodBank/' + id]);
   }
-
+  
+  showCalendar(id: any) {
+    this.router.navigate(['adminDashboard/calendar/'+id]);
+  }
 
 
   onTableDataChange(event: any){

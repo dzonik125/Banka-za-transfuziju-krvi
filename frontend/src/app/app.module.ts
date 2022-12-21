@@ -56,6 +56,9 @@ import { AuthenticationModule } from './modules/authentication/authentication.mo
 import { AddAppointmentSlotComponent } from './modules/medical_worker/blood-bank-view/add-appointment-slot/add-appointment-slot.component';
 import { ScheduleExsistingAppointmentComponent } from './modules/public/schedule-exsisting-appointment/schedule-exsisting-appointment.component';
 import { ScheduledAppointmentsComponent } from './modules/public/scheduled-appointments/scheduled-appointments.component';
+import { CalendarComponent } from './calendar/calendar.component'
+import { FullCalendarModule } from '@fullcalendar/angular';
+
 
 //I keep the new line
 
@@ -85,9 +88,12 @@ import { ScheduledAppointmentsComponent } from './modules/public/scheduled-appoi
     AddAppointmentSlotComponent,
     ScheduleExsistingAppointmentComponent,
     ScheduledAppointmentsComponent,
+    CalendarComponent,
+
   ],
 
   imports: [
+    FullCalendarModule,
     NgMultiSelectDropDownModule,
     MatDialogModule,
     BrowserModule,
