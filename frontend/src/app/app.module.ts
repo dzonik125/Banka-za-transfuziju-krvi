@@ -60,6 +60,7 @@ import { FullCalendarModule } from '@fullcalendar/angular';
 import { RegisterAdministratorComponent } from './modules/administrator/register-administrator/register-administrator.component';
 import { ChangePasswordComponent } from './modules/administrator/admin-dashboard/change-password/change-password.component';
 import { AdminComplaintsComponent } from './modules/administrator/admin-complaints/admin-complaints.component';
+import { ComplaintAnswerComponent } from './modules/administrator/complaint-answer/complaint-answer.component';
 
 //I keep the new line
 
@@ -92,6 +93,7 @@ import { AdminComplaintsComponent } from './modules/administrator/admin-complain
     RegisterAdministratorComponent,
     ChangePasswordComponent,
     AdminComplaintsComponent,
+    ComplaintAnswerComponent,
   ],
 
   imports: [
@@ -127,7 +129,6 @@ import { AdminComplaintsComponent } from './modules/administrator/admin-complain
     ReactiveFormsModule,
     MatFormFieldModule,
     MatSelectModule,
-    FormsModule,
     ToastrModule.forRoot(),
     TitleCasePipe,
     NgxPaginationModule,

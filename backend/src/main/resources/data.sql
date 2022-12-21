@@ -151,5 +151,9 @@ VALUES (1, 'Zalba1 asdsad.  (banka bankaB)', 7);
 
 INSERT INTO complaint(
     id, description, donor_id)
-VALUES (2, 'Zalba2 asdas.  (banka bankaB)', 7);
+VALUES (2, 'Zalba2 asdas.  (banka bankaB)', 8);
+
+INSERT INTO complaint(
+    id, description, donor_id, answer)
+VALUES (3, 'Zalba2 asdas.  (banka bankaB)', 7, 'odg');
 

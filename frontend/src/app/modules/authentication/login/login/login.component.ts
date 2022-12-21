@@ -25,9 +25,6 @@ export class LoginComponent implements OnInit {
   login(): void {
     this.authService.login(this.credentials).subscribe(res => {
 
-        window.alert(JSON.stringify(this.jwtHelper.decodeToken().id));
-        window.alert(JSON.stringify(this.jwtHelper.decodeToken().role));
-
         if('ROLE_ADMIN' === this.jwtHelper.decodeToken().role) 
         {
           this.adminService.getAdministratorById(this.jwtHelper.decodeToken().id).subscribe(res => {

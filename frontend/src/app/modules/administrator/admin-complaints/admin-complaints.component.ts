@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ComplaintsService } from 'src/app/services/complaints.service';
+import {MatDialog, MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
+import { ComplaintAnswerComponent } from '../complaint-answer/complaint-answer.component';
+
 
 @Component({
   selector: 'app-admin-complaints',
@@ -23,16 +26,30 @@ export class AdminComplaintsComponent implements OnInit {
   public complaints: any[] = [];
 
 
-  constructor(private service: ComplaintsService) { }
+  constructor(private service: ComplaintsService, public dialog: MatDialog) { }
 
 
-  
+  //name surname description username
   ngOnInit(): void {
-    this.service.getComplaints().subscribe(res => {
+    this.service.findAllUnanswered().subscribe(res => {
       this.complaints = res;
       
-      window.alert(JSON.stringify(res[0]))
     })
   }
 
+
+  answerComplaint(complaint: any) {
+    const dialogRef = this.dialog.open(ComplaintAnswerComponent, {
+      data: {complaint: complaint},
+      width: '900px',
+      height: '600px'
+
+    });
+
+    dialogRef.afterClosed().subscribe(() => {
+      // Do stuff after the dialog has closed
+      location.reload();
+  });
+    
+  }
 }

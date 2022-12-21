@@ -6,4 +6,8 @@ import java.util.List;
 
 public interface ComplaintService {
     List<Complaint> getAll();
+
+    Complaint answerComplaint(Complaint complaint);
+
+    List<Complaint> getAllUnanswered();
 }

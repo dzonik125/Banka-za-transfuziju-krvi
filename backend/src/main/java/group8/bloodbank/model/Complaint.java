@@ -21,6 +21,9 @@ public class Complaint {
     @Column
     private String description;
 
+    @Column
+    private String answer;
+
 
     @ManyToOne
     @JoinColumn(name = "donor_id")
@@ -31,6 +34,13 @@ public class Complaint {
         this.description = description;
         this.id = id;
     }
+
+    public Complaint(Long id, String description, String answer) {
+        this.description = description;
+        this.id = id;
+        this.answer = answer;
+    }
+
 
     public Complaint() {
 

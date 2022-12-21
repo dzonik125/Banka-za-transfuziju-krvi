@@ -15,5 +15,13 @@ export class ComplaintsService {
     return this.http.get<any[]>(this.apiHost + 'complaints/findAllComplaints', {headers: this.headers});
   }
 
+  findAllUnanswered(): Observable<any[]>{
+    return this.http.get<any[]>(this.apiHost + 'complaints/findAllUnanswered', {headers: this.headers});
+  }
+
+  editComplaint(complaint: any, answer: any) : Observable<any> {
+    complaint.answer = answer;
+    return this.http.put<any>(this.apiHost + 'complaints/answerComplaint', complaint);
+  }
 
 }

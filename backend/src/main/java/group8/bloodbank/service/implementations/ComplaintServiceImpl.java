@@ -24,4 +24,15 @@ public class ComplaintServiceImpl implements ComplaintService {
         return complaintRepository.findAll();
     }
 
+    @Override
+    public Complaint answerComplaint(Complaint complaint) {
+        this.complaintRepository.updateAnswer(complaint.getId(), complaint.getAnswer());
+        return complaint;
+    }
+
+    @Override
+    public List<Complaint> getAllUnanswered() {
+        return this.complaintRepository.getAllUnanswered();
+    }
+
 }
