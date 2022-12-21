@@ -142,3 +142,14 @@ INSERT INTO USER_ROLE (user_id, role_id) VALUES (3, 3); -- user-u dodeljujemo ro
 
 INSERT INTO USER_ROLE (user_id, role_id) VALUES (7, 1); -- user-u dodeljujemo rolu DONOR
 INSERT INTO USER_ROLE (user_id, role_id) VALUES (8, 1); -- user-u dodeljujemo rolu DONOR
+
+
+INSERT INTO complaint(
+    id, description, donor_id)
+VALUES (1, 'Zalba1 asdsad.  (banka bankaB)', 7);
+
+
+INSERT INTO complaint(
+    id, description, donor_id)
+VALUES (2, 'Zalba2 asdas.  (banka bankaB)', 7);
+

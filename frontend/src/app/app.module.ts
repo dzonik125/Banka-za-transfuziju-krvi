@@ -59,6 +59,7 @@ import { CalendarComponent } from './calendar/calendar.component'
 import { FullCalendarModule } from '@fullcalendar/angular';
 import { RegisterAdministratorComponent } from './modules/administrator/register-administrator/register-administrator.component';
 import { ChangePasswordComponent } from './modules/administrator/admin-dashboard/change-password/change-password.component';
+import { AdminComplaintsComponent } from './modules/administrator/admin-complaints/admin-complaints.component';
 
 //I keep the new line
 
@@ -90,6 +91,7 @@ import { ChangePasswordComponent } from './modules/administrator/admin-dashboard
     CalendarComponent,
     RegisterAdministratorComponent,
     ChangePasswordComponent,
+    AdminComplaintsComponent,
   ],
 
   imports: [

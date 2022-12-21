@@ -20,8 +20,9 @@ import java.util.Set;
 @NoArgsConstructor
 public class Donor extends User {
 
+    @JsonIgnore
     @Column
-    @OneToMany(fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "donor", fetch = FetchType.LAZY)
     public Set<Complaint> complaint;
 
     @Column

@@ -19,6 +19,7 @@ import { AddAppointmentSlotComponent } from './modules/medical_worker/blood-bank
 import { CalendarComponent } from './calendar/calendar.component';
 import { RegisterAdministratorComponent } from './modules/administrator/register-administrator/register-administrator.component';
 import { ChangePasswordComponent } from './modules/administrator/admin-dashboard/change-password/change-password.component';
+import { AdminComplaintsComponent } from './modules/administrator/admin-complaints/admin-complaints.component';
 
 
 const routes: Routes = [
@@ -32,6 +33,7 @@ const routes: Routes = [
   {path:'adminDashboard/calendar/:id', component: CalendarComponent}, 
   {path:'adminDashboard/registerMedicalWorker', component: RegisterMedicalWorkerComponent},
   {path:'adminDashboard/registerAdministrator', component: RegisterAdministratorComponent},
+  {path:'adminDashboard/complaints', component: AdminComplaintsComponent},
   
   {path:'addAppointmentSlot', component: AddAppointmentSlotComponent},
   {path: 'displayAllUsers', component: DisplayAllUsersComponent},
