@@ -70,6 +70,7 @@ export class User{
     this._id = value;
   }
 
+
   public constructor(obj?: any) {
       if (obj) {
           this.name = obj.name;

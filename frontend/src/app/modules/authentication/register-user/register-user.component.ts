@@ -50,7 +50,6 @@ export class RegisterUserComponent{
   createUser(){
     this.user.address = this.address;
     this.authService.register(this.user).subscribe(res =>{
-      this.notifyService.showSuccess("You have successfully registered", "Success");
       this.user.name = '';
       this.user.surname = '';
       this.user.email = '';
@@ -63,10 +62,12 @@ export class RegisterUserComponent{
       this.user.occupation = '';
       this.user.gender = '';
       this.validation.repeatPass = '';
-    }, error => {
-      this.notifyService.showError("Fill in all the information ","Error");
-    })
-
+    },
+    (err) => {
+      if(err.status == 409){
+        this.notifyService.showError("Unexpected error ! ","Error");
+      } else this.notifyService.showWarning("Fill in all the information !","Warning");
+    });
   }
 
 }

@@ -16,6 +16,8 @@ export class Donor {
     address!: Address;
     category: string = 'REGULAR';
     userType: string = 'DONOR';
+    hasSurvey!: boolean;
+
 
 
 
@@ -33,6 +35,7 @@ export class Donor {
           this.points = obj.points;
           this.category = obj.category;
           this.userType = obj.userType;
+          this.hasSurvey = obj.hasSurvey;
       }
   }
 

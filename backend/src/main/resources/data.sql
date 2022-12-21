@@ -78,7 +78,6 @@ VALUES (1, 1000, 'Oneg');
 
 
 
-
 --sifre su Donor         -> donor
 --         MedicalWorker -> medicalworker
 --         Admin         -> admin
@@ -105,8 +104,8 @@ VALUES (7, 'donor3@mail.com', 0, '7132312321321', 'Zarko', 'Vodoinstalater', '$2
 
 
 INSERT INTO donor(
-    blood_type, category, penalty, points, id)
-VALUES (0, 0, 0, 11, 1);
+    blood_type, category, penalty, points, id, has_survey)
+VALUES (0, 0, 0, 11, 1, false);
 
 INSERT INTO donor(
     blood_type, category, penalty, points, id)
@@ -130,6 +129,31 @@ VALUES (false, 3);
 INSERT INTO medical_worker_appointments(
     medical_worker_id, appointment_id)
 VALUES (2, 1);
+
+INSERT INTO appointment_slot(
+    start_time, end_time, donor_id, blood_bank_id, status)
+VALUES ('2022-12-15 13:00:28.111756','2022-12-15 14:00:28.112755',null, 1, 0);
+
+INSERT INTO appointment_slot(
+    start_time, end_time, donor_id, blood_bank_id, status)
+VALUES ('2022-12-19 17:00:28.111756','2022-12-19 18:00:28.112755',null, 1, 0);
+
+INSERT INTO appointment_slot(
+    start_time, end_time, donor_id, blood_bank_id, status)
+VALUES ('2022-12-19 11:00:28.111756','2022-12-19 10:00:28.112755',null, 1, 0);
+
+INSERT INTO appointment_slot(
+    start_time, end_time, donor_id, blood_bank_id, status)
+VALUES ('2022-12-20 16:00:28.111756','2022-12-20 18:00:28.112755',null, 1, 0);
+
+
+
+
+
+-- INSERT INTO survey(
+--     answer1, answer2, answer3, answer4, answer5, answer6, answer7, answer8, answer9, answer10, donor_id)
+-- VALUES ('yes','yes','yes','yes','yes','no','yes','yes','yes','yes', 1);
+
 
 
 INSERT INTO role (name) VALUES ('ROLE_DONOR');

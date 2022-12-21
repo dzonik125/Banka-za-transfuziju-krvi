@@ -1,3 +1,4 @@
+import { ScheduledAppointmentsComponent } from './modules/public/scheduled-appointments/scheduled-appointments.component';
 import { ScheduleExsistingAppointmentComponent } from './modules/public/schedule-exsisting-appointment/schedule-exsisting-appointment.component';
 import { CreateSurveyComponent } from './modules/public/create-survey/create-survey.component';
 import { NgModule } from '@angular/core';
@@ -16,6 +17,8 @@ import { DisplayAllUsersComponent } from './modules/administrator/display-all-us
 import { BloodBankViewComponent } from './modules/medical_worker/blood-bank-view/blood-bank-view.component';
 import { LoginComponent } from './modules/authentication/login/login/login.component';
 import { AddAppointmentSlotComponent } from './modules/medical_worker/blood-bank-view/add-appointment-slot/add-appointment-slot.component';
+import { AuthGuard } from './modules/authentication/helpers/auth.guard';
+import { RoleGuard } from './modules/authentication/helpers/role.guard';
 import { CalendarComponent } from './calendar/calendar.component';
 import { RegisterAdministratorComponent } from './modules/administrator/register-administrator/register-administrator.component';
 import { ChangePasswordComponent } from './modules/administrator/admin-dashboard/change-password/change-password.component';
@@ -43,6 +46,9 @@ const routes: Routes = [
   
   {path :'survey', component: CreateSurveyComponent},
   {path :'getAll', component: ScheduleExsistingAppointmentComponent},
+  {path :'survey', component: CreateSurveyComponent, canActivate: [AuthGuard, RoleGuard], data: { roles: ['ROLE_DONOR'] }},
+  {path :'schedule', component: ScheduleExsistingAppointmentComponent, canActivate: [AuthGuard, RoleGuard], data: { roles: ['ROLE_DONOR'] }},
+  {path :'scheduledAppointments', component: ScheduledAppointmentsComponent, canActivate: [AuthGuard, RoleGuard], data: { roles: ['ROLE_DONOR'] }},
 ];
 
 @NgModule({

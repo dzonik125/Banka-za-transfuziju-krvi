@@ -11,7 +11,7 @@ export class Survey {
     answer8!: string;
     answer9!: string;
     answer10!: string;
-   /// donor!: User;
+    donor!: string;
 
   public constructor(obj?: any) {
       if (obj) {
@@ -25,7 +25,7 @@ export class Survey {
           this.answer8 = obj.answer8;
           this.answer9 = obj.answer9;
           this.answer10 = obj.answer10;
-         // this.donor = obj.donor;
+          this.donor = obj.donor;
       }
   }
 

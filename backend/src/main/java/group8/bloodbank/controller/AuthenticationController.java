@@ -9,6 +9,7 @@ import group8.bloodbank.service.interfaces.DonorService;
 import group8.bloodbank.service.interfaces.UserService;
 import group8.bloodbank.util.TokenUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -16,13 +17,13 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import javax.mail.MessagingException;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 
 
 //Kontroler zaduzen za autentifikaciju korisnika
@@ -67,14 +68,13 @@ public class AuthenticationController {
 
 	// Endpoint za registraciju novog korisnika
 	@PostMapping("/signup")
-	public ResponseEntity<User> addUser(@RequestBody UserDTO user, UriComponentsBuilder ucBuilder) {
-		User existUser = this.userService.findByUsername(user.getEmail());
+	public ResponseEntity<User> addUser(@RequestBody UserDTO user, UriComponentsBuilder ucBuilder) throws MessagingException, UnsupportedEncodingException {
 
-		if (existUser != null) {
+		if (this.userService.findByUsername(user.getEmail()) != null) {
 			return new ResponseEntity<>(HttpStatus.CONFLICT);
 		}
 
-		Donor donor = this.donorService.saveDonor(user);
+		Donor donor = this.donorService.registerDonor(user);
 
 		if(donor == null){
 			return new ResponseEntity<>(donor, HttpStatus.CONFLICT);
@@ -82,4 +82,21 @@ public class AuthenticationController {
 
 		return new ResponseEntity<>(donor, HttpStatus.CREATED);
 	}
+
+	@GetMapping("/verify")
+	public ResponseEntity<Boolean> verify(@Param("code")String code, HttpServletResponse res){
+		try {
+			if (donorService.verify(code)) {
+				res.sendRedirect("http://localhost:4200/auth/login");
+				return new ResponseEntity<>(true, HttpStatus.OK);
+			} else {
+				return new ResponseEntity<>(false, HttpStatus.CONFLICT);
+			}
+		} catch(IOException e){
+			e.printStackTrace();
+			throw new RuntimeException(e);
+		}
+	}
+
+
 }

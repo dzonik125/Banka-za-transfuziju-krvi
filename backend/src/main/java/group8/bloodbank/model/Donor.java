@@ -9,6 +9,8 @@ import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 import org.hibernate.annotations.IndexColumn;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.*;
 import java.util.List;
 import java.util.Set;
@@ -29,15 +31,22 @@ public class Donor extends User {
     @OneToMany(fetch = FetchType.LAZY)
     public Set<Survey> survey;
 
+
     @Column
     private int points;
     @Column
     private int penalty;
 
     @Column
+    private Boolean hasSurvey;
+
+    @Column
     private Category category;
     @Column
     private BloodType bloodType;
+
+    @Column
+    private String verificationCode;
 
 
 }

@@ -15,4 +15,8 @@ export class SurveyService {
   createSurvey(survey: any): Observable<any> {
     return this.http.post<any>(this.apiHost + 'survey', survey);
   }
+
+  getSurveys(): Observable<any[]>{
+    return this.http.get<any[]>(this.apiHost + 'survey/findAll', {headers: this.headers});
+  }
 }
