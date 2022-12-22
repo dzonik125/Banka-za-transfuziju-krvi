@@ -61,10 +61,10 @@
             <mat-card-content>{{bloodBank.address.city}},{{bloodBank.address.street}} {{bloodBank.address.number}}</mat-card-content>
           </p>
           <p style="display: inline-block;">
-            <button class="btn btn-primary" (click)="showBank(bloodBank.id)">Show</button>
+            <button  class="btn btn-primary" (click)="showBank(bloodBank.id)">Show</button>
           </p>
           <p style="display: inline-block; margin-left: 10%;">
-            <button class="btn btn-primary" (click)="showCalendar(bloodBank.id)">calendar</button>
+            <button *ngIf="role==='ROLE_ADMIN'" class="btn btn-primary" (click)="showCalendar(bloodBank.id)">calendar</button>
           </p>
         </mat-card-content>
       </mat-card>

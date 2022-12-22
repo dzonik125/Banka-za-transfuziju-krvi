@@ -22,7 +22,7 @@ public class Admin extends User {
 //    }
 
     public Admin(boolean firstLogin, String name, String surname, String email, String password, String jmbg, Address address, String occupation,  Gender gender) {
-        super(name, surname, email, password, jmbg, address, occupation, gender, UserType.MEDICAL_WORKER);
+        super(name, surname, email, password, jmbg, address, occupation, gender, UserType.SYSTEM_ADMINISTRATOR);
         this.firstLogin = firstLogin;
     }
 

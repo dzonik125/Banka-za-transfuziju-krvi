@@ -22,6 +22,7 @@ export class DisplayAllCentersComponent implements AfterViewInit {
   public term: string = '';
   public sorter: MySort = new MySort();
   public filteredbloodBanks: BloodBank[] = [];
+  public role ='';
   _minTerm: string = '';
   _maxTerm: string = '';
 
@@ -29,6 +30,7 @@ export class DisplayAllCentersComponent implements AfterViewInit {
   POSTS: any;
   page: number = 1;
   count: number = 0;
+
 
   constructor(private bloodBankService: BloodBankServiceService,
     private router: Router,
@@ -44,9 +46,8 @@ export class DisplayAllCentersComponent implements AfterViewInit {
         this.bloodBanks = res;
         this.filteredbloodBanks = this.bloodBanks;
       })
+      this.role = this.jwtHelper.decodeToken().role;
 
-
-      
     }
 
   public get minTerm(): string {
