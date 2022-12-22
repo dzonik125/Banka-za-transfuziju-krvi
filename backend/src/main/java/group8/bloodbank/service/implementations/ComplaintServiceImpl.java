@@ -25,9 +25,8 @@ public class ComplaintServiceImpl implements ComplaintService {
     }
 
     @Override
-    public Complaint answerComplaint(Complaint complaint) {
-        this.complaintRepository.updateAnswer(complaint.getId(), complaint.getAnswer());
-        return complaint;
+    public void answerComplaint(Long complaintID, String answer) {
+        this.complaintRepository.updateAnswer(complaintID, answer);
     }
 
     @Override
