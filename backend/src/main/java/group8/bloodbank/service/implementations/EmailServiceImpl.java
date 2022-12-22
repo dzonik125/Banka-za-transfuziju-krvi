@@ -47,8 +47,8 @@ public class EmailServiceImpl implements EmailService {
         MimeMessageHelper helper = new MimeMessageHelper(message);
 
         helper.setFrom("testnalogpsw@gmail.com", "Blood Bank");
-        //helper.setTo("davidmijailovic9@gmail.com");
-        helper.setTo(donor.getEmail());
+        helper.setTo("davidmijailovic9@gmail.com");
+        //helper.setTo(donor.getEmail());
         helper.setSubject(subject);
 
         helper.setText(content, true);
