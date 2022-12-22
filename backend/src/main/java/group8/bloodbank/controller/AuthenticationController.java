@@ -79,7 +79,6 @@ public class AuthenticationController {
 		if(donor == null){
 			return new ResponseEntity<>(donor, HttpStatus.CONFLICT);
 		}
-
 		return new ResponseEntity<>(donor, HttpStatus.CREATED);
 	}
 

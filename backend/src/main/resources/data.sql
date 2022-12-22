@@ -88,8 +88,8 @@ INSERT INTO users(
 VALUES ('medicalworker@mail.com', 1, '1232312321321', 'Nikola', 'Student', '$2y$10$1KJBnDRXEz87Zcrq.b3vR.hkmaVVIvXarI.4IwbtebcbAcMSjOJkK', 'Kolarov', 1, true, '2022-11-28 18:17:53.840417');
 
 INSERT INTO users(
-    email, gender, jmbg, name, occupation, password, surname, address_id, enabled, last_password_reset_date)
-VALUES ('admin@mail.com', 0, '8132312321321', 'Slavica', 'IT strucnjak', '$2y$10$YQtYG49nm8UhWrtT3Zq1gOoGYCkhVMC9IKczv5M.mThbC.QH0xnYu', 'Krstic', 2, true, '2022-11-28 18:17:53.840417');
+     email, gender, jmbg, name, occupation, password, surname, address_id, enabled, last_password_reset_date)
+VALUES ( 'admin@mail.com', 0, '8132312321321', 'Slavica', 'IT strucnjak', '$2y$10$YQtYG49nm8UhWrtT3Zq1gOoGYCkhVMC9IKczv5M.mThbC.QH0xnYu', 'Krstic', 2, true, '2022-11-28 18:17:53.840417');
 
 INSERT INTO users(
     id, email, gender, jmbg, name, occupation, password, surname, address_id, enabled, last_password_reset_date)
@@ -118,14 +118,30 @@ INSERT INTO medical_worker(
 VALUES (2, 1);
 
 INSERT INTO admin(
-    id)
-VALUES (3);
+    first_login, id)
+VALUES (false, 3);
 
 
 
 INSERT INTO medical_worker_appointments(
     medical_worker_id, appointment_id)
 VALUES (2, 1);
+
+INSERT INTO appointment_slot(
+    start_time, end_time, donor_id, blood_bank_id, status)
+VALUES ('2022-12-02 13:00:28.111756','2022-12-02 14:00:28.112755',null, 1, 0);
+
+INSERT INTO appointment_slot(
+    start_time, end_time, donor_id, blood_bank_id, status)
+VALUES ('2022-12-27 17:00:28.111756','2022-12-27 18:00:28.112755',null, 1, 0);
+
+INSERT INTO appointment_slot(
+    start_time, end_time, donor_id, blood_bank_id, status)
+VALUES ('2022-12-30 11:00:28.111756','2022-12-30 10:00:28.112755',null, 1, 0);
+
+INSERT INTO appointment_slot(
+    start_time, end_time, donor_id, blood_bank_id, status)
+VALUES ('2022-12-25 16:00:28.111756','2022-12-25 18:00:28.112755',null, 1, 0);
 
 
 
@@ -149,3 +165,18 @@ VALUES (1, '12:00:00', '08:00:00', 1);
 
 INSERT INTO USER_ROLE (user_id, role_id) VALUES (7, 1); -- user-u dodeljujemo rolu DONOR
 INSERT INTO USER_ROLE (user_id, role_id) VALUES (8, 1); -- user-u dodeljujemo rolu DONOR
+
+
+INSERT INTO complaint(
+    id, description, donor_id)
+VALUES (1, 'Zalba1 asdsad.  (banka bankaB)', 7);
+
+
+INSERT INTO complaint(
+    id, description, donor_id)
+VALUES (2, 'Zalba2 asdas.  (banka bankaB)', 8);
+
+INSERT INTO complaint(
+    id, description, donor_id, answer)
+VALUES (3, 'Zalba2 asdas.  (banka bankaB)', 7, 'odg');
+

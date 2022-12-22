@@ -11,7 +11,6 @@ import javax.persistence.*;
 @Getter
 @Setter
 @AllArgsConstructor
-@NoArgsConstructor
 public class Complaint {
 
     @Id
@@ -22,5 +21,28 @@ public class Complaint {
     @Column
     private String description;
 
+    @Column
+    private String answer;
 
+
+    @ManyToOne
+    @JoinColumn(name = "donor_id")
+    public Donor donor;
+
+    
+    public Complaint(Long id, String description) {
+        this.description = description;
+        this.id = id;
+    }
+
+    public Complaint(Long id, String description, String answer) {
+        this.description = description;
+        this.id = id;
+        this.answer = answer;
+    }
+
+
+    public Complaint() {
+
+    }
 }

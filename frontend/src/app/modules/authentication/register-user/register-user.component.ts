@@ -62,6 +62,8 @@ export class RegisterUserComponent{
       this.user.occupation = '';
       this.user.gender = '';
       this.validation.repeatPass = '';
+      this.notifyService.showInfo("Please, check your email for verification !","Info");
+
     },
     (err) => {
       if(err.status == 409){
