@@ -6,9 +6,11 @@ import group8.bloodbank.model.Appointment;
 import group8.bloodbank.model.DTO.AppointmentCallendarDTO;
 import group8.bloodbank.model.DTO.AppointmentDTO;
 import group8.bloodbank.model.MedicalWorker;
+import group8.bloodbank.model.WorkingHours;
 import group8.bloodbank.service.interfaces.AppointmentService;
 import group8.bloodbank.service.interfaces.DonorService;
 import group8.bloodbank.service.interfaces.MedicalWorkerService;
+import group8.bloodbank.service.interfaces.WorkingHoursService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -27,11 +29,14 @@ public class AppointmentController {
     private MedicalWorkerService medicalWorkerService;
     private DonorService donorService;
 
+    private WorkingHoursService workingHoursService;
+
     @Autowired
-    public AppointmentController(AppointmentService service, MedicalWorkerService medicalWorkerService, DonorService donorService) {
+    public AppointmentController(AppointmentService service, MedicalWorkerService medicalWorkerService, DonorService donorService, WorkingHoursService workingHoursService) {
         this.service = service;
         this.medicalWorkerService = medicalWorkerService;
         this.donorService = donorService;
+        this.workingHoursService = workingHoursService;
     }
 
 
@@ -56,6 +61,11 @@ public class AppointmentController {
         } catch (Exception e) {
             return new ResponseEntity(HttpStatus.CONFLICT);
         }
+    }
+
+    @GetMapping(value = "/getBloodBankWorkingHours")
+    public WorkingHours getBloodBankWorkingHours(@RequestParam(value = "id") Long id){
+        return workingHoursService.getByBloodBankId(id);
     }
 
 }
