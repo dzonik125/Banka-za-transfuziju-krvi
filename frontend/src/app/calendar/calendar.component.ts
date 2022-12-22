@@ -3,14 +3,8 @@ import { CalendarOptions } from '@fullcalendar/core'; // useful for typechecking
 import dayGridPlugin from '@fullcalendar/daygrid'; 
 import interactionPlugin from '@fullcalendar/interaction'; 
 import listPlugin from '@fullcalendar/list';
-import { toJSDate } from '@ng-bootstrap/ng-bootstrap/datepicker/ngb-calendar';
-import { Appointment } from '../model/appointment';
-import { ExistingAppointment } from '../model/existingAppointment';
 import { AppointmentService } from '../services/appointment.service';
-import { setTimeout } from "timers/promises";
-import { concat } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
-
 
 
 @Component({
@@ -30,16 +24,10 @@ export class CalendarComponent implements OnInit {
   constructor(private appointmentService: AppointmentService, private route: ActivatedRoute) { }
 
 
-
-
   ngOnInit() {
     this.id = this.route.snapshot.paramMap.get('id');
-    window.alert(this.id)
 
     this.appointmentService.getAppointmentsByBloodBankID(this.id).subscribe(res => {
-      // window.alert(JSON.stringify(res[0]))
-      // this.appointmets.push(res[0])
-      // this.appointmets.push(res[1])
      res.forEach(element => this.appointmets.push(element));
 
     })

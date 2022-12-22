@@ -22,13 +22,15 @@ import java.util.Set;
 @NoArgsConstructor
 public class Donor extends User {
 
-//    @Column
-//    @OneToMany(fetch = FetchType.LAZY)
-//    public Set<Complaint> complaint;
-//
-//    @Column
-//    @OneToMany(fetch = FetchType.LAZY)
-//    public Set<Survey> survey;
+    @JsonIgnore
+    @Column
+    @OneToMany(mappedBy = "donor", fetch = FetchType.LAZY)
+    public Set<Complaint> complaint;
+
+    @Column
+    @OneToMany(fetch = FetchType.LAZY)
+    public Set<Survey> survey;
+
 
     @Column
     private int points;

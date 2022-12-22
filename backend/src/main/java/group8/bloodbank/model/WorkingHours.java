@@ -5,6 +5,7 @@ package group8.bloodbank.model; /***********************************************
  ***********************************************************************/
 
 import javax.persistence.*;
+import java.sql.Time;
 import java.time.LocalDateTime;
 
 /**
@@ -20,13 +21,13 @@ public class WorkingHours {
 
     @ManyToOne
     @JoinColumn(name = "blood_bank_id")
-    public BloodBank bloodBank;
+    private BloodBank bloodBank;
     @Column
-    private LocalDateTime startTime;
+    private Time startTime;
     @Column
-    private LocalDateTime endTime;
+    private Time endTime;
 
-    public WorkingHours(LocalDateTime startTime, LocalDateTime endTime, BloodBank bloodBank) {
+    public WorkingHours(Time startTime, Time endTime, BloodBank bloodBank) {
         this.startTime = startTime;
         this.endTime = endTime;
         this.bloodBank = bloodBank;
@@ -36,19 +37,19 @@ public class WorkingHours {
 
     }
 
-    public LocalDateTime getStartTime() {
+    public Time getStartTime() {
         return startTime;
     }
 
-    public void setStartTime(LocalDateTime startTime) {
+    public void setStartTime(Time startTime) {
         this.startTime = startTime;
     }
 
-    public LocalDateTime getEndTime() {
+    public Time getEndTime() {
         return endTime;
     }
 
-    public void setEndTime(LocalDateTime endTime) {
+    public void setEndTime(Time endTime) {
         this.endTime = endTime;
     }
 

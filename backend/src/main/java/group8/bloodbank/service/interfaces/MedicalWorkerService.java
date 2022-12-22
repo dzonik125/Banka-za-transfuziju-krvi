@@ -19,4 +19,8 @@ public interface MedicalWorkerService {
     void SetBloodBankIDsForSelectedMedicalWorkers(List<MedicalWorker> medicalWorkers, BloodBank bloodBank);
 
     void updateMedicalWorkerBloodBank(MedicalWorker medicalWorker, BloodBank bloodBank);
+
+    public Long getBloodBank(Long id);
+
+    public MedicalWorker findById(Long id);
 }

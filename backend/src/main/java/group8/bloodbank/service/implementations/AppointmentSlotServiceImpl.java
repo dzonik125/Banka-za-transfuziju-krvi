@@ -1,5 +1,6 @@
 package group8.bloodbank.service.implementations;
 
+import com.google.zxing.WriterException;
 import group8.bloodbank.model.AppointmentSlot;
 import group8.bloodbank.model.AppointmentStatus;
 import group8.bloodbank.model.Donor;
@@ -13,7 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.mail.MessagingException;
-import java.io.UnsupportedEncodingException;
+import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
@@ -22,7 +23,6 @@ import java.util.Optional;
 public class AppointmentSlotServiceImpl implements AppointmentSlotService {
 
 
-    private final String imagePath = "./src/main/resources/qrcodes/QRCode.png";
     private final String link = "http://localhost:4200/scheduledAppointments";
     AppointmentSlotRepository repository;
     BloodBankRepository bloodBankRepository;
@@ -52,7 +52,7 @@ public class AppointmentSlotServiceImpl implements AppointmentSlotService {
     }
 
     @Override
-    public AppointmentSlot scheduleSlot(AppointmentSlot slot) throws MessagingException, UnsupportedEncodingException {
+    public AppointmentSlot scheduleSlot(AppointmentSlot slot) throws MessagingException, IOException, WriterException {
         Optional<Donor> d = donorRepository.findById(slot.donor.getId());
         if(slot.getStartTime().isBefore(LocalDateTime.now())){
             throw new UnsupportedOperationException("This appointment has expired !");
@@ -62,8 +62,9 @@ public class AppointmentSlotServiceImpl implements AppointmentSlotService {
                     throw new UnsupportedOperationException("You already have an appointment at this facility at this time !");
             }
             repository.save(slot);
-            String url = qrCodeService.generateImageAsQRCode(link, 200, 200, imagePath, slot.getId().toString());
-            emailService.sendAppointmentInformationMail(d.get(), url);
+            //String open = LocalDateTime.now() + " Dear " + slot.donor.getName() + ", you have an appointment scheduled for " + slot.getStartTime() + " at the " + slot.bloodBank.getName();
+            //String url = qrCodeService.generateImageAsQRCode(open, 200, 200, slot.getId().toString());
+            //emailService.sendAppointmentInformationMail(d.get(), url);
         }
         return slot;
     }
@@ -89,6 +90,11 @@ public class AppointmentSlotServiceImpl implements AppointmentSlotService {
     @Override
     public List<AppointmentSlot> getAll() {
         return repository.findAll();
+    }
+
+    @Override
+    public List<AppointmentSlot> getAllByBankId(Long id) {
+        return repository.getAllbyBankId(id);
     }
 
 }

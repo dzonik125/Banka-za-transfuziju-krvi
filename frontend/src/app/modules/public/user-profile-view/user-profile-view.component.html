@@ -46,7 +46,7 @@
                 </div>
                 <div class="col-sm-9">
                   <input type="text" id="pass" class="form-control animate pop" style="color: black !important; display: none; margin-top: 1rem;" value='{{user?.password}}'>
-                  <p class="text-muted mb-0" name="toGet">{{user?.password}}</p>
+                  <p class="text-muted mb-0" name="toGet">{{user?.password | password}}</p>
                 </div>
               </div>
               <hr>

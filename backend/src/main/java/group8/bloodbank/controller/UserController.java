@@ -35,7 +35,7 @@ public class UserController {
 
     @CrossOrigin(origins = "http://localhost:4200")
     @GetMapping
-    @PreAuthorize("hasRole('ROLE_DONOR')")
+    @PreAuthorize("hasAnyRole('ROLE_DONOR', 'ROLE_MEDICALWORKER', 'ROLE_ADMIN')")
     public ResponseEntity<User> findById(@RequestParam Long id){
         try {
             User toReturn = userService.findById(id);
