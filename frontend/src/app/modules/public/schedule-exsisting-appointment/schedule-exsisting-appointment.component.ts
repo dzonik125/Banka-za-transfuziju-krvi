@@ -65,7 +65,8 @@ export class ScheduleExsistingAppointmentComponent implements AfterViewInit {
 
     this.existingAppointmentService.getAppointments().subscribe(res => {
       const result = res.filter((r: any) => {
-        return r.status === 'WAITING';
+
+        return r.status === 'WAITING' && new Date(r.startTime) > new Date();
       })
       this.dataSource = new MatTableDataSource<ExistingAppointment>(result);
       this.dataSource.sort = this.sort;

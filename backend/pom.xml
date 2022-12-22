@@ -211,9 +211,15 @@
             <artifactId>firebase-ui-storage</artifactId>
             <version>8.0.2</version>
         </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-autoconfigure</artifactId>
+            <version>2.7.5</version>
+        </dependency>
 
 
     </dependencies>
+
 
     <build>
         <extensions>
@@ -229,8 +235,10 @@
                 <artifactId>protobuf-maven-plugin</artifactId>
                 <version>${protobuf-plugin.version}</version>
                 <configuration>
+                    <!--suppress UnresolvedMavenProperty -->
                     <protocArtifact>com.google.protobuf:protoc:${protobuf.version}:exe:${os.detected.classifier}</protocArtifact>
                     <pluginId>grpc-java</pluginId>
+                    <!--suppress UnresolvedMavenProperty -->
                     <pluginArtifact>io.grpc:protoc-gen-grpc-java:${grpc.version}:exe:${os.detected.classifier}</pluginArtifact>
                 </configuration>
                 <executions>
@@ -281,7 +289,9 @@
                 </executions>
             </plugin>
         </plugins>
+
     </build>
+
     <repositories>
         <repository>
             <id>spring-releases</id>
@@ -352,5 +362,6 @@
             </build>
         </profile>
     </profiles>
+
 
 </project>

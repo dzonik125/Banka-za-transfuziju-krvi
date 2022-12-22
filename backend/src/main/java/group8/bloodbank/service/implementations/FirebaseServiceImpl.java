@@ -7,7 +7,6 @@ import com.google.cloud.storage.BlobInfo;
 import com.google.cloud.storage.Storage;
 import com.google.cloud.storage.StorageOptions;
 import group8.bloodbank.service.interfaces.FirebaseService;
-import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -23,7 +22,7 @@ import java.nio.file.Files;
 public class FirebaseServiceImpl implements FirebaseService {
 
     String firebaseUrl = "https://firebasestorage.googleapis.com/v0/b/isapsw-6ef61.appspot.com/o/%s?alt=media";
-    @Async
+
     @Override
     public String upload(MultipartFile multipartFile, String appointmentId) throws IOException {
             String fileName = "qr_appointment" + appointmentId;

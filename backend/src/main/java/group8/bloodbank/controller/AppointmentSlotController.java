@@ -64,7 +64,7 @@ public class AppointmentSlotController {
             service.scheduleSlot(slot);
             return new ResponseEntity<Exception>(HttpStatus.OK);
         } catch (Exception e){
-            //e.printStackTrace();
+            e.printStackTrace();
             return new ResponseEntity<Exception>(e, HttpStatus.CONFLICT);
         }
     }
