@@ -20,8 +20,9 @@ export class ComplaintsService {
   }
 
   editComplaint(complaint: any, answer: any) : Observable<any> {
-    complaint.answer = answer;
-    return this.http.put<any>(this.apiHost + 'complaints/answerComplaint', complaint);
+    
+    var dto={'adminID': complaint.id, 'password': answer }
+    return this.http.put<any>(this.apiHost + 'complaints/answerComplaint', dto);
   }
 
 }
