@@ -27,20 +27,20 @@ VALUES (null, 1.8, ' ','https://firebasestorage.googleapis.com/v0/b/isapsw-6ef61
 
 
 INSERT INTO public.appointment(
-    id, donor_id, duration, start, blood_bank_id)
-VALUES (1, 1, 20, '2022-12-24 18:17:53.840417', 1);
+    donor_id, duration, start, blood_bank_id)
+VALUES (1, 20, '2022-12-24 18:17:53.840417', 1);
 
 INSERT INTO public.appointment(
-    id, donor_id, duration, start, blood_bank_id)
-VALUES (2, 8, 20, '2022-12-25 18:17:53.840417', 1);
+    donor_id, duration, start, blood_bank_id)
+VALUES (8, 20, '2022-12-25 18:17:53.840417', 1);
 
 INSERT INTO public.appointment(
-    id, donor_id, duration, start, blood_bank_id)
-VALUES (3, 7, 20, '2022-12-24 13:17:53.840417', 1);
+    donor_id, duration, start, blood_bank_id)
+VALUES (7, 20, '2022-12-24 13:17:53.840417', 1);
 
 INSERT INTO public.appointment(
-    id, donor_id, duration, start, blood_bank_id)
-VALUES (4, 7, 20, '2022-12-27 13:17:53.840417', 2);
+    donor_id, duration, start, blood_bank_id)
+VALUES (7, 20, '2022-12-27 13:17:53.840417', 2);
 
 
 INSERT INTO blood_type_blood_bank(
@@ -74,9 +74,6 @@ VALUES (1, 1000, 'Opos');
 INSERT INTO blood_type_blood_bank(
     blood_bank_id, blood_type_amount, blood_type_key)
 VALUES (1, 1000, 'Oneg');
-
-
-
 
 --sifre su Donor         -> donor
 --         MedicalWorker -> medicalworker
@@ -118,7 +115,7 @@ VALUES (2, 2, 0, 14, 8);
 
 INSERT INTO medical_worker(
     id, blood_bank_id)
-VALUES (2, null);
+VALUES (2, 1);
 
 INSERT INTO admin(
     first_login, id)
@@ -149,11 +146,9 @@ VALUES ('2022-12-25 16:00:28.111756','2022-12-25 18:00:28.112755',null, 1, 0);
 
 
 
-
 -- INSERT INTO survey(
 --     answer1, answer2, answer3, answer4, answer5, answer6, answer7, answer8, answer9, answer10, donor_id)
 -- VALUES ('yes','yes','yes','yes','yes','no','yes','yes','yes','yes', 1);
-
 
 
 INSERT INTO role (name) VALUES ('ROLE_DONOR');
@@ -163,6 +158,10 @@ INSERT INTO role (name) VALUES ('ROLE_ADMIN');
 INSERT INTO USER_ROLE (user_id, role_id) VALUES (1, 1); -- user-u dodeljujemo rolu DONOR
 INSERT INTO USER_ROLE (user_id, role_id) VALUES (2, 2); -- user-u dodeljujemo rolu MW
 INSERT INTO USER_ROLE (user_id, role_id) VALUES (3, 3); -- user-u dodeljujemo rolu ADMIN
+
+INSERT INTO working_hours(
+    id, end_time, start_time, blood_bank_id)
+VALUES (1, '12:00:00', '08:00:00', 1);
 
 INSERT INTO USER_ROLE (user_id, role_id) VALUES (7, 1); -- user-u dodeljujemo rolu DONOR
 INSERT INTO USER_ROLE (user_id, role_id) VALUES (8, 1); -- user-u dodeljujemo rolu DONOR

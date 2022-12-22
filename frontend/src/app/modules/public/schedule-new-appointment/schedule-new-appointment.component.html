@@ -1,0 +1,20 @@
+<h1>Schedule an appointment</h1>
+<form (submit)="ScheduleApp1()">
+    <label for="date">Pick a date</label>
+    <input type="date" class="form-control" style="width: 35%" id="date" name="date" [(ngModel)]="date">
+    <label for="time" style="margin-top: 5px;">Pick a start time</label>
+    <input type="time" class="form-control" style="width: 35%;" id="time" name="time" [(ngModel)]="startTime">
+    <input type="submit" *ngIf="schedButton" class="form-control" value="Schedule" style="width: 20%; margin-top: 10px;">
+</form>
+
+<div style="border: 2px solid black; width: 25rem; height: 20rem; overflow: auto; position: absolute; left: 60rem; bottom: 10.5rem;" *ngIf="bloodBanks.length != 0">
+    <h4 style="margin-top: 0; margin-left: 5px;">Banks</h4>
+    <div class="card" style="width: 18rem; height: 5rem; margin-left: 5px; cursor: pointer;" *ngFor="let item of bloodBanks" (click)="ScheduleApp(item.id)">
+          <h6 class="card-title" style="margin-top: 0; margin-left: 2px;">{{item.name}}</h6>
+          <h6 class="card-subtitle mb-2 text-muted" style="margin-top: 0; margin-left: 2px;">{{item.address.street}} {{item.address.number}}, {{item.address.city}}</h6>
+          <h6 class="card-subtitle mb-2 text-muted" style="margin-top: 0; margin-left: auto; margin-right: 1.5rem;">Grade: {{item.avgGrade}}</h6>
+    </div>
+    <a class="link-primary" style="cursor: pointer; position: absolute; right: 5px; top: 5px;" (click)="SortByGrade('avgGrade')">Sort</a>
+</div>
+
+<h1 style="position: absolute; left: 65rem; bottom: 18rem;" *ngIf="fetching">Fetching...</h1>

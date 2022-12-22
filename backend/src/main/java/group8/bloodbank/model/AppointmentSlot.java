@@ -30,11 +30,11 @@ public class AppointmentSlot {
     public Donor donor;
 
     @Column
-    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern="yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
     private LocalDateTime startTime;
 
     @Column
-    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern="yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
     private LocalDateTime endTime;
 
     @Column

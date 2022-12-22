@@ -63,6 +63,8 @@ import { ChangePasswordComponent } from './modules/administrator/admin-dashboard
 import { AdminComplaintsComponent } from './modules/administrator/admin-complaints/admin-complaints.component';
 import { ComplaintAnswerComponent } from './modules/administrator/complaint-answer/complaint-answer.component';
 
+import { ScheduleNewAppointmentComponent } from './modules/public/schedule-new-appointment/schedule-new-appointment.component';
+import { PasswordPipe } from './modules/util/pipes/password.pipe';
 
 //I keep the new line
 
@@ -98,6 +100,8 @@ import { ComplaintAnswerComponent } from './modules/administrator/complaint-answ
     AdminComplaintsComponent,
     ComplaintAnswerComponent,
 
+    ScheduleNewAppointmentComponent,
+      PasswordPipe
   ],
 
   imports: [
