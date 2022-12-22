@@ -60,6 +60,7 @@ import { CalendarComponent } from './calendar/calendar.component'
 import { FullCalendarModule } from '@fullcalendar/angular';
 
 import { ScheduleNewAppointmentComponent } from './modules/public/schedule-new-appointment/schedule-new-appointment.component';
+import { PasswordPipe } from './modules/util/pipes/password.pipe';
 
 //I keep the new line
 
@@ -91,7 +92,8 @@ import { ScheduleNewAppointmentComponent } from './modules/public/schedule-new-a
     ScheduledAppointmentsComponent,
     CalendarComponent,
 
-    ScheduleNewAppointmentComponent
+    ScheduleNewAppointmentComponent,
+      PasswordPipe
   ],
 
   imports: [

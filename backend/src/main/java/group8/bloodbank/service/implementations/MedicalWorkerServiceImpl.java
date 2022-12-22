@@ -70,4 +70,9 @@ public class MedicalWorkerServiceImpl implements MedicalWorkerService {
        return medicalWorkerRepository.getBloodBank(id);
     }
 
+    @Override
+    public MedicalWorker findById(Long id) {
+        return medicalWorkerRepository.findById(id).get();
+    }
+
 }

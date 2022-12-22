@@ -1,10 +1,11 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { JwtHelperService } from '@auth0/angular-jwt';
 import { AppointmentSlot } from 'src/app/model/appointmentSlot';
 import { AppointmentStatus } from 'src/app/model/AppointmentStatus';
 import { BloodBank } from 'src/app/model/bloodBank';
 import { NotificationService } from 'src/app/services/notification.service';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-add-appointment-slot',
@@ -23,10 +24,10 @@ export class AddAppointmentSlotComponent implements OnInit {
   resData: any;
   bank: BloodBank | null = null;
 
-  constructor(private http: HttpClient, private route: ActivatedRoute, private notifyService : NotificationService) { }
+  constructor(private http: HttpClient, private notifyService : NotificationService, private userService: UserService, private jwtHelper: JwtHelperService) { }
 
   ngOnInit(): void {
-    this.medWorkerId = this.route.snapshot.paramMap.get('id') as string;
+    this.medWorkerId = this.jwtHelper.decodeToken().id as string;
     this.getBloodBankWorkingHours();
   }
 

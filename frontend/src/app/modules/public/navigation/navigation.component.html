@@ -5,8 +5,11 @@
     <!--<a routerLink="/login" href="" style="margin-left: 1rem;">Login</a> -->
     <a *ngIf="!isLogged" routerLink="/register" routerLinkActive="active" style="margin-left: 1rem;">Register</a>
     <a *ngIf="isLogged && userRole=='ROLE_DONOR'" [routerLink]="['/survey']" routerLinkActive="active" style="margin-left: 1rem;">Survey</a>
-    <a *ngIf="isLogged && userRole=='ROLE_DONOR'" [routerLink]="['/schedule']" routerLinkActive="active" style="margin-left: 1rem;">Schedule</a>
+    <a *ngIf="isLogged && userRole=='ROLE_DONOR'" [routerLink]="['/scheduleNewAppointment']" routerLinkActive="active" style="margin-left: 1rem;">Schedule new appointment</a>
+    <a *ngIf="isLogged && userRole=='ROLE_DONOR'" [routerLink]="['/schedule']" routerLinkActive="active" style="margin-left: 1rem;">Schedule predefined appointment</a>
     <a *ngIf="isLogged && userRole=='ROLE_DONOR'" [routerLink]="['/scheduledAppointments']" routerLinkActive="active" style="margin-left: 1rem;">Scheduled appointments</a>
-    <a *ngIf="isLogged " (click)="logout()" style="margin-left: 1rem;"> Log out </a>
+    <a *ngIf="isLogged && userRole=='ROLE_MEDICALWORKER'" [routerLink]="['/addAppointmentSlot']" routerLinkActive="active" style="margin-left: 1rem;">Create appointment slot</a>
+    <a *ngIf="isLogged" routerLink="/userProfile" routerLinkActive="active" style="margin-left: 1rem;">Profile</a>
+    <a *ngIf="isLogged " (click)="logout()" style="margin-left: 1rem; cursor: pointer;"> Log out </a>
   </div>
 </nav>

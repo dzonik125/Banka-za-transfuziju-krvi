@@ -21,4 +21,6 @@ public interface MedicalWorkerService {
     void updateMedicalWorkerBloodBank(MedicalWorker medicalWorker, BloodBank bloodBank);
 
     public Long getBloodBank(Long id);
+
+    public MedicalWorker findById(Long id);
 }

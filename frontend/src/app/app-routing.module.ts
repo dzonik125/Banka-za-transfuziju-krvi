@@ -29,18 +29,18 @@ const routes: Routes = [
   {path: 'login', component: LoginComponent},
   {path:'saveApi/:id', component: SaveApiKeyComponent},
   {path:'sendNews/:id', component: SendNewsComponent},
-  {path: 'userProfile/:id', component: UserProfileViewComponent},
+  {path: 'userProfile', component: UserProfileViewComponent, canActivate: [AuthGuard, RoleGuard], data: { roles: ['ROLE_MEDICALWORKER', 'ROLE_DONOR', 'ROLE_ADMIN'] }},
   {path:'adminDashboard/registerBloodBank', component: RegisterBloodBankComponent},
   {path:'adminDashboard/calendar/:id', component: CalendarComponent}, 
   {path:'adminDashboard/registerMedicalWorker', component: RegisterMedicalWorkerComponent},
-  {path:'addAppointmentSlot/:id', component: AddAppointmentSlotComponent, canActivate: [AuthGuard, RoleGuard], data: { roles: ['ROLE_MEDICALWORKER'] }},
+  {path:'addAppointmentSlot', component: AddAppointmentSlotComponent, canActivate: [AuthGuard, RoleGuard], data: { roles: ['ROLE_MEDICALWORKER'] }},
   {path: 'displayAllUsers', component: DisplayAllUsersComponent},
   {path: '', component: DisplayAllCentersComponent},
   {path: 'bloodBank/:id', component: BloodBankViewComponent},
   {path :'survey', component: CreateSurveyComponent, canActivate: [AuthGuard, RoleGuard], data: { roles: ['ROLE_DONOR'] }},
   {path :'schedule', component: ScheduleExsistingAppointmentComponent, canActivate: [AuthGuard, RoleGuard], data: { roles: ['ROLE_DONOR'] }},
   {path :'scheduledAppointments', component: ScheduledAppointmentsComponent, canActivate: [AuthGuard, RoleGuard], data: { roles: ['ROLE_DONOR'] }},
-  {path: 'scheduleNewAppointment', component: ScheduleNewAppointmentComponent}
+  {path: 'scheduleNewAppointment', component: ScheduleNewAppointmentComponent, canActivate: [AuthGuard, RoleGuard], data: { roles: ['ROLE_DONOR'] }}
 ];
 
 @NgModule({

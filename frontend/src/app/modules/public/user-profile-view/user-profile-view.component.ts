@@ -2,10 +2,10 @@ import { Component, Input, OnInit, ChangeDetectorRef } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { User } from 'src/app/model/user';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { JsonPipe } from '@angular/common';
 import { UserDTO } from 'src/app/model/userDTO';
 import { UserService } from 'src/app/services/user.service';
+import { JwtHelperService } from '@auth0/angular-jwt';
+import { PasswordPipe } from '../../util/pipes/password.pipe';
 
 @Component({
   selector: 'app-user-profile-view',
@@ -18,10 +18,11 @@ export class UserProfileViewComponent implements OnInit {
   id: any;
   user: User | undefined;
   oldUser: User | undefined;
-  constructor(private route: ActivatedRoute, private http: HttpClient, private userService: UserService, private cdr: ChangeDetectorRef) { }
+  constructor(private route: ActivatedRoute, private http: HttpClient, private jwtHelper: JwtHelperService, private userService: UserService, private cdr: ChangeDetectorRef) { }
 
   ngOnInit(): void {
-    this.id = this.route.snapshot.paramMap.get('id');
+    this.id = this.jwtHelper.decodeToken().id;
+    console.log(this.id);
     this.userService.fetchUser(this.id).subscribe(data => {
       this.user = new User(data);
       console.log(data);

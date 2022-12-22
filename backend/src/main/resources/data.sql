@@ -27,20 +27,20 @@ VALUES (null, 1.8, ' ','https://firebasestorage.googleapis.com/v0/b/isapsw-6ef61
 
 
 INSERT INTO public.appointment(
-    id, donor_id, duration, start, blood_bank_id)
-VALUES (1, 1, 20, '2022-12-24 18:17:53.840417', 1);
+    donor_id, duration, start, blood_bank_id)
+VALUES (1, 20, '2022-12-24 18:17:53.840417', 1);
 
 INSERT INTO public.appointment(
-    id, donor_id, duration, start, blood_bank_id)
-VALUES (2, 8, 20, '2022-12-25 18:17:53.840417', 1);
+    donor_id, duration, start, blood_bank_id)
+VALUES (8, 20, '2022-12-25 18:17:53.840417', 1);
 
 INSERT INTO public.appointment(
-    id, donor_id, duration, start, blood_bank_id)
-VALUES (3, 7, 20, '2022-12-24 13:17:53.840417', 1);
+    donor_id, duration, start, blood_bank_id)
+VALUES (7, 20, '2022-12-24 13:17:53.840417', 1);
 
 INSERT INTO public.appointment(
-    id, donor_id, duration, start, blood_bank_id)
-VALUES (4, 7, 20, '2022-12-27 13:17:53.840417', 2);
+    donor_id, duration, start, blood_bank_id)
+VALUES (7, 20, '2022-12-27 13:17:53.840417', 2);
 
 
 INSERT INTO blood_type_blood_bank(

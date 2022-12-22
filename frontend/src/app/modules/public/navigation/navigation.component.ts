@@ -35,6 +35,7 @@ export class NavigationComponent implements OnInit {
   logout(): void {
     this.authService.logout();
     this.userRole = '';
+    this.router.navigate(['/']);
   }
 
 

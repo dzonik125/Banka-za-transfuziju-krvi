@@ -1,6 +1,7 @@
 package group8.bloodbank.repository;
 
 import group8.bloodbank.model.Appointment;
+import group8.bloodbank.model.AppointmentSlot;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;

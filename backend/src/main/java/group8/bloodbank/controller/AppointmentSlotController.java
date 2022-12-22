@@ -1,10 +1,12 @@
 package group8.bloodbank.controller;
 
+import group8.bloodbank.model.Appointment;
 import group8.bloodbank.model.AppointmentSlot;
 import group8.bloodbank.model.BloodBank;
 import group8.bloodbank.model.DTO.AppointmentSlotDTO;
 import group8.bloodbank.model.Donor;
 import group8.bloodbank.repository.DonorRepository;
+import group8.bloodbank.service.interfaces.AppointmentService;
 import group8.bloodbank.service.interfaces.AppointmentSlotService;
 import group8.bloodbank.service.interfaces.BloodBankService;
 import group8.bloodbank.service.interfaces.DonorService;
@@ -26,6 +28,7 @@ import java.util.Optional;
 @CrossOrigin(origins = "http://localhost:4200")
 public class AppointmentSlotController {
     private AppointmentSlotService service;
+    private AppointmentService appointmentService;
 
     private DonorService donorService;
 
@@ -34,15 +37,16 @@ public class AppointmentSlotController {
 
     @Autowired
     public AppointmentSlotController(AppointmentSlotService service, DonorService donorService, BloodBankService bloodBankService,
-                                     DonorRepository donorRepository) {
+                                     DonorRepository donorRepository, AppointmentService appointmentService) {
         this.service = service;
         this.donorService = donorService;
         this.bloodBankService = bloodBankService;
-
+        this.appointmentService = appointmentService;
         this.donorRepository = donorRepository;
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @PreAuthorize("hasRole('ROLE_MEDICALWORKER')")
     public ResponseEntity<AppointmentSlot> createSlot(@RequestBody AppointmentSlot slot){
         List<AppointmentSlot> slots = service.getAll();
         for(AppointmentSlot s : slots) {
@@ -98,6 +102,7 @@ public class AppointmentSlotController {
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE, value = "/getAvailableBanks")
+    @PreAuthorize("hasRole('ROLE_DONOR')")
     public ResponseEntity<List<BloodBank>> getFreeBanks(@RequestBody LocalDateTime start){
         boolean addToRet = true;
         List<BloodBank> toRet = new ArrayList<>();
@@ -109,7 +114,18 @@ public class AppointmentSlotController {
                 if(as.getStartTime().minusMinutes(1).isBefore(start) && as.getEndTime().plusMinutes(1).isAfter(start)){
                     addToRet = false;
                     break;
-                } //DODAJ PROVERU I ZA OBICNE APPOINTMENTE
+                }
+            }
+            for (Appointment a: appointmentService.findAllAppointmentsByBloodBankID(b.getId())
+                 ) {
+                if(a.getStart().minusMinutes(1).isBefore(start) && a.getStart().plusMinutes((long) a.getDuration()).plusMinutes(1).isAfter(start)){
+                    addToRet = false;
+                    break;
+                }
+                if(a.getStart().minusMinutes(1).isBefore(start.plusMinutes(30)) && a.getStart().plusMinutes((long) a.getDuration()).plusMinutes(1).isAfter(start.plusMinutes(30))) {
+                    addToRet = false;
+                    break;
+                }
             }
             if(addToRet){
                 toRet.add(b);
