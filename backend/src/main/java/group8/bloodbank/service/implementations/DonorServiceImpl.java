@@ -73,6 +73,12 @@ public class DonorServiceImpl implements DonorService {
     }
 
     @Override
+    public void updatePenalty(Donor donor) {
+        donor.setPenalty(donor.getPenalty() + 1);
+        donorRepository.save(donor);
+    }
+
+    @Override
     public Optional<Donor> findById(Long id) {
         return donorRepository.findById(id);
     }

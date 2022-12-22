@@ -4,44 +4,32 @@ package group8.bloodbank.model; /***********************************************
  * Purpose: Defines the Class Item
  ***********************************************************************/
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+import javax.persistence.*;
+
 /**
  * @pdOid 67762e00-bfac-4da1-b53c-d466a4467f6e
  */
+@Entity
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class Item {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    @Column
     private String name;
-
+    @Column
     private int quantity;
-
+    @ManyToOne
+    @JoinColumn(name = "blood_bank_id")
     private BloodBank bloodBank;
 
-    public Item(String name, int quantity, BloodBank bloodBank) {
-        this.name = name;
-        this.quantity = quantity;
-        this.bloodBank = bloodBank;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public int getQuantity() {
-        return quantity;
-    }
-
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
-    }
-
-    public BloodBank getBloodBank() {
-        return bloodBank;
-    }
-
-    public void setBloodBank(BloodBank bloodBank) {
-        this.bloodBank = bloodBank;
-    }
 }

@@ -20,6 +20,7 @@ public class AppointmentCalendarMapper {
             dto.start = appointment.getStart().toString();
             dto.title = appointment.getDonor().getName() + " " + appointment.getDonor().getSurname();
             dto.end = appointment.getStart().plusMinutes((long) appointment.getDuration()).toString();
+            dto.id = appointment.getId();
 
             appointmentCallendarDTOs.add(dto);
         }

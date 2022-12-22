@@ -24,6 +24,12 @@ INSERT INTO blood_bank(
     api_key, avg_grade, description, image, name, address_id)
 VALUES (null, 1.8, ' ','https://firebasestorage.googleapis.com/v0/b/isapsw-6ef61.appspot.com/o/h3.jpg?alt=media&token=482263cb-3590-405f-9c1e-e1fcd46b5229','C banka' , 3);
 
+INSERT INTO public.item(
+quantity, name, blood_bank_id)
+VALUES(1000, 'Needle', 1);
+INSERT INTO public.item(
+quantity, name, blood_bank_id)
+VALUES(1000, 'Bag', 1);
 
 
 INSERT INTO public.appointment(

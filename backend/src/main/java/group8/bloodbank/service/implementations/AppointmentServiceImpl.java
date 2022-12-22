@@ -1,8 +1,6 @@
 package group8.bloodbank.service.implementations;
 
 import group8.bloodbank.model.Appointment;
-import group8.bloodbank.model.BloodBank;
-import group8.bloodbank.model.Donor;
 import group8.bloodbank.repository.AppointmentRepository;
 import group8.bloodbank.service.interfaces.AppointmentService;
 import group8.bloodbank.service.interfaces.DonorService;
@@ -10,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class AppointmentServiceImpl implements AppointmentService {
@@ -39,5 +38,10 @@ public class AppointmentServiceImpl implements AppointmentService {
         }
 
         return  appointmentsForBloodBankID;
+    }
+
+    @Override
+    public Optional<Appointment> findById(Long id) {
+        return repository.findById(id);
     }
 }

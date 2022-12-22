@@ -58,7 +58,11 @@ export class CalendarComponent implements OnInit {
     },
     dayMaxEvents: true, // allow "more" link when too many events
     events: this.appointmets,
-
+    eventClick: function(info) {
+      info.jsEvent.preventDefault(); // don't let the browser navigate
+  
+      console.log(info.event.title)
+    }
   };
 
 }

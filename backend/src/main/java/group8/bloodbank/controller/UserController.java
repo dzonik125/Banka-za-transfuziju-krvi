@@ -27,6 +27,7 @@ public class UserController {
 
     @CrossOrigin(origins = "http://localhost:4200")
     @PutMapping(value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PreAuthorize("hasRole('ROLE_DONOR')")
     public Boolean editUser(@PathVariable long id, @RequestBody UserDTO user) {
         User userRequest = modelMapper.map(user, User.class);
         return userService.updateUser(id, userRequest);

@@ -62,6 +62,9 @@ public class WebSecurityConfig {
  	 // Handler za vracanje 401 kada klijent sa neodogovarajucim korisnickim imenom i lozinkom pokusa da pristupi resursu
  	@Autowired
  	private RestAuthenticationEntryPoint restAuthenticationEntryPoint;
+
+	@Autowired
+	private CommenceEntryPoint unauthorizedHandler;
  
  	
     // Registrujemo authentication manager koji ce da uradi autentifikaciju korisnika za nas
@@ -97,7 +100,7 @@ public class WebSecurityConfig {
 				.antMatchers("/login").permitAll()
 			
 			// za svaki drugi zahtev korisnik mora biti autentifikovan
-			.anyRequest().authenticated().and()
+				.and().formLogin().loginPage("/login").and()
 			// za development svrhe ukljuci konfiguraciju za CORS iz WebConfig klase
 			.cors().and()
 

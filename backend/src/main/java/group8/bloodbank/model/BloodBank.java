@@ -20,11 +20,18 @@ public class BloodBank {
 
     private Long id;
 
-//    public ArrayList<Item> item;
+    @JsonIgnore
+    @OneToMany(mappedBy = "bloodBank", fetch = FetchType.EAGER)
+    public List<Item> item;
 
     @JsonIgnore
     @OneToMany(mappedBy = "bloodBank", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<Appointment> appointment;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "bloodBank", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    private List<AppointmentHistory> appointmentHistories;
+
     @Transient
     public WorkingHours workingHours;
     @Column

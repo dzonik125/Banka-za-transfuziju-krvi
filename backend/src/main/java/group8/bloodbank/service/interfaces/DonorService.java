@@ -13,6 +13,7 @@ public interface DonorService {
     Donor registerDonor(UserDTO donor) throws MessagingException, UnsupportedEncodingException;
     List<Donor> getAll();
 
+    void updatePenalty(Donor donor);
 
     Optional<Donor> findById(Long id);
 

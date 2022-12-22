@@ -98,6 +98,11 @@ public class BloodBankController {
         return new ResponseEntity<Boolean>(hasEnoughBlood, HttpStatus.OK);
     }
 
+    @PutMapping(value = "/updateBloodAmount")
+    @ResponseBody
+    public void updateBloodAmount(@RequestBody BloodBank bloodBank, @RequestBody BloodType bloodType) {
+        bloodBankService.updateAmountOfDonatedBlood(bloodBank, bloodType);
+    }
 
     @PostMapping(value = "/urgentRequest")
     @ResponseBody

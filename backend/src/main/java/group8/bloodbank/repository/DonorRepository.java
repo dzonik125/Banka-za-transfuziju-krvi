@@ -9,4 +9,6 @@ public interface DonorRepository extends JpaRepository<Donor, Long> {
     Donor findByEmail(String email);
 
     Donor findDonorByVerificationCode(String code);
+
+    Donor findById(int id);
 }
