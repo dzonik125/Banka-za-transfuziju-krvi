@@ -20,6 +20,9 @@ import { AddAppointmentSlotComponent } from './modules/medical_worker/blood-bank
 import { AuthGuard } from './modules/authentication/helpers/auth.guard';
 import { RoleGuard } from './modules/authentication/helpers/role.guard';
 import { CalendarComponent } from './calendar/calendar.component';
+import { RegisterAdministratorComponent } from './modules/administrator/register-administrator/register-administrator.component';
+import { ChangePasswordComponent } from './modules/administrator/admin-dashboard/change-password/change-password.component';
+import { AdminComplaintsComponent } from './modules/administrator/admin-complaints/admin-complaints.component';
 
 
 const routes: Routes = [
@@ -32,14 +35,20 @@ const routes: Routes = [
   {path:'adminDashboard/registerBloodBank', component: RegisterBloodBankComponent},
   {path:'adminDashboard/calendar/:id', component: CalendarComponent}, 
   {path:'adminDashboard/registerMedicalWorker', component: RegisterMedicalWorkerComponent},
+  {path:'adminDashboard/registerAdministrator', component: RegisterAdministratorComponent},
+  {path:'adminDashboard/complaints', component: AdminComplaintsComponent},
+  
   {path:'addAppointmentSlot', component: AddAppointmentSlotComponent},
   {path: 'displayAllUsers', component: DisplayAllUsersComponent},
   {path: '', component: DisplayAllCentersComponent},
   {path: 'bloodBank/:id', component: BloodBankViewComponent},
+  {path: 'changepassword', component: ChangePasswordComponent},
+  
+  {path :'survey', component: CreateSurveyComponent},
+  {path :'getAll', component: ScheduleExsistingAppointmentComponent},
   {path :'survey', component: CreateSurveyComponent, canActivate: [AuthGuard, RoleGuard], data: { roles: ['ROLE_DONOR'] }},
   {path :'schedule', component: ScheduleExsistingAppointmentComponent, canActivate: [AuthGuard, RoleGuard], data: { roles: ['ROLE_DONOR'] }},
   {path :'scheduledAppointments', component: ScheduledAppointmentsComponent, canActivate: [AuthGuard, RoleGuard], data: { roles: ['ROLE_DONOR'] }},
-
 ];
 
 @NgModule({

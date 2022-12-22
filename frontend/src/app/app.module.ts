@@ -58,6 +58,10 @@ import { ScheduleExsistingAppointmentComponent } from './modules/public/schedule
 import { ScheduledAppointmentsComponent } from './modules/public/scheduled-appointments/scheduled-appointments.component';
 import { CalendarComponent } from './calendar/calendar.component'
 import { FullCalendarModule } from '@fullcalendar/angular';
+import { RegisterAdministratorComponent } from './modules/administrator/register-administrator/register-administrator.component';
+import { ChangePasswordComponent } from './modules/administrator/admin-dashboard/change-password/change-password.component';
+import { AdminComplaintsComponent } from './modules/administrator/admin-complaints/admin-complaints.component';
+import { ComplaintAnswerComponent } from './modules/administrator/complaint-answer/complaint-answer.component';
 
 
 //I keep the new line
@@ -89,6 +93,10 @@ import { FullCalendarModule } from '@fullcalendar/angular';
     ScheduleExsistingAppointmentComponent,
     ScheduledAppointmentsComponent,
     CalendarComponent,
+    RegisterAdministratorComponent,
+    ChangePasswordComponent,
+    AdminComplaintsComponent,
+    ComplaintAnswerComponent,
 
   ],
 
@@ -125,7 +133,6 @@ import { FullCalendarModule } from '@fullcalendar/angular';
     ReactiveFormsModule,
     MatFormFieldModule,
     MatSelectModule,
-    FormsModule,
     ToastrModule.forRoot(),
     TitleCasePipe,
     NgxPaginationModule,
