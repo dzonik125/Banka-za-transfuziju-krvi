@@ -3,6 +3,7 @@ package group8.bloodbank.controller;
 import group8.bloodbank.model.Admin;
 import group8.bloodbank.model.BloodBank;
 import group8.bloodbank.model.DTO.AdministratorDTO;
+import group8.bloodbank.model.DTO.ChangePasswordDTO;
 import group8.bloodbank.model.DTO.MedicalWorkerDTO;
 import group8.bloodbank.model.Gender;
 import group8.bloodbank.model.MedicalWorker;
@@ -12,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -38,7 +40,7 @@ public class AdminController {
         return adminService.getAll();
     }
 
-    //@GetMapping(value = "/checkForBloodType")
+
     @CrossOrigin(origins = "http://localhost:4200")
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE, value = "/createAdmin")
     public ResponseEntity<Admin> createAdmin(@RequestBody AdministratorDTO administratorDTO) {
@@ -58,12 +60,12 @@ public class AdminController {
         return adminService.getById(id);
     }
 
+
     @CrossOrigin(origins = "http://localhost:4200")
-    @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE, value = "updatePassword")
-    public ResponseEntity<Boolean> updateMedicalWorkerBloodBank(@RequestBody Admin admin) {
-        int i = 0;
+    @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE, value ="updatePassword")
+    public ResponseEntity<Boolean> updatePassword(@RequestBody ChangePasswordDTO dto) {
         try {
-            adminService.updateAdminPassword(admin.getPassword(), admin.getId());
+            adminService.updateAdminPassword(dto.password, dto.adminID);
             return new ResponseEntity<Boolean>(true, HttpStatus.OK);
         } catch (Exception e) {
             e.printStackTrace();
