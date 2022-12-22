@@ -41,10 +41,16 @@ export class AddAppointmentSlotComponent implements OnInit {
   }
 
   createAppointmentSlot(){
+    if(new Date(this.date) < new Date){
+      this.notifyService.showWarning("You can't pick a date less than today!", "Warning");
+      return;
+    }
+
     if(this.startTime === '' || this.duration === 0){
       this.notifyService.showWarning("All fields mustn't be empty!", "Warning");
       return;
     }
+    
     let splitted = this.startTime.split(":");
     let hour = splitted[0];
     let min = splitted[1];
