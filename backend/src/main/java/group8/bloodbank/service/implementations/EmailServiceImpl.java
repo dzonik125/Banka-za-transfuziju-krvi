@@ -60,8 +60,8 @@ public class EmailServiceImpl implements EmailService {
 
         helper.setFrom("testnalogpsw@gmail.com", "Blood Bank");
         //helper.setTo("davidmijailovic9@gmail.com");
-        helper.setTo("dzonik125@gmail.com");
-//        helper.setTo(donor.getEmail());
+        //helper.setTo("dzonik125@gmail.com");
+        helper.setTo(donor.getEmail());
         helper.setSubject(subject);
 
         helper.setText(content, true);
