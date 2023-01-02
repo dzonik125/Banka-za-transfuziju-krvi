@@ -41,11 +41,9 @@ public class ComplaintController {
 
     @CrossOrigin(origins = "http://localhost:4200")
     @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE, value = "/answerComplaint")
-    public ResponseEntity<Boolean> answerComplaint(@RequestBody ChangePasswordDTO dto) {
-
-        complaintService.answerComplaint(dto.adminID, dto.password);
-        int i = 0;
+    public ResponseEntity<Boolean> answerComplaint(@RequestBody ChangePasswordDTO dto) throws Exception {
         try {
+            complaintService.answerComplaint(dto.adminID, dto.password);
             return new ResponseEntity<Boolean>(true, HttpStatus.OK);
         } catch (Exception e) {
             e.printStackTrace();

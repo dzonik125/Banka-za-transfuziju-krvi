@@ -7,7 +7,7 @@
                 
             </div>
 
-            <div class="card p-3 mt-2" *ngFor="let complaint of  complaints">
+            <div class="card p-3 mt-2" *ngFor="let complaint of  complaints; trackBy: trackByFn">
                 <div class="d-flex justify-content-between align-items-center">
               <div class="user d-flex flex-row align-items-center">
                 <img src="assets\pngtree-user-avatar-placeholder-black-png-image_3918427.jpg" width="30" class="user-img rounded-circle mr-2">
