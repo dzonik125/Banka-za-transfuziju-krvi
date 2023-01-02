@@ -13,6 +13,9 @@ import javax.persistence.*;
 @AllArgsConstructor
 public class Complaint {
 
+    @Version
+    private Integer version;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
@@ -45,4 +48,13 @@ public class Complaint {
     public Complaint() {
 
     }
+
+    public Integer getVersion() {
+        return version;
+    }
+
+    public void setVersion(Integer version) {
+        this.version = version;
+    }
+
 }
