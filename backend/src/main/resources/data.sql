@@ -143,16 +143,8 @@ INSERT INTO medical_worker_appointments(
 VALUES (2, 1);
 
 INSERT INTO appointment_slot(
-    start_time, end_time, donor_id, blood_bank_id, status)
-VALUES ('2023-01-01 10:00:00','2023-01-01 11:00:00',null, 1, 0);
-
-INSERT INTO appointment_slot(
-    start_time, end_time, donor_id, blood_bank_id, status)
-VALUES ('2023-01-01 10:00:00','2023-01-01 11:00:00',null, 1, 0);
-
-INSERT INTO appointment_slot(
-    start_time, end_time, donor_id, blood_bank_id, status)
-VALUES ('2022-12-24 08:00:00','2022-12-24 09:00:00',null, 1, 0);
+    start_time, end_time, donor_id, blood_bank_id, status, version)
+VALUES ('2023-01-22 10:00:00','2023-01-22 11:00:00',null, 1, 0, 0);
 
 
 
