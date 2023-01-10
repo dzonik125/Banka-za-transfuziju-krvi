@@ -65,6 +65,7 @@ import { ComplaintAnswerComponent } from './modules/administrator/complaint-answ
 
 import { ScheduleNewAppointmentComponent } from './modules/public/schedule-new-appointment/schedule-new-appointment.component';
 import { PasswordPipe } from './modules/util/pipes/password.pipe';
+import { PenalizePatientDialogComponent } from './modules/medical_worker/penalize-patient-dialog/penalize-patient-dialog.component';
 
 //I keep the new line
 
@@ -101,7 +102,8 @@ import { PasswordPipe } from './modules/util/pipes/password.pipe';
     ComplaintAnswerComponent,
 
     ScheduleNewAppointmentComponent,
-      PasswordPipe
+      PasswordPipe,
+      PenalizePatientDialogComponent
   ],
 
   imports: [

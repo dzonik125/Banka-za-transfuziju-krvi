@@ -18,11 +18,11 @@ VALUES ('123', 3.4, ' ','https://firebasestorage.googleapis.com/v0/b/isapsw-6ef6
 
 INSERT INTO blood_bank(
     api_key, avg_grade, description, image, name, address_id)
-VALUES ('unknown', 4.4, ' ','https://firebasestorage.googleapis.com/v0/b/isapsw-6ef61.appspot.com/o/h2.jpg?alt=media&token=3d2fca8e-7272-4dcc-bafc-231afce6eeac','B banka' , 2);
+VALUES ('321', 4.4, ' ','https://firebasestorage.googleapis.com/v0/b/isapsw-6ef61.appspot.com/o/h2.jpg?alt=media&token=3d2fca8e-7272-4dcc-bafc-231afce6eeac','B banka' , 2);
 
 INSERT INTO blood_bank(
     api_key, avg_grade, description, image, name, address_id)
-VALUES (null, 1.8, ' ','https://firebasestorage.googleapis.com/v0/b/isapsw-6ef61.appspot.com/o/h3.jpg?alt=media&token=482263cb-3590-405f-9c1e-e1fcd46b5229','C banka' , 3);
+VALUES ('213', 1.8, ' ','https://firebasestorage.googleapis.com/v0/b/isapsw-6ef61.appspot.com/o/h3.jpg?alt=media&token=482263cb-3590-405f-9c1e-e1fcd46b5229','C banka' , 3);
 
 INSERT INTO public.item(
 quantity, name, blood_bank_id)
@@ -80,6 +80,38 @@ VALUES (1, 1000, 'Opos');
 INSERT INTO blood_type_blood_bank(
     blood_bank_id, blood_type_amount, blood_type_key)
 VALUES (1, 1000, 'Oneg');
+
+INSERT INTO blood_type_blood_bank(
+    blood_bank_id, blood_type_amount, blood_type_key)
+VALUES (2, 1000, 'Aneg');
+
+INSERT INTO blood_type_blood_bank(
+    blood_bank_id, blood_type_amount, blood_type_key)
+VALUES (2, 1000, 'Apos');
+
+INSERT INTO blood_type_blood_bank(
+    blood_bank_id, blood_type_amount, blood_type_key)
+VALUES (2, 1000, 'ABpos');
+
+INSERT INTO blood_type_blood_bank(
+    blood_bank_id, blood_type_amount, blood_type_key)
+VALUES (2, 1000, 'ABneg');
+
+INSERT INTO blood_type_blood_bank(
+    blood_bank_id, blood_type_amount, blood_type_key)
+VALUES (2, 1000, 'Bpos');
+
+INSERT INTO blood_type_blood_bank(
+    blood_bank_id, blood_type_amount, blood_type_key)
+VALUES (2, 1000, 'Bneg');
+
+INSERT INTO blood_type_blood_bank(
+    blood_bank_id, blood_type_amount, blood_type_key)
+VALUES (2, 1000, 'Opos');
+
+INSERT INTO blood_type_blood_bank(
+    blood_bank_id, blood_type_amount, blood_type_key)
+VALUES (2, 1000, 'Oneg');
 
 --sifre su Donor         -> donor
 --         MedicalWorker -> medicalworker
