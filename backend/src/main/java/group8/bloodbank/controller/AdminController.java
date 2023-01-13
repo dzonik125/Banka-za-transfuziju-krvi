@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "http://localhost:4201")
 @RestController
 @RequestMapping("/admin")
 public class AdminController {
@@ -23,7 +23,7 @@ public class AdminController {
         this.adminService = adminService;
     }
 
-    @CrossOrigin(origins = "http://localhost:4200")
+
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public List<Admin> getAll() {
         return adminService.getAll();

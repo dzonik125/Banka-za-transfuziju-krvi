@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "http://localhost:4201")
 @RestController
 @RequestMapping("/medicalWorker")
 public class MedicalWorkerController {
@@ -23,7 +23,7 @@ public class MedicalWorkerController {
         this.medicalWorkerService = medicalWorkerService;
     }
 
-    @CrossOrigin(origins = "http://localhost:4200")
+
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<MedicalWorker> saveMedicalWorker(@RequestBody MedicalWorkerDTO medicalWorkerDTO) {
         MedicalWorker medicalWorker = new MedicalWorker(medicalWorkerDTO.name, medicalWorkerDTO.surname, medicalWorkerDTO.email, medicalWorkerDTO.password, medicalWorkerDTO.jmbg, medicalWorkerDTO.address, medicalWorkerDTO.occupation, Gender.valueOf(medicalWorkerDTO.gender.toUpperCase()));
@@ -36,7 +36,7 @@ public class MedicalWorkerController {
         }
     }
 
-    @CrossOrigin(origins = "http://localhost:4200")
+
     @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Boolean> updateMedicalWorkerBloodBank(@RequestBody MedicalWorkerDTO medicalWorkerDTO) {
         MedicalWorker medicalWorker = new MedicalWorker(medicalWorkerDTO.id, medicalWorkerDTO.name, medicalWorkerDTO.surname, medicalWorkerDTO.email, medicalWorkerDTO.password, medicalWorkerDTO.jmbg, medicalWorkerDTO.address, medicalWorkerDTO.occupation, Gender.valueOf(medicalWorkerDTO.gender.toUpperCase()));
@@ -50,13 +50,13 @@ public class MedicalWorkerController {
         }
     }
 
-    @CrossOrigin(origins = "http://localhost:4200")
+
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public List<MedicalWorker> getAll() {
         return medicalWorkerService.getAll();
     }
 
-    @CrossOrigin(origins = "http://localhost:4200")
+
     @GetMapping(value = "/freeMedicalWorkers", produces = MediaType.APPLICATION_JSON_VALUE)
     public List<MedicalWorkerDTO> getAllByBloodBankIsNull() {
         return MedicalWorkerDTO.convertMedicalWorkerListToDTOList(medicalWorkerService.getAllByBloodBankIsNull());
