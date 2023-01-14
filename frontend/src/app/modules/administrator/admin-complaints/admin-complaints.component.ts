@@ -49,7 +49,12 @@ export class AdminComplaintsComponent implements OnInit {
     dialogRef.afterClosed().subscribe(() => {
       // Do stuff after the dialog has closed
       location.reload();
-  });
-    
+    });
   }
+
+  trackByFn(index: any, item: any) {
+    return index; // or item.id
+  }
+
+  
 }

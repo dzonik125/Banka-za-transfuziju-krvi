@@ -12,12 +12,14 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.scheduling.annotation.EnableScheduling;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import java.io.IOException;
 import java.util.Properties;
 
 @EnableScheduling
 @EnableAsync
+@EnableTransactionManagement
 @SpringBootApplication(exclude={SecurityAutoConfiguration.class})
 public class BloodBankApplication {
 

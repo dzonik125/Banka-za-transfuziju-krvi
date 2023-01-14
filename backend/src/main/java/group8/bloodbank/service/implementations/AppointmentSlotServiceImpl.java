@@ -12,6 +12,8 @@ import group8.bloodbank.service.interfaces.EmailService;
 import group8.bloodbank.service.interfaces.QRCodeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.mail.MessagingException;
 import java.io.IOException;
@@ -20,6 +22,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
+@Transactional(readOnly = true)
 public class AppointmentSlotServiceImpl implements AppointmentSlotService {
 
 
@@ -42,6 +45,7 @@ public class AppointmentSlotServiceImpl implements AppointmentSlotService {
     }
 
     @Override
+    @Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW)
     public AppointmentSlot saveSlot(AppointmentSlot slot) {
         try {
             repository.save(slot);
@@ -52,8 +56,13 @@ public class AppointmentSlotServiceImpl implements AppointmentSlotService {
     }
 
     @Override
+    @Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW)
     public AppointmentSlot scheduleSlot(AppointmentSlot slot) throws MessagingException, IOException, WriterException {
         Optional<Donor> d = donorRepository.findById(slot.donor.getId());
+        AppointmentSlot slotToUpdate = repository.findById(slot.getId()).get();
+        if(slotToUpdate.getVersion() == 1)
+            return null;
+
         if(slot.getStartTime().isBefore(LocalDateTime.now())){
             throw new UnsupportedOperationException("This appointment has expired !");
         } else{
@@ -61,25 +70,31 @@ public class AppointmentSlotServiceImpl implements AppointmentSlotService {
                 if(slot.bloodBank.getId().equals(app.bloodBank.getId()) && slot.getStartTime().equals(app.getStartTime()))
                     throw new UnsupportedOperationException("You already have an appointment at this facility at this time !");
             }
-            repository.save(slot);
+            slotToUpdate.setStatus(slot.getStatus());
+            repository.save(slotToUpdate);
             //String open = LocalDateTime.now() + " Dear " + slot.donor.getName() + ", you have an appointment scheduled for " + slot.getStartTime() + " at the " + slot.bloodBank.getName();
             //String url = qrCodeService.generateImageAsQRCode(open, 200, 200, slot.getId().toString());
             //emailService.sendAppointmentInformationMail(d.get(), url);
         }
-        return slot;
+        return slotToUpdate;
     }
 
     @Override
+    @Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW)
     public AppointmentSlot cancelSlot(AppointmentSlot slot) {
 
+        AppointmentSlot slotToUpdate = repository.findById(slot.getId()).get();
+        if(slotToUpdate.getVersion() == 2)
+            return null;
+
             if(LocalDateTime.now().plusDays(1).isBefore(slot.getStartTime())){
-                slot.setStatus(AppointmentStatus.WAITING);
-                slot.setDonor(null);
-                repository.save(slot);
+                slotToUpdate.setStatus(AppointmentStatus.WAITING);
+                slotToUpdate.setDonor(null);
+                repository.save(slotToUpdate);
             } else{
                 throw new UnsupportedOperationException();
             }
-            return slot;
+            return slotToUpdate;
     }
 
     @Override
