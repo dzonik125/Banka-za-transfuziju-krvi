@@ -56,7 +56,8 @@ public class AppointmentController {
                 medicalWorkers.add(medicalWorkerService.findById(id));
             }
             Appointment a = new Appointment(medicalWorkers, app.getDonor_id(), app.getBloodBank(), app.getStart(), app.getDuration(), donorService.findById(app.getDonor_id()).get());
-            service.scheduleAppointment(a);
+            if(!service.scheduleAppointment(a))
+                return new ResponseEntity(HttpStatus.CONFLICT);
             return new ResponseEntity<>(a, HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity(HttpStatus.CONFLICT);
