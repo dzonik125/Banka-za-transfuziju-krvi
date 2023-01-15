@@ -97,4 +97,9 @@ public class AppointmentSlotServiceImpl implements AppointmentSlotService {
         return repository.getAllbyBankId(id);
     }
 
+    @Override
+    public Optional<AppointmentSlot> getById(Long id) {
+        return repository.findById(id);
+    }
+
 }

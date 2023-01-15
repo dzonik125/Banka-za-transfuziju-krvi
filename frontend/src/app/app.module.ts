@@ -62,13 +62,12 @@ import { RegisterAdministratorComponent } from './modules/administrator/register
 import { ChangePasswordComponent } from './modules/administrator/admin-dashboard/change-password/change-password.component';
 import { AdminComplaintsComponent } from './modules/administrator/admin-complaints/admin-complaints.component';
 import { ComplaintAnswerComponent } from './modules/administrator/complaint-answer/complaint-answer.component';
-
 import { ScheduleNewAppointmentComponent } from './modules/public/schedule-new-appointment/schedule-new-appointment.component';
 import { PasswordPipe } from './modules/util/pipes/password.pipe';
-
+import * as jsQR from 'jsqr';
+import { NgxQRCodeModule } from 'ngx-qrcode2';
+import { AppointmentSlotByQrCodeComponent } from './modules/administrator/appointment-slot-by-qr-code/appointment-slot-by-qr-code.component';
 //I keep the new line
-
-
 
 
 @NgModule({
@@ -101,10 +100,12 @@ import { PasswordPipe } from './modules/util/pipes/password.pipe';
     ComplaintAnswerComponent,
 
     ScheduleNewAppointmentComponent,
-      PasswordPipe
+      PasswordPipe,
+      AppointmentSlotByQrCodeComponent
   ],
 
   imports: [
+    NgxQRCodeModule,
     FullCalendarModule,
     NgMultiSelectDropDownModule,
     MatDialogModule,

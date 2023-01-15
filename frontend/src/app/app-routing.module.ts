@@ -25,6 +25,7 @@ import { ChangePasswordComponent } from './modules/administrator/admin-dashboard
 import { AdminComplaintsComponent } from './modules/administrator/admin-complaints/admin-complaints.component';
 
 import { ScheduleNewAppointmentComponent } from './modules/public/schedule-new-appointment/schedule-new-appointment.component';
+import { AppointmentSlotByQrCodeComponent } from './modules/administrator/appointment-slot-by-qr-code/appointment-slot-by-qr-code.component';
 
 const routes: Routes = [
   {path: 'home', component: HomeComponentComponent},
@@ -33,23 +34,25 @@ const routes: Routes = [
   {path:'saveApi/:id', component: SaveApiKeyComponent},
   {path:'sendNews/:id', component: SendNewsComponent},
   {path: 'userProfile', component: UserProfileViewComponent, canActivate: [AuthGuard, RoleGuard], data: { roles: ['ROLE_MEDICALWORKER', 'ROLE_DONOR', 'ROLE_ADMIN'] }},
-  {path:'adminDashboard/registerBloodBank', component: RegisterBloodBankComponent},
+  {path:'registerBloodBank', component: RegisterBloodBankComponent},
   {path:'adminDashboard/calendar/:id', component: CalendarComponent}, 
-  {path:'adminDashboard/registerMedicalWorker', component: RegisterMedicalWorkerComponent},
+  {path:'registerMedicalWorker', component: RegisterMedicalWorkerComponent},
   {path:'addAppointmentSlot', component: AddAppointmentSlotComponent, canActivate: [AuthGuard, RoleGuard], data: { roles: ['ROLE_MEDICALWORKER'] }},
-  {path:'adminDashboard/registerAdministrator', component: RegisterAdministratorComponent},
-  {path:'adminDashboard/complaints', component: AdminComplaintsComponent},
+  {path:'registerAdministrator', component: RegisterAdministratorComponent, canActivate: [AuthGuard, RoleGuard], data: { roles: ['ROLE_ADMIN'] }},
+  {path:'adminDashboard/complaints', component: AdminComplaintsComponent, canActivate: [AuthGuard, RoleGuard], data: { roles: ['ROLE_ADMIN'] }},
   {path:'addAppointmentSlot', component: AddAppointmentSlotComponent},
-  {path: 'displayAllUsers', component: DisplayAllUsersComponent},
+  {path: 'displayAllUsers', component: DisplayAllUsersComponent, canActivate: [AuthGuard, RoleGuard], data: { roles: ['ROLE_ADMIN'] }},
   {path: '', component: DisplayAllCentersComponent},
   {path: 'bloodBank/:id', component: BloodBankViewComponent},
-  {path: 'changepassword', component: ChangePasswordComponent},
+  {path: 'changepassword', component: ChangePasswordComponent, canActivate: [AuthGuard, RoleGuard], data: { roles: ['ROLE_NEW_ADMIN'] }},
   {path :'survey', component: CreateSurveyComponent},
   {path :'getAll', component: ScheduleExsistingAppointmentComponent},
   {path :'survey', component: CreateSurveyComponent, canActivate: [AuthGuard, RoleGuard], data: { roles: ['ROLE_DONOR'] }},
   {path :'schedule', component: ScheduleExsistingAppointmentComponent, canActivate: [AuthGuard, RoleGuard], data: { roles: ['ROLE_DONOR'] }},
   {path :'scheduledAppointments', component: ScheduledAppointmentsComponent, canActivate: [AuthGuard, RoleGuard], data: { roles: ['ROLE_DONOR'] }},
-  {path: 'scheduleNewAppointment', component: ScheduleNewAppointmentComponent, canActivate: [AuthGuard, RoleGuard], data: { roles: ['ROLE_DONOR'] }}
+  {path: 'scheduleNewAppointment', component: ScheduleNewAppointmentComponent, canActivate: [AuthGuard, RoleGuard], data: { roles: ['ROLE_DONOR'] }},
+  {path: 'appointmentSlotByQrCode', component: AppointmentSlotByQrCodeComponent, canActivate: [AuthGuard, RoleGuard], data: { roles: ['ROLE_ADMIN'] }},
+
 ];
 
 @NgModule({

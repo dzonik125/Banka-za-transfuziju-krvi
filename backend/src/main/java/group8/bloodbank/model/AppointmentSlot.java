@@ -40,4 +40,5 @@ public class AppointmentSlot {
     @Column
     private AppointmentStatus status;
 
+
 }

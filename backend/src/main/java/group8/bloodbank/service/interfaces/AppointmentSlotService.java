@@ -6,6 +6,7 @@ import group8.bloodbank.model.AppointmentSlot;
 import javax.mail.MessagingException;
 import java.io.IOException;
 import java.util.List;
+import java.util.Optional;
 
 public interface AppointmentSlotService {
 
@@ -20,4 +21,6 @@ public interface AppointmentSlotService {
     List<AppointmentSlot> getAll();
 
     List<AppointmentSlot> getAllByBankId(Long id);
+
+    Optional<AppointmentSlot> getById(Long id);
 }

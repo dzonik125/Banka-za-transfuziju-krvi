@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ExistingAppointment } from '../model/existingAppointment';
@@ -17,15 +17,19 @@ export class ExistingAppointmentService {
     return this.http.get<ExistingAppointment[]>(this.apiHost + 'appSlots/findAllAppointments', {headers: this.headers});
   }
 
+  getAppointmentById(id: any) : Observable<ExistingAppointment> {
+    let params = new HttpParams();
+    params = params.append("id", id);
+    return this.http.get<ExistingAppointment>(this.apiHost + 'appSlots/getById', {params: params});
+  }
+
+
   scheduleAppointment(request: any){
   return this.http.put<any>(this.apiHost + 'appSlots/updateAppointment', request, {headers: this.headers})
-}
+  }
 
 cancelAppointment(request: any){
   return this.http.put<any>(this.apiHost + 'appSlots/cancelAppointment', request, {headers: this.headers})
-}
-
-
-
+  }
 
 }

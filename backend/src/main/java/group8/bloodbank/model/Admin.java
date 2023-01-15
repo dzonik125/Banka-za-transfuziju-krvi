@@ -33,4 +33,6 @@ public class Admin extends User {
     public boolean getFirstLogin() {
         return this.firstLogin;
     }
+    public void setFirstLogin(boolean firstLogin) {this.firstLogin = firstLogin;}
+
 }

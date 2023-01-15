@@ -129,7 +129,7 @@ VALUES (2, 1);
 
 INSERT INTO appointment_slot(
     start_time, end_time, donor_id, blood_bank_id, status)
-VALUES ('2022-12-02 13:00:28.111756','2022-12-02 14:00:28.112755',null, 1, 0);
+VALUES ('2022-12-02 13:00:28.111756','2022-12-02 14:00:28.112755',1, 1, 0);
 
 INSERT INTO appointment_slot(
     start_time, end_time, donor_id, blood_bank_id, status)
@@ -154,6 +154,7 @@ VALUES ('2022-12-25 16:00:28.111756','2022-12-25 18:00:28.112755',null, 1, 0);
 INSERT INTO role (name) VALUES ('ROLE_DONOR');
 INSERT INTO role (name) VALUES ('ROLE_MEDICALWORKER');
 INSERT INTO role (name) VALUES ('ROLE_ADMIN');
+INSERT INTO role (name) VALUES ('ROLE_NEW_ADMIN');
 
 INSERT INTO USER_ROLE (user_id, role_id) VALUES (1, 1); -- user-u dodeljujemo rolu DONOR
 INSERT INTO USER_ROLE (user_id, role_id) VALUES (2, 2); -- user-u dodeljujemo rolu MW
