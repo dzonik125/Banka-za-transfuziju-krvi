@@ -56,11 +56,17 @@ public class AppointmentSlotController {
         List<AppointmentSlot> slots = service.getAll();
         for(AppointmentSlot s : slots) {
             if(slot.getStartTime().isBefore(s.getEndTime()) && slot.getStartTime().isAfter(s.getStartTime().minusMinutes(1))){
-                return new ResponseEntity<>(HttpStatus.CONFLICT);
+                if(s.getBloodBank().getId() == slot.getBloodBank().getId()){
+                    return new ResponseEntity<>(HttpStatus.CONFLICT);
+                }
             } else if (slot.getEndTime().isAfter(s.getStartTime()) && slot.getEndTime().isBefore(s.getEndTime().plusMinutes(1))){
-                return new ResponseEntity<>(HttpStatus.CONFLICT);
+                if(s.getBloodBank().getId() == slot.getBloodBank().getId()){
+                    return new ResponseEntity<>(HttpStatus.CONFLICT);
+                }
             } else if (slot.getStartTime().isEqual(s.getStartTime()) && slot.getEndTime().isEqual(s.getEndTime())){
-                return new ResponseEntity<>(HttpStatus.CONFLICT);
+                if(s.getBloodBank().getId() == slot.getBloodBank().getId()){
+                    return new ResponseEntity<>(HttpStatus.CONFLICT);
+                }
             }
         }
         try{

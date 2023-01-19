@@ -9,6 +9,8 @@ import group8.bloodbank.service.interfaces.DonorService;
 import group8.bloodbank.service.interfaces.EmailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.mail.MessagingException;
 import java.io.UnsupportedEncodingException;
@@ -47,8 +49,16 @@ public class AppointmentServiceImpl implements AppointmentService {
     }
 
     @Override
-    public void scheduleAppointment(Appointment app) throws MessagingException, UnsupportedEncodingException {
+    @Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW)
+    public boolean scheduleAppointment(Appointment app) throws MessagingException, UnsupportedEncodingException {
+        for (Appointment a:
+             getAll()) {
+            if(a.getStart().isEqual(app.getStart()) && a.getBloodBank().getId() == app.getBloodBank().getId()){
+                return false;
+            }
+        }
         repository.save(app);
         emailService.sendAppointmentMail(app);
+        return true;
     }
 }

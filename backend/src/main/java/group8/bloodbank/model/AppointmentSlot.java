@@ -17,6 +17,8 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 public class AppointmentSlot {
 
+    @Version
+    private Integer version;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -40,5 +42,12 @@ public class AppointmentSlot {
     @Column
     private AppointmentStatus status;
 
-
+    public AppointmentSlot(Long id, BloodBank bloodBank, Donor donor, LocalDateTime startTime, LocalDateTime endTime, AppointmentStatus status) {
+        this.id = id;
+        this.bloodBank = bloodBank;
+        this.donor = donor;
+        this.startTime = startTime;
+        this.endTime = endTime;
+        this.status = status;
+    }
 }
