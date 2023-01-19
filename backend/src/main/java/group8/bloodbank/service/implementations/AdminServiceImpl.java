@@ -39,7 +39,7 @@ public class AdminServiceImpl implements AdminService {
 
     @Override
     public Admin create(Admin admin) {
-        List<Role> roles = roleService.findByName("ROLE_ADMIN");
+        List<Role> roles = roleService.findByName("ROLE_NEW_ADMIN");
         admin.setPassword(passwordEncoder.encode(admin.getPassword()));
         admin.setLastPasswordResetDate(Timestamp.valueOf(LocalDateTime.now()));
         admin.setEnabled(true);
@@ -55,7 +55,12 @@ public class AdminServiceImpl implements AdminService {
 
     @Override
     public void updateAdminPassword(String password, Long id) {
-        adminRepository.updateAdmin(id, passwordEncoder.encode(password));
+        List<Role> roles = roleService.findByName("ROLE_ADMIN");
+        Admin admin = adminRepository.findById(id).get();
+        admin.setRoles(roles);
+        admin.setPassword(passwordEncoder.encode(password));
+        admin.setFirstLogin(false);
+        adminRepository.save(admin);
     }
 
 

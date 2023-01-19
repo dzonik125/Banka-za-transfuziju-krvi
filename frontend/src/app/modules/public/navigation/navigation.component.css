@@ -6,7 +6,13 @@ nav{
 }
 
 .nav-right{
+    position: relative;
     float: right;
+    margin-top: 1rem;
+}
+
+.nav-left{
+    float: left;
     margin-top: 1rem;
 }
 

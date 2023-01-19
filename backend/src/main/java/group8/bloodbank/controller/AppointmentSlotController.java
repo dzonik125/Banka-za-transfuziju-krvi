@@ -1,10 +1,13 @@
 package group8.bloodbank.controller;
 
+import group8.bloodbank.mapper.AppointmentPreviewMapper;
 import group8.bloodbank.model.Appointment;
 import group8.bloodbank.model.AppointmentSlot;
 import group8.bloodbank.model.BloodBank;
+import group8.bloodbank.model.DTO.AppointmentPreviewDTO;
 import group8.bloodbank.model.DTO.AppointmentSlotDTO;
 import group8.bloodbank.model.Donor;
+import group8.bloodbank.repository.AppointmentSlotRepository;
 import group8.bloodbank.repository.DonorRepository;
 import group8.bloodbank.service.interfaces.AppointmentService;
 import group8.bloodbank.service.interfaces.AppointmentSlotService;
@@ -18,7 +21,6 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -34,15 +36,18 @@ public class AppointmentSlotController {
 
     private BloodBankService bloodBankService;
     private final DonorRepository donorRepository;
+    private final AppointmentSlotRepository appointmentSlotRepository;
 
     @Autowired
     public AppointmentSlotController(AppointmentSlotService service, DonorService donorService, BloodBankService bloodBankService,
-                                     DonorRepository donorRepository, AppointmentService appointmentService) {
+                                     DonorRepository donorRepository, AppointmentService appointmentService,
+                                     AppointmentSlotRepository appointmentSlotRepository) {
         this.service = service;
         this.donorService = donorService;
         this.bloodBankService = bloodBankService;
         this.appointmentService = appointmentService;
         this.donorRepository = donorRepository;
+        this.appointmentSlotRepository = appointmentSlotRepository;
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
@@ -71,6 +76,12 @@ public class AppointmentSlotController {
             return new ResponseEntity<>(slot, HttpStatus.CONFLICT);
         }
     }
+
+    @GetMapping(value = "/getById")
+    public AppointmentPreviewDTO getById(@RequestParam(value = "id") Long id) {
+        return AppointmentPreviewMapper.sourceToDestination(service.getById(id).get());
+    }
+
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE, value="/findAllAppointments")
     @PreAuthorize("hasRole('ROLE_DONOR')")

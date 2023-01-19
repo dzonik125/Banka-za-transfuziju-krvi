@@ -1,0 +1,29 @@
+<div>
+    
+    <div class = "QRCodeContainer">
+        <p style="  display: inline-block; font-size: large;">Upload appointment QR CODE</p>
+        <br>
+        
+        <!-- <img style="  display: inline-block;" src="assets\qrcodeicon.png" class="img-fluid" alt="Sample image" width="7%" height="7%"> -->
+        <mat-icon style="transform: scale(2);">qr_code</mat-icon>
+        <input style=" margin-left: 20px; display: inline-block;"  type="file" (change)="uploadQRCode   ($event)">
+        <input type="submit" class="btn btn-primary btn-lg" id="reg" value="Submit" (click) ="sadawd()">
+        
+    </div>
+</div>
+
+<div *ngIf="appsl" class = "appointmentContainer">
+    <mat-card  class="mat-elevation-z19 border align card-background"  style="width: 50%; height: 100%;" >
+        <mat-card-title class="text-center fs-5 fw-bold">Appointment</mat-card-title>
+        <mat-card-content>
+            <p>
+                <mat-card-content>Donor: {{appsl.donorNameAndSurname}}</mat-card-content>
+                <mat-card-content>Blood bank: {{appsl.bloodBankName}}</mat-card-content>
+                <br>
+                <mat-card-content>start: {{appsl.startTime}}</mat-card-content>
+            <mat-card-content>end: {{appsl.endTime}}</mat-card-content>
+            </p>          
+        </mat-card-content>
+</mat-card>
+
+  </div>
