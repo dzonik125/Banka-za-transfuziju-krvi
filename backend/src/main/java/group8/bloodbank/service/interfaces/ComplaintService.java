@@ -8,7 +8,6 @@ public interface ComplaintService {
     List<Complaint> getAll();
 
     Complaint answerComplaint(Long complaintID, String answer) throws Exception;
-    void answerC();
 
     List<Complaint> getAllUnanswered();
 }

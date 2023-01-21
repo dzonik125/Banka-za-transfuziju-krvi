@@ -23,8 +23,8 @@
     <a *ngIf="isLogged && userRole=='ROLE_ADMIN'"  [routerLink]="['/registerMedicalWorker']" routerLinkActive="active" style="margin-left: 1rem;">Create medical worker</a>
     <a *ngIf="isLogged && userRole=='ROLE_ADMIN'" [routerLink]="['/registerBloodBank']" routerLinkActive="active" style="margin-left: 1rem;">Create blood bank</a>
     <a *ngIf="isLogged && userRole=='ROLE_ADMIN'" [routerLink]="['/appointmentSlotByQrCode']" routerLinkActive="active" style="margin-left: 1rem;">Appointment QR Code</a>
+    <a *ngIf="isLogged && userRole=='ROLE_ADMIN'" [routerLink]="['/medicalExamination']" routerLinkActive="active" style="margin-left: 1rem;">Medical Examination</a>
     
-
   </div>
     
 </nav>

@@ -23,9 +23,9 @@ import { CalendarComponent } from './calendar/calendar.component';
 import { RegisterAdministratorComponent } from './modules/administrator/register-administrator/register-administrator.component';
 import { ChangePasswordComponent } from './modules/administrator/admin-dashboard/change-password/change-password.component';
 import { AdminComplaintsComponent } from './modules/administrator/admin-complaints/admin-complaints.component';
-
 import { ScheduleNewAppointmentComponent } from './modules/public/schedule-new-appointment/schedule-new-appointment.component';
 import { AppointmentSlotByQrCodeComponent } from './modules/administrator/appointment-slot-by-qr-code/appointment-slot-by-qr-code.component';
+import { MedicalExaminationComponent } from './modules/administrator/medical-examination/medical-examination.component';
 
 const routes: Routes = [
   {path: 'home', component: HomeComponentComponent},
@@ -52,7 +52,8 @@ const routes: Routes = [
   {path :'scheduledAppointments', component: ScheduledAppointmentsComponent, canActivate: [AuthGuard, RoleGuard], data: { roles: ['ROLE_DONOR'] }},
   {path: 'scheduleNewAppointment', component: ScheduleNewAppointmentComponent, canActivate: [AuthGuard, RoleGuard], data: { roles: ['ROLE_DONOR'] }},
   {path: 'appointmentSlotByQrCode', component: AppointmentSlotByQrCodeComponent, canActivate: [AuthGuard, RoleGuard], data: { roles: ['ROLE_ADMIN'] }},
-
+  {path: 'medicalExamination', component: MedicalExaminationComponent, canActivate: [AuthGuard, RoleGuard], data: { roles: ['ROLE_ADMIN'] }}
+  
 ];
 
 @NgModule({

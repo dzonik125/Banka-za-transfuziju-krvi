@@ -43,6 +43,9 @@ public class BloodBank {
     @Column
     private String image;
 
+    @OneToOne
+    private BloodBankBlood blood;
+
     @ElementCollection(fetch = FetchType.EAGER)
     @CollectionTable(name="bloodType_bloodBank", joinColumns=@JoinColumn(name="bloodBank_id"))
     @MapKeyColumn(name = "bloodType_key")
@@ -84,4 +87,8 @@ public class BloodBank {
         this.address = address;
         this.image = image;
     }
+
+//    public BloodBankBlood getBlood() {
+//        return this.blood;
+//    }
 }

@@ -20,4 +20,5 @@ public interface DonorService {
 
     Donor getById(Long donor_id);
 
+    Donor getByEmail(String email);
 }
