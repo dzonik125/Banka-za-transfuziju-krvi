@@ -9,12 +9,12 @@ export class MedicalExaminationService {
 
   apiHost: string = 'http://localhost:8081/';
   headers: HttpHeaders = new HttpHeaders({ 'Content-Type': 'application/json' });
-  pic: any;
 
   constructor(private http: HttpClient) { }
 
-  getQR(): Observable<any> {
-    return this.http.get<any>(this.apiHost + 'newController', {headers: this.headers});
+
+  createMedicalExamination(medicalExaminationDTO: any): Observable<any> {
+    return this.http.post<any>(this.apiHost + 'medicalExamination/createME', medicalExaminationDTO);
   }
 
 }

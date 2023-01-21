@@ -25,4 +25,6 @@ public interface BloodBankService {
     public boolean checkIfBloodUnitsAvailable(HashMap<BloodType, Double> bloodUnits, String apiKey);
 
     String getApiKeyById(Long id);
+
+    BloodBank getByName(String bb);
 }

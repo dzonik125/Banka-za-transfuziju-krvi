@@ -10,11 +10,15 @@ INSERT INTO address(
     city, country, "number", street)
 VALUES ('Kovilj', 'Srbija', '50', 'Živojina Mišića');
 
+INSERT INTO blood_bank_blood(
+    id, ab_negative, ab_positive, a_negative, a_positive, b_negative, b_positive, o_negative, o_positive)
+VALUES (1, 10, 11, 4, 6, 3, 88, 3, 5);
+
 
 
 INSERT INTO blood_bank(
-    api_key, avg_grade, description, image, name, address_id)
-VALUES ('123', 3.4, ' ','https://firebasestorage.googleapis.com/v0/b/isapsw-6ef61.appspot.com/o/h1.jpg?alt=media&token=5268f3af-3bda-4014-b18e-3e69b57fb3ea','A banka' , 1);
+    api_key, avg_grade, description, image, name, address_id, blood_id)
+VALUES ('123', 3.4, ' ','https://firebasestorage.googleapis.com/v0/b/isapsw-6ef61.appspot.com/o/h1.jpg?alt=media&token=5268f3af-3bda-4014-b18e-3e69b57fb3ea','A banka' , 1, 1);
 
 INSERT INTO blood_bank(
     api_key, avg_grade, description, image, name, address_id)

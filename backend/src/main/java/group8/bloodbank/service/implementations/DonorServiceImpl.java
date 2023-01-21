@@ -96,5 +96,9 @@ public class DonorServiceImpl implements DonorService {
         return donorRepository.findById(donor_id).get();
     }
 
+    @Override
+    public Donor getByEmail(String email) {
+        return donorRepository.findByEmail(email);
+    }
 
 }

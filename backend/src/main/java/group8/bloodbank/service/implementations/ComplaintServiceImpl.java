@@ -37,12 +37,6 @@ public class ComplaintServiceImpl implements ComplaintService {
         return complaintToUpdate;
     }
 
-    @Override
-    @Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW)
-    public void answerC() {
-        int i = 0;
-    }
-
     public List<Complaint> getAllUnanswered() {
         return this.complaintRepository.getAllUnanswered();
     }
