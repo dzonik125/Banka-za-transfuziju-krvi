@@ -59,6 +59,7 @@ export class AppointmentSlotByQrCodeComponent implements OnInit {
   }
 
   sadawd() {
+    console.log(this.qrCodeData);
     this.appointmentServ.getAppointmentById(this.qrCodeData).subscribe(res => {
       this.appsl = res;
     })
