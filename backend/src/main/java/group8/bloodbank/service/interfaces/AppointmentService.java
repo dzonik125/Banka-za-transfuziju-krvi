@@ -16,4 +16,6 @@ public interface AppointmentService {
     List<Appointment> findAllAppointmentsByBloodBankID(Long bloodBankID);
 
     boolean scheduleAppointment(Appointment app) throws MessagingException, IOException, WriterException;
+
+    Appointment getById(Long id);
 }

@@ -52,7 +52,7 @@ public class AppointmentServiceImpl implements AppointmentService {
 
     @Override
     @Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW)
-    public boolean scheduleAppointment(Appointment app) throws MessagingException, IOException, javax.mail.MessagingException, WriterException {
+    public boolean scheduleAppointment(Appointment app) throws MessagingException, javax.mail.MessagingException, IOException, WriterException {
         for (Appointment a:
              getAll()) {
             if(a.getStart().isEqual(app.getStart()) && a.getBloodBank().getId() == app.getBloodBank().getId()){
@@ -62,5 +62,10 @@ public class AppointmentServiceImpl implements AppointmentService {
         repository.save(app);
         emailService.sendAppointmentMail(app);
         return true;
+    }
+
+    @Override
+    public Appointment getById(Long id) {
+        return repository.findById(id).get();
     }
 }
