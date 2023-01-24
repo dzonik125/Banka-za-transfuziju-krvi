@@ -1,5 +1,6 @@
 package group8.bloodbank.service.implementations;
 
+import com.google.zxing.WriterException;
 import group8.bloodbank.model.Appointment;
 import group8.bloodbank.model.BloodBank;
 import group8.bloodbank.model.Donor;
@@ -8,11 +9,12 @@ import group8.bloodbank.service.interfaces.AppointmentService;
 import group8.bloodbank.service.interfaces.DonorService;
 import group8.bloodbank.service.interfaces.EmailService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.messaging.MessagingException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.mail.MessagingException;
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.List;
 
@@ -50,7 +52,7 @@ public class AppointmentServiceImpl implements AppointmentService {
 
     @Override
     @Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW)
-    public boolean scheduleAppointment(Appointment app) throws MessagingException, UnsupportedEncodingException {
+    public boolean scheduleAppointment(Appointment app) throws MessagingException, IOException, javax.mail.MessagingException, WriterException {
         for (Appointment a:
              getAll()) {
             if(a.getStart().isEqual(app.getStart()) && a.getBloodBank().getId() == app.getBloodBank().getId()){

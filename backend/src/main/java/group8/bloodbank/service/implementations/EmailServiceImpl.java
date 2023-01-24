@@ -1,5 +1,6 @@
 package group8.bloodbank.service.implementations;
 
+import com.google.zxing.WriterException;
 import group8.bloodbank.model.Appointment;
 import group8.bloodbank.model.Donor;
 import group8.bloodbank.service.interfaces.EmailService;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 
 @Service
@@ -19,6 +21,8 @@ public class EmailServiceImpl implements EmailService {
 
     @Autowired
     private JavaMailSender mailSender;
+    @Autowired
+    private QRCodeServiceImpl qrCodeService;
 
     @Async
     @Override
@@ -45,12 +49,13 @@ public class EmailServiceImpl implements EmailService {
 
     @Async
     @Override
-    public void sendAppointmentMail(Appointment appointment) throws MessagingException, UnsupportedEncodingException {
+    public void sendAppointmentMail(Appointment appointment) throws MessagingException, IOException, WriterException {
         String subject = "You have successfully scheduled an appointment!";
 //        String imagePath = url;
 //        String messageText = "Please scan the code for more information about your scheduled appointments.: ";
         String title = "Scheduled appointment";
-        String content = buildScheduledAppMessageWithoutQRCode(title, "your appointment is scheduled for " + appointment.getStart().plusHours(1).toString().replace("T", " ") + " at " + appointment.getBloodBank().getName(), appointment.getDonor().getName());
+        String url = qrCodeService.generateImageAsQRCode(appointment.getId().toString(), 200, 200);
+        String content = buildMessageWithQRCode(title, "your appointment is scheduled for " + appointment.getStart().plusHours(1).toString().replace("T", " ") + " at " + appointment.getBloodBank().getName(), appointment.getDonor().getName(), url);
         sendMail(appointment.getDonor(), subject, content);
     }
 
@@ -193,7 +198,7 @@ public class EmailServiceImpl implements EmailService {
                 "      <td width=\"10\" valign=\"middle\"><br></td>\n" +
                 "      <td style=\"font-family:Helvetica,Arial,sans-serif;font-size:19px;line-height:1.315789474;max-width:560px\">\n" +
                 "        \n" +
-                "            <p style=\"Margin:0 0 20px 0;font-size:19px;line-height:25px;color:#0b0c0c\">Hi " + name + ",</p><p style=\"Margin:0 0 20px 0;font-size:19px;line-height:25px;color:#0b0c0c\"> " + message + " </p><blockquote style=\"Margin:0 0 20px 0;border-left:10px solid #b1b4b6;padding:15px 0 0.1px 15px;font-size:19px;line-height:25px\"><p style=\"Margin:0 0 20px 0;font-size:19px;line-height:25px;color:#0b0c0c\"> <img src=" + imagePath +" alt=\"qrCode\"> </p></blockquote>\n<p>See you soon</p>" +
+                "            <p style=\"Margin:0 0 20px 0;font-size:19px;line-height:25px;color:#0b0c0c\">Hi " + name + ",</p><p style=\"Margin:0 0 20px 0;font-size:19px;line-height:25px;color:#0b0c0c\"> " + message + " </p><blockquote style=\"Margin:0 0 20px 0;border-left:10px solid #b1b4b6;padding:15px 0 0.1px 15px;font-size:19px;line-height:25px\"><p style=\"Margin:0 0 20px 0;font-size:19px;line-height:25px;color:#0b0c0c\"> <img src=\""+ imagePath +"\" title=\"qrCode\" style=\"display:block\" width=\"200\" height=\"200\" alt=\"qrCode\"> </p></blockquote>\n<p>See you soon</p>" +
                 "        \n" +
                 "      </td>\n" +
                 "      <td width=\"10\" valign=\"middle\"><br></td>\n" +
