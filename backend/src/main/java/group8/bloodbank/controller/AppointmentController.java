@@ -2,9 +2,11 @@ package group8.bloodbank.controller;
 
 
 import group8.bloodbank.mapper.AppointmentCalendarMapper;
+import group8.bloodbank.mapper.AppointmentPreviewMapper;
 import group8.bloodbank.model.Appointment;
 import group8.bloodbank.model.DTO.AppointmentCallendarDTO;
 import group8.bloodbank.model.DTO.AppointmentDTO;
+import group8.bloodbank.model.DTO.AppointmentPreviewDTO;
 import group8.bloodbank.model.MedicalWorker;
 import group8.bloodbank.model.WorkingHours;
 import group8.bloodbank.service.interfaces.AppointmentService;
@@ -67,6 +69,13 @@ public class AppointmentController {
     @GetMapping(value = "/getBloodBankWorkingHours")
     public WorkingHours getBloodBankWorkingHours(@RequestParam(value = "id") Long id){
         return workingHoursService.getByBloodBankId(id);
+    }
+
+    @GetMapping(value = "/getById")
+    public AppointmentPreviewDTO getById(@RequestParam(value = "id") Long id) {
+        Appointment appointment = service.getById(id);
+        appointment.setDonor(donorService.findById(appointment.getDonor_id()).get());
+        return AppointmentPreviewMapper.appointmentToApointmentDTO(appointment);
     }
 
 }

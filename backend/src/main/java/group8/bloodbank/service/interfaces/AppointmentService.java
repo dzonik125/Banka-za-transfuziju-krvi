@@ -14,4 +14,6 @@ public interface AppointmentService {
     List<Appointment> findAllAppointmentsByBloodBankID(Long bloodBankID);
 
     boolean scheduleAppointment(Appointment app) throws MessagingException, UnsupportedEncodingException;
+
+    Appointment getById(Long id);
 }

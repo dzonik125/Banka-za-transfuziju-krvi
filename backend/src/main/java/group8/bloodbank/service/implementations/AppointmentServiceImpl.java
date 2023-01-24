@@ -61,4 +61,9 @@ public class AppointmentServiceImpl implements AppointmentService {
         emailService.sendAppointmentMail(app);
         return true;
     }
+
+    @Override
+    public Appointment getById(Long id) {
+        return repository.findById(id).get();
+    }
 }

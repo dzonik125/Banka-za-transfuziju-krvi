@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import jsQR, { QRCode } from 'jsqr';
+import { AppointmentService } from 'src/app/services/appointment.service';
 import { ExistingAppointmentService } from '../../../services/existing-appointment.service';
 import { MedicalExaminationService } from '../../../services/medical-examination.service';
 
@@ -21,7 +22,7 @@ export class AppointmentSlotByQrCodeComponent implements OnInit {
   qrCodeData: string = '';
   appsl: any;
 
-  constructor(private router: Router,  private medicalExaminationService: MedicalExaminationService, private appointmentService: ExistingAppointmentService) { }
+  constructor(private router: Router,  private medicalExaminationService: MedicalExaminationService, private appointmentService: ExistingAppointmentService, private appointmentServ: AppointmentService) { }
 
   ngOnInit(): void {
     
@@ -58,7 +59,7 @@ export class AppointmentSlotByQrCodeComponent implements OnInit {
   }
 
   sadawd() {
-    this.appointmentService.getAppointmentById(this.qrCodeData).subscribe(res => {
+    this.appointmentServ.getAppointmentById(this.qrCodeData).subscribe(res => {
       this.appsl = res;
     })
   }

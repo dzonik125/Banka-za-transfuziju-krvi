@@ -1,5 +1,6 @@
 package group8.bloodbank.mapper;
 
+import group8.bloodbank.model.Appointment;
 import group8.bloodbank.model.AppointmentSlot;
 import group8.bloodbank.model.DTO.AppointmentPreviewDTO;
 
@@ -18,4 +19,18 @@ public class AppointmentPreviewMapper {
         apDTO.endTime = source.getEndTime();
         return apDTO;
     }
+
+
+    public static AppointmentPreviewDTO appointmentToApointmentDTO(Appointment appointment) {
+        if ( appointment == null ) {
+            return null;
+        }
+        AppointmentPreviewDTO apDTO = new AppointmentPreviewDTO();
+        apDTO.bloodBankName = appointment.getBloodBank().getName();
+        apDTO.donorNameAndSurname = appointment.getDonor().getName() + " " + appointment.getDonor().getSurname();
+        apDTO.startTime = appointment.getStart();
+        apDTO.endTime = apDTO.startTime.plusMinutes((long) appointment.getDuration());
+        return apDTO;
+    }
+
 }
