@@ -10,4 +10,8 @@ public interface ComplaintService {
     Complaint answerComplaint(Long complaintID, String answer) throws Exception;
 
     List<Complaint> getAllUnanswered();
+
+    void save(Complaint complaint);
+
+    public Complaint getById(long id);
 }

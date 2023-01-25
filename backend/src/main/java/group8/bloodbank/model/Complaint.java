@@ -44,7 +44,6 @@ public class Complaint {
         this.answer = answer;
     }
 
-
     public Complaint() {
 
     }

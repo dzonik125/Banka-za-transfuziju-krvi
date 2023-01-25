@@ -27,10 +27,8 @@ public class ComplaintServiceImpl implements ComplaintService {
     }
 
     @Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW)
-    public Complaint answerComplaint(Long complaintID, String answer) {
+    public Complaint answerComplaint(Long complaintID, String answer) throws Exception {
         Complaint complaintToUpdate = complaintRepository.findById(complaintID).get();
-        if(complaintToUpdate.getVersion() == 1)
-            return null;
 
         complaintToUpdate.setAnswer(answer);
         complaintRepository.save(complaintToUpdate);
@@ -39,6 +37,15 @@ public class ComplaintServiceImpl implements ComplaintService {
 
     public List<Complaint> getAllUnanswered() {
         return this.complaintRepository.getAllUnanswered();
+    }
+
+    @Override
+    public void save(Complaint complaint) {
+        complaintRepository.save(complaint);
+    }
+
+    public Complaint getById(long id) {
+        return complaintRepository.findById(id).get();
     }
 
 }
