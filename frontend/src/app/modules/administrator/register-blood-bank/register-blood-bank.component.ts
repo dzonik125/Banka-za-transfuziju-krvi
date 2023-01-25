@@ -9,6 +9,7 @@ import { BloodBankServiceService } from 'src/app/services/blood-bank-service.ser
 import { MedicalWorkerService } from 'src/app/services/medical-worker.service';
 import { MatDialog } from '@angular/material/dialog';
 import { IDropdownSettings, } from 'ng-multiselect-dropdown';
+import { ToastrService } from 'ngx-toastr';
 
 
 @Component({
@@ -39,7 +40,8 @@ export class RegisterBloodBankComponent implements OnInit {
               private router: Router,
               private storage: Storage,
               private medicalWorkerService: MedicalWorkerService,
-              public dialog: MatDialog
+              public dialog: MatDialog,
+              private tost: ToastrService
               ) {
     }                
 
@@ -113,7 +115,10 @@ export class RegisterBloodBankComponent implements OnInit {
     this.bloodBank.address = this.address;
     this.bloodBank.image = downloadURL;
     this.bloodBank.medicalWorkers = this.selectedMW;
-    this.bbservice.createBloodBank(this.bloodBank).subscribe();   
+    this.bbservice.createBloodBank(this.bloodBank).subscribe( res => {
+      this.tost.success("success", "Sucess registration!")
+      this.router.navigate(['/']);
+    });   
   
   }  
 

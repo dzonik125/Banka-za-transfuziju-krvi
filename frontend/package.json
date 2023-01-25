@@ -58,7 +58,7 @@
     "ng2-file-upload": "^1.4.0",
     "ng2-qrcode-reader": "^0.0.1",
     "ng2-search-filter": "^0.5.1",
-    "ngx-pagination": "^6.0.2",
+    "ngx-pagination": "^6.0.3",
     "ngx-qrcode2": "^9.0.0",
     "ngx-rerender": "^1.1.0",
     "ngx-scanner": "^0.0.0",
