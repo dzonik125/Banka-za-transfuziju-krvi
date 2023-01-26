@@ -17,6 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.List;
+import java.util.concurrent.locks.ReentrantLock;
 
 @Service
 public class AppointmentServiceImpl implements AppointmentService {
@@ -25,6 +26,8 @@ public class AppointmentServiceImpl implements AppointmentService {
     BloodBankServiceImpl bloodBankService;
     DonorService donorService;
     EmailService emailService;
+
+    private final ReentrantLock lock = new ReentrantLock();
 
     @Autowired
     public AppointmentServiceImpl(AppointmentRepository appointmentRepository, BloodBankServiceImpl bloodBankService, DonorService donorService, EmailService emailService) {
@@ -53,15 +56,20 @@ public class AppointmentServiceImpl implements AppointmentService {
     @Override
     @Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW)
     public boolean scheduleAppointment(Appointment app) throws MessagingException, javax.mail.MessagingException, IOException, WriterException {
-        for (Appointment a:
-             getAll()) {
-            if(a.getStart().isEqual(app.getStart()) && a.getBloodBank().getId() == app.getBloodBank().getId()){
-                return false;
+        lock.lock();
+        try {
+            for (Appointment a:
+                 getAll()) {
+                if(a.getStart().isEqual(app.getStart()) && a.getBloodBank().getId() == app.getBloodBank().getId()){
+                    return false;
+                }
             }
+            repository.save(app);
+            emailService.sendAppointmentMail(app);
+            return true;
+        } finally {
+            lock.unlock();
         }
-        repository.save(app);
-        emailService.sendAppointmentMail(app);
-        return true;
     }
 
     @Override
