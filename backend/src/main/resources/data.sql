@@ -178,8 +178,8 @@ INSERT INTO admin(
     first_login, id)
 VALUES (false, 5);
 
-INSERT INTO survey(id, answer1,answer2,answer3,answer4,answer5,answer6,answer7,answer8,answer9,answer10, donor_id)
-VALUES (1, true,true,true,true,false,false,false,true,false,false, 1);
+-- INSERT INTO survey(id, answer1,answer2,answer3,answer4,answer5,answer6,answer7,answer8,answer9,answer10, donor_id)
+-- VALUES (1, true,true,true,true,false,false,false,true,false,false, 1);
 
 -- INSERT INTO donor_surey(donor_id,survey_id)
 -- VALUES (1,1);
