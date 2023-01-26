@@ -113,11 +113,11 @@ VALUES (7, 'donor3@mail.com', 0, '7132312321321', 'Zarko', 'Vodoinstalater', '$2
 
 INSERT INTO donor(
     blood_type, category, penalty, points, id, has_survey)
-VALUES (0, 0, 0, 11, 1, false);
+VALUES (0, 0, 0, 11, 1, true);
 
 INSERT INTO donor(
-    blood_type, category, penalty, points, id)
-VALUES (1, 1, 0, 11, 7);
+    blood_type, category, penalty, points, id, has_survey)
+VALUES (1, 1, 0, 11, 7, false);
 
 INSERT INTO donor(
     blood_type, category, penalty, points, id)
@@ -140,27 +140,31 @@ INSERT INTO admin(
     first_login, id)
 VALUES (false, 5);
 
+INSERT INTO survey(id, answer1,answer2,answer3,answer4,answer5,answer6,answer7,answer8,answer9,answer10, donor_id)
+VALUES (1, true,true,true,true,false,false,false,true,false,false, 1);
 
+-- INSERT INTO donor_surey(donor_id,survey_id)
+-- VALUES (1,1);
 
 INSERT INTO medical_worker_appointments(
     medical_worker_id, appointment_id)
 VALUES (2, 1);
 
-INSERT INTO appointment_slot(
-    start_time, end_time, donor_id, blood_bank_id, status)
-VALUES ('2022-12-02 13:00:28.111756','2022-12-02 14:00:28.112755',1, 1, 0);
-
-INSERT INTO appointment_slot(
-    start_time, end_time, donor_id, blood_bank_id, status)
-VALUES ('2022-12-27 17:00:28.111756','2022-12-27 18:00:28.112755',null, 1, 0);
-
-INSERT INTO appointment_slot(
-    start_time, end_time, donor_id, blood_bank_id, status)
-VALUES ('2022-12-30 11:00:28.111756','2022-12-30 10:00:28.112755',null, 1, 0);
+-- INSERT INTO appointment_slot(
+--     start_time, end_time, donor_id, blood_bank_id, status)
+-- VALUES ('2023-01-22 13:00:28.111756','2023-01-22 14:00:28.112755',1, 1, 0);
+--
+-- INSERT INTO appointment_slot(
+--     start_time, end_time, donor_id, blood_bank_id, status)
+-- VALUES ('2022-12-27 17:00:28.111756','2022-12-27 18:00:28.112755',null, 1, 0);
+--
+-- INSERT INTO appointment_slot(
+--     start_time, end_time, donor_id, blood_bank_id, status)
+-- VALUES ('2022-12-30 11:00:28.111756','2022-12-30 10:00:28.112755',null, 1, 0);
 
 INSERT INTO appointment_slot(
     start_time, end_time, donor_id, blood_bank_id, status, version)
-VALUES ('2023-01-22 10:00:00','2023-01-22 11:00:00',null, 1, 0, 0);
+VALUES ('2023-01-30 10:00:00','2023-01-30 11:00:00',null, 1, 0, 0);
 
 
 
@@ -176,6 +180,7 @@ INSERT INTO role (name) VALUES ('ROLE_ADMIN');
 INSERT INTO role (name) VALUES ('ROLE_NEW_ADMIN');
 
 INSERT INTO USER_ROLE (user_id, role_id) VALUES (1, 1); -- user-u dodeljujemo rolu DONOR
+INSERT INTO USER_ROLE (user_id, role_id) VALUES (7, 1); -- user-u dodeljujemo rolu DONOR
 INSERT INTO USER_ROLE (user_id, role_id) VALUES (2, 2); -- user-u dodeljujemo rolu MW
 INSERT INTO USER_ROLE (user_id, role_id) VALUES (3, 2);
 INSERT INTO USER_ROLE (user_id, role_id) VALUES (4, 2);

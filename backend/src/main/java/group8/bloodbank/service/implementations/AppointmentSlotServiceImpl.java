@@ -36,12 +36,10 @@ public class AppointmentSlotServiceImpl implements AppointmentSlotService {
 
 
     @Autowired
-    public AppointmentSlotServiceImpl(AppointmentSlotRepository repository, BloodBankRepository bloodBankRepository, DonorRepository donorRepository, QRCodeService qrCodeService, EmailService emailService) {
+    public AppointmentSlotServiceImpl(AppointmentSlotRepository repository, BloodBankRepository bloodBankRepository, DonorRepository donorRepository) {
         this.repository = repository;
         this.bloodBankRepository = bloodBankRepository;
         this.donorRepository = donorRepository;
-        this.qrCodeService = qrCodeService;
-        this.emailService = emailService;
     }
 
     @Override
@@ -57,11 +55,11 @@ public class AppointmentSlotServiceImpl implements AppointmentSlotService {
 
     @Override
     @Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW)
-    public AppointmentSlot scheduleSlot(AppointmentSlot slot) throws MessagingException, IOException, WriterException {
+    public boolean scheduleSlot(AppointmentSlot slot) throws MessagingException, IOException, WriterException {
         Optional<Donor> d = donorRepository.findById(slot.donor.getId());
         AppointmentSlot slotToUpdate = repository.findById(slot.getId()).get();
         if(slotToUpdate.getVersion() == 1)
-            return null;
+            return false;
 
         if(slot.getStartTime().isBefore(LocalDateTime.now())){
             throw new UnsupportedOperationException("This appointment has expired !");
@@ -71,12 +69,13 @@ public class AppointmentSlotServiceImpl implements AppointmentSlotService {
                     throw new UnsupportedOperationException("You already have an appointment at this facility at this time !");
             }
             slotToUpdate.setStatus(slot.getStatus());
+            slotToUpdate.setDonor(slot.getDonor());
             repository.save(slotToUpdate);
             //String open = LocalDateTime.now() + " Dear " + slot.donor.getName() + ", you have an appointment scheduled for " + slot.getStartTime() + " at the " + slot.bloodBank.getName();
             //String url = qrCodeService.generateImageAsQRCode(open, 200, 200, slot.getId().toString());
             //emailService.sendAppointmentInformationMail(d.get(), url);
         }
-        return slotToUpdate;
+        return true;
     }
 
     @Override

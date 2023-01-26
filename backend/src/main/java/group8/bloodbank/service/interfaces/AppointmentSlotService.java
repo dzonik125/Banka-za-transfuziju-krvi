@@ -12,7 +12,7 @@ public interface AppointmentSlotService {
 
     AppointmentSlot saveSlot(AppointmentSlot slot);
 
-    AppointmentSlot scheduleSlot(AppointmentSlot slot) throws MessagingException, IOException, WriterException;
+    boolean scheduleSlot(AppointmentSlot slot) throws MessagingException, IOException, WriterException;
 
     AppointmentSlot cancelSlot(AppointmentSlot slot);
 
