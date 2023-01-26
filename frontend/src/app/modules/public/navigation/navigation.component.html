@@ -1,5 +1,5 @@
 <nav style="height: 10%;">
-  
+
   <img style="position: fixed;"  src="assets/logo2.png"  routerLink="" >
   <div class="nav-right"  style = "margin-top: 0.7%;">
     <a *ngIf="!isLogged" [routerLink]="['/auth/login']" style="margin-left: 1rem; "> Log in </a>
@@ -7,7 +7,7 @@
     <a *ngIf="!isLogged" routerLink="/register" routerLinkActive="active" style="margin-left: 1rem;">Register</a>
     <a *ngIf="isLogged " (click)="logout()" style="margin-left: 1rem; cursor: pointer;"> Log out </a>
   </div>
-  
+
   <div style="display: inline-block; margin-left: 10%; margin-top: 0.7%;" class="nav-left" alt="gas">
 
     <a *ngIf="isLogged" routerLink="/userProfile" routerLinkActive="active" style="margin-left: 1rem;">Profile</a>
@@ -16,15 +16,16 @@
     <a *ngIf="isLogged && userRole=='ROLE_DONOR'" [routerLink]="['/scheduleNewAppointment']" routerLinkActive="active" style="margin-left: 1rem;">Schedule new appointment</a>
     <a *ngIf="isLogged && userRole=='ROLE_DONOR'" [routerLink]="['/schedule']" routerLinkActive="active" style="margin-left: 1rem;">Schedule predefined appointment</a>
     <a *ngIf="isLogged && userRole=='ROLE_DONOR'" [routerLink]="['/scheduledAppointments']" routerLinkActive="active" style="margin-left: 1rem;">Scheduled appointments</a>
+    <a *ngIf="isLogged && userRole=='ROLE_DONOR'" [routerLink]="['/visitHistory']" routerLinkActive="active" style="margin-left: 1rem;">Visit history</a>
     <a *ngIf="isLogged && userRole=='ROLE_MEDICALWORKER'" [routerLink]="['/addAppointmentSlot']" routerLinkActive="active" style="margin-left: 1rem;">Create appointment slot</a>
     <a *ngIf="isLogged && userRole=='ROLE_ADMIN'"  [routerLink]="['/displayAllUsers']" routerLinkActive="active" style="margin-left: 1rem;">Users</a>
-    
+
     <a *ngIf="isLogged && userRole=='ROLE_ADMIN'"  [routerLink]="['/registerAdministrator']" routerLinkActive="active" style="margin-left: 1rem;">Create administrator</a>
     <a *ngIf="isLogged && userRole=='ROLE_ADMIN'"  [routerLink]="['/registerMedicalWorker']" routerLinkActive="active" style="margin-left: 1rem;">Create medical worker</a>
     <a *ngIf="isLogged && userRole=='ROLE_ADMIN'" [routerLink]="['/registerBloodBank']" routerLinkActive="active" style="margin-left: 1rem;">Create blood bank</a>
     <a *ngIf="isLogged && userRole=='ROLE_ADMIN'" [routerLink]="['/appointmentSlotByQrCode']" routerLinkActive="active" style="margin-left: 1rem;">Appointment QR Code</a>
     <a *ngIf="isLogged && userRole=='ROLE_ADMIN'" [routerLink]="['/medicalExamination']" routerLinkActive="active" style="margin-left: 1rem;">Medical Examination</a>
-    
+
   </div>
-    
+
 </nav>
