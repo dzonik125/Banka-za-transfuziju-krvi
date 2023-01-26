@@ -8,7 +8,10 @@ import group8.bloodbank.repository.AppointmentRepository;
 import group8.bloodbank.service.interfaces.AppointmentService;
 import group8.bloodbank.service.interfaces.DonorService;
 import group8.bloodbank.service.interfaces.EmailService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.messaging.MessagingException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
@@ -28,6 +31,7 @@ public class AppointmentServiceImpl implements AppointmentService {
     EmailService emailService;
 
     private final ReentrantLock lock = new ReentrantLock();
+    private final Logger LOG = LoggerFactory.getLogger(AppointmentServiceImpl.class);
 
     @Autowired
     public AppointmentServiceImpl(AppointmentRepository appointmentRepository, BloodBankServiceImpl bloodBankService, DonorService donorService, EmailService emailService) {
@@ -72,8 +76,14 @@ public class AppointmentServiceImpl implements AppointmentService {
         }
     }
 
+    @Cacheable("appointment")
     @Override
     public Appointment getById(Long id) {
+        LOG.info("Appointment with id: " + id + " successfully cached!");
         return repository.findById(id).get();
+    }
+
+    public void removeFromCache() {
+        LOG.info("Products removed from cache!");
     }
 }

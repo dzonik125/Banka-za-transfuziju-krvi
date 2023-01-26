@@ -134,7 +134,7 @@ VALUES ('donor7@mail.com', 0, '2232372111321', 'Milos', 'Sportista', '$2y$10$9IN
 
 INSERT INTO donor(
     blood_type, category, penalty, points, id, has_survey)
-VALUES (0, 0, 0, 11, 1, true);
+VALUES (0, 0, 0, 11, 1, false);
 
 INSERT INTO donor(
     blood_type, category, penalty, points, id, has_survey)
