@@ -95,13 +95,15 @@ public class AppointmentSlotController {
     public ResponseEntity<Exception> update(@RequestBody AppointmentSlotDTO appointmentSlot)  {
         Optional<Donor> donor = donorRepository.findById(appointmentSlot.donor);
         AppointmentSlot slot = new AppointmentSlot(appointmentSlot.id, appointmentSlot.bloodBank, donor.get(), appointmentSlot.startTime, appointmentSlot.endTime, appointmentSlot.status);
-        try{
-            service.scheduleSlot(slot);
-            return new ResponseEntity<Exception>(HttpStatus.OK);
-        } catch (Exception e){
-            e.printStackTrace();
-            return new ResponseEntity<Exception>(e, HttpStatus.CONFLICT);
-        }
+            try {
+                donorService.canSchedule(slot);
+                service.scheduleSlot(slot);
+                return new ResponseEntity<Exception>(HttpStatus.OK);
+            } catch (Exception e) {
+                e.printStackTrace();
+                return new ResponseEntity<Exception>(e, HttpStatus.CONFLICT);
+            }
+
     }
 
     @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE, value = "/cancelAppointment")
