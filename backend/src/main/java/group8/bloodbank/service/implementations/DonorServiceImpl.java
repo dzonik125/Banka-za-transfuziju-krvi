@@ -1,10 +1,8 @@
 package group8.bloodbank.service.implementations;
 
-import group8.bloodbank.model.BloodType;
-import group8.bloodbank.model.Category;
+import group8.bloodbank.model.*;
 import group8.bloodbank.model.DTO.UserDTO;
-import group8.bloodbank.model.Donor;
-import group8.bloodbank.model.Role;
+import group8.bloodbank.repository.AppointmentSlotRepository;
 import group8.bloodbank.repository.DonorRepository;
 import group8.bloodbank.service.interfaces.DonorService;
 import group8.bloodbank.service.interfaces.EmailService;
@@ -16,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 import javax.mail.MessagingException;
 import java.io.UnsupportedEncodingException;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -24,6 +23,9 @@ import java.util.Optional;
 public class DonorServiceImpl implements DonorService {
     @Autowired
     DonorRepository donorRepository;
+
+    @Autowired
+    AppointmentSlotRepository appointmentSlotRepository;
     @Autowired
     RoleService roleService;
 
@@ -75,6 +77,19 @@ public class DonorServiceImpl implements DonorService {
     @Override
     public Optional<Donor> findById(Long id) {
         return donorRepository.findById(id);
+    }
+
+    @Override
+    public boolean canSchedule(AppointmentSlot appointmentSlot) {
+        if (appointmentSlot.getStartTime().isBefore(LocalDateTime.now())) {
+            throw new UnsupportedOperationException("This appointment has expired !");
+        }
+        for (AppointmentSlot app : appointmentSlotRepository.findAppointmentSlotByDonor_Id(appointmentSlot.donor.getId())) {
+            if (appointmentSlot.bloodBank.getId().equals(app.bloodBank.getId()) && appointmentSlot.getStartTime().equals(app.getStartTime()))
+                throw new UnsupportedOperationException("You already have an appointment at this facility at this time !");
+        }
+
+        return true;
     }
 
     @Override

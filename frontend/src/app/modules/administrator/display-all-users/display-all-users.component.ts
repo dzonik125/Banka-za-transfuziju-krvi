@@ -16,13 +16,28 @@ import { MedicalWorkerService } from '../../../services/medical-worker.service';
   templateUrl: './display-all-users.component.html',
   styleUrls: ['./display-all-users.component.css']
 })
-export class DisplayAllUsersComponent implements AfterViewInit {
+export class DisplayAllUsersComponent implements AfterViewInit, OnInit {
   
   public dataSource = new MatTableDataSource<BloodBank>();
   public medicalWorkers: any[] = [];
   public donors: any[] = [];
   public admins: any[] = [];
   public filteredString: string ='';
+
+
+  currentPage = 1;
+  itemsPerPage = 6;
+
+  onPageChange(event: any) {
+    this.currentPage = event;
+  }
+
+  ngOnInit() {
+    this.medicalWorkerServi.getMedicalWorkers().subscribe(res => {
+      this.medicalWorkers = res;
+      
+    })
+  }
 
   constructor(private medicalWorkerServi: MedicalWorkerService, private adminService: AdminService ,private donorService: UserService, private router: Router, private _liveAnnouncer: LiveAnnouncer,
     @Inject(DOCUMENT) document: Document) {
@@ -31,10 +46,7 @@ export class DisplayAllUsersComponent implements AfterViewInit {
 
 
   ngAfterViewInit() {
-    this.medicalWorkerServi.getMedicalWorkers().subscribe(res => {
-      this.medicalWorkers = res;
-      
-    })
+
 
     this.donorService.getDonors().subscribe(res => {
       this.donors = res;
@@ -49,8 +61,9 @@ export class DisplayAllUsersComponent implements AfterViewInit {
   }
 
   clickedDonnors() {
+    this.currentPage = 1;
     // var btn = document.getElementById('donnorButt') as HTMLElement;
-    // btn.className="btn btn-primary";
+    // btn.="btn btn-primary ml-3 me-3 border";
 
     // var adminBut = document.getElementById('adminButt') as HTMLElement;
     // adminBut.className="btn btn-outline-primary ml-3  border";
@@ -60,6 +73,7 @@ export class DisplayAllUsersComponent implements AfterViewInit {
 
   }
   clickedMedicalWorkers(){
+    this.currentPage = 1;
     // var btn = document.getElementById('medWorkButt') as HTMLElement;
     // btn.className="btn btn-primary";
 

@@ -4,12 +4,12 @@
   <button id="donnorButt" class="btn btn-outline-primary ml-3 me-3 border" mat-button (click)="clickedDonnors(); showDiv.donorsBool=true; showDiv.medicalWorkersBool=false; showDiv.adminsBool=false;" >Donnors</button>
   <button id="medWorkButt" class="btn btn-outline-primary ml-3 me-3 border" (click)="clickedMedicalWorkers(); showDiv.donorsBool=false; showDiv.medicalWorkersBool=true; showDiv.adminsBool=false;" mat-button>Medical workers</button>
   <button id="adminButt" class="btn btn-outline-primary ml-3  border" mat-button (click)="clickedMedicalWorkers(); showDiv.donorsBool=false; showDiv.medicalWorkersBool=false; showDiv.adminsBool=true;" >Administrators</button>
-  
+ 
   <div style="display: inline-block; margin-left: 50%;">
     <div class="input-group">
       <div class="form-outline">
           <input id="search-focus" [(ngModel)]="filteredString" placeholder="Search..." id="form1" class="form-control" />
-
+          
       </div>
     </div>
     
@@ -19,16 +19,22 @@
 </div>
 <br>
 <br>
+<div  class ="container my-3">
+  <pagination-controls (pageChange)="onPageChange($event)"></pagination-controls>
+
+</div>
+
 <div *ngIf="showDiv.medicalWorkersBool">
   <div class="container">
+    
     <div fxLayout="row wrap space-evenly" fxLayoutGap="15px grid">
-      <div  fxFlex.xs="100%" fxFlex.sm="33%" *ngFor="let medicalWorker of medicalWorkers | searchFilter:filteredString">
+      <div  fxFlex.xs="100%" fxFlex.sm="33%" *ngFor="let medicalWorker of medicalWorkers | searchFilter:filteredString | paginate: { itemsPerPage: itemsPerPage, currentPage: currentPage } ">
         <mat-card  class="mat-elevation-z19 border align card-background" >
           <mat-card-title class="text-center fs-5 fw-bold">{{medicalWorker.name}} {{medicalWorker.surname}} </mat-card-title>
             <mat-card-content>
                <p>
                 <mat-card-content>{{medicalWorker.email}}</mat-card-content>
-                <mat-card-content>{{medicalWorker.password}}</mat-card-content>
+                <!-- <mat-card-content>{{medicalWorker.password}}</mat-card-content> -->
                 <br>
                <mat-card-content>{{medicalWorker.address.city}},{{medicalWorker.address.street}} {{medicalWorker.address.number}}</mat-card-content>
                 <mat-card-content>{{medicalWorker.gender}}</mat-card-content>
@@ -43,13 +49,13 @@
 <div *ngIf="showDiv.donorsBool">
   <div class="container">
     <div fxLayout="row wrap space-evenly" fxLayoutGap="15px grid">
-      <div fxFlex.xs="100%" fxFlex.sm="33%" *ngFor="let donor of donors | searchFilter:filteredString">
+      <div fxFlex.xs="100%" fxFlex.sm="33%" *ngFor="let donor of donors | searchFilter:filteredString | paginate: { itemsPerPage: itemsPerPage, currentPage: currentPage }">
         <mat-card *ngIf="donor.category == 'GOLD'" class="mat-elevation-z19 border align card-background" style="background: #FFED8A;">
           <mat-card-title class="text-center fs-5 fw-bold">{{donor.name}} {{donor.surname}} </mat-card-title>
             <mat-card-content>
               <p>
                 <mat-card-content>{{donor.email}}</mat-card-content>
-                <mat-card-content>{{donor.password}}</mat-card-content>
+                <!-- <mat-card-content>{{donor.password}}</mat-card-content> -->
                 <mat-card-content>points: {{donor.points}}</mat-card-content>
                 <mat-card-content>{{donor.bloodType}}</mat-card-content>
                 
@@ -65,7 +71,7 @@
             <mat-card-content>
               <p>
                 <mat-card-content>{{donor.email}}</mat-card-content>
-                <mat-card-content>{{donor.password}}</mat-card-content>
+                <!-- <mat-card-content>{{donor.password}}</mat-card-content> -->
                 <mat-card-content>points: {{donor.points}}</mat-card-content>
                 <mat-card-content>{{donor.bloodType}}</mat-card-content>
                 
@@ -81,7 +87,7 @@
             <mat-card-content>
               <p>
                 <mat-card-content>{{donor.email}}</mat-card-content>
-                <mat-card-content>{{donor.password}}</mat-card-content>
+                <!-- <mat-card-content>{{donor.password}}</mat-card-content> -->
                 <mat-card-content>points: {{donor.points}}</mat-card-content>
                 <mat-card-content>{{donor.bloodType}}</mat-card-content>
                 
@@ -100,13 +106,13 @@
 <div *ngIf="showDiv.adminsBool">
   <div class="container">
     <div fxLayout="row wrap space-evenly" fxLayoutGap="15px grid">
-      <div fxFlex.xs="100%" fxFlex.sm="33%" *ngFor="let admin of admins | searchFilter:filteredString">
+      <div fxFlex.xs="100%" fxFlex.sm="33%" *ngFor="let admin of admins | searchFilter:filteredString | paginate: { itemsPerPage: itemsPerPage, currentPage: currentPage }">
         <mat-card  class="mat-elevation-z19 border align card-background">
           <mat-card-title class="text-center fs-5 fw-bold"> {{admin.name}} {{admin.surname}} </mat-card-title>
             <mat-card-content>
               <p>
                 <mat-card-content>{{admin.email}}</mat-card-content>
-                <mat-card-content>{{admin.password}}</mat-card-content>
+                <!-- <mat-card-content>{{admin.password}}</mat-card-content> -->
                 <br>
                 <mat-card-content>{{admin.address.city}},{{admin.address.street}} {{admin.address.number}}</mat-card-content>
                 <mat-card-content>{{admin.gender}}</mat-card-content>
