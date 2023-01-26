@@ -1,0 +1,27 @@
+<mat-card class="m-0">
+    <form (ngSubmit)="login()" class="center tertiary w-25" style="padding:40px">
+      <mat-card-header class="row" style="margin-top: 2%">
+        <mat-card-title style="margin-bottom: 5%; color:snow;" class="libre">Log in</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="row">
+          <mat-form-field>
+            <input required type="text" matInput placeholder="Username" name="username" style="color: snow;" [(ngModel)]="credentials.username">
+        </mat-form-field>
+        </div>
+        <div class="row">
+        <mat-form-field>
+            <input required type="password" matInput placeholder="Password" name="password" [(ngModel)]="credentials.password">
+        </mat-form-field>
+        </div>
+        <div class="row">
+          <p *ngIf="error" style="color: snow;">
+            Wrong username and/or password
+          </p>
+        </div>
+      </mat-card-content>
+      <mat-card-actions class="row">
+        <button mat-raised-button class="primary libre" type="submit" style="width:20%;float: right;margin-right: 10%;">Log in</button>
+      </mat-card-actions>
+    </form>
+  </mat-card>

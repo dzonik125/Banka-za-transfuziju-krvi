@@ -1,0 +1,74 @@
+<!-- <div class="center">
+  <table mat-table [dataSource]="dataSource" matSort (matSortChange)="sortColumn($event)" class="mat-elevation-z8">
+      <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by name"> Name </th>
+          <td mat-cell *matCellDef="let bloodBank">{{bloodBank.name}}</td>
+      </ng-container>
+      <ng-container matColumnDef="address.city">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by city"> City </th>
+          <td mat-cell *matCellDef="let bloodBank">{{bloodBank.address.city}}</td>
+      </ng-container>
+      <ng-container matColumnDef="avgGrade">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by avgGrade"> Avg grade </th>
+        <td mat-cell *matCellDef="let bloodBank">{{bloodBank.avgGrade}}</td>
+    </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+
+</div> -->
+
+
+<div class="container my-3">
+<p class="text-start mb-1">Sort by: <span style="margin-left: 14rem;">Filter by:</span></p>
+<button class="btn btn-outline-primary ml-3 me-3 border" mat-button (click)="sortName('name')" >Name</button>
+<button class="btn btn-outline-primary ml-3 me-3 border" mat-button (click)="sortName('address.city')">City</button>
+<button class="btn btn-outline-primary ml-3  border" mat-button (click)="sortData()">Grade</button>
+<button class="btn btn-outline-primary ml-5  border" mat-button style="margin-left: 1.8rem;" onclick="this.setAttribute('style', 'display: none'); this.nextSibling.setAttribute('style', 'display: inline');">Grade</button>
+<div style="display: none;">
+  <span class="input-group-text" style="display: inline; margin-left: 1.8rem;" id="basic-addon1">MIN:</span>
+  <input [(ngModel)]="minTerm" type="text" style="width: 5rem;">
+  <span class="input-group-text" style="display: inline;" id="basic-addon1">MAX:</span>
+  <input [(ngModel)]="maxTerm" type="text" style="width: 5rem;">
+</div>
+<input type="search" placeholder="Search banks..." style="float: right; margin-right: 4.5rem;" [(ngModel)]="term">
+</div>
+
+<div class="container mt-5">
+  <pagination-controls
+    previousLabel="Prev"
+    nextLabel="Next"
+    (pageChange)="onTableDataChange($event)">
+  </pagination-controls>
+</div>
+
+
+<div class="container">
+  <div fxLayout="row wrap space-evenly" fxLayoutGap="25px grid">
+    <div [fxFlex]="(100/3) + '%'" fxFlex.xs="100%" fxFlex.sm="33%" class="zoom" *ngFor="let bloodBank of filteredbloodBanks | filter : term | paginate:{
+      itemsPerPage: 6,
+      currentPage: page,
+      totalItems: count}; let i = index">
+      <mat-card  class="mat-elevation-z19 border align card-background">
+        <img style="height: 200px; width: 300px" class="mt-1 mh-200 mw-200" mat-card-image mat-card-s-image src={{bloodBank.image}}>
+        <mat-card-content>
+          <mat-card-title class="text-center fs-5 fw-bold">{{bloodBank.name}}</mat-card-title>
+          <p>
+            <mat-card-content>{{bloodBank.avgGrade}}</mat-card-content>
+          </p>
+          <p>
+            <mat-card-content>{{bloodBank.address.city}},{{bloodBank.address.street}} {{bloodBank.address.number}}</mat-card-content>
+          </p>
+          <p style="display: inline-block;">
+            <button  class="btn btn-primary" (click)="showBank(bloodBank.id)">Show</button>
+          </p>
+          <p style="display: inline-block; margin-left: 10%;">
+            <button *ngIf="role==='ROLE_ADMIN'" class="btn btn-primary" (click)="showCalendar(bloodBank.id)">calendar</button>
+          </p>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+</div>
+

@@ -4,36 +4,52 @@ package group8.bloodbank.model; /***********************************************
  * Purpose: Defines the Class WorkingHours
  ***********************************************************************/
 
+import javax.persistence.*;
+import java.sql.Time;
 import java.time.LocalDateTime;
 
 /**
  * @pdOid aec80d47-2cf1-4648-9f00-ff070b4eddff
  */
+@Entity
+@Table(name = "workingHours")
 public class WorkingHours {
 
-    public BloodBank bloodBank;
-    private LocalDateTime startTime;
-    private LocalDateTime endTime;
+    @Id
+    @GeneratedValue(strategy =  GenerationType.IDENTITY)
+    private Long id;
 
-    public WorkingHours(LocalDateTime startTime, LocalDateTime endTime, BloodBank bloodBank) {
+    @ManyToOne
+    @JoinColumn(name = "blood_bank_id")
+    private BloodBank bloodBank;
+    @Column
+    private Time startTime;
+    @Column
+    private Time endTime;
+
+    public WorkingHours(Time startTime, Time endTime, BloodBank bloodBank) {
         this.startTime = startTime;
         this.endTime = endTime;
         this.bloodBank = bloodBank;
     }
 
-    public LocalDateTime getStartTime() {
+    public WorkingHours() {
+
+    }
+
+    public Time getStartTime() {
         return startTime;
     }
 
-    public void setStartTime(LocalDateTime startTime) {
+    public void setStartTime(Time startTime) {
         this.startTime = startTime;
     }
 
-    public LocalDateTime getEndTime() {
+    public Time getEndTime() {
         return endTime;
     }
 
-    public void setEndTime(LocalDateTime endTime) {
+    public void setEndTime(Time endTime) {
         this.endTime = endTime;
     }
 

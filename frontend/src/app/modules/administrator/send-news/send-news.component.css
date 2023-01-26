@@ -1,0 +1,7 @@
+*{
+    color: white !important;
+}
+
+input[type = text-block], textarea{
+    color: black !important;
+}

@@ -1,0 +1,50 @@
+nav{
+    width: 100vl;
+    padding: 1rem;
+    background-color: #632626;
+    color: white;
+}
+
+.nav-right{
+    position: relative;
+    float: right;
+    margin-top: 1rem;
+}
+
+.nav-left{
+    float: left;
+    margin-top: 1rem;
+}
+
+a{
+    text-decoration: none;
+    color: white;
+    background-image: linear-gradient(white, white);
+    background-size: 0 5px, auto;
+    background-repeat: no-repeat;
+    background-position: center bottom;
+    transition: all .2s ease-out;
+}
+
+a:hover{
+    background-size: 100% 5px, auto;
+}
+
+img{
+    transform: scale(0.92);
+    object-fit: cover;
+    max-height: 100%;
+}
+
+img:hover{
+    cursor: pointer;
+}
+
+
+*{
+    color: white;
+}
+
+input, select, option{
+    color: black;
+}

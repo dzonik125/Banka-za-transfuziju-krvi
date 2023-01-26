@@ -1,15 +1,38 @@
-package group8.bloodbank.model; /***********************************************************************
- * Module:  Admin.java
- * Author:  dZoNi
- * Purpose: Defines the Class Admin
- ***********************************************************************/
+package group8.bloodbank.model;
 
-/**
- * @pdOid d793ee28-8894-4839-ad00-2602e252b692
- */
+import lombok.AllArgsConstructor;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+
+@Entity
+@AllArgsConstructor
 public class Admin extends User {
 
-    public Admin(int id, String name, String surname, String username, String password, Address address, String jmbg, String email, String occupation, int penalty, Gender gender) {
-        super(id, name, surname, username, password, address, jmbg, email, occupation, penalty, gender);
+    @Column
+    boolean firstLogin;
+
+    public Admin(Long id, String name, String surname, String password, Address address, String jmbg, String email, String occupation, Gender gender) {
+        super(id, name, surname, password, address, jmbg, email, occupation, gender, UserType.SYSTEM_ADMINISTRATOR);
     }
+
+//    public Admin(String name, String surname, String email, String password, String jmbg, Address address, String occupation,  Gender gender) {
+//        super(name, surname, email, password, jmbg, address, occupation, gender, UserType.MEDICAL_WORKER);
+//
+//    }
+
+    public Admin(boolean firstLogin, String name, String surname, String email, String password, String jmbg, Address address, String occupation,  Gender gender) {
+        super(name, surname, email, password, jmbg, address, occupation, gender, UserType.SYSTEM_ADMINISTRATOR);
+        this.firstLogin = firstLogin;
+    }
+
+    public Admin() {
+
+    }
+
+    public boolean getFirstLogin() {
+        return this.firstLogin;
+    }
+    public void setFirstLogin(boolean firstLogin) {this.firstLogin = firstLogin;}
+
 }

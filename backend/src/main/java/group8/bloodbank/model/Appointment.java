@@ -4,55 +4,51 @@ package group8.bloodbank.model; /***********************************************
  * Purpose: Defines the Class Appointment
  ***********************************************************************/
 
-import java.util.ArrayList;
+import lombok.*;
+
+import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
+
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@Entity
+@Table(name = "appointment")
 public class Appointment {
-    public ArrayList<MedicalWorker> medicalWorker;
-    public Donor donor;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @ManyToMany(mappedBy = "appointments", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    public List<MedicalWorker> medicalWorker;
+
+    @Column
+    public Long donor_id;
+
+    @ManyToOne
+    @JoinColumn(name = "blood_bank_id")
     public BloodBank bloodBank;
+
+    @Column
     private LocalDateTime start;
+
+    @Column
     private double duration;
-    private int id;
 
-    public Appointment(LocalDateTime start, double duration, int id, ArrayList<MedicalWorker> medicalWorker, Donor donor, BloodBank bloodBank) {
-        this.start = start;
-        this.duration = duration;
-        this.id = id;
+    @Transient
+    public Donor donor;
+
+    public Appointment(List<MedicalWorker> medicalWorker, Long donor_id, BloodBank bloodBank, LocalDateTime start, double duration, Donor donor) {
         this.medicalWorker = medicalWorker;
-        this.donor = donor;
+        this.donor_id = donor_id;
         this.bloodBank = bloodBank;
-    }
-
-    public LocalDateTime getStart() {
-        return start;
-    }
-
-    public void setStart(LocalDateTime start) {
         this.start = start;
-    }
-
-    public double getDuration() {
-        return duration;
-    }
-
-    public void setDuration(double duration) {
         this.duration = duration;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public ArrayList<MedicalWorker> getMedicalWorker() {
-        return medicalWorker;
-    }
-
-    public void setMedicalWorker(ArrayList<MedicalWorker> medicalWorker) {
-        this.medicalWorker = medicalWorker;
+        this.donor = donor;
     }
 
     public Donor getDonor() {
@@ -67,7 +63,7 @@ public class Appointment {
         return bloodBank;
     }
 
-    public void setBloodBank(BloodBank bloodBank) {
-        this.bloodBank = bloodBank;
+    public void setBloodBank(BloodBank newBloodBank) {
+        this.bloodBank = newBloodBank;
     }
 }
