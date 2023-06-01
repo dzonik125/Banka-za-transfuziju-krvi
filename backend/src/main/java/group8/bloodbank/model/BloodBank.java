@@ -50,8 +50,13 @@ public class BloodBank {
     @Column
     private String image;
 
+
     @OneToOne
     private BloodBankBlood blood;
+
+    @Column
+    private String hospitalBloodRequestsRoutingKey;
+
 
     @ElementCollection(fetch = FetchType.EAGER)
     @CollectionTable(name="bloodType_bloodBank", joinColumns=@JoinColumn(name="bloodBank_id"))
@@ -61,7 +66,7 @@ public class BloodBank {
     private Map<BloodType, Double> bloodType;
 
     public BloodBank(Long id, String name, String description, double avgGrade, Map<BloodType, Double> bloodType,
-                     ArrayList<MedicalWorker> medicalWorkers, ArrayList<Item> item, ArrayList<Appointment> appointment, Address address, WorkingHours workingHours, String apiKey, String image) {
+                     ArrayList<MedicalWorker> medicalWorkers, ArrayList<Item> item, ArrayList<Appointment> appointment, Address address, WorkingHours workingHours, String apiKey, String image, String hospitalBloodRequestsRoutingKey) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -72,6 +77,7 @@ public class BloodBank {
         this.workingHours = workingHours;
         this.apiKey = apiKey;
         this.image = image;
+        this.hospitalBloodRequestsRoutingKey = hospitalBloodRequestsRoutingKey;
     }
 
     public BloodBank(Long id, String name, String description, Address address, String image, double avgGrade) {

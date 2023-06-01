@@ -13,7 +13,6 @@ import java.util.Set;
 @AllArgsConstructor
 @NoArgsConstructor
 public class BloodUnitUrgentRequest {
-
     public Set<BloodDTO> bloodUnits;
     public String APIKey;
 }

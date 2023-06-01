@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "http://localhost:4201")
 @RestController
 @RequestMapping("/donor")
 public class DonorController {
@@ -23,7 +23,19 @@ public class DonorController {
         this.donorService = donorService;
     }
 
-    @CrossOrigin(origins = "http://localhost:4200")
+
+ /*   @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Donor> saveDonor(@RequestBody Donor donor)  {
+        Donor savedDonor = null;
+        try {
+            savedDonor = donorService.saveDonor(donor);
+            return new ResponseEntity<Donor>(savedDonor, HttpStatus.CREATED);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResponseEntity<Donor>(savedDonor, HttpStatus.CONFLICT);
+        }
+    }*/
+
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public List<Donor> getAll() {
         return donorService.getAll();

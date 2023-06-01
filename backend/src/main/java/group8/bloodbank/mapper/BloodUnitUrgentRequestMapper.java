@@ -18,7 +18,7 @@ public class BloodUnitUrgentRequestMapper {
         return  bloodUnitHashMap;
     }
 
-    private static BloodType getTypeFromString(String bloodType) {
+    public static BloodType getTypeFromString(String bloodType) {
         BloodType forReturn = null;
         if (Objects.equals(bloodType, "ZERO_POSITIVE"))
         {

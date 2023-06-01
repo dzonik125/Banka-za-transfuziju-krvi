@@ -56,7 +56,6 @@ INSERT INTO public.appointment(
     donor_id, duration, start, blood_bank_id)
 VALUES (6, 20, '2021-11-27 13:17:53.840417', 3);
 
-
 INSERT INTO blood_type_blood_bank(
     blood_bank_id, blood_type_amount, blood_type_key)
 VALUES (1, 1000, 'Aneg');
@@ -121,6 +120,7 @@ INSERT INTO blood_type_blood_bank(
     blood_bank_id, blood_type_amount, blood_type_key)
 VALUES (2, 1000, 'Oneg');
 
+
 --sifre su Donor         -> donor
 --         MedicalWorker -> medicalworker
 --         Admin         -> admin
@@ -159,6 +159,39 @@ VALUES ('donor4@mail.com', 0, '7132372111321', 'Mirko', 'Bravar', '$2y$10$9INQk3
 INSERT INTO users(
     email, gender, jmbg, name, occupation, password, surname, address_id, enabled, last_password_reset_date)
 VALUES ('donor5@mail.com', 1, '7132372801321', 'Marija', 'Cistacica', '$2y$10$9INQk3/KYVWY1FbUqA0W5upioL.6RVl63zJU9iEwQG.XvHEk9Aug6', 'Micic', 1, true, '2022-11-28 18:17:53.840417');
+
+INSERT INTO blood_type_blood_bank(
+    blood_bank_id, blood_type_amount, blood_type_key)
+VALUES (3, 1000, 'Aneg');
+
+INSERT INTO blood_type_blood_bank(
+    blood_bank_id, blood_type_amount, blood_type_key)
+VALUES (3, 1000, 'Apos');
+
+INSERT INTO blood_type_blood_bank(
+    blood_bank_id, blood_type_amount, blood_type_key)
+VALUES (3, 1000, 'ABpos');
+
+INSERT INTO blood_type_blood_bank(
+    blood_bank_id, blood_type_amount, blood_type_key)
+VALUES (3, 1000, 'ABneg');
+
+INSERT INTO blood_type_blood_bank(
+    blood_bank_id, blood_type_amount, blood_type_key)
+VALUES (3, 1000, 'Bpos');
+
+INSERT INTO blood_type_blood_bank(
+    blood_bank_id, blood_type_amount, blood_type_key)
+VALUES (3, 1000, 'Bneg');
+
+INSERT INTO blood_type_blood_bank(
+    blood_bank_id, blood_type_amount, blood_type_key)
+VALUES (3, 1000, 'Opos');
+
+INSERT INTO blood_type_blood_bank(
+    blood_bank_id, blood_type_amount, blood_type_key)
+VALUES (3, 1000, 'Oneg');
+
 
 
 INSERT INTO users(

@@ -69,6 +69,7 @@ import { NgxQRCodeModule } from 'ngx-qrcode2';
 import { AppointmentSlotByQrCodeComponent } from './modules/administrator/appointment-slot-by-qr-code/appointment-slot-by-qr-code.component';
 import { MedicalExaminationComponent } from './modules/administrator/medical-examination/medical-examination.component';
 import { VisitHistoryComponent } from './modules/public/visit-history/visit-history.component';
+import { MonthlySubscriptionsComponent } from './modules/medical_worker/monthly-subscriptions/monthly-subscriptions.component';
 
 //I keep the new line
 
@@ -105,7 +106,8 @@ import { VisitHistoryComponent } from './modules/public/visit-history/visit-hist
     PasswordPipe,
     AppointmentSlotByQrCodeComponent,
     MedicalExaminationComponent,
-    VisitHistoryComponent
+    VisitHistoryComponent,
+    MonthlySubscriptionsComponent
   ],
 
   imports: [

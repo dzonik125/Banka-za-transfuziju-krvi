@@ -27,6 +27,7 @@ import { AdminComplaintsComponent } from './modules/administrator/admin-complain
 import { ScheduleNewAppointmentComponent } from './modules/public/schedule-new-appointment/schedule-new-appointment.component';
 import { AppointmentSlotByQrCodeComponent } from './modules/administrator/appointment-slot-by-qr-code/appointment-slot-by-qr-code.component';
 import { MedicalExaminationComponent } from './modules/administrator/medical-examination/medical-examination.component';
+import { MonthlySubscriptionsComponent } from './modules/medical_worker/monthly-subscriptions/monthly-subscriptions.component';
 
 const routes: Routes = [
   {path: 'home', component: HomeComponentComponent},
@@ -54,8 +55,8 @@ const routes: Routes = [
   {path: 'scheduleNewAppointment', component: ScheduleNewAppointmentComponent, canActivate: [AuthGuard, RoleGuard], data: { roles: ['ROLE_DONOR'] }},
   {path: 'appointmentSlotByQrCode', component: AppointmentSlotByQrCodeComponent, canActivate: [AuthGuard, RoleGuard], data: { roles: ['ROLE_ADMIN'] }},
   {path: 'medicalExamination', component: MedicalExaminationComponent, canActivate: [AuthGuard, RoleGuard], data: { roles: ['ROLE_ADMIN'] }},
-  {path: 'visitHistory', component: VisitHistoryComponent, canActivate: [AuthGuard, RoleGuard], data: { roles: ['ROLE_DONOR'] }}
-
+  {path: 'visitHistory', component: VisitHistoryComponent, canActivate: [AuthGuard, RoleGuard], data: { roles: ['ROLE_DONOR'] }},
+  {path: 'monthlySubscriptions', component: MonthlySubscriptionsComponent}
 ];
 
 @NgModule({

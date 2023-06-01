@@ -1,4 +1,4 @@
-package group8.bloodbank.rabbitmq;
+package group8.bloodbank.rabbitmq.messages;
 
 
 import org.springframework.web.multipart.MultipartFile;

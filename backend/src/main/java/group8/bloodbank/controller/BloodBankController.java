@@ -40,14 +40,14 @@ public class BloodBankController {
     }
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE, value="/findAll")
-    @CrossOrigin(origins = "http://localhost:4200")
+    @CrossOrigin(origins = "http://localhost:4201")
     public List<BloodBank> findAllByName(Pageable pageable){
         Pageable pageable2 = (Pageable) PageRequest.of(pageable.getNumberOfPages(), 6);
         return bloodBankService.findAllByName(pageable2);
     }
 
 
-   @CrossOrigin(origins = "http://localhost:4200")
+   @CrossOrigin(origins = "http://localhost:4201")
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<BloodBank> saveBloodBank(@RequestBody BloodBankDTO bloodBankDTO)  {
         BloodBank bloodBank = new BloodBank(bloodBankDTO.name, bloodBankDTO.description, bloodBankDTO.address, bloodBankDTO.image);
@@ -61,7 +61,7 @@ public class BloodBankController {
         }
     }
 
-    @CrossOrigin(origins = "http://localhost:4200")
+    @CrossOrigin(origins = "http://localhost:4201")
     @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE, value = "/updateBloodBank")
     public ResponseEntity<BloodBank> updateBloodBank(@RequestBody BloodBankDTO bloodBankDTO)  {
         BloodBank bloodBank = new BloodBank(bloodBankDTO.id, bloodBankDTO.name, bloodBankDTO.description, bloodBankDTO.address, bloodBankDTO.image, bloodBankDTO.avgGrade);
@@ -116,7 +116,6 @@ public class BloodBankController {
     }
 
 
-    @CrossOrigin(origins = "http://localhost:4200")
     @PostMapping(value = "/addApi")
     public void addApi(@RequestBody String json) throws JSONException {
         JSONObject jsonObject = new JSONObject(json);

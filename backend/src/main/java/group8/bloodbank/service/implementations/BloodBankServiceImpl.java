@@ -5,6 +5,7 @@ import group8.bloodbank.model.*;
 import group8.bloodbank.repository.BloodBankRepository;
 import group8.bloodbank.service.interfaces.BloodBankService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.awt.print.Pageable;
@@ -16,6 +17,9 @@ public class BloodBankServiceImpl implements BloodBankService {
 
     public static final double BLOOD_DONATION_AMOUNT = 0.5;
     private final BloodBankRepository bloodBankRepository;
+
+    @Value("${custom.rabbitmq.bloodRequestRoutingKey}")
+    private String requestQueue;
 
     @Autowired
     public BloodBankServiceImpl(BloodBankRepository bloodBankRepository) {
@@ -76,9 +80,6 @@ public class BloodBankServiceImpl implements BloodBankService {
         HashMap<BloodType, Double> bloodUnits =  BloodUnitUrgentRequestMapper.bloodUnitSetToHashMap(bloodUnitUrgentRequest.getBloodUnits());
         return checkIfBloodUnitsAvailable(bloodUnits, apiKey);
     }
-
-
-
     @Override
     public boolean checkIfBloodUnitsAvailable(HashMap<BloodType, Double> bloodUnits, String apiKey) {
         List<Object[]> bloodUnitsInBank = bloodBankRepository.getAllBloodUnits(apiKey);
@@ -105,7 +106,6 @@ public class BloodBankServiceImpl implements BloodBankService {
     }
 
     @Override
-
     public void updateAmountOfDonatedBlood(BloodBank bloodBank, BloodType bloodType) {
         double currentAmount = bloodBank.getBloodType().get(bloodType);
         bloodBank.getBloodType().replace(bloodType, currentAmount + BLOOD_DONATION_AMOUNT);
@@ -114,6 +114,16 @@ public class BloodBankServiceImpl implements BloodBankService {
 
     public BloodBank getByName(String bb) {
         return bloodBankRepository.findByName(bb);
+    }
+
+    public List<BloodBank> getAllRegisteredToRequestQueue() {
+        List<BloodBank> bloodBanks = new ArrayList<>();
+        for(BloodBank bloodBank: getAll()) {
+            if(bloodBank.getHospitalBloodRequestsRoutingKey().equals(requestQueue)) {
+                bloodBanks.add(bloodBank);
+            }
+        }
+        return bloodBanks;
 
     }
 
