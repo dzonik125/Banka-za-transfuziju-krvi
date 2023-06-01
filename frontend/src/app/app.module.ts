@@ -62,14 +62,15 @@ import { RegisterAdministratorComponent } from './modules/administrator/register
 import { ChangePasswordComponent } from './modules/administrator/admin-dashboard/change-password/change-password.component';
 import { AdminComplaintsComponent } from './modules/administrator/admin-complaints/admin-complaints.component';
 import { ComplaintAnswerComponent } from './modules/administrator/complaint-answer/complaint-answer.component';
-
 import { ScheduleNewAppointmentComponent } from './modules/public/schedule-new-appointment/schedule-new-appointment.component';
 import { PasswordPipe } from './modules/util/pipes/password.pipe';
-import { PenalizePatientDialogComponent } from './modules/medical_worker/penalize-patient-dialog/penalize-patient-dialog.component';
+import * as jsQR from 'jsqr';
+import { NgxQRCodeModule } from 'ngx-qrcode2';
+import { AppointmentSlotByQrCodeComponent } from './modules/administrator/appointment-slot-by-qr-code/appointment-slot-by-qr-code.component';
+import { MedicalExaminationComponent } from './modules/administrator/medical-examination/medical-examination.component';
+import { VisitHistoryComponent } from './modules/public/visit-history/visit-history.component';
 
 //I keep the new line
-
-
 
 
 @NgModule({
@@ -100,13 +101,15 @@ import { PenalizePatientDialogComponent } from './modules/medical_worker/penaliz
     ChangePasswordComponent,
     AdminComplaintsComponent,
     ComplaintAnswerComponent,
-
     ScheduleNewAppointmentComponent,
-      PasswordPipe,
-      PenalizePatientDialogComponent
+    PasswordPipe,
+    AppointmentSlotByQrCodeComponent,
+    MedicalExaminationComponent,
+    VisitHistoryComponent
   ],
 
   imports: [
+    NgxQRCodeModule,
     FullCalendarModule,
     NgMultiSelectDropDownModule,
     MatDialogModule,

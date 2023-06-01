@@ -1,5 +1,6 @@
 package group8.bloodbank.service.interfaces;
 
+import group8.bloodbank.model.AppointmentSlot;
 import group8.bloodbank.model.DTO.UserDTO;
 import group8.bloodbank.model.Donor;
 
@@ -17,8 +18,11 @@ public interface DonorService {
 
     Optional<Donor> findById(Long id);
 
+    boolean canSchedule(AppointmentSlot appointmentSlot);
+
     boolean verify(String code);
 
     Donor getById(Long donor_id);
 
+    Donor getByEmail(String email);
 }

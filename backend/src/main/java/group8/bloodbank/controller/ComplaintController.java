@@ -4,6 +4,7 @@ package group8.bloodbank.controller;
 import group8.bloodbank.model.BloodBank;
 import group8.bloodbank.model.Complaint;
 import group8.bloodbank.model.DTO.BloodBankDTO;
+import group8.bloodbank.model.DTO.ChangePasswordDTO;
 import group8.bloodbank.service.interfaces.ComplaintService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -40,14 +41,13 @@ public class ComplaintController {
 
     @CrossOrigin(origins = "http://localhost:4200")
     @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE, value = "/answerComplaint")
-    public ResponseEntity<Complaint> answerComplaint(@RequestBody Complaint complaint) {
-        Complaint complaint1 = complaintService.answerComplaint(complaint);
-        int i = 0;
+    public ResponseEntity<Boolean> answerComplaint(@RequestBody ChangePasswordDTO dto) throws Exception {
         try {
-            return new ResponseEntity<Complaint>(complaint1, HttpStatus.OK);
+            complaintService.answerComplaint(dto.adminID, dto.password);
+            return new ResponseEntity<Boolean>(true, HttpStatus.OK);
         } catch (Exception e) {
             e.printStackTrace();
-            return new ResponseEntity<Complaint>(complaint1, HttpStatus.CONFLICT);
+            return new ResponseEntity<Boolean>(false, HttpStatus.CONFLICT);
         }
     }
 }

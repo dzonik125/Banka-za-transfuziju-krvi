@@ -24,11 +24,9 @@ public class FirebaseServiceImpl implements FirebaseService {
     String firebaseUrl = "https://firebasestorage.googleapis.com/v0/b/isapsw-6ef61.appspot.com/o/%s?alt=media";
 
     @Override
-    public String upload(MultipartFile multipartFile, String appointmentId) throws IOException {
-            String fileName = "qr_appointment" + appointmentId;
-            File file = this.convertToFile(multipartFile, fileName);                      // to convert multipartFile to File
-            String url = this.uploadFile(file, fileName);                                   // to get uploaded file link
-            file.delete();                                                                // to delete the copy of uploaded file stored in the project folder
+    public String upload(File file, String unique) throws IOException {
+            String fileName = "qr_appointment" + unique;
+            String url = this.uploadFile(file, fileName);
             return url;
     }
 

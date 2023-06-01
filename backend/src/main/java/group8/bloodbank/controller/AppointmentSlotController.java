@@ -1,10 +1,13 @@
 package group8.bloodbank.controller;
 
+import group8.bloodbank.mapper.AppointmentPreviewMapper;
 import group8.bloodbank.model.Appointment;
 import group8.bloodbank.model.AppointmentSlot;
 import group8.bloodbank.model.BloodBank;
+import group8.bloodbank.model.DTO.AppointmentPreviewDTO;
 import group8.bloodbank.model.DTO.AppointmentSlotDTO;
 import group8.bloodbank.model.Donor;
+import group8.bloodbank.repository.AppointmentSlotRepository;
 import group8.bloodbank.repository.DonorRepository;
 import group8.bloodbank.service.interfaces.AppointmentService;
 import group8.bloodbank.service.interfaces.AppointmentSlotService;
@@ -18,7 +21,6 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -34,15 +36,18 @@ public class AppointmentSlotController {
 
     private BloodBankService bloodBankService;
     private final DonorRepository donorRepository;
+    private final AppointmentSlotRepository appointmentSlotRepository;
 
     @Autowired
     public AppointmentSlotController(AppointmentSlotService service, DonorService donorService, BloodBankService bloodBankService,
-                                     DonorRepository donorRepository, AppointmentService appointmentService) {
+                                     DonorRepository donorRepository, AppointmentService appointmentService,
+                                     AppointmentSlotRepository appointmentSlotRepository) {
         this.service = service;
         this.donorService = donorService;
         this.bloodBankService = bloodBankService;
         this.appointmentService = appointmentService;
         this.donorRepository = donorRepository;
+        this.appointmentSlotRepository = appointmentSlotRepository;
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
@@ -51,11 +56,17 @@ public class AppointmentSlotController {
         List<AppointmentSlot> slots = service.getAll();
         for(AppointmentSlot s : slots) {
             if(slot.getStartTime().isBefore(s.getEndTime()) && slot.getStartTime().isAfter(s.getStartTime().minusMinutes(1))){
-                return new ResponseEntity<>(HttpStatus.CONFLICT);
+                if(s.getBloodBank().getId() == slot.getBloodBank().getId()){
+                    return new ResponseEntity<>(HttpStatus.CONFLICT);
+                }
             } else if (slot.getEndTime().isAfter(s.getStartTime()) && slot.getEndTime().isBefore(s.getEndTime().plusMinutes(1))){
-                return new ResponseEntity<>(HttpStatus.CONFLICT);
+                if(s.getBloodBank().getId() == slot.getBloodBank().getId()){
+                    return new ResponseEntity<>(HttpStatus.CONFLICT);
+                }
             } else if (slot.getStartTime().isEqual(s.getStartTime()) && slot.getEndTime().isEqual(s.getEndTime())){
-                return new ResponseEntity<>(HttpStatus.CONFLICT);
+                if(s.getBloodBank().getId() == slot.getBloodBank().getId()){
+                    return new ResponseEntity<>(HttpStatus.CONFLICT);
+                }
             }
         }
         try{
@@ -65,6 +76,12 @@ public class AppointmentSlotController {
             return new ResponseEntity<>(slot, HttpStatus.CONFLICT);
         }
     }
+
+    @GetMapping(value = "/getById")
+    public AppointmentPreviewDTO getById(@RequestParam(value = "id") Long id) {
+        return AppointmentPreviewMapper.sourceToDestination(service.getById(id).get());
+    }
+
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE, value="/findAllAppointments")
     @PreAuthorize("hasRole('ROLE_DONOR')")
@@ -78,13 +95,15 @@ public class AppointmentSlotController {
     public ResponseEntity<Exception> update(@RequestBody AppointmentSlotDTO appointmentSlot)  {
         Optional<Donor> donor = donorRepository.findById(appointmentSlot.donor);
         AppointmentSlot slot = new AppointmentSlot(appointmentSlot.id, appointmentSlot.bloodBank, donor.get(), appointmentSlot.startTime, appointmentSlot.endTime, appointmentSlot.status);
-        try{
-            service.scheduleSlot(slot);
-            return new ResponseEntity<Exception>(HttpStatus.OK);
-        } catch (Exception e){
-            e.printStackTrace();
-            return new ResponseEntity<Exception>(e, HttpStatus.CONFLICT);
-        }
+            try {
+                donorService.canSchedule(slot);
+                service.scheduleSlot(slot);
+                return new ResponseEntity<Exception>(HttpStatus.OK);
+            } catch (Exception e) {
+                e.printStackTrace();
+                return new ResponseEntity<Exception>(e, HttpStatus.CONFLICT);
+            }
+
     }
 
     @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE, value = "/cancelAppointment")

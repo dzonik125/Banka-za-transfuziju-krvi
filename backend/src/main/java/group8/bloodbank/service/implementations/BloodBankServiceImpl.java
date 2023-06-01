@@ -105,10 +105,16 @@ public class BloodBankServiceImpl implements BloodBankService {
     }
 
     @Override
+
     public void updateAmountOfDonatedBlood(BloodBank bloodBank, BloodType bloodType) {
         double currentAmount = bloodBank.getBloodType().get(bloodType);
         bloodBank.getBloodType().replace(bloodType, currentAmount + BLOOD_DONATION_AMOUNT);
         updateBloodBank(bloodBank);
+    }
+
+    public BloodBank getByName(String bb) {
+        return bloodBankRepository.findByName(bb);
+
     }
 
     @Override
@@ -116,4 +122,45 @@ public class BloodBankServiceImpl implements BloodBankService {
         return bloodBankRepository.findAllByName(pageable);
     }
 
+    public void updateBloodAmount(MedicalExamination med) {
+        BloodBank bloodBank = bloodBankRepository.findById(med.getBloodBank().getId()).get();
+        BloodBankBlood bloodBankBlood = bloodBank.getBlood();
+
+        switch(med.getBloodType()) {
+            case "A_POSITIVE":
+                bloodBankBlood.setA_POSITIVE(bloodBankBlood.getA_POSITIVE() + med.getAmount());
+                break;
+            case "A_NEGATIVE":
+                bloodBankBlood.setA_NEGATIVE(bloodBankBlood.getA_NEGATIVE() + med.getAmount());
+                break;
+
+            case "B_POSITIVE":
+                bloodBankBlood.setB_POSITIVE(bloodBankBlood.getB_POSITIVE() + med.getAmount());
+                break;
+
+            case "B_NEGATIVE":
+                bloodBankBlood.setB_NEGATIVE(bloodBankBlood.getB_NEGATIVE() + med.getAmount());
+                break;
+
+            case "AB_POSITIVE":
+                bloodBankBlood.setAB_POSITIVE(bloodBankBlood.getAB_POSITIVE() + med.getAmount());
+                break;
+
+            case "AB_NEGATIVE":
+                bloodBankBlood.setAB_NEGATIVE(bloodBankBlood.getAB_NEGATIVE() + med.getAmount());
+                break;
+
+            case "O_NEGATIVE":
+                bloodBankBlood.setO_NEGATIVE(bloodBankBlood.getO_NEGATIVE() + med.getAmount());
+                break;
+
+            case "O_POSITIVE":
+                bloodBankBlood.setO_POSITIVE(bloodBankBlood.getO_POSITIVE() + med.getAmount());
+                break;
+
+        }
+
+        bloodBank.setBlood(bloodBankBlood);
+        bloodBankRepository.save(bloodBank);
+    }
 }

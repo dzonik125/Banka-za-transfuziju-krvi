@@ -1,6 +1,7 @@
 package group8.bloodbank.model.DTO;
 
 import group8.bloodbank.model.BloodBank;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
 import java.time.LocalDateTime;

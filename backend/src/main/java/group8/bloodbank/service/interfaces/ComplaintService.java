@@ -7,7 +7,11 @@ import java.util.List;
 public interface ComplaintService {
     List<Complaint> getAll();
 
-    Complaint answerComplaint(Complaint complaint);
+    Complaint answerComplaint(Long complaintID, String answer) throws Exception;
 
     List<Complaint> getAllUnanswered();
+
+    void save(Complaint complaint);
+
+    public Complaint getById(long id);
 }

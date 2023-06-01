@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { JwtHelperService } from '@auth0/angular-jwt';
+import { ToastrService } from 'ngx-toastr';
+import { AuthService } from 'src/app/modules/authentication/services/auth.service';
 import { Validator } from 'src/app/modules/util/validation';
 import { AdminService } from 'src/app/services/admin.service';
 
@@ -17,7 +19,7 @@ export class ChangePasswordComponent implements OnInit {
   public repeatPass: any = "";
   public pass: any ="";
 
-  constructor(private adminService: AdminService, private jwtHelper: JwtHelperService, private router: Router) { }
+  constructor(private adminService: AdminService, private jwtHelper: JwtHelperService, private router: Router, private tost: ToastrService, private authService: AuthService) { }
 
   ngOnInit(): void {
     this.adminService.getAdministratorById(this.jwtHelper.decodeToken().id).subscribe(res => {
@@ -39,7 +41,10 @@ export class ChangePasswordComponent implements OnInit {
     {
       this.admin.password = this.pass;
       this.adminService.updateAdmin(this.admin).subscribe(res => {
+        this.tost.success("success", "Sucessful password update. Please log in again!")
+        this.authService.logout();
         this.router.navigate(['/']);
+        this.router.navigate(['/auth/login']);
       })
     }
 

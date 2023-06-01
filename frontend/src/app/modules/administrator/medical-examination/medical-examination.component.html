@@ -1,0 +1,65 @@
+<div style="position: absolute; margin-top: 10rem; margin-left: 30rem;">
+<form>
+    <!-- 2 column grid layout with text inputs for the first and last names -->
+    <div class="row mb-4">
+      <div class="col">
+        <div class="form-outline">
+          <input type="text" name="sssa" id="form3Example1" class="form-control" />
+          <label class="form-label" for="form3Example1">First name</label>
+        </div>
+      </div>
+      <div class="col">
+        <div class="form-outline">
+          <input type="text" name="sssa"  id="form3Example2" class="form-control" />
+          <label class="form-label" for="form3Example2">Last name</label>
+        </div>
+      </div>
+    </div>
+  
+    <!-- Email input -->
+    <div class="form-outline mb-4">
+      <input [(ngModel)] = "email" name="sssa" type="email" name="ss" id="form3Example3" class="form-control" />
+      <label class="form-label" for="form3Example3">Email address</label>
+    </div>
+    
+
+    <div>
+      <ng-multiselect-dropdown  class="form-control"  (onSelect)="onItemSelect($event)" [data]="bloodBanks" [settings]="dropdownSettings" >
+                                
+      </ng-multiselect-dropdown>
+      <label class="form-label" for="form3Example3">Blood bank name</label>
+    </div>
+  
+    <div class="row mb-4">
+        <div class="col">
+          <div class="form-outline">
+            <select class="form-control"  name="sssa" [(ngModel)]="bloodType">
+            <option value="A_POSITIVE"> A+ </option>
+            <option value="A_NEGATIVE"> A- </option>
+            <option value="B_POSITIVE"> B+ </option>
+            <option value="B_NEGATIVE"> B- </option>
+            <option value="AB_POSITIVE"> AB+ </option>
+            <option value="AB_NEGATIVE"> AB- </option>
+            <option value="O_POSITIVE"> O+ </option>
+            <option value="O_NEGATIVE"> O- </option>
+            
+            
+            </select>
+            <label class="form-label" for="form3Example1">Blood type</label>
+          </div>
+        </div>
+        <div class="col">
+          <div class="form-outline">
+            <input type="number" name="sssa" [(ngModel)]="amount" min="1" id="form3Example2" class="form-control" />
+            <label class="form-label"  for="form3Example2">Amount</label>
+          </div>
+        </div>
+      </div>
+  
+    <!-- Submit button -->
+    <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
+        <input type="submit" (click)="createME()" class="btn btn-primary btn-lg" id="reg" value="Submit">
+      </div>  
+
+  </form>
+</div>

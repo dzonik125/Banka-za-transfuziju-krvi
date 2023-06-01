@@ -28,7 +28,9 @@ export class AdminService {
 
   
   updateAdmin(administrator: any): Observable<any> {
-    return this.http.put<any>(this.apiHost + 'admin/updatePassword', administrator);
+    var dto = {'adminID': administrator.id, 'password': administrator.password}
+    return this.http.put<any>(this.apiHost + 'admin/updatePassword', dto);
   }
+
 
 }

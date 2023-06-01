@@ -27,4 +27,6 @@ public interface BloodBankService {
     String getApiKeyById(Long id);
 
     void updateAmountOfDonatedBlood(BloodBank bloodBank, BloodType bloodType);
+
+    BloodBank getByName(String bb);
 }

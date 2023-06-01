@@ -1,19 +1,16 @@
 package group8.bloodbank.controller;
-
-
 import group8.bloodbank.mapper.AppointmentCalendarMapper;
+import group8.bloodbank.mapper.AppointmentPreviewMapper;
 import group8.bloodbank.model.Appointment;
-import group8.bloodbank.model.AppointmentHistory;
-import group8.bloodbank.model.AppointmentSlot;
 import group8.bloodbank.model.DTO.AppointmentCallendarDTO;
 import group8.bloodbank.model.DTO.AppointmentDTO;
-import group8.bloodbank.model.User;
-import group8.bloodbank.service.interfaces.AppointmentService;
-import org.modelmapper.ModelMapper;
+import group8.bloodbank.model.DTO.AppointmentPreviewDTO;
 import group8.bloodbank.model.MedicalWorker;
+import group8.bloodbank.model.WorkingHours;
 import group8.bloodbank.service.interfaces.AppointmentService;
 import group8.bloodbank.service.interfaces.DonorService;
 import group8.bloodbank.service.interfaces.MedicalWorkerService;
+import group8.bloodbank.service.interfaces.WorkingHoursService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -23,7 +20,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/appointments")
@@ -33,13 +29,14 @@ public class AppointmentController {
     private MedicalWorkerService medicalWorkerService;
     private DonorService donorService;
 
+    private WorkingHoursService workingHoursService;
 
-
-    public AppointmentController(AppointmentService service, MedicalWorkerService medicalWorkerService, DonorService donorService) {
-
+    @Autowired
+    public AppointmentController(AppointmentService service, MedicalWorkerService medicalWorkerService, DonorService donorService, WorkingHoursService workingHoursService) {
         this.service = service;
         this.medicalWorkerService = medicalWorkerService;
         this.donorService = donorService;
+        this.workingHoursService = workingHoursService;
     }
 
 
@@ -49,33 +46,34 @@ public class AppointmentController {
         return AppointmentCalendarMapper.sourceToDestination(service.findAllAppointmentsByBloodBankID(id));
     }
 
-
-    @CrossOrigin(origins = "http://localhost:4200")
-    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE, value="/findAppointmentByID")
-    public ResponseEntity<Appointment> findById(@RequestParam(value = "id") Long id) {
-        Optional<Appointment> appointment = service.findById(id);
-        if (appointment.isPresent())
-            return new ResponseEntity<Appointment>(appointment.get(), HttpStatus.OK);
-        else
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-    }
-
     @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE, value = "/scheduleAppointment")
     @PreAuthorize("hasRole('ROLE_DONOR')")
     public ResponseEntity scheduleAppointment(@RequestBody AppointmentDTO app){
         try {
             List<MedicalWorker> medicalWorkers = new ArrayList<>();
             for (Long id: app.getMedicalWorkerIds()
-                 ) {
+            ) {
                 medicalWorkers.add(medicalWorkerService.findById(id));
             }
             Appointment a = new Appointment(medicalWorkers, app.getDonor_id(), app.getBloodBank(), app.getStart(), app.getDuration(), donorService.findById(app.getDonor_id()).get());
-            service.scheduleAppointment(a);
+            if(!service.scheduleAppointment(a))
+                return new ResponseEntity(HttpStatus.CONFLICT);
             return new ResponseEntity<>(a, HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity(HttpStatus.CONFLICT);
         }
+    }
 
+    @GetMapping(value = "/getBloodBankWorkingHours")
+    public WorkingHours getBloodBankWorkingHours(@RequestParam(value = "id") Long id){
+        return workingHoursService.getByBloodBankId(id);
+    }
+
+    @GetMapping(value = "/getById")
+    public AppointmentPreviewDTO getById(@RequestParam(value = "id") Long id) {
+        Appointment appointment = service.getById(id);
+        appointment.setDonor(donorService.findById(appointment.getDonor_id()).get());
+        return AppointmentPreviewMapper.appointmentToApointmentDTO(appointment);
     }
 
 }

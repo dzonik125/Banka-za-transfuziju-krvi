@@ -1,17 +1,26 @@
 package group8.bloodbank.service.implementations;
 
+import com.google.zxing.WriterException;
 import group8.bloodbank.model.Appointment;
+import group8.bloodbank.model.BloodBank;
+import group8.bloodbank.model.Donor;
 import group8.bloodbank.repository.AppointmentRepository;
 import group8.bloodbank.service.interfaces.AppointmentService;
 import group8.bloodbank.service.interfaces.DonorService;
 import group8.bloodbank.service.interfaces.EmailService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
+import org.springframework.messaging.MessagingException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
-import javax.mail.MessagingException;
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.List;
-import java.util.Optional;
+import java.util.concurrent.locks.ReentrantLock;
 
 @Service
 public class AppointmentServiceImpl implements AppointmentService {
@@ -20,6 +29,9 @@ public class AppointmentServiceImpl implements AppointmentService {
     BloodBankServiceImpl bloodBankService;
     DonorService donorService;
     EmailService emailService;
+
+    private final ReentrantLock lock = new ReentrantLock();
+    private final Logger LOG = LoggerFactory.getLogger(AppointmentServiceImpl.class);
 
     @Autowired
     public AppointmentServiceImpl(AppointmentRepository appointmentRepository, BloodBankServiceImpl bloodBankService, DonorService donorService, EmailService emailService) {
@@ -46,14 +58,32 @@ public class AppointmentServiceImpl implements AppointmentService {
     }
 
     @Override
-
-    public Optional<Appointment> findById(Long id) {
-        return repository.findById(id);
+    @Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW)
+    public boolean scheduleAppointment(Appointment app) throws MessagingException, javax.mail.MessagingException, IOException, WriterException {
+        lock.lock();
+        try {
+            for (Appointment a:
+                    getAll()) {
+                if(a.getStart().isEqual(app.getStart()) && a.getBloodBank().getId() == app.getBloodBank().getId()){
+                    return false;
+                }
+            }
+            repository.save(app);
+            emailService.sendAppointmentMail(app);
+            return true;
+        } finally {
+            lock.unlock();
+        }
     }
 
-    public void scheduleAppointment(Appointment app) throws MessagingException, UnsupportedEncodingException {
-        repository.save(app);
-        emailService.sendAppointmentMail(app);
+    @Cacheable("appointment")
+    @Override
+    public Appointment getById(Long id) {
+        LOG.info("Appointment with id: " + id + " successfully cached!");
+        return repository.findById(id).get();
+    }
 
+    public void removeFromCache() {
+        LOG.info("Products removed from cache!");
     }
 }
