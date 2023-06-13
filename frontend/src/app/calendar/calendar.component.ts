@@ -1,4 +1,4 @@
-import { OnInit,  Component } from '@angular/core';
+import { OnInit,  Component, ViewChild } from '@angular/core';
 import { CalendarOptions } from '@fullcalendar/core'; // useful for typechecking
 import dayGridPlugin from '@fullcalendar/daygrid'; 
 import interactionPlugin from '@fullcalendar/interaction'; 
@@ -22,7 +22,6 @@ export class CalendarComponent implements OnInit {
 
   public appointmets: Appointment[] = [
   ];
-  
   public id: any;
   public isAppointmentNow!: boolean;
   constructor(private appointmentService: AppointmentService, 
@@ -32,6 +31,10 @@ export class CalendarComponent implements OnInit {
 
 
   ngOnInit() {
+    this.getAppointments();
+  }
+
+  getAppointments() {
     this.medicalWorkerService.getBloodBankId(this.jwtHelper.decodeToken().id).subscribe(res=> {
       this.id = res;
       this.appointmentService.getAppointmentsByBloodBankID(this.id).subscribe(res => {
@@ -40,6 +43,7 @@ export class CalendarComponent implements OnInit {
              this.appointmets.push(this.handle(element))
            }
         });
+        
        })
     })
   }
@@ -70,7 +74,11 @@ export class CalendarComponent implements OnInit {
             donorId : event.event.extendedProps.donorId,
             bloodBankId: this.id
           }
-        })
+        }).afterClosed().subscribe(res=> {
+          this.getAppointments();
+          this.calendarOptions.events = this.appointmets as any; 
+        }
+      )
       }      
     })
   }

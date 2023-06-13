@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -26,14 +27,16 @@ public class ComplaintController {
         this.complaintService = complaintService;
     }
 
-    @CrossOrigin(origins = "http://localhost:4200")
+
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE, value="/findAllComplaints")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+
     public List<Complaint> getAll() {
         return complaintService.getAll();
     }
 
-    @CrossOrigin(origins = "http://localhost:4200")
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE, value="/findAllUnanswered")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public List<Complaint> getAllUnanswered() {
         return complaintService.getAllUnanswered();
     }

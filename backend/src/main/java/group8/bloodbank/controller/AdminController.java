@@ -43,6 +43,7 @@ public class AdminController {
 
     @CrossOrigin(origins = "http://localhost:4200")
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE, value = "/createAdmin")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public ResponseEntity<Admin> createAdmin(@RequestBody AdministratorDTO administratorDTO) {
 
         Admin admin = new Admin(administratorDTO.firstLogin, administratorDTO.getName(), administratorDTO.getSurname(), administratorDTO.getEmail(), administratorDTO.getPassword(), administratorDTO.getJmbg(), administratorDTO.getAddress(), administratorDTO.getOccupation(), administratorDTO.getGender());
@@ -56,12 +57,14 @@ public class AdminController {
     }
 
     @GetMapping(value = "/getById")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public Optional<Admin> getById(@RequestParam(value = "id") Long id) {
         return adminService.getById(id);
     }
 
 
     @CrossOrigin(origins = "http://localhost:4200")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE, value ="updatePassword")
     public ResponseEntity<Boolean> updatePassword(@RequestBody ChangePasswordDTO dto) {
         try {

@@ -14,6 +14,7 @@ import { AppointmentService } from 'src/app/services/appointment.service';
 import { DonorService } from 'src/app/services/donor.service';
 import { ItemService } from 'src/app/services/item.service';
 import { SurveyService } from 'src/app/services/survey.service';
+import { Gender } from '../../util/enum/gender';
 @Component({
   selector: 'app-examination',
   templateUrl: './examination.component.html',
@@ -35,6 +36,7 @@ export class ExaminationComponent implements OnInit {
   public selectedType: string = "";
   public appHistory: AppointmentHistory = new AppointmentHistory();
   public canExamine: boolean = true;
+  public female!: boolean;
   constructor(@Inject(MAT_DIALOG_DATA) public data : any,
               private surveyService : SurveyService,
               private jwtHelper : JwtHelperService,
@@ -42,16 +44,25 @@ export class ExaminationComponent implements OnInit {
               private appHistoryService : AppointmentHistoryService,
               private appService : AppointmentService,
               private donorService: DonorService,
-              private DialogRef: MatDialogRef<ExaminationComponent>) { }
+              private DialogRef: MatDialogRef<ExaminationComponent>,
+              ) { }
   
 
   ngOnInit(): void {
     this.surveyService.getSurveyByDonor(this.data.donorId).subscribe(res =>{
       this.donorSurvey = res;
       console.log(this.donorSurvey);
+    
+    })
+    this.donorService.fetchUser(this.data.donorId).subscribe(res=>{
+      console.log(res.gender)
+      this.female = res.gender == "FEMALE";
+    })
     this.surveyService.canDonorDonate(this.data.donorId).subscribe(res => {
       this.canExamine = res;
-    })
+      if(!this.canExamine) {
+        window.alert("Based on survey, patient is not fit to donate blood");
+      }
     })
     this.medicalWorkerId = this.jwtHelper.decodeToken().id;
   
@@ -132,6 +143,12 @@ export class ExaminationComponent implements OnInit {
         this.donorService.penalizeUser(this.data.donorId).subscribe();
         this.DialogRef.close()
       });
+    }
+  }
+
+  examine() {
+    if(!this.canExamine) {
+      window.alert("Based on survey, patient is not fit to donate blood");
     }
   }
 }

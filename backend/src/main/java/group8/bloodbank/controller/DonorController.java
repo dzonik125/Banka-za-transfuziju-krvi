@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -41,12 +42,14 @@ public class DonorController {
     }*/
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public List<Donor> getAll() {
         return donorService.getAll();
     }
 
 
     @PutMapping(produces = MediaType.APPLICATION_JSON_VALUE, value = "/{id}")
+    @PreAuthorize("hasRole('ROLE_MEDICALWORKER')")
     public ResponseEntity updatePenalty(@PathVariable(value = "id") Long id) {
         try{
             donorService.updatePenalty(id);
@@ -66,7 +69,7 @@ public class DonorController {
             return new ResponseEntity(HttpStatus.NOT_FOUND);
         }
     }
-
+    @PreAuthorize("hasRole('ROLE_MEDICALWORKER')")
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE, value = "findDonorsByBankId/{id}")
     public ResponseEntity<List<DonorDTO>> findByBankId(@PathVariable(value = "id") Long id) {
         try {

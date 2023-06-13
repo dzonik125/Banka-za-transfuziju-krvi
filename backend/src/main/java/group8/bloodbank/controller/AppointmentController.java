@@ -64,6 +64,7 @@ public class AppointmentController {
     }
 
     @GetMapping(value = "/getBloodBankWorkingHours")
+    @PreAuthorize("hasAnyRole('ROLE_MEDICALWORKER', 'ROLE_ADMIN')")
     public WorkingHours getBloodBankWorkingHours(@RequestParam(value = "id") Long id){
         return workingHoursService.getByBloodBankId(id);
     }
@@ -76,6 +77,7 @@ public class AppointmentController {
     }
 
     @PutMapping(value = "/cancelAppointment/{id}")
+    @PreAuthorize("hasRole('ROLE_MEDICALWORKER')")
     public ResponseEntity cancelAppointment(@PathVariable(value = "id") Long id) {
         try {
             service.cancelAppointment(id);
@@ -86,6 +88,7 @@ public class AppointmentController {
     }
 
     @GetMapping(value = "/isAppointmentNow/{id}")
+    @PreAuthorize("hasRole('ROLE_MEDICALWORKER')")
     public ResponseEntity isAppointmentNow(@PathVariable(value = "id") Long id) {
         try {
             boolean isAppointmentNow = service.isAppointmentNow(id);

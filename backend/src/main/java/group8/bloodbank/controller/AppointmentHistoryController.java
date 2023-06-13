@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -25,8 +26,9 @@ public class AppointmentHistoryController {
         this.bloodBankService = bloodBankService;
     }
 
+    @PreAuthorize("hasRole('ROLE_MEDICALWORKER')")
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<AppointmentHistoryDTO> createSlot(@RequestBody AppointmentHistoryDTO appointmentHistory){
+    public ResponseEntity<AppointmentHistoryDTO> saveAppointmentHistory(@RequestBody AppointmentHistoryDTO appointmentHistory){
         try{
             appointmentHistoryService.save(appointmentHistory);
             return new ResponseEntity<>(appointmentHistory, HttpStatus.CREATED);

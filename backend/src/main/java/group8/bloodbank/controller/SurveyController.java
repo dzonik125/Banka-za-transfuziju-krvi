@@ -54,13 +54,14 @@ public class SurveyController {
 
     @CrossOrigin(origins = "http://localhost:4200")
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE, value="/findAll")
-    //@PreAuthorize("hasRole('ROLE_DONOR')")
+    @PreAuthorize("hasRole('ROLE_DONOR')")
     public List<Survey> getAll() {
         return surveyService.findAll();
     }
 
     @CrossOrigin(origins = "http://localhost:4200")
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE, value="/getByDonorId/{id}")
+    @PreAuthorize("hasRole('ROLE_MEDICALWORKER')")
     public ResponseEntity<Survey> getByDonorId(@PathVariable(value = "id")Long id) {
         try {
             return new ResponseEntity<>(surveyService.getByDonorId(id), HttpStatus.OK);

@@ -64,10 +64,15 @@ export class BloodBankViewComponent implements OnInit  {
 
     ngOnInit(): void {
       this.id = this.route.snapshot.paramMap.get('id');
+      if(this.jwtHelper.decodeToken() !== null){
+      
       this.medicalWorkerService.getBloodBankId(this.jwtHelper.decodeToken().id).subscribe(res=> {
         this.showContent = this.id == res;
         console.log(this.showContent);
       })
+    }else {
+      this.showContent = false;
+    }
       this.initMap();
       const tiles = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       maxZoom: 18,

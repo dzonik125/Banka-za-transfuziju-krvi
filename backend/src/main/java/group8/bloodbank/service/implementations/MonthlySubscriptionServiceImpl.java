@@ -10,6 +10,8 @@ import group8.bloodbank.repository.MonthlySubscriptionRepository;
 import group8.bloodbank.service.interfaces.MonthlySubscriptionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -26,11 +28,6 @@ public class MonthlySubscriptionServiceImpl implements MonthlySubscriptionServic
     @Autowired
     public MonthlySubscriptionServiceImpl(MonthlySubscriptionRepository monthlySubscriptionRepository) {
         this.monthlySubscriptionRepository = monthlySubscriptionRepository;
-//        HashMap<BloodType, Double> map = new HashMap<>();
-//        map.put(BloodType.Opos, 12.0);
-//        map.put(BloodType.Bpos, 12.0);
-//        MonthlySubscription monthlySubscription = new MonthlySubscription(1l, 1, map, LocalDate.now(),null, SubscriptionStatus.WAITING);
-//        save(monthlySubscription);
     }
 
     @Override
@@ -43,17 +40,21 @@ public class MonthlySubscriptionServiceImpl implements MonthlySubscriptionServic
         monthlySubscriptionRepository.save(monthlySubscription);
     }
 
+    @Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW)
     @Override
-    public void changeStatus(MonthlySubscription monthlySubscription) {
+    public MonthlySubscription changeStatus(Long id, SubscriptionStatus status) {
+        MonthlySubscription monthlySubscription = monthlySubscriptionRepository.findById(id).get();
         MonthlySubscriptionResponseDTO monthlySubscriptionResponseDTO = new MonthlySubscriptionResponseDTO();
         monthlySubscriptionResponseDTO.hospitalSubscriptionId = monthlySubscription.getHospitalSubscriptionId();
-        if(monthlySubscription.getStatus() == SubscriptionStatus.APPROVED) {
+        if(status == SubscriptionStatus.APPROVED) {
             monthlySubscriptionResponseDTO.status = SubscriptionResponseStatus.ACCEPTED;
         }else {
             monthlySubscriptionResponseDTO.status = SubscriptionResponseStatus.REJECTED;
         }
+        monthlySubscription.setStatus(status);
         save(monthlySubscription);
         rabbitMQSender.sendSubscriptionsResponse(monthlySubscriptionResponseDTO);
+        return monthlySubscription;
     }
 
     @Override

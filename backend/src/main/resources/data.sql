@@ -28,6 +28,7 @@ INSERT INTO blood_bank(
     api_key, avg_grade, description, image, name, address_id)
 VALUES ('213', 1.8, ' ','https://firebasestorage.googleapis.com/v0/b/isapsw-6ef61.appspot.com/o/h3.jpg?alt=media&token=482263cb-3590-405f-9c1e-e1fcd46b5229','C banka' , 3);
 
+
 INSERT INTO item(
 quantity, name, blood_bank_id)
 VALUES(1000, 'Needle', 1);
@@ -35,6 +36,23 @@ INSERT INTO item(
 quantity, name, blood_bank_id)
 VALUES(1000, 'Bag', 1);
 
+INSERT INTO item(
+    quantity, name, blood_bank_id)
+VALUES(500, 'Needle', 2);
+INSERT INTO item(
+    quantity, name, blood_bank_id)
+VALUES(500, 'Bag', 2);
+
+
+INSERT INTO item(
+    quantity, name, blood_bank_id)
+VALUES(600, 'Needle', 3);
+INSERT INTO item(
+    quantity, name, blood_bank_id)
+VALUES(600, 'Bag', 3);
+
+INSERT INTO public.monthly_subscription(delivery_date, hospital_subscription_id, status, blood_bank_id, version)
+VALUES(CURRENT_DATE, 1, 0, 2, 0);
 
 INSERT INTO public.appointment(
     donor_id, duration, start, blood_bank_id, status)
@@ -42,15 +60,15 @@ VALUES (1, 20, CURRENT_TIMESTAMP, 1, 0);
 
 INSERT INTO public.appointment(
     donor_id, duration, start, blood_bank_id, status)
-VALUES (6, 20, CURRENT_TIMESTAMP, 1, 0);
+VALUES (6, 20, CURRENT_TIMESTAMP, 2, 0);
 
 INSERT INTO public.appointment(
     donor_id, duration, start, blood_bank_id, status)
-VALUES (8, 20, '2022-12-25 18:17:53.840417', 1, 0);
+VALUES (9, 20, CURRENT_TIMESTAMP, 3, 0);
 
 INSERT INTO public.appointment(
     donor_id, duration, start, blood_bank_id, status)
-VALUES (7, 20, '2022-12-24 13:17:53.840417', 1, 0);
+VALUES (7, 20, '2023-06-22 13:17:53.840417', 1, 0);
 
 INSERT INTO public.appointment(
     donor_id, duration, start, blood_bank_id, status)
@@ -164,6 +182,8 @@ INSERT INTO users(
     email, gender, jmbg, name, occupation, password, surname, address_id, enabled, last_password_reset_date)
 VALUES ('donor5@mail.com', 1, '7132372801321', 'Marija', 'Cistacica', '$2y$10$9INQk3/KYVWY1FbUqA0W5upioL.6RVl63zJU9iEwQG.XvHEk9Aug6', 'Micic', 1, true, '2022-11-28 18:17:53.840417');
 
+
+
 INSERT INTO blood_type_blood_bank(
     blood_bank_id, blood_type_amount, blood_type_key)
 VALUES (3, 1000, 'Aneg');
@@ -235,7 +255,20 @@ INSERT INTO donor(
     blood_type, category, penalty, points, id, has_survey)
 VALUES (1, 2, 2, 89, 11, false);
 
+INSERT INTO survey(
+    blood_pressure_abnormalities, dental_interventions, less_than50kg, menstrual_cycle, sickness_symptoms, skin_illness, skin_piercings, therapy_intake, donor_id
+)
+VALUES (false, false, false, false, false, false, false, false, 1);
 
+INSERT INTO survey(
+    blood_pressure_abnormalities, dental_interventions, less_than50kg, menstrual_cycle, sickness_symptoms, skin_illness, skin_piercings, therapy_intake, donor_id
+)
+VALUES (false, true, false, false, true, false, false, false, 6);
+
+INSERT INTO survey(
+    blood_pressure_abnormalities, dental_interventions, less_than50kg, menstrual_cycle, sickness_symptoms, skin_illness, skin_piercings, therapy_intake, donor_id
+)
+VALUES (false, false, false, false, false, false, false, false, 9);
 
 INSERT INTO medical_worker(
     id, blood_bank_id)
@@ -248,6 +281,11 @@ VALUES (3, 2);
 INSERT INTO medical_worker(
     id, blood_bank_id)
 VALUES (4, 3);
+
+INSERT INTO appointment_history (blood_type, date, status, blood_bank_id, donor_id, medical_worker_id, amount)
+VALUES (0, '2023-01-22 13:00:28.111756', 0, 1, 10, 2, 0.4);
+INSERT INTO appointment_history (blood_type, date, status, blood_bank_id, donor_id, medical_worker_id, amount)
+VALUES (3, '2023-02-17 11:25:28.111756', 0, 1, 11, 2, 0.4);
 
 INSERT INTO admin(
     first_login, id)
@@ -320,11 +358,9 @@ INSERT INTO working_hours(
 VALUES (3, '13:00:00', '11:00:00', 3);
 
 
-
 INSERT INTO complaint(
     id, description, version, donor_id)
 VALUES (1, 'Zalba1 asdsad.  (banka bankaB)', 0, 7);
-
 
 INSERT INTO complaint(
     id, description, version, donor_id)

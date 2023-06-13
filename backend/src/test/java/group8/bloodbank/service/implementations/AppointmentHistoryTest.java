@@ -35,14 +35,14 @@ public class AppointmentHistoryTest {
 
         ExecutorService executor = Executors.newFixedThreadPool(2);
         AppointmentHistoryDTO appHistory = new AppointmentHistoryDTO(1l, 1l, 1l, 2l, 1l, BloodType.ABpos, 0.4, AppointmentStatus.FINISHED, new ArrayList<Item>());
-        AppointmentHistoryDTO appHistory2 = new AppointmentHistoryDTO(2l, 1l, 1l, 2l, 1l, BloodType.ABpos, 0.4, AppointmentStatus.FINISHED, new ArrayList<Item>());
+        AppointmentHistoryDTO appHistory2 = new AppointmentHistoryDTO(2l, 6l, 1l, 2l, 2l, BloodType.ABpos, 0.4, AppointmentStatus.FINISHED, new ArrayList<Item>());
         //act
         Future<AppointmentHistory> firstExecutedAnswer = ((ExecutorService) executor).submit(() -> appointmentHistoryService.save(appHistory));
         Future<AppointmentHistory> secondExecutedAnswer = ((ExecutorService) executor).submit(() -> appointmentHistoryService.save(appHistory2));
 
         executor.submit(() -> {
             System.out.println("Startovan Thread 1");
-            appointmentHistoryService.save(appHistory); // izvrsavanje transakcione metode traje oko 200 milisekundi
+            appointmentHistoryService.save(appHistory);
 
         });
         Future<?> future2 = executor.submit(() -> {
@@ -50,9 +50,9 @@ public class AppointmentHistoryTest {
             appointmentHistoryService.save(appHistory);
         });
         try {
-            future2.get(); // podize ExecutionException za bilo koji izuzetak iz drugog child threada
+            future2.get();
         } catch (ExecutionException e) {
-            System.out.println("Exception from thread " + e.getCause().getClass()); // u pitanju je bas PessimisticLockingFailureException
+            System.out.println("Exception from thread " + e.getCause().getClass());
             throw e.getCause();
         } catch (InterruptedException e) {
             e.printStackTrace();
