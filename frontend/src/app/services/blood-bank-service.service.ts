@@ -2,6 +2,7 @@ import { BloodBank } from 'src/app/model/bloodBank';
 import { HttpHeaders, HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { BloodBankBlood } from '../model/bloodBankBlood';
 
 @Injectable({
   providedIn: 'root'
@@ -43,6 +44,10 @@ export class BloodBankServiceService {
     let params = new HttpParams();
     params = params.append("id", id);
     return this.http.get(this.apiHost + 'bloodBanks/getApiKeyById', {params: params, responseType: 'text'});
+  }
+
+  getBlood(id: any) : Observable<BloodBankBlood>{
+    return this.http.get<BloodBankBlood>(this.apiHost + 'bloodBanks/getBloodBankBlood/' + id, {headers: this.headers});
   }
 
 }

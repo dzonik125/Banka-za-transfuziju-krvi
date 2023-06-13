@@ -27,7 +27,6 @@ public class BloodUnitSupplierScheduler {
     private RabbitMQSender rabbitMQSender;
     @Autowired
     private BloodUnitRequestService bloodUnitRequestService;
-
     @Autowired
     private MonthlySubscriptionService monthlySubscriptionService;
 

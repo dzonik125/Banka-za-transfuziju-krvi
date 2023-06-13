@@ -16,7 +16,10 @@
     <a *ngIf="isLogged && userRole=='ROLE_DONOR'" [routerLink]="['/schedule']" routerLinkActive="active" style="margin-left: 1rem;">Schedule predefined appointment</a>
     <a *ngIf="isLogged && userRole=='ROLE_DONOR'" [routerLink]="['/scheduledAppointments']" routerLinkActive="active" style="margin-left: 1rem;">Scheduled appointments</a>
     <a *ngIf="isLogged && userRole=='ROLE_DONOR'" [routerLink]="['/visitHistory']" routerLinkActive="active" style="margin-left: 1rem;">Visit history</a>
+    <a *ngIf="isLogged && userRole=='ROLE_MEDICALWORKER'" (click)="showMyBank()" style="margin-left: 1rem;">My Bank</a>
     <a *ngIf="isLogged && userRole=='ROLE_MEDICALWORKER'" [routerLink]="['/addAppointmentSlot']" routerLinkActive="active" style="margin-left: 1rem;">Create appointment slot</a>
+    <a *ngIf="isLogged && userRole=='ROLE_MEDICALWORKER'" [routerLink]="['/calendar']" routerLinkActive="active" style="margin-left: 1rem;">Calendar</a>
+    <a *ngIf="isLogged && userRole=='ROLE_MEDICALWORKER'" [routerLink]="['/donorsVisited']" routerLinkActive="active" style="margin-left: 1rem;">Donors</a>
     <a *ngIf="isLogged && userRole=='ROLE_ADMIN'"  [routerLink]="['/displayAllUsers']" routerLinkActive="active" style="margin-left: 1rem;">Users</a>
 
     <a *ngIf="isLogged && userRole=='ROLE_ADMIN'"  [routerLink]="['/registerAdministrator']" routerLinkActive="active" style="margin-left: 1rem;">Create administrator</a>

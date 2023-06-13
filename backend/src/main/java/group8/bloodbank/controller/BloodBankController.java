@@ -3,6 +3,7 @@ package group8.bloodbank.controller;
 import group8.bloodbank.model.BloodBank;
 import group8.bloodbank.model.BloodType;
 import group8.bloodbank.model.BloodUnitUrgentRequest;
+import group8.bloodbank.model.DTO.BloodBankBloodDTO;
 import group8.bloodbank.model.DTO.BloodBankDTO;
 import group8.bloodbank.service.interfaces.BloodBankService;
 import group8.bloodbank.service.interfaces.MedicalWorkerService;
@@ -102,6 +103,17 @@ public class BloodBankController {
     @ResponseBody
     public void updateBloodAmount(@RequestBody BloodBank bloodBank, @RequestBody BloodType bloodType) {
         bloodBankService.updateAmountOfDonatedBlood(bloodBank, bloodType);
+    }
+
+    @GetMapping(value = "/getBloodBankBlood/{id}")
+    @ResponseBody
+    public ResponseEntity<BloodBankBloodDTO> getBloodBankBlood(@PathVariable(value = "id") Long id) {
+        try {
+            return new ResponseEntity<BloodBankBloodDTO>(bloodBankService.getBloodBankBlood(id), HttpStatus.OK);
+        }catch (Exception ex) {
+            System.out.println(ex.getMessage());
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @PostMapping(value = "/urgentRequest")

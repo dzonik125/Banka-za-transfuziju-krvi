@@ -28,7 +28,6 @@ public class AppointmentController {
     private AppointmentService service;
     private MedicalWorkerService medicalWorkerService;
     private DonorService donorService;
-
     private WorkingHoursService workingHoursService;
 
     @Autowired
@@ -74,6 +73,26 @@ public class AppointmentController {
         Appointment appointment = service.getById(id);
         appointment.setDonor(donorService.findById(appointment.getDonor_id()).get());
         return AppointmentPreviewMapper.appointmentToApointmentDTO(appointment);
+    }
+
+    @PutMapping(value = "/cancelAppointment/{id}")
+    public ResponseEntity cancelAppointment(@PathVariable(value = "id") Long id) {
+        try {
+            service.cancelAppointment(id);
+            return new ResponseEntity(HttpStatus.OK);
+        }catch(Exception ex) {
+            return new ResponseEntity(HttpStatus.CONFLICT);
+        }
+    }
+
+    @GetMapping(value = "/isAppointmentNow/{id}")
+    public ResponseEntity isAppointmentNow(@PathVariable(value = "id") Long id) {
+        try {
+            boolean isAppointmentNow = service.isAppointmentNow(id);
+            return new ResponseEntity(isAppointmentNow, HttpStatus.OK);
+        }catch(Exception ex) {
+            return new ResponseEntity(HttpStatus.CONFLICT);
+        }
     }
 
 }

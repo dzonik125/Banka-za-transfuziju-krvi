@@ -2,8 +2,10 @@ package group8.bloodbank.service.implementations;
 
 import group8.bloodbank.mapper.BloodUnitUrgentRequestMapper;
 import group8.bloodbank.model.*;
+import group8.bloodbank.model.DTO.BloodBankBloodDTO;
 import group8.bloodbank.repository.BloodBankRepository;
 import group8.bloodbank.service.interfaces.BloodBankService;
+import group8.bloodbank.service.interfaces.EquipmentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -14,16 +16,18 @@ import java.util.*;
 @Service
 public class BloodBankServiceImpl implements BloodBankService {
 
-
-    public static final double BLOOD_DONATION_AMOUNT = 0.5;
+    public static final double BLOOD_DONATION_AMOUNT = 0.4;
     private final BloodBankRepository bloodBankRepository;
+    private final EquipmentService equipmentService;
 
     @Value("${custom.rabbitmq.bloodRequestRoutingKey}")
     private String requestQueue;
 
     @Autowired
-    public BloodBankServiceImpl(BloodBankRepository bloodBankRepository) {
+    public BloodBankServiceImpl(BloodBankRepository bloodBankRepository,
+                                EquipmentService equipmentService) {
         this.bloodBankRepository = bloodBankRepository;
+        this.equipmentService = equipmentService;
 
     }
 
@@ -112,6 +116,25 @@ public class BloodBankServiceImpl implements BloodBankService {
         updateBloodBank(bloodBank);
     }
 
+    @Override
+    public void updateEquipmentStorage(BloodBank bloodBank, List<Item> items) {
+        List<Item> bloodBankItems = equipmentService.findAllByBloodBankId(bloodBank.getId());
+        for(Item item : bloodBankItems) {
+            for(Item usedItem : items) {
+                if(item.getId() == usedItem.getId()) {
+                    int updatedQuantity = item.getQuantity() - usedItem.getQuantity();
+                    if(updatedQuantity >= 0) {
+                        item.setQuantity(updatedQuantity);
+                    }else {
+                        throw new ArithmeticException();
+                    }
+                }
+            }
+        }
+        bloodBank.setItem(bloodBankItems);
+        updateBloodBank(bloodBank);
+    }
+
     public BloodBank getByName(String bb) {
         return bloodBankRepository.findByName(bb);
     }
@@ -124,7 +147,49 @@ public class BloodBankServiceImpl implements BloodBankService {
             }
         }
         return bloodBanks;
+    }
 
+    @Override
+    public BloodBankBloodDTO getBloodBankBlood(Long bloodBankId) {
+        BloodBank bloodBank = bloodBankRepository.findById(bloodBankId).get();
+        Map<BloodType, Double> bloodMap = bloodBank.getBloodType();
+        BloodBankBloodDTO bloodBankBlood = new BloodBankBloodDTO();
+        for(BloodType type : bloodMap.keySet()) {
+            switch(type) {
+                case Apos:
+                    bloodBankBlood.setA_POSITIVE(bloodBankBlood.getA_POSITIVE() + bloodMap.get(type));
+                    break;
+                case Aneg:
+                    bloodBankBlood.setA_NEGATIVE(bloodBankBlood.getA_NEGATIVE() + bloodMap.get(type));
+                    break;
+
+                case Bpos:
+                    bloodBankBlood.setB_POSITIVE(bloodBankBlood.getB_POSITIVE() + bloodMap.get(type));
+                    break;
+
+                case Bneg:
+                    bloodBankBlood.setB_NEGATIVE(bloodBankBlood.getB_NEGATIVE() + bloodMap.get(type));
+                    break;
+
+                case ABpos:
+                    bloodBankBlood.setAB_POSITIVE(bloodBankBlood.getAB_POSITIVE() + bloodMap.get(type));
+                    break;
+
+                case ABneg:
+                    bloodBankBlood.setAB_NEGATIVE(bloodBankBlood.getAB_NEGATIVE() + bloodMap.get(type));
+                    break;
+
+                case Opos:
+                    bloodBankBlood.setO_NEGATIVE(bloodBankBlood.getO_POSITIVE() + bloodMap.get(type));
+                    break;
+
+                case Oneg:
+                    bloodBankBlood.setO_POSITIVE(bloodBankBlood.getO_NEGATIVE() + bloodMap.get(type));
+                    break;
+
+            }
+        }
+        return bloodBankBlood;
     }
 
     @Override

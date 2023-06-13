@@ -1,0 +1,122 @@
+<mat-stepper [linear]="true" #stepper>
+    <mat-step>
+        <div  class="row mt-4">
+            <mat-label>1.Does patient have less than 50kg?</mat-label>
+            <mat-label *ngIf="donorSurvey.lessThan50kg" class="pl-3">-Yes</mat-label>
+            <mat-label *ngIf="!donorSurvey.lessThan50kg" class="pl-3">-No</mat-label>
+        </div>
+        <div class="row mt-4">
+            <mat-label>2. Does patient have any sickness symptoms?</mat-label>
+            <mat-label *ngIf="donorSurvey.sicknessSymptoms" class="pl-3">-Yes</mat-label>
+            <mat-label *ngIf="!donorSurvey.sicknessSymptoms" class="pl-3">-No</mat-label>
+        </div>
+        <div class="row mt-4">
+            <mat-label>3.Does patient have skin illness?</mat-label>
+            <mat-label *ngIf="donorSurvey.skinIllness" class="pl-3">-Yes</mat-label>
+            <mat-label *ngIf="!donorSurvey.skinIllness" class="pl-3">-No</mat-label>
+        </div>
+        <div class="row mt-4">
+            <mat-label>4.Does patient have too high or too low blood pressure?</mat-label>
+            <mat-label *ngIf="donorSurvey.bloodPressureAbnormalities" class="pl-3">-Yes</mat-label>
+            <mat-label *ngIf="!donorSurvey.bloodPressureAbnormalities" class="pl-3">-No</mat-label>
+        </div>
+        <div class="row mt-4">
+            <mat-label>5.Therapy intake in last 7 days?</mat-label>
+            <mat-label *ngIf="donorSurvey.therapyIntake" class="pl-3">-Yes</mat-label>
+            <mat-label *ngIf="!donorSurvey.therapyIntake" class="pl-3">-No</mat-label>
+        </div>
+        <div class="row mt-4">
+            <mat-label>6.Does patient have menstrual cycle?</mat-label>
+            <mat-label *ngIf="donorSurvey.menstrualCycle" class="pl-3">-Yes</mat-label>
+            <mat-label *ngIf="!donorSurvey.menstrualCycle" class="pl-3">-No</mat-label>
+        </div>
+        <div class="row mt-4">
+            <mat-label>7.Patient has a tooth extracted in the last 7 days?</mat-label>
+            <mat-label *ngIf="donorSurvey.dentalInterventions" class="pl-3">-Yes</mat-label>
+            <mat-label *ngIf="!donorSurvey.dentalInterventions" class="pl-3">-No</mat-label>
+        </div>
+        <div class="row mt-4">
+            <mat-label>8.Skin piercings in last 6 months?</mat-label>
+            <mat-label *ngIf="donorSurvey.skinPiercings" class="pl-3">-Yes</mat-label>
+            <mat-label *ngIf="!donorSurvey.skinPiercings" class="pl-3">-No</mat-label>
+        </div>
+        <div class="row mt-4">
+          <div class="col">
+            <button class="btn btn-primary btn-sm" [disabled]="!canExamine" matStepperNext>Next</button>
+          </div>
+          <div class="col">
+            <button class="btn btn-primary btn-sm" (click)="reject()" >Reject</button>
+          </div>
+          <div class="col">
+            <button class="btn btn-primary btn-sm" (click)="penalizeUser()">Patient absent</button>
+          </div>
+        </div>
+    </mat-step>
+    <mat-step>
+      <div class="row">
+        <div class="col">
+            <h5>Equipment available</h5>
+            <table mat-table [dataSource]="dataSource" class="mt-4">
+                <ng-container matColumnDef="name" >
+                    <th mat-header-cell *matHeaderCellDef class="cell-center"> Name </th>
+                    <td mat-cell *matCellDef="let item" class="clickable cell-center" >{{item.name}}</td>
+                </ng-container>
+                <ng-container matColumnDef="quantity" >
+                    <th mat-header-cell *matHeaderCellDef class="cell-center" > Quantity </th>
+                    <td mat-cell *matCellDef="let item" class="clickable cell-center" (click)="select(item)" >{{item.quantity}}</td>
+                </ng-container>
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
+            <div class="col mt-4">
+                <label>{{selectedItem.name}}</label>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <input type="number" [(ngModel)]="quantity" name="Number" required>
+                </div>
+                <div class="col">
+                    <button class="btn btn-primary btn-sm" (click)="addUsed()">Add</button>
+                </div>
+            </div>
+            <h5>Blood type</h5>
+            <mat-form-field>
+            <mat-label>Blood type</mat-label>
+            <mat-select matNativeControl required [(value)]="selectedType">
+                <mat-option value="0">O+</mat-option>
+                <mat-option value="1">O-</mat-option>
+                <mat-option value="2">A+</mat-option>
+                <mat-option value="3">A-</mat-option>
+                <mat-option value="4">B+</mat-option>
+                <mat-option value="5">B-</mat-option>
+                <mat-option value="6">AB+</mat-option>
+                <mat-option value="7">AB-</mat-option>
+            </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="col">
+            <h5>Equipment used</h5>
+            <table mat-table [dataSource]="dataSourceUsed" class="mt-4">
+                <ng-container matColumnDef="name" >
+                    <th mat-header-cell *matHeaderCellDef class="cell-center"> Name </th>
+                    <td mat-cell *matCellDef="let item" class="clickable cell-center" >{{item.name}}</td>
+                </ng-container>
+                <ng-container matColumnDef="quantity" >
+                    <th mat-header-cell *matHeaderCellDef class="cell-center" > Quantity </th>
+                    <td mat-cell *matCellDef="let item" class="clickable cell-center" >{{item.quantity}}</td>
+                </ng-container>
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
+          </div>
+      </div>
+      <div class="row mt-5">
+            <div class="col">
+                <button class="btn btn-primary btn-md" matStepperPrevious>Back</button>
+            </div>
+            <div class="col">
+                <button class="btn btn-primary btn-md" (click)="finishExamination()">Finish</button>
+            </div>
+      </div>
+    </mat-step>
+  </mat-stepper>

@@ -27,9 +27,6 @@ public class AppointmentSlotServiceImpl implements AppointmentSlotService {
     BloodBankRepository bloodBankRepository;
     DonorRepository donorRepository;
 
-    EmailService emailService;
-    QRCodeService qrCodeService;
-
 
     @Autowired
     public AppointmentSlotServiceImpl(AppointmentSlotRepository repository, BloodBankRepository bloodBankRepository, DonorRepository donorRepository) {

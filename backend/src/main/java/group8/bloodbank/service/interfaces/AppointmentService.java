@@ -16,4 +16,9 @@ public interface AppointmentService {
     boolean scheduleAppointment(Appointment app) throws MessagingException, IOException, WriterException;
     Appointment getById(Long id);
 
+    void cancelAppointment(Long id);
+
+    void finishAppointment(Long appointmentId);
+
+    boolean isAppointmentNow(Long id);
 }

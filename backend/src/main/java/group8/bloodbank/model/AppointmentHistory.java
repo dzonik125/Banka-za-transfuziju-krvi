@@ -6,9 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.List;
 
 
 @Getter
@@ -32,13 +30,10 @@ public class AppointmentHistory {
     private MedicalWorker medicalWorker;
     @Column
     private LocalDateTime date;
-    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    private Anamnesis anamnesis;
     @Column
     private BloodType bloodType;
     @Column
     private double amount;
     @Column
     private AppointmentStatus status;
-
 }

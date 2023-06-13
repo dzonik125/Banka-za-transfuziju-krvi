@@ -6,4 +6,5 @@ public interface MedicalExaminationService {
 
     MedicalExamination create(MedicalExamination medicalExamination);
 
+    Long getBloodBankId(Long medicalWorkerId);
 }

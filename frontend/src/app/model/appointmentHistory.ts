@@ -1,32 +1,31 @@
-import { Anamnesis } from "./anamnesis";
 import { AppointmentStatus } from "./AppointmentStatus";
-import { BloodBank } from "./bloodBank";
 import { BloodType } from "./bloodType";
-import { Donor } from "./donor";
-import { MedicalWorker } from "./medicalWorker";
+import { Item } from "./item";
 
 export class AppointmentHistory{
     id!: number;
-    bloodBank!: BloodBank;
+    bloodBankId!: number;
     date!: Date;
-    donor!: Donor;
-    medicalWorker!: MedicalWorker;
-    anamnesis!: Anamnesis;
-    bloodType!: BloodType;
+    donorId!: number;
+    medicalWorkerId!: number;
+    bloodType!: string;
     amount!: number;
     status!: AppointmentStatus
+    item!: Item[]
+    appointmentId!: number;
 
     constructor(obj?: any){
         if(obj) {
             this.id = obj.id;
-            this.bloodBank = obj.bloodBank;
+            this.bloodBankId = obj.bloodBankId;
             this.date = obj.date;
-            this.donor = obj.donor;
-            this.medicalWorker = obj.medicalWorker;
-            this.anamnesis = obj.anamnesis;
+            this.donorId = obj.donorId;
+            this.medicalWorkerId = obj.medicalWorkerId;
             this.bloodType = obj.bloodType;
             this.amount = obj.amount;
             this.status = obj.status;
+            this.item = obj.item;
+            this.appointmentId = obj.appointmentId;
         }
     }
 }

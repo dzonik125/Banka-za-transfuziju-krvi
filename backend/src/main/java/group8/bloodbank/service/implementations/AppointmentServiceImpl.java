@@ -2,6 +2,7 @@ package group8.bloodbank.service.implementations;
 
 import com.google.zxing.WriterException;
 import group8.bloodbank.model.Appointment;
+import group8.bloodbank.model.AppointmentStatus;
 import group8.bloodbank.model.BloodBank;
 import group8.bloodbank.model.Donor;
 import group8.bloodbank.repository.AppointmentRepository;
@@ -19,7 +20,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 import java.util.concurrent.locks.ReentrantLock;
 
 @Service
@@ -81,6 +84,34 @@ public class AppointmentServiceImpl implements AppointmentService {
     public Appointment getById(Long id) {
         LOG.info("Appointment with id: " + id + " successfully cached!");
         return repository.findById(id).get();
+    }
+
+    @Override
+    public void cancelAppointment(Long id) {
+        Optional<Appointment> app = repository.findById(id);
+        if(app.isPresent()) {
+            app.get().setStatus(AppointmentStatus.CANCELED);
+            repository.save(app.get());
+        }
+    }
+
+    @Override
+    public void finishAppointment(Long appointmentId) {
+        Optional<Appointment> appointment = repository.findById(appointmentId);
+        if(appointment.isPresent()) {
+            appointment.get().setStatus(AppointmentStatus.FINISHED);
+            repository.save(appointment.get());
+        }
+    }
+
+    @Override
+    public boolean isAppointmentNow(Long id) {
+        Optional<Appointment> appointment = repository.findById(id);
+        if(appointment.isPresent()) {
+            return appointment.get().getStart().isBefore(LocalDateTime.now())
+                    && appointment.get().getStart().plusMinutes((long)appointment.get().getDuration()).isAfter(LocalDateTime.now());
+        }
+        return false;
     }
 
     public void removeFromCache() {

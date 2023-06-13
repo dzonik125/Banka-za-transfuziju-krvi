@@ -10,5 +10,9 @@ public interface SurveyService {
 
     List<Survey> findAll();
 
+    Survey getByDonorId(long id);
+
+    boolean canDonorDonate(Long donorId);
+
     void updateSurvey(SurveyDTO surveyDTO);
 }

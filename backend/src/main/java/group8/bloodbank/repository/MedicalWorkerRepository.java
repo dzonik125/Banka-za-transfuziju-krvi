@@ -2,13 +2,13 @@ package group8.bloodbank.repository;
 
 import group8.bloodbank.model.BloodBank;
 import group8.bloodbank.model.MedicalWorker;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Modifying;
-import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.jpa.repository.*;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.LockModeType;
+import javax.persistence.QueryHint;
 import java.util.List;
 
 @Repository
@@ -19,6 +19,11 @@ public interface MedicalWorkerRepository extends JpaRepository<MedicalWorker, Lo
 
     @Query("SELECT b from MedicalWorker b where b.bloodBank.id =:bloodBankId")
     public List<MedicalWorker> getAllByBloodBank(@Param("bloodBankId") Long bloodBankId);
+
+    @Lock(LockModeType.PESSIMISTIC_WRITE)
+    @Query("select m from MedicalWorker m where m.id = :id")
+    @QueryHints({@QueryHint(name = "javax.persistence.lock.timeout", value = "0")})
+    MedicalWorker getByIdLocked(Long id);
 
     @Transactional
     @Modifying(clearAutomatically = true, flushAutomatically = true)

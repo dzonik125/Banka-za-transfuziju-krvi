@@ -20,6 +20,9 @@ import java.util.Map;
 @Table
 @Entity
 public class MonthlySubscription {
+    @Version
+    private Integer version;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

@@ -1,6 +1,8 @@
 package group8.bloodbank.controller;
 
+import group8.bloodbank.model.DTO.DonorDTO;
 import group8.bloodbank.model.Donor;
+import group8.bloodbank.service.interfaces.AppointmentHistoryService;
 import group8.bloodbank.service.interfaces.DonorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -11,16 +13,18 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 
-@CrossOrigin(origins = "http://localhost:4201")
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping("/donor")
 public class DonorController {
 
     private DonorService donorService;
+    private final AppointmentHistoryService appointmentHistoryService;
 
     @Autowired
-    public DonorController(DonorService donorService) {
+    public DonorController(DonorService donorService, AppointmentHistoryService appointmentHistoryService) {
         this.donorService = donorService;
+        this.appointmentHistoryService = appointmentHistoryService;
     }
 
 
@@ -41,13 +45,17 @@ public class DonorController {
         return donorService.getAll();
     }
 
-    @CrossOrigin(origins = "http://localhost:4200")
-    @PutMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public void updatePenalty(@RequestBody Donor donor) {
-        donorService.updatePenalty(donor);
+
+    @PutMapping(produces = MediaType.APPLICATION_JSON_VALUE, value = "/{id}")
+    public ResponseEntity updatePenalty(@PathVariable(value = "id") Long id) {
+        try{
+            donorService.updatePenalty(id);
+            return new ResponseEntity(HttpStatus.OK);
+        }catch(Exception ex) {
+            return new ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
-    @CrossOrigin(origins = "http://localhost:4200")
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE, value = "findDonorByID")
     public ResponseEntity<Donor> findById(@RequestParam Long id){
         try {
@@ -58,4 +66,14 @@ public class DonorController {
             return new ResponseEntity(HttpStatus.NOT_FOUND);
         }
     }
+
+    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE, value = "findDonorsByBankId/{id}")
+    public ResponseEntity<List<DonorDTO>> findByBankId(@PathVariable(value = "id") Long id) {
+        try {
+            return new ResponseEntity<>(appointmentHistoryService.getAllByBloodBankId(id), HttpStatus.OK);
+        }catch (Exception ex) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
 }

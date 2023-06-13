@@ -28,33 +28,37 @@ INSERT INTO blood_bank(
     api_key, avg_grade, description, image, name, address_id)
 VALUES ('213', 1.8, ' ','https://firebasestorage.googleapis.com/v0/b/isapsw-6ef61.appspot.com/o/h3.jpg?alt=media&token=482263cb-3590-405f-9c1e-e1fcd46b5229','C banka' , 3);
 
-INSERT INTO public.item(
+INSERT INTO item(
 quantity, name, blood_bank_id)
 VALUES(1000, 'Needle', 1);
-INSERT INTO public.item(
+INSERT INTO item(
 quantity, name, blood_bank_id)
 VALUES(1000, 'Bag', 1);
 
 
 INSERT INTO public.appointment(
-    donor_id, duration, start, blood_bank_id)
-VALUES (1, 20, '2022-12-24 18:17:53.840417', 1);
+    donor_id, duration, start, blood_bank_id, status)
+VALUES (1, 20, CURRENT_TIMESTAMP, 1, 0);
 
 INSERT INTO public.appointment(
-    donor_id, duration, start, blood_bank_id)
-VALUES (8, 20, '2022-12-25 18:17:53.840417', 1);
+    donor_id, duration, start, blood_bank_id, status)
+VALUES (6, 20, CURRENT_TIMESTAMP, 1, 0);
 
 INSERT INTO public.appointment(
-    donor_id, duration, start, blood_bank_id)
-VALUES (7, 20, '2022-12-24 13:17:53.840417', 1);
+    donor_id, duration, start, blood_bank_id, status)
+VALUES (8, 20, '2022-12-25 18:17:53.840417', 1, 0);
 
 INSERT INTO public.appointment(
-    donor_id, duration, start, blood_bank_id)
-VALUES (7, 20, '2022-12-27 13:17:53.840417', 2);
+    donor_id, duration, start, blood_bank_id, status)
+VALUES (7, 20, '2022-12-24 13:17:53.840417', 1, 0);
 
 INSERT INTO public.appointment(
-    donor_id, duration, start, blood_bank_id)
-VALUES (6, 20, '2021-11-27 13:17:53.840417', 3);
+    donor_id, duration, start, blood_bank_id, status)
+VALUES (7, 20, '2022-12-27 13:17:53.840417', 2, 0);
+
+INSERT INTO public.appointment(
+    donor_id, duration, start, blood_bank_id, status)
+VALUES (6, 20, '2021-11-27 13:17:53.840417', 3, 0);
 
 INSERT INTO blood_type_blood_bank(
     blood_bank_id, blood_type_amount, blood_type_key)
@@ -205,7 +209,7 @@ VALUES ('donor7@mail.com', 0, '2232372111321', 'Milos', 'Sportista', '$2y$10$9IN
 
 INSERT INTO donor(
     blood_type, category, penalty, points, id, has_survey)
-VALUES (0, 0, 0, 11, 1, true);
+VALUES (0, 0, 0, 11, 1, false);
 
 INSERT INTO donor(
     blood_type, category, penalty, points, id, has_survey)

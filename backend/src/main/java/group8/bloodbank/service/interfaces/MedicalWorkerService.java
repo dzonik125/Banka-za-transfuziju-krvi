@@ -23,4 +23,6 @@ public interface MedicalWorkerService {
     public Long getBloodBank(Long id);
 
     public MedicalWorker findById(Long id);
+
+    MedicalWorker getByIdLocked(Long id);
 }

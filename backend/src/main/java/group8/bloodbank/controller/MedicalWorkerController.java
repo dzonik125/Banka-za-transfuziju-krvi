@@ -1,5 +1,6 @@
 package group8.bloodbank.controller;
 
+import clojure.lang.IFn;
 import group8.bloodbank.model.DTO.MedicalWorkerDTO;
 import group8.bloodbank.model.Gender;
 import group8.bloodbank.model.MedicalWorker;
@@ -15,7 +16,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@CrossOrigin(origins = "http://localhost:4201")
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping("/medicalWorker")
 public class MedicalWorkerController {
@@ -29,7 +30,7 @@ public class MedicalWorkerController {
         this.workingHoursService = workingHoursService;
     }
 
-    @CrossOrigin(origins = "http://localhost:4201")
+    @CrossOrigin(origins = "http://localhost:4200")
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<MedicalWorker> saveMedicalWorker(@RequestBody MedicalWorkerDTO medicalWorkerDTO) {
         MedicalWorker medicalWorker = new MedicalWorker(medicalWorkerDTO.name, medicalWorkerDTO.surname, medicalWorkerDTO.email, medicalWorkerDTO.password, medicalWorkerDTO.jmbg, medicalWorkerDTO.address, medicalWorkerDTO.occupation, Gender.valueOf(medicalWorkerDTO.gender.toUpperCase()));
@@ -42,7 +43,7 @@ public class MedicalWorkerController {
         }
     }
 
-    @CrossOrigin(origins = "http://localhost:4201")
+    @CrossOrigin(origins = "http://localhost:4200")
     @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Boolean> updateMedicalWorkerBloodBank(@RequestBody MedicalWorkerDTO medicalWorkerDTO) {
         MedicalWorker medicalWorker = new MedicalWorker(medicalWorkerDTO.id, medicalWorkerDTO.name, medicalWorkerDTO.surname, medicalWorkerDTO.email, medicalWorkerDTO.password, medicalWorkerDTO.jmbg, medicalWorkerDTO.address, medicalWorkerDTO.occupation, Gender.valueOf(medicalWorkerDTO.gender.toUpperCase()));
@@ -56,13 +57,13 @@ public class MedicalWorkerController {
         }
     }
 
-    @CrossOrigin(origins = "http://localhost:4201")
+    @CrossOrigin(origins = "http://localhost:4200")
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public List<MedicalWorker> getAll() {
         return medicalWorkerService.getAll();
     }
 
-    @CrossOrigin(origins = "http://localhost:4201")
+    @CrossOrigin(origins = "http://localhost:4200")
     @GetMapping(value = "/freeMedicalWorkers", produces = MediaType.APPLICATION_JSON_VALUE)
     public List<MedicalWorkerDTO> getAllByBloodBankIsNull() {
         return MedicalWorkerDTO.convertMedicalWorkerListToDTOList(medicalWorkerService.getAllByBloodBankIsNull());
@@ -77,6 +78,16 @@ public class MedicalWorkerController {
     @PreAuthorize("hasRole('ROLE_MEDICALWORKER')")
     public WorkingHours getBloodBankWorkingHours(@RequestParam(value = "id") Long id){
         return workingHoursService.getByBloodBankId(medicalWorkerService.getBloodBank(id));
+    }
+
+    @GetMapping(value = "/getBloodBankIdForMedicalWorker/{id}")
+    @PreAuthorize("hasRole('ROLE_MEDICALWORKER')")
+    public ResponseEntity<Long> getBloodBankId(@PathVariable(value = "id") Long id) {
+        try{
+            return new ResponseEntity<>(medicalWorkerService.getBloodBank(id), HttpStatus.OK);
+        }catch (Exception ex) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
 }

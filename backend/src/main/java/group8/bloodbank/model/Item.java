@@ -28,7 +28,7 @@ public class Item {
     private String name;
     @Column
     private int quantity;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "blood_bank_id")
     private BloodBank bloodBank;
 

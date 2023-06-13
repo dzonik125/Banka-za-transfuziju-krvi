@@ -22,36 +22,20 @@ public class Survey {
     @OneToOne
     @JoinColumn(name = "donor_id")
     private Donor donor;
-
     @Column
-    @NotNull
-    private String answer1;
+    private boolean lessThan50kg;
     @Column
-    @NotNull
-    private String answer3;
+    private boolean sicknessSymptoms;
     @Column
-    @NotNull
-    private String answer2;
+    private boolean skinIllness;
     @Column
-    @NotNull
-    private String answer4;
+    private boolean bloodPressureAbnormalities;
     @Column
-    @NotNull
-    private String answer5;
+    private boolean therapyIntake;
     @Column
-    @NotNull
-    private String answer6;
+    private boolean menstrualCycle;
     @Column
-    @NotNull
-    private String answer7;
+    private boolean dentalInterventions;
     @Column
-    @NotNull
-    private String answer8;
-    @Column
-    @NotNull
-    private String answer9;
-    @Column
-    @NotNull
-    private String answer10;
-
+    private boolean skinPiercings;
 }
