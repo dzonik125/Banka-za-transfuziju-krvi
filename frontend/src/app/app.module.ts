@@ -69,6 +69,12 @@ import { NgxQRCodeModule } from 'ngx-qrcode2';
 import { AppointmentSlotByQrCodeComponent } from './modules/administrator/appointment-slot-by-qr-code/appointment-slot-by-qr-code.component';
 import { MedicalExaminationComponent } from './modules/administrator/medical-examination/medical-examination.component';
 import { VisitHistoryComponent } from './modules/public/visit-history/visit-history.component';
+import { MonthlySubscriptionsComponent } from './modules/medical_worker/monthly-subscriptions/monthly-subscriptions.component';
+import { ExaminationComponent } from './modules/medical_worker/examination/examination.component';
+import { MatStepperModule } from '@angular/material/stepper';
+
+import { AgmCoreModule } from '@agm/core';
+import { DonorVisitedComponent } from './modules/medical_worker/donor-visited/donor-visited.component';
 
 //I keep the new line
 
@@ -105,7 +111,10 @@ import { VisitHistoryComponent } from './modules/public/visit-history/visit-hist
     PasswordPipe,
     AppointmentSlotByQrCodeComponent,
     MedicalExaminationComponent,
-    VisitHistoryComponent
+    VisitHistoryComponent,
+    MonthlySubscriptionsComponent,
+    ExaminationComponent,
+    DonorVisitedComponent
   ],
 
   imports: [
@@ -149,6 +158,10 @@ import { VisitHistoryComponent } from './modules/public/visit-history/visit-hist
     MatButtonModule,
     MatInputModule,
     AuthenticationModule,
+    MatStepperModule,
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyBpSPLN2QIM7aJZm_07XfIdri9JgQQrlrs'
+    }),
     JwtModule.forRoot({
       config: {
         tokenGetter: () => localStorage.getItem('token')

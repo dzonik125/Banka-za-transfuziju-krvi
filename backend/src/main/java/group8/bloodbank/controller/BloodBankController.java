@@ -3,6 +3,7 @@ package group8.bloodbank.controller;
 import group8.bloodbank.model.BloodBank;
 import group8.bloodbank.model.BloodType;
 import group8.bloodbank.model.BloodUnitUrgentRequest;
+import group8.bloodbank.model.DTO.BloodBankBloodDTO;
 import group8.bloodbank.model.DTO.BloodBankDTO;
 import group8.bloodbank.service.interfaces.BloodBankService;
 import group8.bloodbank.service.interfaces.MedicalWorkerService;
@@ -13,6 +14,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.awt.print.Pageable;
@@ -40,15 +42,16 @@ public class BloodBankController {
     }
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE, value="/findAll")
-    @CrossOrigin(origins = "http://localhost:4200")
+    @CrossOrigin(origins = "http://localhost:4201")
     public List<BloodBank> findAllByName(Pageable pageable){
         Pageable pageable2 = (Pageable) PageRequest.of(pageable.getNumberOfPages(), 6);
         return bloodBankService.findAllByName(pageable2);
     }
 
 
-   @CrossOrigin(origins = "http://localhost:4200")
+   @CrossOrigin(origins = "http://localhost:4201")
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+   @PreAuthorize("hasRole('ROLE_ADMIN')")
     public ResponseEntity<BloodBank> saveBloodBank(@RequestBody BloodBankDTO bloodBankDTO)  {
         BloodBank bloodBank = new BloodBank(bloodBankDTO.name, bloodBankDTO.description, bloodBankDTO.address, bloodBankDTO.image);
         try{
@@ -61,7 +64,8 @@ public class BloodBankController {
         }
     }
 
-    @CrossOrigin(origins = "http://localhost:4200")
+    @CrossOrigin(origins = "http://localhost:4201")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_MEDICALWORKER')")
     @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE, value = "/updateBloodBank")
     public ResponseEntity<BloodBank> updateBloodBank(@RequestBody BloodBankDTO bloodBankDTO)  {
         BloodBank bloodBank = new BloodBank(bloodBankDTO.id, bloodBankDTO.name, bloodBankDTO.description, bloodBankDTO.address, bloodBankDTO.image, bloodBankDTO.avgGrade);
@@ -98,6 +102,24 @@ public class BloodBankController {
         return new ResponseEntity<Boolean>(hasEnoughBlood, HttpStatus.OK);
     }
 
+    @PutMapping(value = "/updateBloodAmount")
+    @ResponseBody
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_MEDICALWORKER')")
+    public void updateBloodAmount(@RequestBody BloodBank bloodBank, @RequestBody BloodType bloodType) {
+        bloodBankService.updateAmountOfDonatedBlood(bloodBank, bloodType);
+    }
+
+    @GetMapping(value = "/getBloodBankBlood/{id}")
+    @ResponseBody
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_MEDICALWORKER')")
+    public ResponseEntity<BloodBankBloodDTO> getBloodBankBlood(@PathVariable(value = "id") Long id) {
+        try {
+            return new ResponseEntity<BloodBankBloodDTO>(bloodBankService.getBloodBankBlood(id), HttpStatus.OK);
+        }catch (Exception ex) {
+            System.out.println(ex.getMessage());
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 
     @PostMapping(value = "/urgentRequest")
     @ResponseBody
@@ -111,7 +133,6 @@ public class BloodBankController {
     }
 
 
-    @CrossOrigin(origins = "http://localhost:4200")
     @PostMapping(value = "/addApi")
     public void addApi(@RequestBody String json) throws JSONException {
         JSONObject jsonObject = new JSONObject(json);
@@ -126,6 +147,8 @@ public class BloodBankController {
     }
 
     @GetMapping(value = "getApiKeyById")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_MEDICALWORKER')")
+
     public String getApiKeyById(@RequestParam(value = "id") Long id) {
         return bloodBankService.getApiKeyById(id);}
 }

@@ -27,26 +27,28 @@ import { AdminComplaintsComponent } from './modules/administrator/admin-complain
 import { ScheduleNewAppointmentComponent } from './modules/public/schedule-new-appointment/schedule-new-appointment.component';
 import { AppointmentSlotByQrCodeComponent } from './modules/administrator/appointment-slot-by-qr-code/appointment-slot-by-qr-code.component';
 import { MedicalExaminationComponent } from './modules/administrator/medical-examination/medical-examination.component';
+import { MonthlySubscriptionsComponent } from './modules/medical_worker/monthly-subscriptions/monthly-subscriptions.component';
+import { DonorVisitedComponent } from './modules/medical_worker/donor-visited/donor-visited.component';
 
 const routes: Routes = [
   {path: 'home', component: HomeComponentComponent},
   {path :'register', component: RegisterUserComponent},
   {path: 'login', component: LoginComponent},
-  {path:'saveApi/:id', component: SaveApiKeyComponent},
-  {path:'sendNews/:id', component: SendNewsComponent},
+  {path:'saveApi/:id', component: SaveApiKeyComponent, canActivate: [AuthGuard, RoleGuard], data: { roles: ['ROLE_MEDICALWORKER'] }},
+  {path:'sendNews/:id', component: SendNewsComponent, canActivate: [AuthGuard, RoleGuard], data: { roles: ['ROLE_MEDICALWORKER'] }},
   {path: 'userProfile', component: UserProfileViewComponent, canActivate: [AuthGuard, RoleGuard], data: { roles: ['ROLE_MEDICALWORKER', 'ROLE_DONOR', 'ROLE_ADMIN'] }},
-  {path:'registerBloodBank', component: RegisterBloodBankComponent},
-  {path:'adminDashboard/calendar/:id', component: CalendarComponent},
-  {path:'registerMedicalWorker', component: RegisterMedicalWorkerComponent},
+  {path:'registerBloodBank', component: RegisterBloodBankComponent, canActivate: [AuthGuard, RoleGuard], data: { roles: ['ROLE_ADMIN'] }},
+  {path:'calendar', component: CalendarComponent, canActivate: [AuthGuard, RoleGuard], data: { roles: ['ROLE_MEDICALWORKER'] }},
+  {path:'registerMedicalWorker', component: RegisterMedicalWorkerComponent, canActivate: [AuthGuard, RoleGuard], data: { roles: ['ROLE_ADMIN'] }},
   {path:'addAppointmentSlot', component: AddAppointmentSlotComponent, canActivate: [AuthGuard, RoleGuard], data: { roles: ['ROLE_MEDICALWORKER'] }},
   {path:'registerAdministrator', component: RegisterAdministratorComponent, canActivate: [AuthGuard, RoleGuard], data: { roles: ['ROLE_ADMIN'] }},
   {path:'adminDashboard/complaints', component: AdminComplaintsComponent, canActivate: [AuthGuard, RoleGuard], data: { roles: ['ROLE_ADMIN'] }},
-  {path:'addAppointmentSlot', component: AddAppointmentSlotComponent},
+  {path:'addAppointmentSlot', component: AddAppointmentSlotComponent, canActivate: [AuthGuard, RoleGuard], data: { roles: ['ROLE_MEDICALWORKER']}},
   {path: 'displayAllUsers', component: DisplayAllUsersComponent, canActivate: [AuthGuard, RoleGuard], data: { roles: ['ROLE_ADMIN'] }},
   {path: '', component: DisplayAllCentersComponent},
   {path: 'bloodBank/:id', component: BloodBankViewComponent},
   {path: 'changepassword', component: ChangePasswordComponent, canActivate: [AuthGuard, RoleGuard], data: { roles: ['ROLE_NEW_ADMIN'] }},
-  {path :'survey', component: CreateSurveyComponent},
+  {path :'survey', component: CreateSurveyComponent, canActivate: [AuthGuard, RoleGuard], data: { roles: ['ROLE_DONOR'] }},
   {path :'getAll', component: ScheduleExsistingAppointmentComponent},
   {path :'survey', component: CreateSurveyComponent, canActivate: [AuthGuard, RoleGuard], data: { roles: ['ROLE_DONOR'] }},
   {path :'schedule', component: ScheduleExsistingAppointmentComponent, canActivate: [AuthGuard, RoleGuard], data: { roles: ['ROLE_DONOR'] }},
@@ -54,8 +56,9 @@ const routes: Routes = [
   {path: 'scheduleNewAppointment', component: ScheduleNewAppointmentComponent, canActivate: [AuthGuard, RoleGuard], data: { roles: ['ROLE_DONOR'] }},
   {path: 'appointmentSlotByQrCode', component: AppointmentSlotByQrCodeComponent, canActivate: [AuthGuard, RoleGuard], data: { roles: ['ROLE_ADMIN'] }},
   {path: 'medicalExamination', component: MedicalExaminationComponent, canActivate: [AuthGuard, RoleGuard], data: { roles: ['ROLE_ADMIN'] }},
-  {path: 'visitHistory', component: VisitHistoryComponent, canActivate: [AuthGuard, RoleGuard], data: { roles: ['ROLE_DONOR'] }}
-
+  {path: 'visitHistory', component: VisitHistoryComponent, canActivate: [AuthGuard, RoleGuard], data: { roles: ['ROLE_DONOR'] }},
+  {path: 'monthlySubscriptions', component: MonthlySubscriptionsComponent},
+  {path: 'donorsVisited', component: DonorVisitedComponent, canActivate: [AuthGuard, RoleGuard], data: {roles: ['ROLE_MEDICALWORKER']}}
 ];
 
 @NgModule({

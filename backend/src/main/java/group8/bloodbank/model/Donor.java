@@ -37,6 +37,11 @@ public class Donor extends User {
     @Column
     private int penalty;
 
+    @JsonIgnore
+    @OneToMany(mappedBy = "donor", fetch = FetchType.EAGER)
+    @Fetch(value = FetchMode.SUBSELECT)
+    private List<AppointmentHistory> appointmentHistories;
+
     @Column
     private Boolean hasSurvey;
 

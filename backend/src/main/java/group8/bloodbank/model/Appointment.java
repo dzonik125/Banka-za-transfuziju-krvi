@@ -42,6 +42,9 @@ public class Appointment {
     @Transient
     public Donor donor;
 
+    @Column
+    private AppointmentStatus status;
+
     public Appointment(List<MedicalWorker> medicalWorker, Long donor_id, BloodBank bloodBank, LocalDateTime start, double duration, Donor donor) {
         this.medicalWorker = medicalWorker;
         this.donor_id = donor_id;
@@ -49,6 +52,9 @@ public class Appointment {
         this.start = start;
         this.duration = duration;
         this.donor = donor;
+    }
+
+    public Appointment(long l, List<MedicalWorker> all, long l1, BloodBank bloodBank, LocalDateTime start, double v, Donor donor) {
     }
 
     public Donor getDonor() {

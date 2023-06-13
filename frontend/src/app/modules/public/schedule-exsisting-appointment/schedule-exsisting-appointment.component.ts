@@ -111,10 +111,4 @@ export class ScheduleExsistingAppointmentComponent implements AfterViewInit {
       this._liveAnnouncer.announce('Sorting cleared');
     }
   }
-
-
-
-
-
-
 }

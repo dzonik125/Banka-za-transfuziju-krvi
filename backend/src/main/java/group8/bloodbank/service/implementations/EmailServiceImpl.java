@@ -70,7 +70,7 @@ public class EmailServiceImpl implements EmailService {
         helper.setSubject(subject);
 
         helper.setText(content, true);
-        mailSender.send(message);
+        //mailSender.send(message);
     }
 
     private String buildMessage(String title, String message, String name, String linkText, String link) {

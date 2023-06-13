@@ -31,6 +31,13 @@ export class AppointmentService {
     return this.http.get<Appointment>(this.apiHost + 'appointments/getById', {params: params});
   }
 
+  cancelAppointment(id: any) : Observable<any> {
+    return this.http.put<Appointment>(this.apiHost + 'appointments/cancelAppointment/' + id, {headers: this.headers});
+  }
+
+  isAppointmentNow(id: any) : Observable<boolean> {
+    return this.http.get<boolean>(this.apiHost + 'appointments/isAppointmentNow/' + id, {headers: this.headers});
+  }
 
 /*
   getBloodBankById(id: any) : Observable<BloodBank> {

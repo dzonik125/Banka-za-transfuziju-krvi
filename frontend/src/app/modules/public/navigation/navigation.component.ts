@@ -7,6 +7,7 @@ import { map, Observable, shareReplay } from 'rxjs';
 import { AdminService } from 'src/app/services/admin.service';
 import { AuthService } from '../../authentication/services/auth.service';
 import { CreateSurveyComponent } from '../create-survey/create-survey.component';
+import { MedicalWorkerService } from 'src/app/services/medical-worker.service';
 
 @Component({
   selector: 'app-navigation',
@@ -25,7 +26,9 @@ export class NavigationComponent implements OnInit {
     shareReplay()
   );
 
-  constructor(private breakpointObserver: BreakpointObserver, private authService: AuthService, private router: Router, private adminService: AdminService, private jwtHelper: JwtHelperService) { }
+  constructor(private breakpointObserver: BreakpointObserver, private authService: AuthService, private router: Router, 
+    private adminService: AdminService, private jwtHelper: JwtHelperService,
+    private medicalWorkerService: MedicalWorkerService) { }
   
 
   ngOnInit(): void {
@@ -42,7 +45,12 @@ export class NavigationComponent implements OnInit {
       })
       
     }
+  }
 
+  showMyBank() {
+    this.medicalWorkerService.getBloodBankId(this.jwtHelper.decodeToken().id).subscribe(res=>{
+      this.router.navigate(['/bloodBank/' + res])
+    })
   }
 
   logout(): void {

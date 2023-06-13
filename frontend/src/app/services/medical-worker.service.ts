@@ -25,6 +25,10 @@ export class MedicalWorkerService {
     return this.http.get<any[]>(this.apiHost + 'medicalWorker/freeMedicalWorkers', {headers: this.headers});
   }
 
+  getBloodBankId(id: any): Observable<number>{
+    return this.http.get<number>(this.apiHost + 'medicalWorker/getBloodBankIdForMedicalWorker/' + id, {headers: this.headers});
+  }
+
   getAllByBloodBank(bloodBankId: any): Observable<any[]> {
     let params = new HttpParams();
     params = params.append("bloodBankId", bloodBankId);

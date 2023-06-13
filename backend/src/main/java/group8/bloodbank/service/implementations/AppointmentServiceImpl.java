@@ -2,13 +2,17 @@ package group8.bloodbank.service.implementations;
 
 import com.google.zxing.WriterException;
 import group8.bloodbank.model.Appointment;
+import group8.bloodbank.model.AppointmentStatus;
 import group8.bloodbank.model.BloodBank;
 import group8.bloodbank.model.Donor;
 import group8.bloodbank.repository.AppointmentRepository;
 import group8.bloodbank.service.interfaces.AppointmentService;
 import group8.bloodbank.service.interfaces.DonorService;
 import group8.bloodbank.service.interfaces.EmailService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.messaging.MessagingException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
@@ -16,7 +20,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 import java.util.concurrent.locks.ReentrantLock;
 
 @Service
@@ -28,6 +34,7 @@ public class AppointmentServiceImpl implements AppointmentService {
     EmailService emailService;
 
     private final ReentrantLock lock = new ReentrantLock();
+    private final Logger LOG = LoggerFactory.getLogger(AppointmentServiceImpl.class);
 
     @Autowired
     public AppointmentServiceImpl(AppointmentRepository appointmentRepository, BloodBankServiceImpl bloodBankService, DonorService donorService, EmailService emailService) {
@@ -59,7 +66,7 @@ public class AppointmentServiceImpl implements AppointmentService {
         lock.lock();
         try {
             for (Appointment a:
-                 getAll()) {
+                    getAll()) {
                 if(a.getStart().isEqual(app.getStart()) && a.getBloodBank().getId() == app.getBloodBank().getId()){
                     return false;
                 }
@@ -72,8 +79,42 @@ public class AppointmentServiceImpl implements AppointmentService {
         }
     }
 
+    @Cacheable("appointment")
     @Override
     public Appointment getById(Long id) {
+        LOG.info("Appointment with id: " + id + " successfully cached!");
         return repository.findById(id).get();
+    }
+
+    @Override
+    public void cancelAppointment(Long id) {
+        Optional<Appointment> app = repository.findById(id);
+        if(app.isPresent()) {
+            app.get().setStatus(AppointmentStatus.CANCELED);
+            repository.save(app.get());
+        }
+    }
+
+    @Override
+    public void finishAppointment(Long appointmentId) {
+        Optional<Appointment> appointment = repository.findById(appointmentId);
+        if(appointment.isPresent()) {
+            appointment.get().setStatus(AppointmentStatus.FINISHED);
+            repository.save(appointment.get());
+        }
+    }
+
+    @Override
+    public boolean isAppointmentNow(Long id) {
+        Optional<Appointment> appointment = repository.findById(id);
+        if(appointment.isPresent()) {
+            return appointment.get().getStart().isBefore(LocalDateTime.now())
+                    && appointment.get().getStart().plusMinutes((long)appointment.get().getDuration()).isAfter(LocalDateTime.now());
+        }
+        return false;
+    }
+
+    public void removeFromCache() {
+        LOG.info("Products removed from cache!");
     }
 }

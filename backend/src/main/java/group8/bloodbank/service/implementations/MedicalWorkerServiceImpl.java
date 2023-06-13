@@ -7,10 +7,12 @@ import group8.bloodbank.service.interfaces.MedicalWorkerService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Service
+@Transactional
 public class MedicalWorkerServiceImpl implements MedicalWorkerService {
 
     MedicalWorkerRepository medicalWorkerRepository;
@@ -74,5 +76,9 @@ public class MedicalWorkerServiceImpl implements MedicalWorkerService {
     public MedicalWorker findById(Long id) {
         return medicalWorkerRepository.findById(id).get();
     }
+
+    @Transactional
+    @Override
+    public MedicalWorker getByIdLocked(Long id) {return  medicalWorkerRepository.getByIdLocked(id);}
 
 }

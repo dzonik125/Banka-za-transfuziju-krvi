@@ -61,8 +61,5 @@ public class BloodBankApplication {
 //                .build();
 //
 //        FirebaseApp.initializeApp(options);
-
     }
-
-
 }

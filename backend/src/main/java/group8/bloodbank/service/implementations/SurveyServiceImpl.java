@@ -37,16 +37,14 @@ public class SurveyServiceImpl implements SurveyService {
         d.get().setHasSurvey(true);
         userRepository.save(d.get());
 
-        s.setAnswer1(survey.getAnswer1());
-        s.setAnswer2(survey.getAnswer2());
-        s.setAnswer3(survey.getAnswer3());
-        s.setAnswer4(survey.getAnswer4());
-        s.setAnswer5(survey.getAnswer5());
-        s.setAnswer6(survey.getAnswer6());
-        s.setAnswer7(survey.getAnswer7());
-        s.setAnswer8(survey.getAnswer8());
-        s.setAnswer9(survey.getAnswer9());
-        s.setAnswer10(survey.getAnswer10());
+        s.setMenstrualCycle(survey.isMenstrualCycle());
+        s.setDentalInterventions(survey.isDentalInterventions());
+        s.setSkinIllness(survey.isSkinIllness());
+        s.setLessThan50kg(survey.isLessThan50kg());
+        s.setSicknessSymptoms(survey.isSicknessSymptoms());
+        s.setTherapyIntake(survey.isTherapyIntake());
+        s.setBloodPressureAbnormalities(survey.isBloodPressureAbnormalities());
+        s.setSkinPiercings(survey.isSkinPiercings());
         s.setDonor(d.get());
         return surveyRepository.save(s);
     }
@@ -57,20 +55,43 @@ public class SurveyServiceImpl implements SurveyService {
     }
 
     @Override
+    public Survey getByDonorId(long id) {
+        return surveyRepository.getSurveyByDonorId(id);
+    }
+
+    @Override
+    public boolean canDonorDonate(Long donorId) {
+        Survey donorSurvey = surveyRepository.getSurveyByDonorId(donorId);
+        if(donorSurvey != null) {
+            if(donorSurvey.isBloodPressureAbnormalities() ||
+               donorSurvey.isLessThan50kg() ||
+               donorSurvey.isSkinPiercings() ||
+               donorSurvey.isMenstrualCycle() ||
+               donorSurvey.isTherapyIntake() ||
+               donorSurvey.isDentalInterventions() ||
+               donorSurvey.isSicknessSymptoms() ||
+               donorSurvey.isSkinIllness()) {
+                return false;
+            }else  {
+                return true;
+            }
+        }return false;
+    }
+
+    @Override
     public void updateSurvey(SurveyDTO surveyDTO) {
         Survey forUpdate = surveyRepository.getSurveyByDonorId(Long.valueOf(surveyDTO.getDonor()));
         Optional<Donor> d = donorRepository.findById(Long.valueOf(surveyDTO.getDonor()));
         forUpdate.setDonor(d.get());
-        forUpdate.setAnswer1(surveyDTO.getAnswer1());
-        forUpdate.setAnswer2(surveyDTO.getAnswer2());
-        forUpdate.setAnswer3(surveyDTO.getAnswer3());
-        forUpdate.setAnswer4(surveyDTO.getAnswer4());
-        forUpdate.setAnswer5(surveyDTO.getAnswer5());
-        forUpdate.setAnswer6(surveyDTO.getAnswer6());
-        forUpdate.setAnswer7(surveyDTO.getAnswer7());
-        forUpdate.setAnswer8(surveyDTO.getAnswer8());
-        forUpdate.setAnswer9(surveyDTO.getAnswer9());
-        forUpdate.setAnswer10(surveyDTO.getAnswer10());
+        forUpdate.setMenstrualCycle(surveyDTO.isMenstrualCycle());
+        forUpdate.setDentalInterventions(surveyDTO.isDentalInterventions());
+        forUpdate.setSkinIllness(surveyDTO.isSkinIllness());
+        forUpdate.setLessThan50kg(surveyDTO.isLessThan50kg());
+        forUpdate.setSicknessSymptoms(surveyDTO.isSicknessSymptoms());
+        forUpdate.setTherapyIntake(surveyDTO.isTherapyIntake());
+        forUpdate.setBloodPressureAbnormalities(surveyDTO.isBloodPressureAbnormalities());
+        forUpdate.setSkinPiercings(surveyDTO.isSkinPiercings());
+        forUpdate.setDonor(d.get());
         surveyRepository.save(forUpdate);
 
     }

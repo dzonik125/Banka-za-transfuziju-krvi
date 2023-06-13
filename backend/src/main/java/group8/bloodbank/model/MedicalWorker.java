@@ -1,8 +1,12 @@
 package group8.bloodbank.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -43,6 +47,11 @@ public class MedicalWorker extends User {
         super(name, surname, email, password, jmbg, address, occupation, gender, UserType.MEDICAL_WORKER);
         setId(id);
     }
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "medicalWorker", fetch = FetchType.EAGER)
+    @Fetch(value = FetchMode.SUBSELECT)
+    private List<AppointmentHistory> appointmentHistories;
 
     public BloodBank getBloodBank() {
         return bloodBank;

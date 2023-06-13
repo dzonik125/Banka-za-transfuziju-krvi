@@ -1,6 +1,7 @@
 import { User } from './user';
 import { BloodBank } from './bloodBank';
 import { Address } from './address';
+import { BloodType } from './bloodType';
 
 
 export class Donor {
@@ -17,6 +18,7 @@ export class Donor {
     category: string = 'REGULAR';
     userType: string = 'DONOR';
     hasSurvey!: boolean;
+    bloodType!: BloodType;
 
 
 
@@ -36,6 +38,7 @@ export class Donor {
           this.category = obj.category;
           this.userType = obj.userType;
           this.hasSurvey = obj.hasSurvey;
+          this.bloodType = obj.bloodType;
       }
   }
 

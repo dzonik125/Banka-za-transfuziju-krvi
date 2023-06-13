@@ -8,11 +8,14 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface AppointmentRepository extends JpaRepository<Appointment, Long> {
 
     @Query("SELECT a from Appointment a where a.bloodBank.id=:bloodBankId")
     public List<Appointment> findAllByBloodBankID(@Param("bloodBankId") Long bloodBankId);
+
+
 
 }

@@ -1,6 +1,4 @@
 package group8.bloodbank.controller;
-
-
 import group8.bloodbank.mapper.AppointmentCalendarMapper;
 import group8.bloodbank.mapper.AppointmentPreviewMapper;
 import group8.bloodbank.model.Appointment;
@@ -30,7 +28,6 @@ public class AppointmentController {
     private AppointmentService service;
     private MedicalWorkerService medicalWorkerService;
     private DonorService donorService;
-
     private WorkingHoursService workingHoursService;
 
     @Autowired
@@ -54,7 +51,7 @@ public class AppointmentController {
         try {
             List<MedicalWorker> medicalWorkers = new ArrayList<>();
             for (Long id: app.getMedicalWorkerIds()
-                 ) {
+            ) {
                 medicalWorkers.add(medicalWorkerService.findById(id));
             }
             Appointment a = new Appointment(medicalWorkers, app.getDonor_id(), app.getBloodBank(), app.getStart(), app.getDuration(), donorService.findById(app.getDonor_id()).get());
@@ -67,6 +64,7 @@ public class AppointmentController {
     }
 
     @GetMapping(value = "/getBloodBankWorkingHours")
+    @PreAuthorize("hasAnyRole('ROLE_MEDICALWORKER', 'ROLE_ADMIN')")
     public WorkingHours getBloodBankWorkingHours(@RequestParam(value = "id") Long id){
         return workingHoursService.getByBloodBankId(id);
     }
@@ -76,6 +74,28 @@ public class AppointmentController {
         Appointment appointment = service.getById(id);
         appointment.setDonor(donorService.findById(appointment.getDonor_id()).get());
         return AppointmentPreviewMapper.appointmentToApointmentDTO(appointment);
+    }
+
+    @PutMapping(value = "/cancelAppointment/{id}")
+    @PreAuthorize("hasRole('ROLE_MEDICALWORKER')")
+    public ResponseEntity cancelAppointment(@PathVariable(value = "id") Long id) {
+        try {
+            service.cancelAppointment(id);
+            return new ResponseEntity(HttpStatus.OK);
+        }catch(Exception ex) {
+            return new ResponseEntity(HttpStatus.CONFLICT);
+        }
+    }
+
+    @GetMapping(value = "/isAppointmentNow/{id}")
+    @PreAuthorize("hasRole('ROLE_MEDICALWORKER')")
+    public ResponseEntity isAppointmentNow(@PathVariable(value = "id") Long id) {
+        try {
+            boolean isAppointmentNow = service.isAppointmentNow(id);
+            return new ResponseEntity(isAppointmentNow, HttpStatus.OK);
+        }catch(Exception ex) {
+            return new ResponseEntity(HttpStatus.CONFLICT);
+        }
     }
 
 }

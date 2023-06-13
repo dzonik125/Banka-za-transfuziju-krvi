@@ -16,11 +16,12 @@ public class AppointmentCalendarMapper {
 
         for(Appointment appointment: source) {
             AppointmentCallendarDTO dto = new AppointmentCallendarDTO();
-
             dto.start = appointment.getStart().toString();
             dto.title = appointment.getDonor().getName() + " " + appointment.getDonor().getSurname();
             dto.end = appointment.getStart().plusMinutes((long) appointment.getDuration()).toString();
-
+            dto.id = appointment.getId();
+            dto.donorId = appointment.getDonor().getId();
+            dto.status = appointment.getStatus();
             appointmentCallendarDTOs.add(dto);
         }
         return appointmentCallendarDTOs;
